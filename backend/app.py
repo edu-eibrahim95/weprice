@@ -8,7 +8,7 @@ from main_api import main_api
 from flask_jwt_extended import JWTManager
 
 
-template_dir = os.path.abspath('../frontend/dist/frontend/')
+template_dir = os.path.dirname(os.path.realpath(__file__)) + '/../frontend/dist/frontend/'
 app = Flask(__name__, template_folder=template_dir)
 application = app
 app.config.from_object('config')
