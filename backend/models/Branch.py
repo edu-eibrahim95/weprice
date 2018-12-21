@@ -30,6 +30,7 @@ class BranchSchema(Schema):
     months_avg_qt = fields.Number()
     workhours_day_qt = fields.Number()
     workdays_month_qt = fields.Number()
+    interest_month_pct = fields.Number()
     raw_material_rate_pct = fields.Number()
     months_stock_qt = fields.Number()
     days_rec_qt = fields.Number()

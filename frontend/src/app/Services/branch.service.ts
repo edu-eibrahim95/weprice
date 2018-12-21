@@ -16,6 +16,10 @@ export class BranchService {
     return this.http.get<Branch[]>(`${API_URL}/branches/parent`)
       .catch(BranchService._handleError);
   }
+  getBranches(): Observable<Branch[]>{
+    return this.http.get<Branch[]>(`${API_URL}/branches`)
+      .catch(BranchService._handleError);
+  }
   addBranch(parameter): Observable<number>{
     const httpOptions = {
       headers: new HttpHeaders({

@@ -28,6 +28,5 @@ def page_not_found(e):
     return render_template("index.html")
 
 
-
 register_api_routes()
 main_api.init_app(app)

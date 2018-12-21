@@ -17,6 +17,18 @@ class GetParentBranches(Resource):
         }
 
 
+class GetBranches(Resource):
+    @jwt_required
+    def get(self):
+        branches = Branch.query.all()
+        schema = BranchSchema(many=True)
+        branches_data = [] if len(branches) == 0 else schema.dump(branches).data
+        return {
+            'status': 1,
+            'branches': branches_data
+        }
+
+
 class AddBranch(Resource):
     def __init__(self):
         self.parser = reqparse.RequestParser()
@@ -60,4 +72,5 @@ class AddBranch(Resource):
 
 def register_branches_routes():
     main_api.add_resource(GetParentBranches, '/api/branches/parent')
+    main_api.add_resource(GetBranches, '/api/branches')
     main_api.add_resource(AddBranch, '/api/branches/add')

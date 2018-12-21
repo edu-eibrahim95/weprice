@@ -356,7 +356,7 @@ var BrancheEditComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".ag-theme-material .ag-header-cell, .ag-theme-material .ag-header-group-cell {\n  padding-left: 6px !important;\n  padding-right: 6px !important;\n}\n"
 
 /***/ }),
 
@@ -367,7 +367,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  branches-overview works!\n</p>\n"
+module.exports = "<!-- ########## START: MAIN PANEL ########## -->\n<div class=\"br-mainpanel\" xmlns=\"\">\n  <div class=\"pd-30\">\n    <h4 class=\"tx-gray-800 mg-b-5\">Branches </h4>\n    <p class=\"mg-b-0\">list of existing branches </p>\n  </div><!-- d-flex -->\n  <div class=\"br-pagebody\">\n    <div class=\"br-section-wrapper\">\n      <div class=\"text-right\">\n        <a routerLink=\"/branches/add\" class=\"btn btn-danger mg-r-10\">Mass Delete</a>\n        <a routerLink=\"/branches/add\" class=\"btn btn-success\">Add New</a>\n      </div>\n      <hr>\n      <ag-grid-angular\n        style=\"width: 100%;\"\n        class=\"ag-theme-material\"\n        [rowData]=\"rowData\"\n        [columnDefs]=\"columnDefs\"\n        [enableSorting]=\"true\"\n        [enableFilter]=\"true\"\n      >\n      </ag-grid-angular>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -382,6 +382,9 @@ module.exports = "<p>\n  branches-overview works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BranchesOverviewComponent", function() { return BranchesOverviewComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _Services_branch_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Services/branch.service */ "./src/app/Services/branch.service.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -392,10 +395,43 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var BranchesOverviewComponent = /** @class */ (function () {
-    function BranchesOverviewComponent() {
+    function BranchesOverviewComponent(branchesApi) {
+        this.branchesApi = branchesApi;
+        this.columnDefs = [];
+        this.rowData = [];
+        this.height = null;
     }
     BranchesOverviewComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.branchesSubs = this.branchesApi.getBranches().subscribe(function (res) {
+            _this.branches = res['branches'];
+            console.log(_this.branches);
+            _this.height = _this.branches.length * 48 + 60;
+            var w = jquery__WEBPACK_IMPORTED_MODULE_2__(document).innerWidth() - jquery__WEBPACK_IMPORTED_MODULE_2__('.br-sideleft').width() - 220;
+            w = w / 10;
+            _this.columnDefs = [
+                { headerName: 'Branch', field: 'name', width: w },
+                { headerName: 'Area', field: 'area', width: w },
+                { headerName: 'Monthly AVG QT', field: 'months_avg_qt', width: w },
+                { headerName: 'Monthly Interest', field: 'interest_month_pct', width: w },
+                { headerName: 'Work Hours / Day', field: 'workhours_day_qt', width: w },
+                { headerName: 'Work Days / Month', field: 'workdays_month_qt', width: w },
+                { headerName: 'Monthly Stock QT', field: 'months_stock_qt', width: w },
+                { headerName: 'Raw Material Rate', field: 'raw_material_rate_pct', width: w },
+                { headerName: 'Days Rec', field: 'days_rec_qt', width: w },
+                { headerName: 'Actions', field: 'actions', width: w, cellRenderer: function (params) {
+                        return params.value ? params.value : '';
+                    } },
+            ];
+            for (var i = 0; i < _this.branches.length; i++) {
+                _this.branches[i]['actions'] = jquery__WEBPACK_IMPORTED_MODULE_2__("<div><a class='btn btn-danger'><i class='fa fa-trash text-white'></i></a>  <a class='btn btn-primary'><i class='fa fa-edit text-white'></i></a></div>").html();
+            }
+            _this.rowData = _this.branches;
+            jquery__WEBPACK_IMPORTED_MODULE_2__('ag-grid-angular').height(_this.height);
+        });
     };
     BranchesOverviewComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -403,7 +439,7 @@ var BranchesOverviewComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./branches-overview.component.html */ "./src/app/Components/branches/branches-overview/branches-overview.component.html"),
             styles: [__webpack_require__(/*! ./branches-overview.component.css */ "./src/app/Components/branches/branches-overview/branches-overview.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_Services_branch_service__WEBPACK_IMPORTED_MODULE_1__["BranchService"]])
     ], BranchesOverviewComponent);
     return BranchesOverviewComponent;
 }());
@@ -664,6 +700,10 @@ var BranchService = /** @class */ (function () {
     };
     BranchService.prototype.getParents = function () {
         return this.http.get(_env__WEBPACK_IMPORTED_MODULE_1__["API_URL"] + "/branches/parent")
+            .catch(BranchService_1._handleError);
+    };
+    BranchService.prototype.getBranches = function () {
+        return this.http.get(_env__WEBPACK_IMPORTED_MODULE_1__["API_URL"] + "/branches")
             .catch(BranchService_1._handleError);
     };
     BranchService.prototype.addBranch = function (parameter) {
