@@ -26,10 +26,7 @@
               "src/styles.css",
               "src/assets/css/font-awesome.css",
               "src/assets/css/ionicons.css",
-              "src/assets/css/bracket.css",
-               "node_modules/ag-grid-community/dist/styles/ag-grid.css",
-              "node_modules/ag-grid-community/dist/styles/ag-theme-balham.css",
-              "node_modules/ag-grid-community/dist/styles/ag-theme-material.css"
+              "src/assets/css/bracket.css"
             ],
             "scripts": [
               "src/assets/js/jquery.js",
@@ -55,10 +52,10 @@
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true
             }
           }

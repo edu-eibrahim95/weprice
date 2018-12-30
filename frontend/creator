@@ -1,0 +1,8 @@
+#! /bin/bash
+ng generate c Components/$1s
+ng generate c Components/$2/$1Overview
+ng generate c Components/$2/$1Add
+ng generate c Components/$2/$1Edit
+ng generate s Services/$1
+rm src/app/Services/`echo $3 | sed 's,_,\-,'`.service.spec.ts
+echo "export class $1 { id: number}" > src/app/Models/$3.ts

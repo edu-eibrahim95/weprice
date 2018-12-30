@@ -1,0 +1,120 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="br-mainpanel" xmlns="">
+  <div class="pd-30">
+    <h4 class="tx-gray-800 mg-b-5">Products </h4>
+    <p class="mg-b-0">Edit new Product </p>
+  </div>
+  <div class="br-pagebody">
+    <div class="br-section-wrapper">
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Edit a  Product</h6>
+      <form *ngIf="product" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
+        <div class="form-layout form-layout-6">
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Name:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter name"
+                     name="name" #name="ngModel" ngModel [ngModel]="product.name">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Description:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter description"
+                     name="description" #description="ngModel" ngModel [ngModel]="product.description">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Type:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="product.type">
+                <option value="0" selected="">Simple</option>
+                <option value="1">Compound</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Product group:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose product_group"
+                      aria-hidden="true"  name="product_group" #product_group="ngModel" ngModel [ngModel]="product.product_group">
+                <option value="0" selected="">Raw Material</option>
+                <option value="1">Finished</option>
+                <option value="2">Semi Finished</option>
+                <option value="3">Rescale</option>
+                <option value="4">Packing</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Internal Code:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter internal_code"
+                     name="internal_code" #internal_code="ngModel" ngModel [ngModel]="product.internal_code">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Unit:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter unit"
+                     name="unit" #unit="ngModel" ngModel [ngModel]="product.unit">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Currency Type:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number" [ngModel]="product.currency_type"
+                     name="currency_type" #currency_type="ngModel" ngModel placeholder="Enter currency_type" >
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Cost Price:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number" [ngModel]="product.cost_price"
+                     name="cost_price" #cost_price="ngModel" ngModel placeholder="Enter cost_price">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Sale Price:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number" [ngModel]="product.sale_price"
+                     name="sale_price" #sale_price="ngModel" ngModel placeholder="Enter sale_price">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Day Sterm Recpt:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number" [ngModel]="product.daysterm_recpt"
+                     name="daysterm_recpt" #daysterm_recpt="ngModel" ngModel placeholder="Enter daysterm_recpt">
+            </div>
+          </div><!-- row -->
+        </div><!-- form-layout -->
+        <hr>
+        <div class="form-layout-footer mg-t-30 text-center">
+          <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

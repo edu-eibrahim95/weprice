@@ -28,8 +28,7 @@ export class BranchAddComponent implements OnInit {
     this.branchesSubs = this.branchesApi.getParents().subscribe(res => {
       this.branches = res['branches'];
       console.log(this.branches);
-
-    })
+    });
   }
 
   onSubmit(f: NgForm) {

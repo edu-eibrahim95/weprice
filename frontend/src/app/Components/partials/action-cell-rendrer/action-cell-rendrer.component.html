@@ -1,0 +1,8 @@
+<div>
+    <a *ngIf="can_delete" href="#" (click)="delete(entity_id, gridApi)" class='btn btn-danger mr-1' >
+        <i class='fa fa-trash text-white'></i>
+    </a>
+    <a *ngIf="can_edit" [routerLink]="edit_url+entity_id" class='btn btn-primary'>
+        <i class='fa fa-edit text-white'></i>
+    </a>
+</div>

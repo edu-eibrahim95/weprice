@@ -3,140 +3,118 @@
   <div class="pd-30">
     <h4 class="tx-gray-800 mg-b-5">Branches </h4>
     <p class="mg-b-0">Add new branch </p>
-  </div><!-- d-flex -->
+  </div>
   <div class="br-pagebody">
     <div class="br-section-wrapper">
       <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New Branch</h6>
       <form #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
-        <div class="row">
-          <div class="col-6">
-            <div class="form-layout form-layout-6">
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Installation:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <select id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
-                          aria-hidden="true" name="installation_id" #installation_id="ngModel" ngModel [ngModel]="0">
-                    <option value="0">Choose Installation</option>
-                    <option *ngFor="let installation of installations" value="{{installation.id}}">{{installation.name}}</option>
-                  </select>
-                </div><!-- col-8 -->
-              </div><!-- row -->
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Type:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
-                          aria-hidden="true" onchange="changeType()" name="type" #type="ngModel" ngModel [ngModel]="0">
-                    <option value="0" selected="">Company</option>
-                    <option value="1">Branch</option>
-                  </select>
-                </div><!-- col-8 -->
-              </div><!-- row -->
-              <div id="parent_branch" class="row no-gutters d-none">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Parent Company:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
-                          aria-hidden="true" name="parent_id" #parent_id="ngModel" ngModel [ngModel]="0">
-                    <option value="0" selected="">Select Company</option>
-                    <option *ngFor="let branch of branches" value="{{branch.id}}">{{branch.name}}</option>
-                  </select>
-                </div><!-- col-8 -->
-              </div><!-- row -->
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  NAME:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <input class="form-control" type="text" placeholder="Enter Branch Name"
-                         name="name" #name="ngModel" ngModel>
-                </div><!-- col-8 -->
-              </div><!-- row -->
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Area:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <input class="form-control" type="number"
-                         name="area" #area="ngModel" ngModel placeholder="Enter Area">
-                </div>
-              </div>
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Monthly Interest:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <input class="form-control" type="number"
-                         name="interest_month_pct" #interest_month_pct="ngModel" ngModel placeholder="Enter Monthly Interest:">
-                </div>
-              </div>
-
-            </div><!-- form-layout -->
-          </div>
-          <div class="col-6">
-            <div class="form-layout form-layout-6">
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Avg Quantity Months:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <input class="form-control" type="number"
-                         name="months_avg_qt" #months_avg_qt="ngModel" ngModel placeholder="Enter Avg Quantity Months">
-                </div><!-- col-8 -->
-              </div><!-- row -->
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Work hours per day:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <input class="form-control" type="number"
-                         name="workhours_day_qt" #workhours_day_qt="ngModel" ngModel placeholder="Enter Work hours per day">
-                </div><!-- col-8 -->
-              </div><!-- row -->
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Work days per month:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <input class="form-control" type="number"
-                         name="workdays_month_qt" #workdays_month_qt="ngModel" ngModel placeholder="Enter Work hours per day">
-                </div><!-- col-8 -->
-              </div><!-- row -->
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Months Stock Quantity:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <input class="form-control" type="number"
-                         name="months_stock_qt" #months_stock_qt="ngModel" ngModel placeholder="Enter Months Stock Quantity">
-                </div>
-              </div>
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Raw Material Rate:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <input class="form-control" type="number"
-                         name="raw_material_rate_pct" #raw_material_rate_pct="ngModel" ngModel placeholder="Enter Raw Material Rate">
-                </div>
-              </div>
-              <div class="row no-gutters">
-                <div class="col-5 col-sm-4 col-md-3">
-                  Days Rec:
-                </div><!-- col-4 -->
-                <div class="col-7 col-sm-8 col-md-9">
-                  <input class="form-control" type="number"
-                         name="days_rec_qt" #days_rec_qt="ngModel" ngModel placeholder="Enter Days Rec">
-                </div>
-              </div>
-
-            </div><!-- form-layout -->
-          </div>
-        </div>
+        <div class="form-layout form-layout-6">
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Type:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true" (change)="changeType()" name="type" #type="ngModel" ngModel [ngModel]="0">
+                <option value="0" selected="">Company</option>
+                <option value="1">Branch</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div id="parent_branch" class="row no-gutters d-none">
+            <div class="col-5 col-sm-4 col-md-3">
+              Parent Company:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true" name="parent_id" #parent_id="ngModel" ngModel [ngModel]="0">
+                <option value="0" selected="">Select Company</option>
+                <option *ngFor="let branch of branches" value="{{branch.id}}">{{branch.name}}</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              NAME:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter Branch Name"
+                     name="name" #name="ngModel" ngModel>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Area:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="area" #area="ngModel" ngModel placeholder="Enter Area">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Monthly Interest:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="interest_month_pct" #interest_month_pct="ngModel" ngModel placeholder="Enter Monthly Interest:">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Avg Quantity Months:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="months_avg_qt" #months_avg_qt="ngModel" ngModel placeholder="Enter Avg Quantity Months">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Work hours per day:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="workhours_day_qt" #workhours_day_qt="ngModel" ngModel placeholder="Enter Work hours per day">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Work days per month:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="workdays_month_qt" #workdays_month_qt="ngModel" ngModel placeholder="Enter Work hours per day">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Months Stock Quantity:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="months_stock_qt" #months_stock_qt="ngModel" ngModel placeholder="Enter Months Stock Quantity">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Raw Material Rate:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="raw_material_rate_pct" #raw_material_rate_pct="ngModel" ngModel placeholder="Enter Raw Material Rate">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Days Rec:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="days_rec_qt" #days_rec_qt="ngModel" ngModel placeholder="Enter Days Rec">
+            </div>
+          </div><!-- row -->
+        </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
           <button class="btn btn-info" type="submit">Submit</button>

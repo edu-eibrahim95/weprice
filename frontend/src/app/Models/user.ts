@@ -3,5 +3,9 @@ export class User {
     name: string;
     full_name: string;
     email: string;
-    token: string;
+    active_flag: number;
+    initial_date: string;
+    final_date: string;
+    created_at: string;
+    updated_at: string;
 }

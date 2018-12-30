@@ -1,0 +1,90 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="br-mainpanel" xmlns="">
+  <div class="pd-30">
+    <h4 class="tx-gray-800 mg-b-5">Employees </h4>
+    <p class="mg-b-0">Add new Employee </p>
+  </div>
+  <div class="br-pagebody">
+    <div class="br-section-wrapper">
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New Employee</h6>
+      <form *ngIf="employee" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
+        <div class="form-layout form-layout-6">
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Branch:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true" name="branch_id" #branch_id="ngModel" ngModel [ngModel]="employee.branch_id">
+                <option value="0" selected="">Select Branch</option>
+                <option *ngFor="let branch of branches" value="{{branch.id}}">{{branch.name}}</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Name:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter name"
+                     name="name" #name="ngModel" ngModel [ngModel]="employee.name">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Type:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="employee.type">
+                <option value="0" selected="">Standard</option>
+                <option value="1">Director</option>
+                <option value="2">Trainee</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Hire Date:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="date" [ngModel]="employee.hire_date"
+                     name="hire_date" #hire_date="ngModel" ngModel placeholder="Enter hire_date">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Dismiss Date:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="date" [ngModel]="employee.dismiss_date"
+                     name="dismiss_date" #dismiss_date="ngModel" ngModel placeholder="Enter dismiss_date:">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Salary:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number" [ngModel]="employee.salary"
+                     name="salary" #salary="ngModel" ngModel placeholder="Enter salary">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Extra Salary:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number" [ngModel]="employee.extra_salary"
+                     name="extra_salary" #extra_salary="ngModel" ngModel placeholder="Enter extra_salary">
+            </div>
+          </div><!-- row -->
+        </div><!-- form-layout -->
+        <hr>
+        <div class="form-layout-footer mg-t-30 text-center">
+          <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

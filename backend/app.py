@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, send_from_directory
 from db import db
 from flask_cors import CORS
-from datetime import datetime
 from api import register_api_routes
 import os
 from main_api import main_api

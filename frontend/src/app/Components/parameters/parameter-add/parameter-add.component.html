@@ -1,0 +1,47 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="br-mainpanel" xmlns="">
+  <div class="pd-30">
+    <h4 class="tx-gray-800 mg-b-5">Parameters </h4>
+    <p class="mg-b-0">Add new Parameter </p>
+  </div>
+  <div class="br-pagebody">
+    <div class="br-section-wrapper">
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New Parameter</h6>
+      <form #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
+        <div class="form-layout form-layout-6">
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Attribute:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter attribute"
+                     name="attribute" #attribute="ngModel" ngModel>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Description:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter description"
+                     name="description" #description="ngModel" ngModel>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Default Value:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter default_value"
+                     name="default_value" #default_value="ngModel" ngModel>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+        </div><!-- form-layout -->
+        <hr>
+        <div class="form-layout-footer mg-t-30 text-center">
+          <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

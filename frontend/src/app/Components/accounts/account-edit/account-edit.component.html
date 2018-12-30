@@ -1,0 +1,190 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="br-mainpanel" xmlns="">
+    <div class="pd-30">
+        <h4 class="tx-gray-800 mg-b-5">Accounts </h4>
+        <p class="mg-b-0">Add new Account </p>
+    </div><!-- d-flex -->
+    <div class="br-pagebody">
+        <div class="br-section-wrapper">
+
+            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New Account</h6>
+            <form #f="ngForm" *ngIf="account" role="form" (ngSubmit)="onSubmit(f);">
+                <div class="form-layout form-layout-6">
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Account Type:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                                    aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="account.type">
+                                <option value="0" selected="">Sintetic</option>
+                                <option value="1">Analitic</option>
+                            </select>
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Account Nat:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <select id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                                    aria-hidden="true"  name="nat" #nat="ngModel" ngModel [ngModel]="account.nat">
+                                <option value="0" selected="">Debit</option>
+                                <option value="1">Credit</option>
+                            </select>
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Expense Type:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <select id="select2-d" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                                    aria-hidden="true"  name="expense_type" #expense_type="ngModel" ngModel [ngModel]="account.expense_type">
+                                <option value="0" selected="">Fixed</option>
+                                <option value="1">Variable</option>
+                                <option value="2">Both</option>
+                            </select>
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Expense Absorb Type:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <select id="select2-e" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                                    aria-hidden="true"  name="expense_abs_type" #expense_abs_type="ngModel" ngModel [ngModel]="account.expense_abs_type">
+                                <option value="0" selected="">No Absorption</option>
+                                <option value="1">Rating</option>
+                                <option value="2">Employees</option>
+                                <option value="3">Employees-Quant</option>
+                                <option value="4">Employees-Dir</option>
+                                <option value="5">Social Charges</option>
+                                <option value="6">Depreciation</option>
+                                <option value="7">Sale Price</option>
+                                <option value="8">Entry</option>
+                            </select>
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Code:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="text" placeholder="Enter Code"
+                                   name="code" #code="ngModel" ngModel [ngModel]="account.code">
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Description:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="text" placeholder="Enter Description"
+                                   name="description" #description="ngModel" ngModel [ngModel]="account.description">
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            BDG Entry Flag:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input type="checkbox"
+                                   name="bdgentry_flag" #bdgentry_flag="ngModel" ngModel [ngModel]="account.bdgentry_flag">
+                        </div>
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            BDG Entry Value:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="number" [ngModel]="account.bdgentry_value"
+                                   name="bdgentry_value" #bdgentry_value="ngModel" ngModel placeholder="Enter Area">
+                        </div>
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Expense Limit:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="number" [ngModel]="account.expense_limit_pct"
+                                   name="expense_limit_pct" #expense_limit_pct="ngModel" ngModel placeholder="Enter Expense Limit">
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Expense Var:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="number" [ngModel]="account.expense_var_pct"
+                                   name="expense_var_pct" #expense_var_pct="ngModel" ngModel placeholder="EnterExpense Var">
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Avg Month Quantity:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="number" [ngModel]="account.months_qt_avg"
+                                   name="months_qt_avg" #months_qt_avg="ngModel" ngModel placeholder="Enter Machines Quantity:">
+                        </div>
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Expense Ded Pct:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="number" [ngModel]="account.expense_ded_pct"
+                                   name="expense_ded_pct" #expense_ded_pct="ngModel" ngModel placeholder="Enter Expense Ded Pct">
+                        </div>
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Expense recov pct:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="number" [ngModel]="account.expense_recov_pct"
+                                   name="expense_recov_pct" #expense_recov_pct="ngModel" ngModel placeholder="Enter Expense recov pct">
+                        </div>
+                    </div><!-- row -->
+
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Revenue Flag:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input type="checkbox"
+                                   name="revenue_flag" #revenue_flag="ngModel" ngModel placeholder="Enter Area" [ngModel]="1">
+                        </div>
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Earning Distrib Flag:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input type="checkbox" [ngModel]="account.earning_distrib_flag"
+                                   name="earning_distrib_flag" #earning_distrib_flag="ngModel" ngModel placeholder="Enter Area" >
+                        </div>
+                    </div><!-- row -->
+
+                </div>
+                <hr>
+                <div class="form-layout-footer mg-t-30 text-center">
+                    <button class="btn btn-info" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

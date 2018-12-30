@@ -22,18 +22,27 @@
       </a><!-- br-menu-link -->
       <ul class="br-menu-sub nav flex-column">
         <li class="nav-item"><a routerLink="/branches" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Branches</a></li>
-        <li class="nav-item"><a href="alerts.html" class="nav-link">Cost Centers</a></li>
-        <li class="nav-item"><a href="buttons.html" class="nav-link">Accounts</a></li>
-        <li class="nav-item"><a href="cards.html" class="nav-link">Products</a></li>
-        <li class="nav-item"><a href="cards.html" class="nav-link">** General</a></li>
-        <li class="nav-item"><a href="cards.html" class="nav-link">** Finished</a></li>
-        <li class="nav-item"><a href="cards.html" class="nav-link">** Semi-Finished</a></li>
-        <li class="nav-item"><a href="icons.html" class="nav-link">Employees</a></li>
-        <li class="nav-item"><a href="modal.html" class="nav-link">Assets</a></li>
-        <li class="nav-item"><a href="pagination.html" class="nav-link">Taxes</a></li>
-        <li class="nav-item"><a href="popups.html" class="nav-link">Social Charges</a></li>
-        <li class="nav-item"><a href="progress.html" class="nav-link">Parameters</a></li>
-        <li class="nav-item"><a href="spinners.html" class="nav-link">Users</a></li>
+        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Cost Centers</a></li>
+        <li class="nav-item"><a routerLink="/accounts"class="nav-link">Accounts</a></li>
+        <li class="nav-item">
+          <a href="#" class="br-menu-link">
+            <div class="br-menu-item nav-link">
+              <span class="menu-item-label">Products</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+          </a><!-- br-menu-link -->
+          <ul class="br-menu-sub br-menu-sub-sub nav flex-column">
+            <li class="nav-item"><a routerLink="/products" class="nav-link">General</a></li>
+            <li class="nav-item"><a routerLink="/products" class="nav-link">Finished</a></li>
+            <li class="nav-item"><a routerLink="/products" class="nav-link">Semi-Finished</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a routerLink="/employees" class="nav-link">Employees</a></li>
+        <li class="nav-item"><a routerLink="/assets" class="nav-link">Assets</a></li>
+        <li class="nav-item"><a routerLink="/taxes" class="nav-link">Taxes</a></li>
+        <li class="nav-item"><a routerLink="/social_charges" class="nav-link">Social Charges</a></li>
+        <li class="nav-item"><a routerLink="/parameters" class="nav-link">Parameters</a></li>
+        <li class="nav-item"><a routerLink="/users" class="nav-link">Users</a></li>
       </ul>
       <a href="#" class="br-menu-link">
         <div class="br-menu-item">
@@ -43,7 +52,7 @@
         </div><!-- menu-item -->
       </a><!-- br-menu-link -->
       <ul class="br-menu-sub nav flex-column">
-        <li class="nav-item"><a href="navigation.html" class="nav-link">Entries</a></li>
+        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Entries</a></li>
       </ul>
       <a href="#" class="br-menu-link">
         <div class="br-menu-item">
@@ -53,9 +62,9 @@
         </div><!-- menu-item -->
       </a><!-- br-menu-link -->
       <ul class="br-menu-sub nav flex-column">
-        <li class="nav-item"><a href="chart-morris.html" class="nav-link">Cost Map</a></li>
-        <li class="nav-item"><a href="chart-flot.html" class="nav-link">Finished Products</a></li>
-        <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Semi-Finished Products</a></li>
+        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Cost Map</a></li>
+        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Finished Products</a></li>
+        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Semi-Finished Products</a></li>
       </ul>
       <a href="#" class="br-menu-link">
         <div class="br-menu-item">
@@ -65,10 +74,19 @@
         </div><!-- menu-item -->
       </a><!-- br-menu-link -->
       <ul class="br-menu-sub nav flex-column">
-        <li class="nav-item"><a href="form-elements.html" class="nav-link">Demonstratives</a></li>
-        <li class="nav-item"><a href="form-layouts.html" class="nav-link">** Expenses</a></li>
-        <li class="nav-item"><a href="form-validation.html" class="nav-link">** Results</a></li>
-        <li class="nav-item"><a href="form-wizards.html" class="nav-link">EBTIDA</a></li>
+        <li class="nav-item">
+          <a href="#" class="br-menu-link">
+            <div class="br-menu-item nav-link">
+              <span class="menu-item-label">Demonstratives</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+          </a><!-- br-menu-link -->
+          <ul class="br-menu-sub br-menu-sub-sub nav flex-column">
+            <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Expenses</a></li>
+            <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Results</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">EBTIDA</a></li>
       </ul>
     </div><!-- br-sideleft-menu -->
     <br>
@@ -87,7 +105,7 @@
       <div class="navicon-right">
         <div class="dropdown">
           <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-            <span class="logged-name hidden-md-down">{{user.full_name}}</span>
+            <span *ngIf="user" class="logged-name hidden-md-down">{{user.full_name}}</span>
             <i class="fa fa-angle-down mg-r-5"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-header wd-200">

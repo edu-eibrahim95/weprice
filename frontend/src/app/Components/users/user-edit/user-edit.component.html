@@ -1,0 +1,84 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="br-mainpanel" xmlns="">
+  <div class="pd-30">
+    <h4 class="tx-gray-800 mg-b-5">Users </h4>
+    <p class="mg-b-0">Add new User </p>
+  </div>
+  <div class="br-pagebody">
+    <div class="br-section-wrapper">
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New User</h6>
+      <form *ngIf="user" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
+        <div class="form-layout form-layout-6">
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Name:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter attribute"
+                     name="name" #name="ngModel" ngModel [ngModel]="user.name">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Password:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="password" placeholder="Enter password"
+                     name="password" #password="ngModel" ngModel >
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Full Name:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter full_name"
+                     name="full_name" #full_name="ngModel" ngModel [ngModel]="user.full_name">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Email:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter full_name"
+                     name="email" #email="ngModel" ngModel [ngModel]="user.email">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Active Flag:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input type="checkbox" [ngModel]="user.active_flag"
+                     name="active_flag" #active_flag="ngModel" ngModel>
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Initial Date:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="date" [ngModel]="user.initial_date"
+                     name="initial_date" #initial_date="ngModel" ngModel placeholder="Enter Area">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Final Date:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="date" [ngModel]="user.final_date"
+                     name="final_date" #final_date="ngModel" ngModel placeholder="Enter Monthly Interest:">
+            </div>
+          </div><!-- row -->
+
+        </div><!-- form-layout -->
+        <hr>
+        <div class="form-layout-footer mg-t-30 text-center">
+          <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

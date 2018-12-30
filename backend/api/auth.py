@@ -1,8 +1,17 @@
+import datetime
+
 from flask_restful import Resource, reqparse
 from main_api import main_api
 from models import User, UserSchema
 from db import save_to_db
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+
+
+def create_tokens(email):
+    expires = datetime.timedelta(days=365)
+    access_token = create_access_token(identity=email, expires_delta=expires)
+    refresh_token = create_refresh_token(identity=email)
+    return access_token, refresh_token
 
 
 class Register(Resource):
@@ -26,8 +35,7 @@ class Register(Resource):
         )
         try:
             save_to_db(new_user)
-            access_token = create_access_token(identity=data['email'])
-            refresh_token = create_refresh_token(identity=data['email'])
+            access_token, refresh_token = create_tokens(email=data['email'])
             schema = UserSchema(only=['id', 'name', 'full_name', 'email'])
             user_data = schema.dump(new_user)
             user_data.data['token'] = access_token
@@ -53,8 +61,7 @@ class Login(Resource):
             return {'message': 'User {} doesn\'t exist'.format(data['email'])}
 
         if User.verify_hash(data['password'], current_user.password):
-            access_token = create_access_token(identity=data['email'])
-            refresh_token = create_refresh_token(identity=data['email'])
+            access_token, refresh_token = create_tokens(email=data['email'])
             schema = UserSchema(only=['id', 'name', 'full_name', 'email'])
             user_data = schema.dump(current_user)
             user_data.data['token'] = access_token

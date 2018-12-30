@@ -1,0 +1,101 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="br-mainpanel" xmlns="">
+  <div class="pd-30">
+    <h4 class="tx-gray-800 mg-b-5">Cost Centers </h4>
+    <p class="mg-b-0">Add new Cost center </p>
+  </div><!-- d-flex -->
+  <div class="br-pagebody">
+    <div class="br-section-wrapper">
+
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New Cost Center</h6>
+      <form #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
+        <div class="form-layout form-layout-6">
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Branch:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true" name="branch_id" #branch_id="ngModel" ngModel [ngModel]="0">
+                <option value="0" selected="">Select Branch</option>
+                <option *ngFor="let branch of branches" value="{{branch.id}}">{{branch.name}}</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Type:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="0">
+                <option value="0" selected="">Building</option>
+                <option value="1">Support</option>
+                <option value="2">Direct</option>
+                <option value="3">Commercial</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              NAME:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="text" placeholder="Enter Cost Center Name"
+                     name="name" #name="ngModel" ngModel>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Area:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="area" #area="ngModel" ngModel placeholder="Enter Area">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Work hours per day:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="workhours_qt" #workhours_qt="ngModel" ngModel placeholder="Enter Work hours per day">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Work days per month:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="workdays_qt" #workdays_qt="ngModel" ngModel placeholder="Enter Work hours per day">
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Machines Quantity:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="machines_qt" #machines_qt="ngModel" ngModel placeholder="Enter Machines Quantity:">
+            </div>
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Sales Revenue:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="number"
+                     name="sales_revenue" #sales_revenue="ngModel" ngModel placeholder="Enter Sales Revenue:">
+            </div>
+          </div><!-- row -->
+        </div>
+        <hr>
+        <div class="form-layout-footer mg-t-30 text-center">
+          <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
