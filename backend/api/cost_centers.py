@@ -60,20 +60,23 @@ class GetCostCenterRatio(Resource):
 SELECT costcenter_costcenter.* , costcenter_costcenter.costcenter_part_id as name FROM  costcenter_costcenter, cost_centers
 WHERE costcenter_costcenter.costcenter_id = cost_centers.id AND cost_centers.id = {}
 """.format(cost_center.id))
+        schema = CostCenterRatioSchema(many=True)
+        cost_centers_data = schema.dump(ratio).data if ratio.rowcount > 0 else []
+        ratio.close()
         taxes = raw_query("""
 SELECT costcenter_taxes.*, taxes.id as name FROM costcenter_taxes, cost_centers, taxes
 WHERE costcenter_taxes.costcenter_id = cost_centers.id AND taxes.id = costcenter_taxes.tax_id  AND cost_centers.id = {}
 """.format(cost_center.id))
+        taxes_schema = CostCenterTaxesSchema(many=True)
+        cost_centers_taxes_data = taxes_schema.dump(taxes).data if taxes.rowcount > 0 else []
+        taxes.close()
         coms = raw_query("""
 SELECT costcenter_coms.*, b.id as name FROM costcenter_coms, cost_centers a, cost_centers b
 WHERE costcenter_coms.costcenter_id = a.id AND b.id = costcenter_coms.costcenter_com_id  AND a.id = {}
 """.format(cost_center.id))
-        schema = CostCenterRatioSchema(many=True)
-        taxes_schema = CostCenterTaxesSchema(many=True)
         coms_schema = CostCenterComSchema(many=True)
-        cost_centers_data = schema.dump(ratio).data if ratio.rowcount > 0 else []
-        cost_centers_taxes_data = taxes_schema.dump(taxes).data if taxes.rowcount > 0 else []
         cost_centers_coms_data = coms_schema.dump(coms).data if coms.rowcount > 0 else []
+        coms.close()
         add = able('add', 'cost_centers')
         edit = able('edit', 'cost_centers')
         delete = able('delete', 'cost_centers')
