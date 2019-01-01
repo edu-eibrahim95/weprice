@@ -1,3 +1,20 @@
 // export const API_URL = 'http://miltonsonodadeploy.pythonanywhere.com';
 // export const API_URL = 'http://127.0.0.1:5000/api';
 export const API_URL = 'http://eibrahim95.pythonanywhere.com/api';
+
+// DROP TABLE accounts;
+// DROP TABLE  assets;
+// DROP TABLE  branches;
+// DROP TABLE  cost_centers;
+// DROP TABLE  costcenter_taxes;
+// DROP TABLE  employees;
+// DROP TABLE  entry_accounts;
+// DROP TABLE  installations;
+// DROP TABLE  parameters;
+// DROP TABLE  permissions;
+// DROP TABLE  product_classifications;
+// DROP TABLE  products;
+// DROP TABLE  social_charges;
+// DROP TABLE  spots;
+// DROP TABLE  taxes;
+// DROP TABLE  users ;

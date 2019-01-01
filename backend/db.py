@@ -6,7 +6,9 @@ db = SQLAlchemy()
 def save_to_db(e):
     db.session.add(e)
     db.session.commit()
-    # db.session.close()
+    id = e.id
+    db.session.close()
+    return id
 
 
 def delete_from_db(e):
