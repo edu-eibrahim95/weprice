@@ -15,3 +15,4 @@ export class CostCenter {
   created_at: string;
   updated_at: string;
 }
+

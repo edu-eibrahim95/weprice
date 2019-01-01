@@ -12,21 +12,22 @@
       </div>
       <hr>
       <ag-grid-angular
-        style="width: 100%;"
-        class="ag-theme-material"
-        [rowData]="rowData"
-        [columnDefs]="columnDefs"
-        [enableSorting]="true"
-        [enableFilter]="true"
-        [frameworkComponents]="frameworkComponents"
-        rowSelection="multiple"
-        (gridReady)="onGridReady($event)"
-        domLayout='autoHeight'
-
+              style="width: 100%;"
+              class="ag-theme-material"
+              [rowData]="rowData"
+              [columnDefs]="columnDefs"
+              [enableSorting]="true"
+              [enableFilter]="true"
+              [frameworkComponents]="frameworkComponents"
+              rowSelection="multiple"
+              (gridReady)="onGridReady($event)"
+              domLayout='autoHeight'
+              pagination="true"
+              paginationPageSize="10"
       >
       </ag-grid-angular>
-              <!--rowSelection="multiple"-->
-        <!--[rowMultiSelectWithClick]="true"-->
+      <!--rowSelection="multiple"-->
+      <!--[rowMultiSelectWithClick]="true"-->
     </div>
   </div>
 </div>

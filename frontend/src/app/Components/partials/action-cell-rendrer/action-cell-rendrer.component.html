@@ -1,8 +1,11 @@
 <div>
-    <a *ngIf="can_delete" href="#" (click)="delete(entity_id, gridApi)" class='btn btn-danger mr-1' >
+    <a *ngIf="can_delete" href="#" (click)="delete(entity_id, type, self)" class='btn btn-danger mr-1' >
         <i class='fa fa-trash text-white'></i>
     </a>
-    <a *ngIf="can_edit" [routerLink]="edit_url+entity_id" class='btn btn-primary'>
+    <a *ngIf="can_edit" [routerLink]="edit_url+entity_id" class='btn btn-primary mr-1'>
         <i class='fa fa-edit text-white'></i>
+    </a>
+    <a *ngIf="can_save" (click)="save(entity_id, type, self)"  href="#" class="btn btn-success mr-1">
+        <i class="fa fa-save"></i>
     </a>
 </div>

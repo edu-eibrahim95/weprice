@@ -3,11 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-
 def save_to_db(e):
     db.session.add(e)
     db.session.commit()
-    db.session.close()
+    # db.session.close()
 
 
 def delete_from_db(e):
@@ -16,3 +15,8 @@ def delete_from_db(e):
         db.session.delete(i)
     db.session.commit()
     db.session.close()
+
+
+def raw_query(query):
+    result = db.engine.execute(query)
+    return result

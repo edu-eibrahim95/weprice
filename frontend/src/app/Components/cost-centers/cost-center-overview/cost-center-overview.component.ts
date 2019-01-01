@@ -51,7 +51,7 @@ export class CostCenterOverviewComponent implements OnInit {
                 {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.cost_centers.length; i++){
-                this.cost_centers[i]['details'] = {'id': i,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
+                this.cost_centers[i]['details'] = {'row_id': i, 'id': this.cost_centers[i].id,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
                 this.cost_centers[i]['actions'] = {
                     'api' : this.costCenterApi,
                     'id':this.cost_centers[i].id,

@@ -22,3 +22,6 @@ outline: none;
 /deep/ .btn {
   cursor: pointer;
 }
+/deep/ .details-ag-grid .btn {
+  padding: 3px;
+}

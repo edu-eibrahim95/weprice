@@ -13,11 +13,7 @@ class CostCenter(db.Model):
     workdays_qt = db.Column(db.Float, default=0)
     machines_qt = db.Column(db.Integer, default=0)
     sales_revenue = db.Column(db.Float, default=0)
-    mkt_id = db.Column(db.Integer, default=0)
     branch_id = db.Column(db.Integer, default=0)
-    parent_id = db.Column(db.Integer, default=0)
-    rating_pct = db.Column(db.Float, default=0)
-    day_rect_qt = db.Column(db.Float, default=0)
     created_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
     updated_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
 
@@ -31,10 +27,65 @@ class CostCenterSchema(Schema):
     workdays_qt = fields.Number()
     machines_qt = fields.Number()
     sales_revenue = fields.Number()
-    mkt_id = fields.Number()
     branch_id = fields.Number()
-    parent_id = fields.Number()
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()
+
+
+class CostCenterRatio(db.Model):
+    __tablename__ = 'costcenter_costcenter'
+    id = db.Column(db.Integer, primary_key=True)
+    costcenter_id = db.Column(db.Integer)
+    costcenter_part_id = db.Column(db.Integer)
+    rating_pct = db.Column(db.Float)
+    created_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class CostCenterRatioSchema(Schema):
+    id = fields.Number()
+    costcenter_part_id = fields.Number()
+    name = fields.Str()
     rating_pct = fields.Number()
-    day_rect_qt = fields.Number()
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()
+
+
+class CostCenterTaxes(db.Model):
+    __tablename__ = 'costcenter_taxes'
+    id = db.Column(db.Integer, primary_key=True)
+    costcenter_id = db.Column(db.Integer)
+    tax_id = db.Column(db.Integer)
+    tax_pct = db.Column(db.Float)
+    created_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class CostCenterTaxesSchema(Schema):
+    id = fields.Number()
+    costcenter_id = fields.Number()
+    tax_id = fields.Number()
+    name = fields.Str()
+    tax_pct = fields.Number()
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()
+
+
+class CostCenterCom(db.Model):
+    __tablename__ = 'costcenter_coms'
+    id = db.Column(db.Integer, primary_key=True)
+    costcenter_id = db.Column(db.Integer)
+    costcenter_com_id = db.Column(db.Integer)
+    day_rec_qt = db.Column(db.Float)
+    created_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class CostCenterComSchema(Schema):
+    id = fields.Number()
+    costcenter_id = fields.Number()
+    costcenter_com_id = fields.Number()
+    name = fields.Str()
+    day_rec_qt = fields.Number()
     created_at = fields.DateTime()
     updated_at = fields.DateTime()
