@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs";
 import {Parameter} from "../../../Models/parameter";
-import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-rendrer.component";
+import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {ParameterService} from "../../../Services/parameter.service";
 import * as $ from 'jquery';
 
@@ -45,7 +45,7 @@ export class ParameterOverviewComponent implements OnInit {
             for (let i=0; i<this.parameters.length; i++){
                 this.parameters[i]['details'] = {'id': i,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
                 this.parameters[i]['actions'] = {
-                    'api' : this.parameterApi,
+                    'self' : this,
                     'id':this.parameters[i].id,
                     'delete': [this.delete, this.deleteParameter],
                     'edit': [this.edit, '/parameters/edit/'] };
@@ -59,10 +59,10 @@ export class ParameterOverviewComponent implements OnInit {
         this.gridColumnApi = params.columnApi;
     }
 
-    deleteParameter(id, parameterApi) {
+    deleteParameter(id, type, self) {
         let parameter = {};
         if(confirm("Are You Sure Want To Delete ? ")){
-            this.parameterSubs = parameterApi.deleteParameter(id, parameter).subscribe(res => {
+            this.parameterSubs = self.parameterApi.deleteParameter(id, parameter).subscribe(res => {
                     if (res == 1 ){
                         location.reload();
                     }

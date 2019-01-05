@@ -16,7 +16,7 @@ outline: none;
   padding-left: 5px;
   padding-right: 5px;
 }
-/deep/ mat-tab-group.details {
+/deep/ mat-tab-group.details,/deep/ div.details {
   margin-left: 50px; overflow:visible; width: 500px; border: 1px solid #673ab7; padding:15px; margin-top: 20px;
 }
 /deep/ .btn {
@@ -24,4 +24,10 @@ outline: none;
 }
 /deep/ .details-ag-grid .btn {
   padding: 3px;
+}
+/deep/ .mat-ink-bar.mat-ink-bar{
+  display: none;
+}
+/deep/ .d-grid{
+  display: grid;
 }

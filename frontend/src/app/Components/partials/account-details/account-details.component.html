@@ -1,0 +1,19 @@
+<div style="overflow: visible">
+    <button [class]="'btn btn-link collapsed-toggle details-toggle-'+master_raw_id" (click)="toggleDetails()"><i class="fa fa-angle-down"></i></button>
+    <div [id]="'tab-details-'+master_raw_id" class="invisible details d-grid">
+        <div class="text-right" style="overflow:visible;width:100%;z-index:10000">
+            <a href="#"  (click)="massDelete()" class="btn btn-danger btn-sm mg-r-10" >Mass Delete</a>
+        </div>
+        <ag-grid-angular
+                style="overflow:visible;width:100%;z-index:10000"
+                [id]="'details-'+master_raw_id"
+                class="ag-theme-fresh details-ag-grid"
+                [rowData]="rowData"
+                [columnDefs]="columnDefs"
+                domLayout='autoHeight'
+                [frameworkComponents]="frameworkComponents"
+                rowSelection="multiple"
+                (gridReady)="onGridReady($event)">
+        </ag-grid-angular>
+    </div>
+</div>

@@ -2,26 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import {Subscription} from "rxjs";
 import {CostCentersService} from "../../../Services/cost-centers.service";
-import {Ratio} from "../../../Models/cost_center_raio";
-import {ActionsFormatterComponent} from "../action-cell-rendrer/action-cell-rendrer.component";
+import {ActionsFormatterComponent} from "../action-cell-rendrer/action-cell-renderer.component";
 
 @Component({
     selector: 'cost-center-details',
     templateUrl: './cost-center-details.component.html'
 })
+
 export class DetailsFormatterComponent implements  OnInit{
+    master_raw_id = null;
+    cost_center_id = null;
     costCenterSubs: Subscription;
-    params: any;
-    ratio: Ratio[];
     ratioColumnDefs = [];
     ratioRowData = [{id: 0, name: "0", rating_pct: '0', check: 'Add new '}];
     taxesColumnDefs = [];
     taxesRowData = [{id: 0, name: "0", tax_pct: '0', check: 'Add new '}];
     comsColumnDefs = [];
     comsRowData = [{id: 0, name: "0", day_rec_qt: '0', check: 'Add new '}];
-    w : number;
-    master_raw_id = null;
-    cost_center_id = null;
+    ratio_cost_center_options = {};
+    taxes_cost_center_options: {};
     private gridApi;
     private taxGridApi;
     private ratioGridApi;
@@ -30,12 +29,13 @@ export class DetailsFormatterComponent implements  OnInit{
     private ratioGridColumnApi;
     private taxGridColumnApi;
     private comGridColumnApi;
+
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
     };
-    ratio_cost_center_options = {};
-    taxes_cost_center_options: {};
+
     constructor(private costCenterApi: CostCentersService){}
+
     onRatioGridReady(params) {
         this.ratioGridApi = params.api;
         this.ratioGridColumnApi = params.columnApi;
@@ -49,14 +49,14 @@ export class DetailsFormatterComponent implements  OnInit{
         this.comGridColumnApi = params.columnApi;
     }
 
-    extractValues(mappings) {
+    static extractValues(mappings) {
         return Object.keys(mappings);
     }
-    lookupValue(mappings, key) {
+    static lookupValue(mappings, key) {
         return mappings[key];
     }
 
-    lookupKey(mappings, name) {
+    static lookupKey(mappings, name) {
         for (var key in mappings) {
             if (mappings.hasOwnProperty(key)) {
                 if (name === mappings[key]) {
@@ -65,22 +65,22 @@ export class DetailsFormatterComponent implements  OnInit{
             }
         }
     }
+
     ngOnInit() {
         $(document).ready(function () {
-            $(".mat-ink-bar.mat-ink-bar").css("visibility", "hidden");
             let w = 8/9 * (parseInt($(document).innerWidth()) - parseInt($('.br-sideleft').width()) - 300);
             $('mat-tab-group').width(w)
         })
     }
+
     agInit(params: any): void {
-        this.params = params;
         this.gridApi = params.value.gridApi;
         this.gridColumnApi = params.value.gridColumnApi;
         this.master_raw_id = params.value.row_id;
         this.cost_center_id = params.value.id;
     }
-    toggleDetails() {
 
+    toggleDetails() {
         let toggle = $('.details-toggle-'+this.master_raw_id);
         let angle = toggle.find('i');
         let node = this.gridApi.getRowNode(this.master_raw_id);
@@ -97,19 +97,18 @@ export class DetailsFormatterComponent implements  OnInit{
                         {headerName: '', field: 'check', checkboxSelection: function (params) {return (params.node.id != 0) ;}},
                         {headerName: 'Cost Center Name', field: 'name', editable: true, cellEditor: 'agSelectCellEditor',
                             cellEditorParams: {
-                                values: c.extractValues(c.ratio_cost_center_options)
+                                values: DetailsFormatterComponent.extractValues(c.ratio_cost_center_options)
                             },
                             valueFormatter: function (params) {
-                                return c.lookupValue(c.ratio_cost_center_options, params.value);
+                                return DetailsFormatterComponent.lookupValue(c.ratio_cost_center_options, params.value);
                             },
                             valueParser: function (params) {
-                                return c.lookupKey(c.ratio_cost_center_options, params.newValue);
+                                return DetailsFormatterComponent.lookupKey(c.ratio_cost_center_options, params.newValue);
                             }
                         },
                         {headerName: 'Rating %', field: 'rating_pct', editable: true},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent' },
                     ];
-                    //////////////////////////////////////
                     this.ratioRowData = this.ratioRowData.concat(res['ratio']);
                     for (let i=0; i<this.ratioRowData.length; i++){
                         this.ratioRowData[i]['actions'] = {
@@ -122,17 +121,18 @@ export class DetailsFormatterComponent implements  OnInit{
                             self: this
                         };
                     }
+                    //////////////////////////////////////
                     this.taxesColumnDefs = [
                         {headerName: '', field: 'check', checkboxSelection: function (params) {return (params.node.id != 0) ;}},
                         {headerName: 'Tax', field: 'name', editable: true, cellEditor: 'agSelectCellEditor',
                             cellEditorParams: {
-                                values: c.extractValues(c.taxes_cost_center_options)
+                                values: DetailsFormatterComponent.extractValues(c.taxes_cost_center_options)
                             },
                             valueFormatter: function (params) {
-                                return c.lookupValue(c.taxes_cost_center_options, params.value);
+                                return DetailsFormatterComponent.lookupValue(c.taxes_cost_center_options, params.value);
                             },
                             valueParser: function (params) {
-                                return c.lookupKey(c.taxes_cost_center_options, params.newValue);
+                                return DetailsFormatterComponent.lookupKey(c.taxes_cost_center_options, params.newValue);
                             }
                         },
                         {headerName: 'PCT', field: 'tax_pct', editable: true },
@@ -150,17 +150,18 @@ export class DetailsFormatterComponent implements  OnInit{
                             self: this
                         };
                     }
+                    //////////////////////////////////////
                     this.comsColumnDefs = [
                         {headerName: '', field: 'check', checkboxSelection: function (params) {return (params.node.id != 0) ;}},
                         {headerName: 'Com', field: 'name' , editable: true, cellEditor: 'agSelectCellEditor',
                             cellEditorParams: {
-                                values: c.extractValues(c.ratio_cost_center_options)
+                                values: DetailsFormatterComponent.extractValues(c.ratio_cost_center_options)
                             },
                             valueFormatter: function (params) {
-                                return c.lookupValue(c.ratio_cost_center_options, params.value);
+                                return DetailsFormatterComponent.lookupValue(c.ratio_cost_center_options, params.value);
                             },
                             valueParser: function (params) {
-                                return c.lookupKey(c.ratio_cost_center_options, params.newValue);
+                                return DetailsFormatterComponent.lookupKey(c.ratio_cost_center_options, params.newValue);
                             }
                         },
                         {headerName: 'PCT', field: 'day_rec_qt', editable: true },
@@ -183,15 +184,11 @@ export class DetailsFormatterComponent implements  OnInit{
                     toggle.addClass('expanded-toggle');
                     angle.removeClass('fa-angle-down');
                     angle.addClass('fa-angle-up');
-                    bar.css('visibility', 'visible');
-
+                    bar.css('display', 'block');
                     let r = Math.max(this.ratioRowData.length, this.comsRowData.length, this.taxesRowData.length);
-                    let d = $('#details-'+this.master_raw_id);
                     t.removeClass('invisible');
-                    let h = t.height();
                     node.setRowHeight((r*25)+270);
                     this.gridApi.onRowHeightChanged();
-
                 });
             }
             else {
@@ -199,13 +196,9 @@ export class DetailsFormatterComponent implements  OnInit{
                 toggle.addClass('expanded-toggle');
                 angle.removeClass('fa-angle-down');
                 angle.addClass('fa-angle-up');
-                bar.css('visibility', 'visible');
-
+                bar.css('display', 'block');
                 let r = Math.max(this.ratioRowData.length, this.comsRowData.length, this.taxesRowData.length);
-                let d = $('#details-'+this.master_raw_id);
                 t.removeClass('invisible');
-                let h = t.height();
-                console.log(h, d.height(), r,this.ratioRowData.length, this.comsRowData.length, this.taxesRowData.length);
                 node.setRowHeight((r*25)+270);
                 this.gridApi.onRowHeightChanged();
             }
@@ -219,9 +212,10 @@ export class DetailsFormatterComponent implements  OnInit{
             angle.removeClass('fa-angle-up');
             angle.addClass('fa-angle-down');
             t.addClass('invisible');
-            bar.css('visibility', 'hidden');
+            bar.css('display', 'none');
         }
     }
+
     deleteRatio(id, type, self) {
         if(confirm("Are You Sure")){
             let grid = null;
@@ -249,6 +243,7 @@ export class DetailsFormatterComponent implements  OnInit{
             return false;
         }
     }
+
     massDelete(type) {
         let grid = null;
         let rowData = null;
@@ -274,7 +269,7 @@ export class DetailsFormatterComponent implements  OnInit{
             if (confirm("Are You Sure")) {
                 this.costCenterSubs = this.costCenterApi.deleteCostCenterRatio(type, this.cost_center_id, 'mass', parameter).subscribe(res => {
                         if (res == 1) {
-                            rowData = rowData.filter(row => ! (row.id in ids));
+                            rowData = rowData.filter(row => ! (ids.includes(row.id)));
                             grid.setRowData(rowData);
                         }
                     },
@@ -284,6 +279,7 @@ export class DetailsFormatterComponent implements  OnInit{
             }
         }
     }
+
     save(id, type, self) {
         let parameters = {};
         let grid = null;
@@ -329,17 +325,7 @@ export class DetailsFormatterComponent implements  OnInit{
         }
         else {
             self.costCenterSubs = self.costCenterApi.editCostCenterRatio(type, self.cost_center_id, id, parameters).subscribe(res => {
-                    if (res > 0 ){
-                        parameters['id'] = res;
-                        parameters['actions'] = {
-                            api : this.costCenterApi,
-                            id:res,
-                            delete: [true, self.deleteRatio],
-                            edit: [false, ''],
-                            save: [true, self.save],
-                            type: 'ratio',
-                            self: self
-                        };
+                    if (res == 0 ){
                         return false;
                     }
                 },
@@ -348,4 +334,5 @@ export class DetailsFormatterComponent implements  OnInit{
         }
         return false;
     }
+
 }

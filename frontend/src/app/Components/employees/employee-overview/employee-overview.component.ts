@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs";
 import {Employee} from "../../../Models/employee";
-import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-rendrer.component";
+import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {EmployeeService} from "../../../Services/employee.service";
 import * as $ from 'jquery';
+import {EmployeeDetailsComponent} from "../../partials/employee-details/employee-details.component";
 
 @Component({
     selector: 'app-employee-overview',
@@ -22,6 +23,7 @@ export class EmployeeOverviewComponent implements OnInit {
     employees : Employee[];
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
+        detailsFormatterComponent: EmployeeDetailsComponent
     };
     private gridApi;
     private gridColumnApi;
@@ -34,22 +36,27 @@ export class EmployeeOverviewComponent implements OnInit {
             this.edit = res['edit'];
             this.delete = res['delete'];
             this.height = this.employees.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 220;
-            w = w/8;
+            let w = $(document).innerWidth() - $('.br-sideleft').width() - 330;
+            w = w/7;
             this.columnDefs = [
+                {headerName: '', field: 'check', checkboxSelection:true, width:60},
+                {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
                 {headerName: 'Name', field: 'name', width: w},
                 {headerName: 'Type', field: 'type', width: w},
                 {headerName: 'Hire Date', field: 'hire_date', width: w},
                 {headerName: 'Dismiss Date', field: 'dismiss_date', width: w},
                 {headerName: 'Salary', field: 'salary', width: w},
                 {headerName: 'Extra Salary', field: 'extra_salary', width: w},
-                {headerName: 'Branch', field: 'branch_id', width: w},
                 {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.employees.length; i++){
-                this.employees[i]['details'] = {'id': i,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
+                this.employees[i]['details'] = {
+                    'row_id':i,
+                    'id': this.employees[i].id,
+                    'gridApi' : this.gridApi,
+                    'gridColumnApi': this.gridColumnApi};
                 this.employees[i]['actions'] = {
-                    'api' : this.employeeApi,
+                    'self' : this,
                     'id':this.employees[i].id,
                     'delete': [this.delete, this.deleteEmployee],
                     'edit': [this.edit, '/employees/edit/'] };
@@ -63,10 +70,10 @@ export class EmployeeOverviewComponent implements OnInit {
         this.gridColumnApi = params.columnApi;
     }
 
-    deleteEmployee(id, employeeApi) {
+    deleteEmployee(id, type, self) {
         let employee = {};
         if(confirm("Are You Sure Want To Delete ? ")){
-            this.employeeSubs = employeeApi.deleteEmployee(id, employee).subscribe(res => {
+            this.employeeSubs = self.employeeApi.deleteEmployee(id, employee).subscribe(res => {
                     if (res == 1 ){
                         location.reload();
                     }

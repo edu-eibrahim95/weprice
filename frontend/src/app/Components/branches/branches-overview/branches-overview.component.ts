@@ -3,7 +3,7 @@ import {Subscription} from "rxjs/Rx";
 import {Branch} from "../../../Models/branch";
 import {BranchService} from "../../../Services/branch.service";
 import * as $ from 'jquery';
-import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-rendrer.component";
+import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 
 @Component({
     selector: 'app-branches-overview',
@@ -48,16 +48,20 @@ export class BranchesOverviewComponent implements OnInit {
                 {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.branches.length; i++){
-                this.branches[i]['actions'] = {'api' : this.branchesApi,'id':this.branches[i].id, 'delete': [this.delete, this.deleteBranch], 'edit': [this.edit, '/branches/edit/'] };
+                this.branches[i]['actions'] = {
+                    'self' : this,
+                    'id':this.branches[i].id,
+                    'delete': [this.delete, this.deleteBranch],
+                    'edit': [this.edit, '/branches/edit/']
+                };
             }
             this.rowData = this.branches;
-            // $('ag-grid-angular').height(this.height);
         });
     }
-    deleteBranch(id, branchesApi) {
+    deleteBranch(id, type, self) {
         let parameter = {};
         if(confirm("Are You Sure Want To Delete ? ")){
-            this.branchesSubs = branchesApi.deleteBranch(id, parameter).subscribe(res => {
+            this.branchesSubs = self.branchesApi.deleteBranch(id, parameter).subscribe(res => {
                     if (res == 1 ){
                         location.reload();
                     }

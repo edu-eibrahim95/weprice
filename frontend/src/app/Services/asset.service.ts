@@ -5,12 +5,12 @@ import {Asset} from "../Models/asset";
 import {API_URL} from "../env";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AssetService {
 
 
- httpOptions = {
+    httpOptions = {
         headers: new HttpHeaders({
             'Content-Type':  'application/json',
         })
@@ -21,6 +21,10 @@ export class AssetService {
     }
     getAssets() {
         return this.http.get<Asset[]>(`${API_URL}/assets`)
+            .catch(AssetService._handleError);
+    }
+    getAssetCostCenters(asset_id) {
+        return this.http.get<Asset[]>(`${API_URL}/assets/cost_centers/`+asset_id)
             .catch(AssetService._handleError);
     }
 
@@ -35,8 +39,32 @@ export class AssetService {
                 return 0;
             })
     }
+    addAssetCostCenter(asset_id, asset) : Observable<number>{
+        return this.http.post(`${API_URL}/assets/cost_centers/`+asset_id+`/add`, asset, this.httpOptions).map(
+            res => {
+                if (res['status'] == 1) {
+                    return res['id'];
+                }
+            },
+            err => {
+                return 0;
+            })
+    }
+
     deleteAsset(asset_id, asset) {
         return this.http.post(`${API_URL}/assets/delete/`+asset_id, asset, this.httpOptions).map(
+            res => {
+                if (res['status'] == 1) {
+                    return 1;
+                }
+            },
+            err => {
+                return 0;
+            })
+    }
+
+    deleteAssetCostCenter(asset_id, asset, asset_cost_center_id) {
+        return this.http.post(`${API_URL}/assets/cost_centers/`+asset_id+`/delete/`+asset_cost_center_id, asset, this.httpOptions).map(
             res => {
                 if (res['status'] == 1) {
                     return 1;
@@ -63,4 +91,17 @@ export class AssetService {
                 return 0;
             })
     }
+
+    editAssetCostCenter(asset_id, asset, asset_cost_center_id): Observable<number>{
+        return this.http.post(`${API_URL}/assets/cost_centers/`+asset_id+`/edit/`+asset_cost_center_id, asset, this.httpOptions).map(
+            res => {
+                if (res['status'] == 1) {
+                    return 1;
+                }
+            },
+            err => {
+                return 0;
+            })
+    }
+
 }

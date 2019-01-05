@@ -6,6 +6,10 @@ import {BranchService} from "../../../Services/branch.service";
 import {AssetService} from "../../../Services/asset.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {AssetType} from "../../../Models/asset_type";
+import {Local} from "../../../Models/local";
+import {AssetTypeService} from "../../../Services/asset-type.service";
+import {LocalService} from "../../../Services/local.service";
 
 @Component({
     selector: 'app-asset-edit',
@@ -18,7 +22,11 @@ export class AssetEditComponent implements OnInit {
     branches : Branch[];
     assetSubs: Subscription;
     asset : Asset;
-    constructor(private branchesApi: BranchService, private assetsApi: AssetService, private router: Router, private route: ActivatedRoute) { }
+    assetTypesSubs: Subscription;
+    assetTypes : AssetType[];
+    localsSubs: Subscription;
+    locals : Local[];
+    constructor(private branchesApi: BranchService, private assetsApi: AssetService, private router: Router, private route: ActivatedRoute, private assetTypesApi : AssetTypeService, private localsApi : LocalService) { }
 
     ngOnInit() {
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
@@ -26,6 +34,12 @@ export class AssetEditComponent implements OnInit {
         });
         this.assetSubs = this.assetsApi.getAsset(this.route.params['value']['rule_id']).subscribe(res => {
             this.asset = res['asset'];
+        });
+        this.assetTypesSubs = this.assetTypesApi.getAssetTypes().subscribe(res => {
+            this.assetTypes = res['asset_types'];
+        });
+        this.localsSubs = this.localsApi.getLocals().subscribe(res => {
+            this.locals = res['locals'];
         });
     }
 

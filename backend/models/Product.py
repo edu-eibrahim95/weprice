@@ -38,3 +38,25 @@ class ProductSchema(Schema):
     installation_id = fields.Number()
     created_at = fields.DateTime()
     updated_at = fields.DateTime()
+
+
+class ProductTaxes(db.Model):
+    __tablename__ = 'product_taxes'
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, default=0)
+    tax_id = db.Column(db.Integer, default=0)
+    purchase_pct = db.Column(db.Float, default=0)
+    sale_pct = db.Column(db.Float, default=0)
+    created_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class ProductTaxesSchema(Schema):
+    id = fields.Number()
+    product_id = fields.Number()
+    tax_id = fields.Number()
+    name = fields.Number()
+    purchase_pct = fields.Number()
+    sale_pct = fields.Number()
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()

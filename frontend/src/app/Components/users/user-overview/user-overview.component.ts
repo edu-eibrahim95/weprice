@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs";
 import {User} from "../../../Models/user";
-import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-rendrer.component";
+import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {UserService} from "../../../Services/user.service";
 import * as $ from 'jquery';
 

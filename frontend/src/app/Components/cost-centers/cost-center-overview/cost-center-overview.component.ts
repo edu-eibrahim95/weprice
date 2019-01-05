@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CostCenter} from "../../../Models/cost_center";
-import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-rendrer.component";
+import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {CostCentersService} from "../../../Services/cost-centers.service";
 import {Subscription} from "rxjs";
 import * as $ from 'jquery';
@@ -19,14 +19,14 @@ export class CostCenterOverviewComponent implements OnInit {
     delete = false;
     columnDefs = [];
     rowData = [];
-    height = null;
     cost_centers : CostCenter[];
+    private gridApi;
+    private gridColumnApi;
+
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
         detailsFormatterComponent: DetailsFormatterComponent
     };
-    private gridApi;
-    private gridColumnApi;
     constructor(private costCenterApi: CostCentersService) { }
 
     ngOnInit() {
@@ -35,7 +35,6 @@ export class CostCenterOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.cost_centers.length * 48 + 60;
             let w = $(document).innerWidth() - $('.br-sideleft').width() - 330;
             w = w/8;
             this.columnDefs = [
@@ -47,19 +46,18 @@ export class CostCenterOverviewComponent implements OnInit {
                 {headerName: 'Work Days / Month', field: 'workdays_qt', width: w},
                 {headerName: 'Machines QT', field: 'machines_qt', width: w},
                 {headerName: 'Sales Revenue', field: 'sales_revenue', width: w},
-                {headerName: 'Branch', field: 'branch_id', width: w},
+                {headerName: 'Type', field: 'type', width: w},
                 {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.cost_centers.length; i++){
                 this.cost_centers[i]['details'] = {'row_id': i, 'id': this.cost_centers[i].id,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
                 this.cost_centers[i]['actions'] = {
-                    'api' : this.costCenterApi,
+                    'self' : this,
                     'id':this.cost_centers[i].id,
                     'delete': [this.delete, this.deleteCostCenter],
                     'edit': [this.edit, '/cost_centers/edit/'] };
             }
             this.rowData = this.cost_centers;
-            // $('ag-grid-angular').height(this.height);
         });
 
     }
@@ -68,10 +66,10 @@ export class CostCenterOverviewComponent implements OnInit {
         this.gridColumnApi = params.columnApi;
     }
 
-    deleteCostCenter(id, costCenterApi) {
+    deleteCostCenter(id, type, self) {
         let parameter = {};
         if(confirm("Are You Sure Want To Delete ? ")){
-            this.costCenterSubs = costCenterApi.deleteCostCenter(id, parameter).subscribe(res => {
+            this.costCenterSubs = self.costCenterApi.deleteCostCenter(id, parameter).subscribe(res => {
                     if (res == 1 ){
                         location.reload();
                     }

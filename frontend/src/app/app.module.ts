@@ -10,7 +10,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { FormsModule }   from '@angular/forms';
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "./Services/auth.service";
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AuthenticatedGuard} from "./_guards/authenticated.guard";
 import { BranchesOverviewComponent } from './Components/branches/branches-overview/branches-overview.component';
 import { BranchEditComponent } from './Components/branches/branch-edit/branch-edit.component';
@@ -21,7 +21,7 @@ import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from "./_helpers/error.interceptor";
 import {BranchService} from "./Services/branch.service";
 import { AgGridModule } from 'ag-grid-angular';
-import {ActionsFormatterComponent} from "./Components/partials/action-cell-rendrer/action-cell-rendrer.component";
+import {ActionsFormatterComponent} from "./Components/partials/action-cell-rendrer/action-cell-renderer.component";
 import { CostCenterComponent } from './Components/cost-centers/cost-center.component';
 import { CostCenterOverviewComponent } from './Components/cost-centers/cost-center-overview/cost-center-overview.component';
 import { CostCenterAddComponent } from './Components/cost-centers/cost-center-add/cost-center-add.component';
@@ -61,6 +61,34 @@ import { UserOverviewComponent } from './Components/users/user-overview/user-ove
 import { UserAddComponent } from './Components/users/user-add/user-add.component';
 import { UserEditComponent } from './Components/users/user-edit/user-edit.component';
 import {TaxAddComponent} from "./Components/taxes/tax-add/tax-add.component";
+import { AccountDetailsComponent } from './Components/partials/account-details/account-details.component';
+import { ProductDetailsComponent } from './Components/partials/product-details/product-details.component';
+import { EmployeeDetailsComponent } from './Components/partials/employee-details/employee-details.component';
+import { AssetDetailsComponent } from './Components/partials/asset-details/asset-details.component';
+import { SocialChargeDetailsComponent } from './Components/partials/social-charge-details/social-charge-details.component';
+import { ProductClassifsComponent } from './Components/product-classifs/product-classifs.component';
+import { ProductClassifOverviewComponent } from './Components/product-classifs/product-classif-overview/product-classif-overview.component';
+import { ProductClassifAddComponent } from './Components/product-classifs/product-classif-add/product-classif-add.component';
+import { ProductClassifEditComponent } from './Components/product-classifs/product-classif-edit/product-classif-edit.component';
+import { ProductClassifDetailsComponent } from './Components/partials/product-classif-details/product-classif-details.component';
+import { AssetTypesComponent } from './Components/asset-types/asset-types.component';
+import { AssetTypeOverviewComponent } from './Components/asset-types/asset-type-overview/asset-type-overview.component';
+import { AssetTypeAddComponent } from './Components/asset-types/asset-type-add/asset-type-add.component';
+import { AssetTypeEditComponent } from './Components/asset-types/asset-type-edit/asset-type-edit.component';
+import { LocalsComponent } from './Components/locals/locals.component';
+import { LocalOverviewComponent } from './Components/locals/local-overview/local-overview.component';
+import { LocalAddComponent } from './Components/locals/local-add/local-add.component';
+import { LocalEditComponent } from './Components/locals/local-edit/local-edit.component';
+import { SpotsComponent } from './Components/spots/spots.component';
+import { SpotOverviewComponent } from './Components/spots/spot-overview/spot-overview.component';
+import { SpotAddComponent } from './Components/spots/spot-add/spot-add.component';
+import { SpotEditComponent } from './Components/spots/spot-edit/spot-edit.component';
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 
 @NgModule({
   declarations: [
@@ -109,11 +137,39 @@ import {TaxAddComponent} from "./Components/taxes/tax-add/tax-add.component";
     UsersComponent,
     UserOverviewComponent,
     UserAddComponent,
-    UserEditComponent
+    UserEditComponent,
+    AccountDetailsComponent,
+    ProductDetailsComponent,
+    EmployeeDetailsComponent,
+    AssetDetailsComponent,
+    SocialChargeDetailsComponent,
+    ProductClassifsComponent,
+    ProductClassifOverviewComponent,
+    ProductClassifAddComponent,
+    ProductClassifEditComponent,
+    ProductClassifDetailsComponent,
+    AssetTypesComponent,
+    AssetTypeOverviewComponent,
+    AssetTypeAddComponent,
+    AssetTypeEditComponent,
+    LocalsComponent,
+    LocalOverviewComponent,
+    LocalAddComponent,
+    LocalEditComponent,
+    SpotsComponent,
+    SpotOverviewComponent,
+    SpotAddComponent,
+    SpotEditComponent
   ],
   entryComponents: [
     ActionsFormatterComponent,
-    DetailsFormatterComponent
+    DetailsFormatterComponent,
+    AccountDetailsComponent,
+    ProductDetailsComponent,
+    EmployeeDetailsComponent,
+    AssetDetailsComponent,
+    SocialChargeDetailsComponent,
+    ProductClassifDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -123,7 +179,14 @@ import {TaxAddComponent} from "./Components/taxes/tax-add/tax-add.component";
     HttpClientModule,
     AgGridModule.withComponents([]),
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+       TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     AuthGuard,

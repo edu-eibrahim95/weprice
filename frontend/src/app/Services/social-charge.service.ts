@@ -5,11 +5,11 @@ import {SocialCharge} from "../Models/social_charge";
 import {API_URL} from "../env";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SocialChargeService {
 
-  httpOptions = {
+    httpOptions = {
         headers: new HttpHeaders({
             'Content-Type':  'application/json',
         })
@@ -20,6 +20,11 @@ export class SocialChargeService {
     }
     getSocialCharges() {
         return this.http.get<SocialCharge[]>(`${API_URL}/social_charges`)
+            .catch(SocialChargeService._handleError);
+    }
+
+    getSocialChargeAccounts(social_charge_id) {
+        return this.http.get<SocialCharge[]>(`${API_URL}/social_charges/accounts/`+social_charge_id)
             .catch(SocialChargeService._handleError);
     }
 
@@ -34,8 +39,32 @@ export class SocialChargeService {
                 return 0;
             })
     }
+    addSocialChargeAccount(social_charge_id, parameter) : Observable<number>{
+        return this.http.post(`${API_URL}/social_charges/accounts/`+social_charge_id+`/add`, parameter, this.httpOptions).map(
+            res => {
+                if (res['status'] == 1) {
+                    return res['id'];
+                }
+            },
+            err => {
+                return 0;
+            })
+    }
+
     deleteSocialCharge(social_charge_id, parameter) {
         return this.http.post(`${API_URL}/social_charges/delete/`+social_charge_id, parameter, this.httpOptions).map(
+            res => {
+                if (res['status'] == 1) {
+                    return 1;
+                }
+            },
+            err => {
+                return 0;
+            })
+    }
+
+    deleteSocialChargeAccount(social_charge_id, parameter, social_charge_account_id) {
+        return this.http.post(`${API_URL}/social_charges/accounts/`+social_charge_id+`/delete/`+social_charge_account_id, parameter, this.httpOptions).map(
             res => {
                 if (res['status'] == 1) {
                     return 1;
@@ -53,6 +82,17 @@ export class SocialChargeService {
 
     editSocialCharge(social_charge_id, parameter): Observable<number>{
         return this.http.post(`${API_URL}/social_charges/edit/`+social_charge_id, parameter, this.httpOptions).map(
+            res => {
+                if (res['status'] == 1) {
+                    return 1;
+                }
+            },
+            err => {
+                return 0;
+            })
+    }
+    editSocialChargeAccount(social_charge_id, parameter, social_charge_account_id): Observable<number>{
+        return this.http.post(`${API_URL}/social_charges/accounts/`+social_charge_id+`/edit/`+social_charge_account_id, parameter, this.httpOptions).map(
             res => {
                 if (res['status'] == 1) {
                     return 1;

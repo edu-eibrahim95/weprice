@@ -29,6 +29,17 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
+              Product Classif:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select *ngIf="productClassifs" id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true"  name="product_class_id" #product_class_id="ngModel" ngModel [ngModel]="(productClassifs.length > 0) ? productClassifs[0].id : 0">
+                <option *ngFor="let product_classif of productClassifs" [value]="product_classif.id" selected="">{{product_classif.description}}</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
               Type:
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">

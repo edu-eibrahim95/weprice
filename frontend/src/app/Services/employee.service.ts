@@ -5,11 +5,11 @@ import {Employee} from "../Models/employee";
 import {API_URL} from "../env";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class EmployeeService {
 
- httpOptions = {
+    httpOptions = {
         headers: new HttpHeaders({
             'Content-Type':  'application/json',
         })
@@ -20,6 +20,10 @@ export class EmployeeService {
     }
     getEmployees() {
         return this.http.get<Employee[]>(`${API_URL}/employees`)
+            .catch(EmployeeService._handleError);
+    }
+    getEmployeeCostCenters(employee_id) {
+        return this.http.get<Employee[]>(`${API_URL}/employees/cost_centers/`+employee_id)
             .catch(EmployeeService._handleError);
     }
 
@@ -34,8 +38,31 @@ export class EmployeeService {
                 return 0;
             })
     }
+    addEmployeeCostCenter(employee_id, employee) : Observable<number>{
+        return this.http.post(`${API_URL}/employees/cost_centers/`+employee_id+`/add`, employee, this.httpOptions).map(
+            res => {
+                if (res['status'] == 1) {
+                    return res['id'];
+                }
+            },
+            err => {
+                return 0;
+            })
+    }
+
     deleteEmployee(employee_id, employee) {
         return this.http.post(`${API_URL}/employees/delete/`+employee_id, employee, this.httpOptions).map(
+            res => {
+                if (res['status'] == 1) {
+                    return 1;
+                }
+            },
+            err => {
+                return 0;
+            })
+    }
+    deleteEmployeeCostCenter(employee_id, employee, ec_id) {
+        return this.http.post(`${API_URL}/employees/cost_centers/`+employee_id+`/delete/`+ec_id, employee, this.httpOptions).map(
             res => {
                 if (res['status'] == 1) {
                     return 1;
@@ -62,4 +89,17 @@ export class EmployeeService {
                 return 0;
             })
     }
+    editEmployeeCostCenter(employee_id, employee, ec_id): Observable<number>{
+        return this.http.post(`${API_URL}/employees/cost_centers/`+employee_id+`/edit/`+ec_id, employee, this.httpOptions).map(
+            res => {
+                if (res['status'] == 1) {
+                    return 1;
+                }
+            },
+            err => {
+                return 0;
+            })
+    }
+
+
 }

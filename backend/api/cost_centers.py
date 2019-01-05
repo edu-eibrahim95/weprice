@@ -9,11 +9,17 @@ from api.utils import can, able, get_user
 
 
 class GetCostCenters(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
+
     @jwt_required
     @can(action='view', thing='cost_centers')
     def get(self):
+        data = self.parser.parse_args()
         cost_centers = CostCenter.query.join(Branch, Branch.id == CostCenter.branch_id) \
-            .filter(Branch.installation_id == get_user().installation_id).all()
+            .filter(Branch.installation_id == get_user().installation_id) \
+            .filter(Branch.id == data['branch_id']).all()
         schema = CostCenterSchema(many=True)
         cost_centers_data = [] if len(cost_centers) == 0 else schema.dump(cost_centers).data
         add = able('add', 'cost_centers')
@@ -29,11 +35,18 @@ class GetCostCenters(Resource):
 
 
 class GetCostCenter(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
+
     @jwt_required
     @can(action='view', thing='cost_centers')
     def get(self, cost_center_id):
+        data = self.parser.parse_args()
         cost_centers = CostCenter.query.filter_by(id=cost_center_id).join(Branch, Branch.id == CostCenter.branch_id) \
-            .filter(Branch.installation_id == get_user().installation_id).all()
+            .filter(Branch.installation_id == get_user().installation_id) \
+            .filter(Branch.id == data['branch_id']).all()
+
         schema = CostCenterSchema(many=True)
         branches_data = [] if len(cost_centers) == 0 else schema.dump(cost_centers).data
         add = able('add', 'cost_centers')
@@ -49,34 +62,39 @@ class GetCostCenter(Resource):
 
 
 class GetCostCenterRatio(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
+
     @jwt_required
     @can(action='view', thing='cost_centers')
     def get(self, cost_center_id):
+        data = self.parser.parse_args()
         cost_center = CostCenter.query.filter_by(id=cost_center_id).join(Branch, Branch.id == CostCenter.branch_id) \
             .filter(Branch.installation_id == get_user().installation_id).first()
         if not cost_center:
             return {'status': 0}
-        ratio = raw_query("""
-SELECT costcenter_costcenter.* , costcenter_costcenter.costcenter_part_id as name FROM  costcenter_costcenter, cost_centers
-WHERE costcenter_costcenter.costcenter_id = cost_centers.id AND cost_centers.id = {}
-""".format(cost_center.id))
+        ratio = CostCenterRatio.query.filter_by(costcenter_id=cost_center_id) \
+            .join(CostCenter, CostCenter.id == CostCenterRatio.costcenter_id) \
+            .join(Branch, Branch.id == CostCenter.branch_id).filter(Branch.id == data['branch_id']).all()
+        for i in ratio:
+            i.name = i.costcenter_part_id
         schema = CostCenterRatioSchema(many=True)
-        cost_centers_data = schema.dump(ratio).data if ratio.rowcount > 0 else []
-        ratio.close()
-        taxes = raw_query("""
-SELECT costcenter_taxes.*, taxes.id as name FROM costcenter_taxes, cost_centers, taxes
-WHERE costcenter_taxes.costcenter_id = cost_centers.id AND taxes.id = costcenter_taxes.tax_id  AND cost_centers.id = {}
-""".format(cost_center.id))
+        cost_centers_data = schema.dump(ratio).data if len(ratio) > 0 else []
+        taxes = CostCenterTaxes.query.filter_by(costcenter_id=cost_center_id) \
+            .join(CostCenter, CostCenter.id == CostCenterTaxes.costcenter_id) \
+            .join(Branch, Branch.id == CostCenter.branch_id).filter(Branch.id == data['branch_id']).all()
+        for i in taxes:
+            i.name = i.tax_id
         taxes_schema = CostCenterTaxesSchema(many=True)
-        cost_centers_taxes_data = taxes_schema.dump(taxes).data if taxes.rowcount > 0 else []
-        taxes.close()
-        coms = raw_query("""
-SELECT costcenter_coms.*, b.id as name FROM costcenter_coms, cost_centers a, cost_centers b
-WHERE costcenter_coms.costcenter_id = a.id AND b.id = costcenter_coms.costcenter_com_id  AND a.id = {}
-""".format(cost_center.id))
+        cost_centers_taxes_data = taxes_schema.dump(taxes).data if len(taxes) > 0 else []
+        coms = CostCenterCom.query.filter_by(costcenter_id=cost_center_id) \
+            .join(CostCenter, CostCenter.id == CostCenterCom.costcenter_id) \
+            .join(Branch, Branch.id == CostCenter.branch_id).filter(Branch.id == data['branch_id']).all()
+        for i in coms:
+            i.name = i.costcenter_com_id
         coms_schema = CostCenterComSchema(many=True)
-        cost_centers_coms_data = coms_schema.dump(coms).data if coms.rowcount > 0 else []
-        coms.close()
+        cost_centers_coms_data = coms_schema.dump(coms).data if len(coms) > 0 else []
         add = able('add', 'cost_centers')
         edit = able('edit', 'cost_centers')
         delete = able('delete', 'cost_centers')
@@ -140,13 +158,16 @@ class AddCostCenterRatio(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('costcenter_part_id', help='This field cannot be blank', required=True)
         self.parser.add_argument('rating_pct', help='This field cannot be blank', required=True)
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
 
     @jwt_required
     @can(action='add', thing='cost_centers')
     def post(self, cost_center_id):
         data = self.parser.parse_args()
         cost_center = CostCenter.query.filter_by(id=data['costcenter_part_id']).join(Branch, Branch.id == CostCenter.branch_id) \
-            .filter(Branch.installation_id == get_user().installation_id).first()
+            .filter(Branch.installation_id == get_user().installation_id) \
+            .filter(Branch.id == data['branch_id']) \
+            .first()
         if not cost_center:
             return {'status': 0}
         cost_center_ratio = CostCenterRatio(
@@ -210,18 +231,22 @@ class EditCostCenterRatio(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('costcenter_part_id', help='This field cannot be blank', required=True)
         self.parser.add_argument('rating_pct', help='This field cannot be blank', required=True)
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
 
     @jwt_required
     @can(action='add', thing='cost_centers')
     def post(self, cost_center_id, cost_center_ratio_id):
         data = self.parser.parse_args()
         cost_center = CostCenter.query.filter_by(id=data['costcenter_part_id']).join(Branch, Branch.id == CostCenter.branch_id) \
-            .filter(Branch.installation_id == get_user().installation_id).first()
+            .filter(Branch.installation_id == get_user().installation_id) \
+            .filter(Branch.id == data['branch_id']) \
+            .first()
         if not cost_center:
             return {'status': 0}
         cost_center_ratio = CostCenterRatio.query.filter_by(id=cost_center_ratio_id).filter_by(costcenter_id=cost_center_id) \
             .join(CostCenter, CostCenter.id == CostCenterRatio.costcenter_id) \
             .join(Branch, Branch.id == CostCenter.branch_id) \
+            .filter(Branch.id == data['branch_id']) \
             .filter(Branch.installation_id == get_user().installation_id).first()
         cost_center_ratio.costcenter_id = cost_center_id
         cost_center_ratio.costcenter_part_id = data['costcenter_part_id']
@@ -238,6 +263,7 @@ class EditCostCenterTax(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('tax_id', help='This field cannot be blank', required=True)
         self.parser.add_argument('tax_pct', help='This field cannot be blank', required=True)
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
 
     @jwt_required
     @can(action='add', thing='cost_centers')
@@ -246,7 +272,9 @@ class EditCostCenterTax(Resource):
         cost_center = CostCenterTaxes.query.filter_by(id=cost_center_tax_id).filter_by(costcenter_id=cost_center_id) \
             .join(CostCenter, CostCenter.id == CostCenterTaxes.costcenter_id) \
             .join(Branch, Branch.id == CostCenter.branch_id) \
-            .filter(Branch.installation_id == get_user().installation_id).first()
+            .filter(Branch.installation_id == get_user().installation_id) \
+            .filter(Branch.id == data['branch_id']) \
+            .first()
         cost_center.costcenter_id = cost_center_id
         cost_center.tax_id = data['tax_id']
         cost_center.tax_pct = data['tax_pct']
@@ -262,6 +290,7 @@ class EditCostCenterCom(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('costcenter_com_id', help='This field cannot be blank', required=True)
         self.parser.add_argument('day_rec_qt', help='This field cannot be blank', required=True)
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
 
     @jwt_required
     @can(action='add', thing='cost_centers')
@@ -269,13 +298,17 @@ class EditCostCenterCom(Resource):
         data = self.parser.parse_args()
         cost_center = CostCenter.query.filter_by(id=data['costcenter_com_id']) \
             .join(Branch, Branch.id == CostCenter.branch_id) \
-            .filter(Branch.installation_id == get_user().installation_id).first()
+            .filter(Branch.installation_id == get_user().installation_id) \
+            .filter(Branch.id == data['branch_id']) \
+            .first()
         if not cost_center:
             return {'status': 0}
         cost_center = CostCenterCom.query.filter_by(id=cost_center_com_id).filter_by(costcenter_id=cost_center_id) \
-                .join(CostCenter, CostCenter.id == CostCenterCom.costcenter_id) \
-                .join(Branch, Branch.id == CostCenter.branch_id) \
-                .filter(Branch.installation_id == get_user().installation_id).first()
+            .join(CostCenter, CostCenter.id == CostCenterCom.costcenter_id) \
+            .join(Branch, Branch.id == CostCenter.branch_id) \
+            .filter(Branch.installation_id == get_user().installation_id) \
+            .filter(Branch.id == data['branch_id']) \
+            .first()
         cost_center.costcenter_id=cost_center_id
         cost_center.costcenter_com_id=data['costcenter_com_id']
         cost_center.day_rec_qt=data['day_rec_qt']
@@ -366,23 +399,31 @@ class DeleteCostCenterRatio(Resource):
 
 
 class DeleteCostCenterTax(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
+
     @jwt_required
     @can('delete', 'cost_centers')
     def post(self, cost_center_id, cost_center_tax_id):
         if cost_center_tax_id == 'mass':
-            parser = reqparse.RequestParser()
-            parser.add_argument('ids', help='This field cannot be blank', required=True, type=int, action='append')
-            data = parser.parse_args()
+            self.parser.add_argument('ids', help='This field cannot be blank', required=True, type=int, action='append')
+            data = self.parser.parse_args()
             cost_centers = CostCenterTaxes.query.filter(CostCenterTaxes.costcenter_id.in_(data['ids'])) \
                 .join(CostCenter, CostCenter.id == CostCenterTaxes.costcenter_id) \
                 .join(Branch, Branch.id == CostCenter.branch_id) \
-                .filter(Branch.installation_id == get_user().installation_id).all()
+                .filter(Branch.installation_id == get_user().installation_id)\
+                .filter(Branch.id == data['branch_id'])\
+                .all()
 
         else:
+            data = self.parser.parse_args()
             cost_centers = CostCenterTaxes.query.filter_by(id=cost_center_tax_id).filter_by(costcenter_id=cost_center_id) \
                 .join(CostCenter, CostCenter.id == CostCenterTaxes.costcenter_id) \
                 .join(Branch, Branch.id == CostCenter.branch_id) \
-                .filter(Branch.installation_id == get_user().installation_id).first()
+                .filter(Branch.installation_id == get_user().installation_id)\
+                .filter(Branch.id == data['branch_id'])\
+                .first()
             if not cost_centers:
                 return {'status': 0}
         try:
@@ -393,23 +434,31 @@ class DeleteCostCenterTax(Resource):
 
 
 class DeleteCostCenterCom(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
+
     @jwt_required
     @can('delete', 'cost_centers')
     def post(self, cost_center_id, cost_center_com_id):
         if cost_center_com_id == 'mass':
-            parser = reqparse.RequestParser()
-            parser.add_argument('ids', help='This field cannot be blank', required=True, type=int, action='append')
-            data = parser.parse_args()
+            self.parser.add_argument('ids', help='This field cannot be blank', required=True, type=int, action='append')
+            data = self.parser.parse_args()
             cost_centers = CostCenterCom.query.filter(CostCenterCom.costcenter_id.in_(data['ids'])) \
                 .join(CostCenter, CostCenter.id == CostCenterCom.costcenter_id) \
                 .join(Branch, Branch.id == CostCenter.branch_id) \
-                .filter(Branch.installation_id == get_user().installation_id).all()
+                .filter(Branch.installation_id == get_user().installation_id)\
+                .filter(Branch.id == data['branch_id'])\
+                .all()
 
         else:
+            data = self.parser.parse_args()
             cost_centers = CostCenterCom.query.filter_by(id=cost_center_com_id).filter_by(costcenter_id=cost_center_id) \
                 .join(CostCenter, CostCenter.id == CostCenterCom.costcenter_id) \
                 .join(Branch, Branch.id == CostCenter.branch_id) \
-                .filter(Branch.installation_id == get_user().installation_id).first()
+                .filter(Branch.installation_id == get_user().installation_id)\
+                .filter(Branch.id == data['branch_id'])\
+                .first()
             if not cost_centers:
                 return {'status': 0}
         try:
@@ -441,3 +490,19 @@ def register_cost_center_routes():
     main_api.add_resource(AddCostCenter, '/api/cost_centers/add')                       # Add
     main_api.add_resource(EditCostCenter, '/api/cost_centers/edit/<cost_center_id>')         # Edit
     main_api.add_resource(DeleteCostCenter, '/api/cost_centers/delete/<cost_center_id>')     # Delete
+
+
+# raw_query("""
+# SELECT costcenter_costcenter.* , costcenter_costcenter.costcenter_part_id as name FROM  costcenter_costcenter, cost_centers
+# WHERE costcenter_costcenter.costcenter_id = cost_centers.id AND cost_centers.id = {}
+# """.format(cost_center.id))
+
+# raw_query("""
+# SELECT costcenter_taxes.*, taxes.id as name FROM costcenter_taxes, cost_centers, taxes
+# WHERE costcenter_taxes.costcenter_id = cost_centers.id AND taxes.id = costcenter_taxes.tax_id  AND cost_centers.id = {}
+# """.format(cost_center.id))
+
+#             raw_query("""
+# SELECT costcenter_coms.*, b.id as name FROM costcenter_coms, cost_centers a, cost_centers b
+# WHERE costcenter_coms.costcenter_id = a.id AND b.id = costcenter_coms.costcenter_com_id  AND a.id = {}
+# """.format(cost_center.id))

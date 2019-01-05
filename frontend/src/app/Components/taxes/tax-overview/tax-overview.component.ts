@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs";
 import {Tax} from "../../../Models/tax";
-import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-rendrer.component";
+import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {TaxService} from "../../../Services/tax.service";
 import * as $ from 'jquery';
-import {AccountService} from "../../../Services/account.service";
 
 @Component({
     selector: 'app-tax-overview',
@@ -49,10 +48,14 @@ export class TaxOverviewComponent implements OnInit {
                 {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.taxes.length; i++){
-                this.taxes[i]['actions'] = {'api' : this.taxesApi,'id':this.taxes[i].id, 'delete': [this.delete, this.deleteTax], 'edit': [this.edit, '/taxes/edit/'] };
+                this.taxes[i]['actions'] = {
+                    'self' : this,
+                    'id':this.taxes[i].id,
+                    'delete': [this.delete, this.deleteTax],
+                    'edit': [this.edit, '/taxes/edit/']
+                };
             }
             this.rowData = this.taxes;
-            $('ag-grid-angular').height(this.height);
         });
     }
 
@@ -76,10 +79,10 @@ export class TaxOverviewComponent implements OnInit {
         return false;
     }
 
-    deleteTax(id, taxesApi) {
+    deleteTax(id, type, self) {
         let parameter = {};
         if(confirm("Are You Sure Want To Delete ? ")){
-            this.taxesSubs = taxesApi.deleteTax(id, parameter).subscribe(res => {
+            this.taxesSubs = self.taxesApi.deleteTax(id, parameter).subscribe(res => {
                     if (res == 1 ){
                         location.reload();
                     }

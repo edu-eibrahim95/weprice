@@ -29,7 +29,7 @@ export class CostCenterAddComponent implements OnInit {
         let parameter = JSON.stringify(f.value);
         this.costCentersSubs = this.costCentersApi.addCostCenter(parameter).subscribe(res => {
                 if (res ==1 ){
-                    this.router.navigate(['/accounts']);
+                    this.router.navigate(['/cost_centers']);
                     location.reload();
                 }
             },

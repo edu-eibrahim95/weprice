@@ -4,20 +4,26 @@ import {Product} from "../../../Models/product";
 import {ProductService} from "../../../Services/product.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {ProductClassifService} from "../../../Services/product-classif.service";
+import {ProductClassif} from "../../../Models/product_classif";
 
 @Component({
-  selector: 'app-product-add',
-  templateUrl: './product-add.component.html',
-  styleUrls: ['./product-add.component.css']
+    selector: 'app-product-add',
+    templateUrl: './product-add.component.html',
+    styleUrls: ['./product-add.component.css']
 })
 export class ProductAddComponent implements OnInit {
-
-   productsSubs: Subscription;
+    productClassifSubs: Subscription;
+    productClassifs : ProductClassif[];
+    productsSubs: Subscription;
     products : Product[];
 
-    constructor(private productApi : ProductService, private router: Router) { }
+    constructor(private productApi : ProductService, private router: Router, private productClassifApi: ProductClassifService) { }
 
     ngOnInit() {
+        this.productClassifSubs = this.productClassifApi.getProductClassifs().subscribe(res => {
+            this.productClassifs = res['products_classifs'];
+        });
     }
 
     onSubmit(f: NgForm) {

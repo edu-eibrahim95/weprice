@@ -12,18 +12,6 @@
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Branch:
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
-                      aria-hidden="true" name="branch_id" #branch_id="ngModel" ngModel [ngModel]="0">
-                <option value="0" selected="">Select Branch</option>
-                <option *ngFor="let branch of branches" value="{{branch.id}}">{{branch.name}}</option>
-              </select>
-            </div><!-- col-8 -->
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
               Type:
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">

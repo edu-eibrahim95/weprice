@@ -10,6 +10,7 @@ export class Product {
     sale_price: number;
     cost_price: number;
     daysterm_recpt: number;
+    product_class_id: number;
     created_at: string;
     updated_at: string;
 }

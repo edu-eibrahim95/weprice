@@ -36,3 +36,23 @@ class AssetSchema(Schema):
     branch_id = fields.Number()
     created_at = fields.DateTime()
     updated_at = fields.DateTime()
+
+
+class AssetCostCenter(db.Model):
+    __tablename__ = 'asset_cost_centers'
+    id = db.Column(db.Integer, primary_key=True)
+    asset_id = db.Column(db.Integer, default=0)
+    costcenter_id = db.Column(db.Integer, default=0)
+    rating_pct = db.Column(db.Float, default=0)
+    created_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class AssetCostCenterSchema(Schema):
+    id = fields.Number()
+    name = fields.Number()
+    asset_id = fields.Number()
+    costcenter_id = fields.Number()
+    rating_pct = fields.Number()
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()

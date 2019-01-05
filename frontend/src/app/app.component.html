@@ -1,154 +1,155 @@
 <div *ngIf="noHeader; else component">
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>
 <ng-template #component>
-  <!-- ########## START: LEFT PANEL ########## -->
-  <div class="br-logo"><a href=""><span>[</span>Weprice<span>]</span></a></div>
-  <div class="br-sideleft overflow-y-auto">
-    <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
-    <div class="br-sideleft-menu">
-      <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="br-menu-link active">
-        <div class="br-menu-item">
-          <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-          <span class="menu-item-label">Dashboard</span>
-        </div><!-- menu-item -->
-      </a><!-- br-menu-link -->
-      <a href="#" class="br-menu-link">
-        <div class="br-menu-item">
-          <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-          <span class="menu-item-label">Files</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
-        </div><!-- menu-item -->
-      </a><!-- br-menu-link -->
-      <ul class="br-menu-sub nav flex-column">
-        <li class="nav-item"><a routerLink="/branches" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Branches</a></li>
-        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Cost Centers</a></li>
-        <li class="nav-item"><a routerLink="/accounts"class="nav-link">Accounts</a></li>
-        <li class="nav-item">
-          <a href="#" class="br-menu-link">
-            <div class="br-menu-item nav-link">
-              <span class="menu-item-label">Products</span>
-              <i class="menu-item-arrow fa fa-angle-down"></i>
-            </div><!-- menu-item -->
-          </a><!-- br-menu-link -->
-          <ul class="br-menu-sub br-menu-sub-sub nav flex-column">
-            <li class="nav-item"><a routerLink="/products" class="nav-link">General</a></li>
-            <li class="nav-item"><a routerLink="/products" class="nav-link">Finished</a></li>
-            <li class="nav-item"><a routerLink="/products" class="nav-link">Semi-Finished</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a routerLink="/employees" class="nav-link">Employees</a></li>
-        <li class="nav-item"><a routerLink="/assets" class="nav-link">Assets</a></li>
-        <li class="nav-item"><a routerLink="/taxes" class="nav-link">Taxes</a></li>
-        <li class="nav-item"><a routerLink="/social_charges" class="nav-link">Social Charges</a></li>
-        <li class="nav-item"><a routerLink="/parameters" class="nav-link">Parameters</a></li>
-        <li class="nav-item"><a routerLink="/users" class="nav-link">Users</a></li>
-      </ul>
-      <a href="#" class="br-menu-link">
-        <div class="br-menu-item">
-          <i class="menu-item-icon ion-ios-redo-outline tx-24"></i>
-          <span class="menu-item-label">Transactions</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
-        </div><!-- menu-item -->
-      </a><!-- br-menu-link -->
-      <ul class="br-menu-sub nav flex-column">
-        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Entries</a></li>
-      </ul>
-      <a href="#" class="br-menu-link">
-        <div class="br-menu-item">
-          <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-          <span class="menu-item-label">Calculations</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
-        </div><!-- menu-item -->
-      </a><!-- br-menu-link -->
-      <ul class="br-menu-sub nav flex-column">
-        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Cost Map</a></li>
-        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Finished Products</a></li>
-        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Semi-Finished Products</a></li>
-      </ul>
-      <a href="#" class="br-menu-link">
-        <div class="br-menu-item">
-          <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-          <span class="menu-item-label">Reports</span>
-          <i class="menu-item-arrow fa fa-angle-down"></i>
-        </div><!-- menu-item -->
-      </a><!-- br-menu-link -->
-      <ul class="br-menu-sub nav flex-column">
-        <li class="nav-item">
-          <a href="#" class="br-menu-link">
-            <div class="br-menu-item nav-link">
-              <span class="menu-item-label">Demonstratives</span>
-              <i class="menu-item-arrow fa fa-angle-down"></i>
-            </div><!-- menu-item -->
-          </a><!-- br-menu-link -->
-          <ul class="br-menu-sub br-menu-sub-sub nav flex-column">
-            <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Expenses</a></li>
-            <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Results</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">EBTIDA</a></li>
-      </ul>
-    </div><!-- br-sideleft-menu -->
-    <br>
-  </div><!-- br-sideleft -->
-  <!-- ########## END: LEFT PANEL ########## -->
-
-  <!-- ########## START: HEAD PANEL ########## -->
-  <div class="br-header">
-    <div class="br-header-left">
-      <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-      <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
-    </div><!-- br-header-left -->
-    <div class="br-header-right">
-      <nav class="nav">
-      </nav>
-      <div class="navicon-right">
-        <div class="dropdown">
-          <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-            <span *ngIf="user" class="logged-name hidden-md-down">{{user.full_name}}</span>
-            <i class="fa fa-angle-down mg-r-5"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-header wd-200">
-            <ul class="list-unstyled user-profile-nav">
-              <li><a href=""><i class="icon ion-ios-person"></i> Edit Profile</a></li>
-              <li><a href=""><i class="icon ion-ios-gear"></i> Settings</a></li>
-              <li><a href="" (click)="logout()"><i class="icon ion-power"></i> Sign Out</a></li>
+    <!-- ########## START: LEFT PANEL ########## -->
+    <div class="br-logo"><a href=""><span>[</span>Weprice<span>]</span></a></div>
+    <div class="br-sideleft overflow-y-auto">
+        <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
+        <div class="br-sideleft-menu">
+            <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+                    <span class="menu-item-label">Dashboard</span>
+                </div><!-- menu-item -->
+            </a><!-- br-menu-link -->
+            <a href="#" [class]="'br-menu-link '+files_open">
+                <div class="br-menu-item">
+                    <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+                    <span class="menu-item-label">Files</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- br-menu-link -->
+            <ul class="br-menu-sub nav flex-column">
+                <li class="nav-item"><a routerLink="/branches" routerLinkActive="active"  class="nav-link">Branches</a></li>
+                <li class="nav-item"><a routerLink="/cost_centers" routerLinkActive="active" class="nav-link">Cost Centers</a></li>
+                <li class="nav-item"><a routerLink="/accounts" routerLinkActive="active" class="nav-link">Accounts</a></li>
+                <li class="nav-item">
+                    <a href="#" class="br-menu-link">
+                        <div class="br-menu-item nav-link">
+                            <span class="menu-item-label">Products</span>
+                            <i class="menu-item-arrow fa fa-angle-down"></i>
+                        </div><!-- menu-item -->
+                    </a><!-- br-menu-link -->
+                    <ul class="br-menu-sub br-menu-sub-sub nav flex-column">
+                        <li class="nav-item"><a routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">General</a></li>
+                        <li class="nav-item"><a routerLink="/products/1" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Finished</a></li>
+                        <li class="nav-item"><a routerLink="/products/2" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Semi-Finished</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a routerLink="/employees" routerLinkActive="active" class="nav-link">Employees</a></li>
+                <li class="nav-item"><a routerLink="/assets" routerLinkActive="active" class="nav-link">Assets</a></li>
+                <li class="nav-item"><a routerLink="/taxes" routerLinkActive="active" class="nav-link">Taxes</a></li>
+                <li class="nav-item"><a routerLink="/social_charges" routerLinkActive="active" class="nav-link">Social Charges</a></li>
+                <li class="nav-item"><a routerLink="/parameters" routerLinkActive="active" class="nav-link">Parameters</a></li>
+                <li class="nav-item"><a routerLink="/users" routerLinkActive="active" class="nav-link">Users</a></li>
             </ul>
-          </div><!-- dropdown-menu -->
-        </div><!-- dropdown -->
-      </div><!-- navicon-right -->
-    </div><!-- br-header-right -->
-  </div><!-- br-header -->
-  <!-- ########## END: HEAD PANEL ########## -->
+            <a href="#" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="menu-item-icon ion-ios-redo-outline tx-24"></i>
+                    <span class="menu-item-label">Transactions</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- br-menu-link -->
+            <ul class="br-menu-sub nav flex-column">
+                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Entries</a></li>
+            </ul>
+            <a href="#" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+                    <span class="menu-item-label">Calculations</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- br-menu-link -->
+            <ul class="br-menu-sub nav flex-column">
+                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Cost Map</a></li>
+                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Finished Products</a></li>
+                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Semi-Finished Products</a></li>
+            </ul>
+            <a href="#" class="br-menu-link">
+                <div class="br-menu-item">
+                    <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
+                    <span class="menu-item-label">Reports</span>
+                    <i class="menu-item-arrow fa fa-angle-down"></i>
+                </div><!-- menu-item -->
+            </a><!-- br-menu-link -->
+            <ul class="br-menu-sub nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="br-menu-link">
+                        <div class="br-menu-item nav-link">
+                            <span class="menu-item-label">Demonstratives</span>
+                            <i class="menu-item-arrow fa fa-angle-down"></i>
+                        </div><!-- menu-item -->
+                    </a><!-- br-menu-link -->
+                    <ul class="br-menu-sub br-menu-sub-sub nav flex-column">
+                        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Expenses</a></li>
+                        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Results</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">EBTIDA</a></li>
+            </ul>
+        </div><!-- br-sideleft-menu -->
+        <br>
+    </div><!-- br-sideleft -->
+    <!-- ########## END: LEFT PANEL ########## -->
+
+    <!-- ########## START: HEAD PANEL ########## -->
+    <div class="br-header">
+        <div class="br-header-left">
+            <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
+            <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
+        </div><!-- br-header-left -->
+        <div class="br-header-right">
+            <nav class="nav">
+                <p class="mr-3 pt-3" style="text-decoration: underline">{{branch_name}}</p>
+            </nav>
+            <div class="navicon-right">
+                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span *ngIf="user" class="logged-name hidden-md-down">{{user.full_name}}</span>
+                        <i class="fa fa-angle-down mg-r-5"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href=""><i class="icon ion-ios-person"></i> Edit Profile</a></li>
+                            <li><a href=""><i class="icon ion-ios-gear"></i> Settings</a></li>
+                            <li><a href="" (click)="logout()"><i class="icon ion-power"></i> Sign Out</a></li>
+                        </ul>
+                    </div><!-- dropdown-menu -->
+                </div><!-- dropdown -->
+            </div><!-- navicon-right -->
+        </div><!-- br-header-right -->
+    </div><!-- br-header -->
+    <!-- ########## END: HEAD PANEL ########## -->
 
 
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 
-  <script>
-    $(function(){
-      'use strict'
-      // FOR DEMO ONLY
-      // menu collapsed by default during first page load or refresh with screen
-      // having a size between 992px and 1299px. This is intended on this page only
-      // for better viewing of widgets demo.
-      $(window).resize(function(){
-        minimizeMenu();
-      });
+    <script>
+        $(function(){
+            'use strict'
+            // FOR DEMO ONLY
+            // menu collapsed by default during first page load or refresh with screen
+            // having a size between 992px and 1299px. This is intended on this page only
+            // for better viewing of widgets demo.
+            $(window).resize(function(){
+                minimizeMenu();
+            });
 
-      minimizeMenu();
+            minimizeMenu();
 
-      function minimizeMenu() {
-        if(window.matchMedia('(min-width: 992px)').matches && window.matchMedia('(max-width: 1299px)').matches) {
-          // show only the icons and hide left menu label by default
-          $('.menu-item-label,.menu-item-arrow').addClass('op-lg-0-force d-lg-none');
-          $('body').addClass('collapsed-menu');
-          $('.show-sub + .br-menu-sub').slideUp();
-        } else if(window.matchMedia('(min-width: 1300px)').matches && !$('body').hasClass('collapsed-menu')) {
-          $('.menu-item-label,.menu-item-arrow').removeClass('op-lg-0-force d-lg-none');
-          $('body').removeClass('collapsed-menu');
-          $('.show-sub + .br-menu-sub').slideDown();
-        }
-      }
-    });
-  </script>
+            function minimizeMenu() {
+                if(window.matchMedia('(min-width: 992px)').matches && window.matchMedia('(max-width: 1299px)').matches) {
+                    // show only the icons and hide left menu label by default
+                    $('.menu-item-label,.menu-item-arrow').addClass('op-lg-0-force d-lg-none');
+                    $('body').addClass('collapsed-menu');
+                    $('.show-sub + .br-menu-sub').slideUp();
+                } else if(window.matchMedia('(min-width: 1300px)').matches && !$('body').hasClass('collapsed-menu')) {
+                    $('.menu-item-label,.menu-item-arrow').removeClass('op-lg-0-force d-lg-none');
+                    $('body').removeClass('collapsed-menu');
+                    $('.show-sub + .br-menu-sub').slideDown();
+                }
+            }
+        });
+    </script>
 </ng-template>

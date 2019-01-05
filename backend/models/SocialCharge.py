@@ -26,3 +26,21 @@ class SocialChargeSchema(Schema):
     installation_id = fields.Number()
     created_at = fields.DateTime()
     updated_at = fields.DateTime()
+
+
+class SocialChargeAccount(db.Model):
+    __tablename__ = 'social_charge_accounts'
+    id = db.Column(db.Integer, primary_key=True)
+    account_id = db.Column(db.Integer, default=0)
+    social_charge_id = db.Column(db.Integer, default=0)
+    created_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+    updated_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class SocialChargeAccountSchema(Schema):
+    id = fields.Number()
+    name = fields.Number()
+    account_id = fields.Number()
+    social_charge_id = fields.Number()
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()

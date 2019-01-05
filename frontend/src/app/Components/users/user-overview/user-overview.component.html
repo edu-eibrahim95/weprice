@@ -8,7 +8,8 @@
     <div class="br-section-wrapper">
       <div class="text-right">
         <a href="#" (click)="massDeleteUser()" class="btn btn-danger mg-r-10" *ngIf="delete">Mass Delete</a>
-        <a routerLink="/users/add" class="btn btn-success" *ngIf="add">Add New</a>
+        <a routerLink="/users/add" class="btn btn-success mg-r-10" *ngIf="add">Add New</a>
+        <a routerLink="/spots" class="btn btn-warning">Manage Spots</a>
       </div>
       <hr>
       <ag-grid-angular

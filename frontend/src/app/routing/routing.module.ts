@@ -46,6 +46,23 @@ import {UsersComponent} from "../Components/users/users.component";
 import {UserOverviewComponent} from "../Components/users/user-overview/user-overview.component";
 import {UserAddComponent} from "../Components/users/user-add/user-add.component";
 import {UserEditComponent} from "../Components/users/user-edit/user-edit.component";
+import {ProductClassif} from "../Models/product_classif";
+import {ProductClassifOverviewComponent} from "../Components/product-classifs/product-classif-overview/product-classif-overview.component";
+import {ProductClassifAddComponent} from "../Components/product-classifs/product-classif-add/product-classif-add.component";
+import {ProductClassifEditComponent} from "../Components/product-classifs/product-classif-edit/product-classif-edit.component";
+import {ProductClassifsComponent} from "../Components/product-classifs/product-classifs.component";
+import {AssetTypesComponent} from "../Components/asset-types/asset-types.component";
+import {AssetTypeAddComponent} from "../Components/asset-types/asset-type-add/asset-type-add.component";
+import {AssetTypeOverviewComponent} from "../Components/asset-types/asset-type-overview/asset-type-overview.component";
+import {AssetTypeEditComponent} from "../Components/asset-types/asset-type-edit/asset-type-edit.component";
+import {LocalsComponent} from "../Components/locals/locals.component";
+import {LocalOverviewComponent} from "../Components/locals/local-overview/local-overview.component";
+import {LocalAddComponent} from "../Components/locals/local-add/local-add.component";
+import {LocalEditComponent} from "../Components/locals/local-edit/local-edit.component";
+import {SpotsComponent} from "../Components/spots/spots.component";
+import {SpotOverviewComponent} from "../Components/spots/spot-overview/spot-overview.component";
+import {SpotAddComponent} from "../Components/spots/spot-add/spot-add.component";
+import {SpotEditComponent} from "../Components/spots/spot-edit/spot-edit.component";
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -80,6 +97,7 @@ const appRoutes: Routes = [
         children: [
             { path: '', component: ProductOverviewComponent },
             { path: 'add', component: ProductAddComponent },
+            { path: ':type', component: ProductOverviewComponent },
             { path: 'edit/:rule_id', component: ProductEditComponent }
         ],
         canActivate: [AuthGuard]
@@ -129,6 +147,38 @@ const appRoutes: Routes = [
             { path: '', component: UserOverviewComponent },
             { path: 'add', component: UserAddComponent },
             { path: 'edit/:rule_id', component: UserEditComponent }
+        ],
+        canActivate: [AuthGuard]
+    },
+    { path: 'product_classifs', component: ProductClassifsComponent,
+        children: [
+            { path: '', component: ProductClassifOverviewComponent },
+            { path: 'add', component: ProductClassifAddComponent },
+            { path: 'edit/:rule_id', component: ProductClassifEditComponent }
+        ],
+        canActivate: [AuthGuard]
+    },
+    { path: 'asset_types', component: AssetTypesComponent,
+        children: [
+            { path: '', component: AssetTypeOverviewComponent },
+            { path: 'add', component: AssetTypeAddComponent },
+            { path: 'edit/:rule_id', component: AssetTypeEditComponent }
+        ],
+        canActivate: [AuthGuard]
+    },
+    { path: 'locals', component: LocalsComponent,
+        children: [
+            { path: '', component: LocalOverviewComponent },
+            { path: 'add', component: LocalAddComponent },
+            { path: 'edit/:rule_id', component: LocalEditComponent }
+        ],
+        canActivate: [AuthGuard]
+    },
+    { path: 'spots', component: SpotsComponent,
+        children: [
+            { path: '', component: SpotOverviewComponent },
+            { path: 'add', component: SpotAddComponent },
+            { path: 'edit/:rule_id', component: SpotEditComponent }
         ],
         canActivate: [AuthGuard]
     },

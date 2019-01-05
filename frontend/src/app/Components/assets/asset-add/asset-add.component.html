@@ -11,13 +11,23 @@
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Branch:
+              Asset Type:
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
-                      aria-hidden="true" name="branch_id" #branch_id="ngModel" ngModel [ngModel]="0">
-                <option value="0" selected="">Select Branch</option>
-                <option *ngFor="let branch of branches" value="{{branch.id}}">{{branch.name}}</option>
+              <select *ngIf="assetTypes" id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true"  name="type_id" #type_id="ngModel" ngModel [ngModel]="(assetTypes.length > 0) ? assetTypes[0].id : 0">
+                <option *ngFor="let asset_type of assetTypes" [value]="asset_type.id" selected="">{{asset_type.description}}</option>
+              </select>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              Local:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select *ngIf="locals" id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                      aria-hidden="true"  name="local_id" #local_id="ngModel" ngModel [ngModel]="(locals.length > 0) ? locals[0].id : 0">
+                <option *ngFor="let local of locals" [value]="local.id" selected="">{{local.description}}</option>
               </select>
             </div><!-- col-8 -->
           </div><!-- row -->
@@ -50,7 +60,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-             Unit Price:
+              Unit Price:
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number"
@@ -75,7 +85,7 @@
                      name="start_depr_date" #start_depr_date="ngModel" ngModel placeholder="Enter start_depr_date:">
             </div>
           </div><!-- row -->
-                    <div class="row no-gutters">
+          <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
               Expiration Depr Date:
             </div><!-- col-4 -->

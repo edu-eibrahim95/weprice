@@ -1,104 +1,114 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
-  <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">Assets </h4>
-    <p class="mg-b-0">Add new Asset </p>
-  </div>
-  <div class="br-pagebody">
-    <div class="br-section-wrapper">
-      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New Asset</h6>
-      <form *ngIf="asset" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
-        <div class="form-layout form-layout-6">
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              Branch:
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
-                      aria-hidden="true" name="branch_id" #branch_id="ngModel" ngModel [ngModel]="asset.branch_id">
-                <option value="0" selected="">Select Branch</option>
-                <option *ngFor="let branch of branches" value="{{branch.id}}">{{branch.name}}</option>
-              </select>
-            </div><!-- col-8 -->
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              Description:
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="text" placeholder="Enter description"
-                     name="description" #description="ngModel" ngModel [ngModel]="asset.description">
-            </div><!-- col-8 -->
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              Description Det:
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="text" placeholder="Enter description_det"
-                     name="description_det" #description_det="ngModel" ngModel [ngModel]="asset.description_det">
-            </div><!-- col-8 -->
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              Inventory Qt:
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number" [ngModel]="asset.inventory_qt"
-                     name="inventory_qt" #inventory_qt="ngModel" ngModel placeholder="Enter salary">
-            </div>
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-             Unit Price:
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number" [ngModel]="asset.cost_price_unit"
-                     name="cost_price_unit" #cost_price_unit="ngModel" ngModel placeholder="Enter cost_price_unit">
-            </div>
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              Acquisition Date:
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="date" [ngModel]="asset.acquisition_date"
-                     name="acquisition_date" #acquisition_date="ngModel" ngModel placeholder="Enter acquisition_date">
-            </div>
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              Start Depr Date:
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="date" [ngModel]="asset.start_depr_date"
-                     name="start_depr_date" #start_depr_date="ngModel" ngModel placeholder="Enter start_depr_date:">
-            </div>
-          </div><!-- row -->
-                    <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              Expiration Depr Date:
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="date" [ngModel]="asset.expiration_depr_date"
-                     name="expiration_depr_date" #expiration_depr_date="ngModel" ngModel placeholder="Enter expiration_depr_date:">
-            </div>
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              Depreciable Flag  :
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input type="checkbox" [ngModel]="asset.depreciable_flag"
-                     name="depreciable_flag" #depreciable_flag="ngModel" ngModel>
-            </div>
-          </div><!-- row -->
-        </div><!-- form-layout -->
-        <hr>
-        <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">Submit</button>
-        </div>
-      </form>
+    <div class="pd-30">
+        <h4 class="tx-gray-800 mg-b-5">Assets </h4>
+        <p class="mg-b-0">Edit Asset </p>
     </div>
-  </div>
+    <div class="br-pagebody">
+        <div class="br-section-wrapper">
+            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Edit Asset</h6>
+            <form *ngIf="asset" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
+                <div class="form-layout form-layout-6">
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Asset Type:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <select *ngIf="assetTypes" id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                                    aria-hidden="true"  name="type_id" #type_id="ngModel" ngModel [ngModel]="asset.type_id">
+                                <option *ngFor="let asset_type of assetTypes" [value]="asset_type.id" selected="">{{asset_type.description}}</option>
+                            </select>
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Local:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <select *ngIf="locals" id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                                    aria-hidden="true"  name="local_id" #local_id="ngModel" ngModel [ngModel]="asset.local_id">
+                                <option *ngFor="let local of locals" [value]="local.id" selected="">{{local.description}}</option>
+                            </select>
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Description:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="text" placeholder="Enter description"
+                                   name="description" #description="ngModel" ngModel [ngModel]="asset.description">
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Description Det:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="text" placeholder="Enter description_det"
+                                   name="description_det" #description_det="ngModel" ngModel [ngModel]="asset.description_det">
+                        </div><!-- col-8 -->
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Inventory Qt:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="number" [ngModel]="asset.inventory_qt"
+                                   name="inventory_qt" #inventory_qt="ngModel" ngModel placeholder="Enter salary">
+                        </div>
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Unit Price:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="number" [ngModel]="asset.cost_price_unit"
+                                   name="cost_price_unit" #cost_price_unit="ngModel" ngModel placeholder="Enter cost_price_unit">
+                        </div>
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Acquisition Date:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="date" [ngModel]="asset.acquisition_date"
+                                   name="acquisition_date" #acquisition_date="ngModel" ngModel placeholder="Enter acquisition_date">
+                        </div>
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Start Depr Date:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="date" [ngModel]="asset.start_depr_date"
+                                   name="start_depr_date" #start_depr_date="ngModel" ngModel placeholder="Enter start_depr_date:">
+                        </div>
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Expiration Depr Date:
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input class="form-control" type="date" [ngModel]="asset.expiration_depr_date"
+                                   name="expiration_depr_date" #expiration_depr_date="ngModel" ngModel placeholder="Enter expiration_depr_date:">
+                        </div>
+                    </div><!-- row -->
+                    <div class="row no-gutters">
+                        <div class="col-5 col-sm-4 col-md-3">
+                            Depreciable Flag  :
+                        </div><!-- col-4 -->
+                        <div class="col-7 col-sm-8 col-md-9">
+                            <input type="checkbox" [ngModel]="asset.depreciable_flag"
+                                   name="depreciable_flag" #depreciable_flag="ngModel" ngModel>
+                        </div>
+                    </div><!-- row -->
+                </div><!-- form-layout -->
+                <hr>
+                <div class="form-layout-footer mg-t-30 text-center">
+                    <button class="btn btn-info" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

@@ -82,6 +82,7 @@ class AddUser(Resource):
             return {'status': 0}, 500
 
 
+# noinspection PyInterpreter
 class DeleteUser(Resource):
     @jwt_required
     @can('delete', 'users')
@@ -110,7 +111,7 @@ class EditUser(Resource):
     def __init__(self):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('name', help='This field cannot be blank', required=True)
-        self.parser.add_argument('password', help='This field cannot be blank', required=True)
+        self.parser.add_argument('password', help='This field cannot be blank', required=False)
         self.parser.add_argument('full_name', help='This field cannot be blank', required=True)
         self.parser.add_argument('email', help='This field cannot be blank', required=True)
         self.parser.add_argument('active_flag', help='This field cannot be blank', required=True)
