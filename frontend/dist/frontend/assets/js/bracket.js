@@ -88,11 +88,13 @@ $(document).ready(function(){
 
             if(nextElem.is(':visible')) {
                 thisLink.removeClass('show-sub');
+                thisLink.removeClass('active');
                 nextElem.slideUp();
             } else {
                 if (! nextElem.hasClass('br-menu-sub-sub')) {
                     $('.br-menu-link').each(function(){
                       $(this).removeClass('show-sub');
+                      $(this).removeClass('active');
                     });
 
                     $('.br-menu-sub').each(function(){
@@ -100,6 +102,7 @@ $(document).ready(function(){
                     });
                 }
                 thisLink.addClass('show-sub');
+                thisLink.addClass('active');
                 nextElem.slideDown();
             }
             return false;

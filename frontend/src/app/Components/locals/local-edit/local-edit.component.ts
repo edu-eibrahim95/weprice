@@ -33,5 +33,8 @@ export class LocalEditComponent implements OnInit {
             console.error
         );
     }
-
+    onCancel(){
+        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/locals']);
+        return false;
+    }
 }

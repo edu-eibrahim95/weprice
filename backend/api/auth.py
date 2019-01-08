@@ -2,7 +2,7 @@ import datetime
 
 from flask_restful import Resource, reqparse
 from main_api import main_api
-from models import User, UserSchema
+from models import User, UserSchema, Installation
 from db import save_to_db
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
@@ -61,6 +61,10 @@ class Login(Resource):
             return {'message': 'User {} doesn\'t exist'.format(data['email'])}
 
         if User.verify_hash(data['password'], current_user.password):
+            installation = Installation.query.filter_by(id=current_user.installation_id).first()
+            if not installation:
+                lang = 'en'
+            lang = installation.lang
             access_token, refresh_token = create_tokens(email=data['email'])
             schema = UserSchema(only=['id', 'name', 'full_name', 'email'])
             user_data = schema.dump(current_user)
@@ -69,6 +73,7 @@ class Login(Resource):
             return {
                 'message': 1,
                 'user': user_data.data,
+                'lang': lang
             }
         else:
             return {'message': 0}

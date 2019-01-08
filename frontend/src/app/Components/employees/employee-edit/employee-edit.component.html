@@ -1,17 +1,17 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">Employees </h4>
-    <p class="mg-b-0">Edit Employee </p>
+    <h4 class="tx-gray-800 mg-b-5"> {{ "employe.employ" | translate }} </h4>
+    <p class="mg-b-0">  {{ "employe.edit" | translate }}</p>
   </div>
   <div class="br-pagebody">
     <div class="br-section-wrapper">
-      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Edit Employee</h6>
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10"> {{ "employe.edit" | translate }}</h6>
       <form *ngIf="employee" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Name:
+              {{ "employe.name" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter name"
@@ -20,20 +20,20 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Type:
+              {{ "employe.type" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
                       aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="employee.type">
-                <option value="0" selected="">Standard</option>
-                <option value="1">Director</option>
-                <option value="2">Trainee</option>
+                <option value="0" selected=""> {{ "employe.stand" | translate }}</option>
+                <option value="1"> {{ "employe.dire" | translate }}</option>
+                <option value="2"> {{ "employe.train" | translate }}</option>
               </select>
             </div><!-- col-8 -->
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Hire Date:
+              {{ "employe.hire" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="date" [ngModel]="employee.hire_date"
@@ -42,7 +42,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Dismiss Date:
+              {{ "employe.diss" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="date" [ngModel]="employee.dismiss_date"
@@ -51,7 +51,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Salary:
+              {{ "employe.salary" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number" [ngModel]="employee.salary"
@@ -60,7 +60,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Extra Salary:
+              {{ "employe.extra" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number" [ngModel]="employee.extra_salary"
@@ -70,7 +70,9 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">Submit</button>
+          <button class="btn btn-info" type="submit"> {{ "employe.sub" | translate }}</button>
+          <button class="text-white btn btn-secondary cancel-edit ml-3"
+                  (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
         </div>
       </form>
     </div>

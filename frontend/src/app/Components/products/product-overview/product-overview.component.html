@@ -1,15 +1,15 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5"> Products </h4>
-    <p class="mg-b-0">list of existing  Products </p>
+    <h4 class="tx-gray-800 mg-b-5"> {{ 'producto.prod' | translate }} </h4>
+    <p class="mg-b-0">{{ 'producto.list' | translate }} </p>
   </div><!-- d-flex -->
   <div class="br-pagebody">
     <div class="br-section-wrapper">
       <div class="text-right">
-        <a href="#" (click)="massDeleteProduct()" class="btn btn-danger mg-r-10" *ngIf="delete">Mass Delete</a>
-        <a routerLink="/products/add" class="btn btn-success mg-r-10" *ngIf="add">Add New</a>
-        <a routerLink="/product_classifs" class="btn btn-warning">Manage Product Classifs</a>
+        <a href="#" (click)="massDeleteProduct()" class="btn btn-danger mg-r-10" *ngIf="delete">{{ 'producto.mass' | translate }}</a>
+        <a routerLink="/products/add" class="btn btn-success mg-r-10" *ngIf="add"> {{ 'producto.new' | translate }}</a>
+        <a routerLink="/product_classifs" class="btn btn-warning">{{ 'producto.manage' | translate }}</a>
       </div>
       <hr>
       <ag-grid-angular
@@ -24,7 +24,8 @@
               [rowMultiSelectWithClick]="true"
               (gridReady)="onGridReady($event)"
               domLayout='autoHeight'
-
+              pagination="true"
+              paginationPageSize="10"
       >
       </ag-grid-angular>
     </div>

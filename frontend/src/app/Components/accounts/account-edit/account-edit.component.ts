@@ -4,7 +4,6 @@ import {Subscription} from "rxjs";
 import {AccountService} from "../../../Services/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
-import {BranchService} from "../../../Services/branch.service";
 
 @Component({
   selector: 'app-account-edit',
@@ -33,5 +32,9 @@ export class AccountEditComponent implements OnInit {
             },
             console.error
         );
+    }
+    onCancel(){
+      if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/accounts']);
+      return false;
     }
 }

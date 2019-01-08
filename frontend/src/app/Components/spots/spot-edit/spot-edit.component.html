@@ -1,17 +1,17 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">Spots </h4>
-    <p class="mg-b-0">Add new Spot </p>
+    <h4 class="tx-gray-800 mg-b-5"> {{ 'spote.spot' | translate }}</h4>
+    <p class="mg-b-0">{{ 'spote.new' | translate }} </p>
   </div>
   <div class="br-pagebody">
     <div class="br-section-wrapper">
-      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New Spot</h6>
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10"> {{ 'spote.add' | translate }}</h6>
       <form *ngIf="spot" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Name:
+              {{ 'spote.name' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter name"
@@ -20,7 +20,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Ip Address:
+              {{ 'spote.ip' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter ip_address"
@@ -29,7 +29,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Nic Address:
+              {{ 'spote.nic' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter nic_address"
@@ -39,7 +39,9 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">Submit</button>
+          <button class="btn btn-info" type="submit"> {{ 'spote.sub' | translate }}</button>
+          <button class="text-white btn btn-secondary cancel-edit ml-3"
+                  (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
         </div>
       </form>
     </div>

@@ -1,14 +1,14 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5"> Parameters </h4>
-    <p class="mg-b-0">list of existing  Parameters </p>
+    <h4 class="tx-gray-800 mg-b-5"> {{ 'paramo.param' | translate }} </h4>
+    <p class="mg-b-0">{{ 'paramo.list' | translate }} </p>
   </div><!-- d-flex -->
   <div class="br-pagebody">
     <div class="br-section-wrapper">
       <div class="text-right">
-        <a href="#" (click)="massDeleteParameter()" class="btn btn-danger mg-r-10" *ngIf="delete">Mass Delete</a>
-        <a routerLink="/parameters/add" class="btn btn-success" *ngIf="add">Add New</a>
+        <a href="#" (click)="massDeleteParameter()" class="btn btn-danger mg-r-10" *ngIf="delete"> {{ 'paramo.mass' | translate }}</a>
+        <a routerLink="/parameters/add" class="btn btn-success" *ngIf="add"> {{ 'paramo.new' | translate }}</a>
       </div>
       <hr>
       <ag-grid-angular
@@ -23,7 +23,8 @@
               [rowMultiSelectWithClick]="true"
               (gridReady)="onGridReady($event)"
               domLayout='autoHeight'
-
+              pagination="true"
+              paginationPageSize="10"
       >
       </ag-grid-angular>
     </div>

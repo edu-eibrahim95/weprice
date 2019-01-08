@@ -1,14 +1,14 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">Cost Centers </h4>
-    <p class="mg-b-0">list of existing cost centers </p>
+    <h4 class="tx-gray-800 mg-b-5">{{ "costo.cost" | translate }} </h4>
+    <p class="mg-b-0">{{ "costo.list" | translate }} </p>
   </div><!-- d-flex -->
   <div class="br-pagebody">
     <div class="br-section-wrapper">
       <div class="text-right">
-        <a href="#" (click)="massDeleteCostCenter()" class="btn btn-danger mg-r-10" *ngIf="delete">Mass Delete</a>
-        <a routerLink="/cost_centers/add" class="btn btn-success" *ngIf="add">Add New</a>
+        <a href="#" (click)="massDeleteCostCenter()" class="btn btn-danger mg-r-10" *ngIf="delete">{{ "costo.mass" | translate }}</a>
+        <a routerLink="/cost_centers/add" class="btn btn-success" *ngIf="add">{{ "costo.new" | translate }}</a>
       </div>
       <hr>
       <ag-grid-angular
@@ -29,5 +29,6 @@
       <!--rowSelection="multiple"-->
       <!--[rowMultiSelectWithClick]="true"-->
     </div>
+    <br>
   </div>
 </div>

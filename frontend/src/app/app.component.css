@@ -1,9 +1,9 @@
 /deep/ .ag-cell-focus,.ag-cell-no-focus{
-border:none !important;
+  border:none !important;
 }
 /deep/ .ag-cell:focus{
-border:none !important;
-outline: none;
+  border:none !important;
+  outline: none;
 }
 /deep/ div [col-id="details"] {
   overflow: visible;
@@ -31,3 +31,48 @@ outline: none;
 /deep/ .d-grid{
   display: grid;
 }
+/deep/ .br-menu-link.active .menu-item-label {
+  color: #fff;
+}
+/*/deep/ .br-mainpanel {*/
+  /*height: calc(100% - 170px);*/
+  /*min-height: calc(100% - 170px);*/
+  /*max-height: calc(100% - 170px);*/
+  /*overflow-x: hidden;*/
+  /*overflow-y: hidden;*/
+/*}*/
+/*/deep/ .top-page-title {*/
+  /*position: fixed;*/
+  /*width: calc(100% - 230px);*/
+  /*background: #e9ecef;*/
+  /*padding-bottom: 0;*/
+  /*z-index: 90;*/
+/*}*/
+/*/deep/ .top-page-title .br-section-wrapper {*/
+  /*box-shadow: none;*/
+  /*padding-top: 40px;*/
+  /*margin-top: 10px;*/
+/*}*/
+/*/deep/ .collapsed-menu .top-page-title {*/
+    /*width: calc(100% - 60px);*/
+/*}*/
+/*/deep/ .page-base-content {*/
+  /*margin-top: 120px;*/
+/*}*/
+/*/deep/ .ag-theme-material .ag-header {*/
+  /*height: 56px;*/
+  /*min-height: 56px;*/
+  /*padding-top: 10px;*/
+  /*padding-bottom: 10px;*/
+  /*position: fixed;*/
+  /*background: white;*/
+  /*z-index: 90;*/
+  /*overflow: hidden;*/
+  /*width: calc(100% - 350px);*/
+  /*margin-top: 20px;*/
+  /*box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.21);*/
+/*}*/
+
+/*/deep/ .ag-theme-material .ag-ltr .ag-body {*/
+  /*margin-top : 100px*/
+/*}*/

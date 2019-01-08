@@ -101,7 +101,9 @@
         </div><!-- br-header-left -->
         <div class="br-header-right">
             <nav class="nav">
-                <p class="mr-3 pt-3" style="text-decoration: underline">{{branch_name}}</p>
+                <a routerLink="/">
+                    <p class="mr-3 pt-3" style="text-decoration: underline">{{branch_name}}</p>
+                </a>
             </nav>
             <div class="navicon-right">
                 <div class="dropdown">
@@ -122,9 +124,16 @@
     </div><!-- br-header -->
     <!-- ########## END: HEAD PANEL ########## -->
 
-
     <router-outlet></router-outlet>
 
+    <div class="br-mainpanel">
+        <footer class="br-footer">
+            <div class="footer-left">
+                <div class="mg-b-2">{{ 'home.footer' | translate }}</div>
+                <div> {{ 'home.made' | translate }}<a href="http://www.ibrahimgad.website">Ibrahim E.gad</a>.</div>
+            </div>
+        </footer>
+    </div>
     <script>
         $(function(){
             'use strict'

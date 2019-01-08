@@ -34,5 +34,8 @@ export class UserEditComponent implements OnInit {
             console.error
         );
     }
-
+    onCancel(){
+        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/users']);
+        return false;
+    }
 }

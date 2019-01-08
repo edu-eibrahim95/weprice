@@ -45,6 +45,9 @@ export class BranchEditComponent implements OnInit {
         let type = $("select[name=type]").val();
         this.branch.type = type;
     }
-
+  onCancel(){
+      if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/branches']);
+      return false;
+    }
 
 }

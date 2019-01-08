@@ -34,5 +34,8 @@ export class SpotEditComponent implements OnInit {
         );
     }
 
-
+    onCancel(){
+        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/spots']);
+        return false;
+    }
 }

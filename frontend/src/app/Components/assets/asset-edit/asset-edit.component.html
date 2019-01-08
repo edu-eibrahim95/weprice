@@ -1,17 +1,17 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
     <div class="pd-30">
-        <h4 class="tx-gray-800 mg-b-5">Assets </h4>
-        <p class="mg-b-0">Edit Asset </p>
+        <h4 class="tx-gray-800 mg-b-5"> {{ "assets_edit.assets" | translate }}</h4>
+        <p class="mg-b-0">{{ "assets_edit.edit" | translate }} </p>
     </div>
     <div class="br-pagebody">
         <div class="br-section-wrapper">
-            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Edit Asset</h6>
+            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">{{ "assets_edit.edit" | translate }}</h6>
             <form *ngIf="asset" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
                 <div class="form-layout form-layout-6">
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Asset Type:
+                            {{ "assets_edit.type" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <select *ngIf="assetTypes" id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
@@ -22,7 +22,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Local:
+                            {{ "assets_edit.local" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <select *ngIf="locals" id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
@@ -33,8 +33,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Description:
-                        </div><!-- col-4 -->
+                            {{ "assets_edit.descript" | translate }}                        </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="text" placeholder="Enter description"
                                    name="description" #description="ngModel" ngModel [ngModel]="asset.description">
@@ -42,7 +41,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Description Det:
+                            {{ "assets_edit.det" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="text" placeholder="Enter description_det"
@@ -51,7 +50,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Inventory Qt:
+                            {{ "assets_edit.invent" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="number" [ngModel]="asset.inventory_qt"
@@ -60,7 +59,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Unit Price:
+                            {{ "assets_edit.unit" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="number" [ngModel]="asset.cost_price_unit"
@@ -69,7 +68,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Acquisition Date:
+                            {{ "assets_edit.date" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="date" [ngModel]="asset.acquisition_date"
@@ -78,7 +77,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Start Depr Date:
+                            {{ "assets_edit.start" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="date" [ngModel]="asset.start_depr_date"
@@ -87,7 +86,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Expiration Depr Date:
+                            {{ "assets_edit.expire" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="date" [ngModel]="asset.expiration_depr_date"
@@ -96,7 +95,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Depreciable Flag  :
+                            {{ "assets_edit.flag" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input type="checkbox" [ngModel]="asset.depreciable_flag"
@@ -106,7 +105,9 @@
                 </div><!-- form-layout -->
                 <hr>
                 <div class="form-layout-footer mg-t-30 text-center">
-                    <button class="btn btn-info" type="submit">Submit</button>
+                    <button class="btn btn-info" type="submit">{{ "assets_edit.sub" | translate }}</button>
+                    <button class="text-white btn btn-secondary cancel-edit ml-3"
+                            (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
                 </div>
             </form>
         </div>

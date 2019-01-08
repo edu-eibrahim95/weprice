@@ -1,78 +1,78 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
     <div class="pd-30">
-        <h4 class="tx-gray-800 mg-b-5">Accounts </h4>
-        <p class="mg-b-0">Edit Account </p>
+        <h4 class="tx-gray-800 mg-b-5">{{ "acc_edit.acc" | translate }} </h4>
+        <p class="mg-b-0">{{ "acc_edit.edit" | translate }} </p>
     </div><!-- d-flex -->
     <div class="br-pagebody">
         <div class="br-section-wrapper">
 
-            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Edit Account</h6>
+            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">{{ "acc_edit.edit" | translate }}</h6>
             <form #f="ngForm" *ngIf="account" role="form" (ngSubmit)="onSubmit(f);">
                 <div class="form-layout form-layout-6">
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Account Type:
+                            {{ "acc_edit.acc_type" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
                                     aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="account.type">
-                                <option value="0" selected="">Sintetic</option>
-                                <option value="1">Analitic</option>
+                                <option value="0" selected="">{{ "acc_edit.sin" | translate }}</option>
+                                <option value="1">{{ "acc_edit.analit" | translate }}</option>
                             </select>
                         </div><!-- col-8 -->
                     </div><!-- row -->
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Account Nat:
+                            {{ "acc_edit.nat" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <select id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
                                     aria-hidden="true"  name="nat" #nat="ngModel" ngModel [ngModel]="account.nat">
-                                <option value="0" selected="">Debit</option>
-                                <option value="1">Credit</option>
+                                <option value="0" selected="">{{ "acc_edit.deb" | translate }}</option>
+                                <option value="1">{{ "acc_edit.cred" | translate }}</option>
                             </select>
                         </div><!-- col-8 -->
                     </div><!-- row -->
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Expense Type:
+                            {{ "acc_edit.expense" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <select id="select2-d" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
                                     aria-hidden="true"  name="expense_type" #expense_type="ngModel" ngModel [ngModel]="account.expense_type">
-                                <option value="0" selected="">Fixed</option>
-                                <option value="1">Variable</option>
-                                <option value="2">Both</option>
+                                <option value="0" selected="">{{ "acc_edit.fix" | translate }}</option>
+                                <option value="1">{{ "acc_edit.var" | translate }}</option>
+                                <option value="2">{{ "acc_edit.both" | translate }}</option>
                             </select>
                         </div><!-- col-8 -->
                     </div><!-- row -->
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Expense Absorb Type:
+                            {{ "acc_edit.absorb" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <select id="select2-e" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
                                     aria-hidden="true"  name="expense_abs_type" #expense_abs_type="ngModel" ngModel [ngModel]="account.expense_abs_type">
-                                <option value="0" selected="">No Absorption</option>
-                                <option value="1">Rating</option>
-                                <option value="2">Employees</option>
-                                <option value="3">Employees-Quant</option>
-                                <option value="4">Employees-Dir</option>
-                                <option value="5">Social Charges</option>
-                                <option value="6">Depreciation</option>
-                                <option value="7">Sale Price</option>
-                                <option value="8">Entry</option>
+                                <option value="0" selected="">{{ "acc_edit.no_absorb" | translate }}</option>
+                                <option value="1">{{ "acc_edit.rate" | translate }}</option>
+                                <option value="2">{{ "acc_edit.employ" | translate }}</option>
+                                <option value="3">{{ "acc_edit.employ_quant" | translate }}</option>
+                                <option value="4">{{ "acc_edit.employ_dir" | translate }}</option>
+                                <option value="5">{{ "acc_edit.social" | translate }}</option>
+                                <option value="6">{{ "acc_edit.dep" | translate }}</option>
+                                <option value="7">{{ "acc_edit.sale" | translate }}</option>
+                                <option value="8">{{ "acc_edit.entry" | translate }}</option>
                             </select>
                         </div><!-- col-8 -->
                     </div><!-- row -->
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Code:
+                            {{ "acc_edit.code" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="text" placeholder="Enter Code"
@@ -82,7 +82,7 @@
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Description:
+                            {{ "acc_edit.descript" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="text" placeholder="Enter Description"
@@ -92,7 +92,7 @@
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            BDG Entry Flag:
+                            {{ "acc_edit.bgd" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input type="checkbox"
@@ -102,7 +102,7 @@
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            BDG Entry Value:
+                            {{ "acc_edit.bgd_entry" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="number" [ngModel]="account.bdgentry_value"
@@ -112,7 +112,7 @@
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Expense Limit:
+                           {{ "acc_edit.limit" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="number" [ngModel]="account.expense_limit_pct"
@@ -122,7 +122,7 @@
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Expense Var:
+                            {{ "acc_edit.expense_var" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="number" [ngModel]="account.expense_var_pct"
@@ -132,7 +132,7 @@
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Avg Month Quantity:
+                            {{ "acc_edit.avg" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="number" [ngModel]="account.months_qt_avg"
@@ -142,7 +142,7 @@
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Expense Ded Pct:
+                            {{ "acc_edit.ded" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="number" [ngModel]="account.expense_ded_pct"
@@ -152,7 +152,7 @@
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Expense recov pct:
+                            {{ "acc_edit.recov" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input class="form-control" type="number" [ngModel]="account.expense_recov_pct"
@@ -162,7 +162,7 @@
 
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Revenue Flag:
+                            {{ "acc_edit.flag" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input type="checkbox"
@@ -171,7 +171,7 @@
                     </div><!-- row -->
                     <div class="row no-gutters">
                         <div class="col-5 col-sm-4 col-md-3">
-                            Earning Distrib Flag:
+                            {{ "acc_edit.ear" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
                             <input type="checkbox" [ngModel]="account.earning_distrib_flag"
@@ -182,7 +182,9 @@
                 </div>
                 <hr>
                 <div class="form-layout-footer mg-t-30 text-center">
-                    <button class="btn btn-info" type="submit">Submit</button>
+                    <button class="btn btn-info" type="submit">{{ "acc_edit.sub" | translate }}</button>
+                    <button class="text-white btn btn-secondary cancel-edit ml-3"
+                       (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
                 </div>
             </form>
         </div>

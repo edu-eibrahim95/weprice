@@ -1,8 +1,8 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel">
     <div class="pd-30">
-        <h4 class="tx-gray-800 mg-b-5">Dashboard {{ 'HOME.TITLE' | translate }}</h4>
-        <p class="mg-b-0">WePrice the most accurate </p>
+        <h4 class="tx-gray-800 mg-b-5"> {{ 'home.title' | translate }}</h4>
+        <p class="mg-b-0">{{ 'home.we' | translate }}</p>
     </div><!-- d-flex -->
 
     <div class="br-pagebody mg-t-5 pd-x-30">
@@ -10,14 +10,14 @@
             <div class="col-12">
                 <div class="card pd-0 bd-0 shadow-base pb-3">
                     <div class="pd-x-30 pd-t-30 pd-b-15">
-                        <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Settings</h6>
+                        <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">{{ 'home.set' | translate }}</h6>
                         <div class="row">
-                            <label class="col-3" for="branch_id">Select Branch</label>
+                            <label class="col-3" for="branch_id">{{ 'home.branch' | translate }}</label>
                             <select id="branch_id" class="form-control select2 col-6 mr-1" name="branch_id"
                                     #branch_id="ngModel" ngModel [ngModel]="branch">
                                 <option *ngFor="let branch of branches" [value]="branch.id">{{branch.name}}</option>
                             </select>
-                            <button class="btn btn-primary col-2 ml-5" (click)="changeBranch()">Submit</button>
+                            <button class="btn btn-primary col-2 ml-5" (click)="changeBranch()">{{ 'home.subm' | translate }}</button>
                         </div>
                     </div>
                 </div><!-- card -->
@@ -30,9 +30,9 @@
                     <div class="pd-25 d-flex align-items-center">
                         <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
                         <div class="mg-l-20">
-                            <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Today's Visits</p>
-                            <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">1,975,224</p>
-                            <span class="tx-11 tx-roboto tx-white-6">24% higher yesterday</span>
+                            <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{ 'home.visit' | translate }}</p>
+                            <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{ 'home.num' | translate }}</p>
+                            <span class="tx-11 tx-roboto tx-white-6">{{ 'home.anum' | translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -42,9 +42,9 @@
                     <div class="pd-25 d-flex align-items-center">
                         <i class="ion ion-bag tx-60 lh-0 tx-white op-7"></i>
                         <div class="mg-l-20">
-                            <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Today Sales</p>
-                            <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">$329,291</p>
-                            <span class="tx-11 tx-roboto tx-white-6">$390,212 before tax</span>
+                            <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{ 'home.sales' | translate }}</p>
+                            <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{ 'home.dollar' | translate }}</p>
+                            <span class="tx-11 tx-roboto tx-white-6">{{ 'home.before' | translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -54,9 +54,9 @@
                     <div class="pd-25 d-flex align-items-center">
                         <i class="ion ion-monitor tx-60 lh-0 tx-white op-7"></i>
                         <div class="mg-l-20">
-                            <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">% Unique Visits</p>
+                            <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{ 'home.visits' | translate }}</p>
                             <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">54.45%</p>
-                            <span class="tx-11 tx-roboto tx-white-6">23% average duration</span>
+                            <span class="tx-11 tx-roboto tx-white-6">{{ 'home.avg' | translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -66,9 +66,9 @@
                     <div class="pd-25 d-flex align-items-center">
                         <i class="ion ion-clock tx-60 lh-0 tx-white op-7"></i>
                         <div class="mg-l-20">
-                            <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Bounce Rate</p>
+                            <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{ 'home.bounce' | translate }}</p>
                             <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">32.16%</p>
-                            <span class="tx-11 tx-roboto tx-white-6">65.45% on average time</span>
+                            <span class="tx-11 tx-roboto tx-white-6">{{ 'home.time' | translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -77,11 +77,6 @@
 
 
     </div><!-- br-pagebody -->
-    <footer class="br-footer">
-        <div class="footer-left">
-            <div class="mg-b-2">Copyright &copy; 2019. WePrice. All Rights Reserved.</div>
-            <div>Attentively and carefully made by <a href="http://www.ibrahimgad.website">Ibrahim E.gad</a>.</div>
-        </div>
-    </footer>
+
 </div><!-- br-mainpanel -->
 <!-- ########## END: MAIN PANEL ########## -->

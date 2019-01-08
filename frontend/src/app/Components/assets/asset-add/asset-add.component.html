@@ -1,17 +1,17 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
-  <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">Assets </h4>
-    <p class="mg-b-0">Add new Asset </p>
+  <div class="pd-30"> 
+    <h4 class="tx-gray-800 mg-b-5">{{ "assets_add.asset" | translate }} </h4>
+    <p class="mg-b-0">{{ "assets_add.new" | translate }} </p>
   </div>
   <div class="br-pagebody">
     <div class="br-section-wrapper">
-      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New Asset</h6>
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">{{ "assets_add.anew" | translate }}</h6>
       <form #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Asset Type:
+              {{ "assets_add.type" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <select *ngIf="assetTypes" id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
@@ -22,7 +22,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Local:
+              {{ "assets_add.local" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <select *ngIf="locals" id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
@@ -33,7 +33,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Description:
+              {{ "assets_add.descript" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter description"
@@ -42,7 +42,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Description Det:
+              {{ "assets_add.det" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter description_det"
@@ -51,7 +51,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Inventory Qt:
+              {{ "assets_add.invent" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number"
@@ -60,7 +60,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Unit Price:
+              {{ "assets_add.unit" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number"
@@ -69,7 +69,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Acquisition Date:
+             {{ "assets_add.date" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="date"
@@ -78,7 +78,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Start Depr Date:
+              {{ "assets_add.start" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="date"
@@ -87,7 +87,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Expiration Depr Date:
+              {{ "assets_add.expire" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="date"
@@ -96,7 +96,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Depreciable Flag  :
+              {{ "assets_add.dep" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input type="checkbox"
@@ -106,7 +106,7 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">Submit</button>
+          <button class="btn btn-info" type="submit">{{ "assets_add.sub" | translate }}</button>
         </div>
       </form>
     </div>

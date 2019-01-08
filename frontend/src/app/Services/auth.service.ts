@@ -42,6 +42,8 @@ export class AuthService {
       res => {
         if (res['message'] == 1) {
           localStorage.setItem('currentUser', JSON.stringify(res['user']));
+          localStorage.setItem('lang', res['lang']);
+          console.log(localStorage.getItem('lang'), res['lang']);
           return 1;
         }
       },
@@ -53,5 +55,8 @@ export class AuthService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('lang');
+    localStorage.removeItem('branch_id');
+    localStorage.removeItem('branch_name');
   }
 }

@@ -33,5 +33,8 @@ export class ParameterEditComponent implements OnInit {
             console.error
         );
     }
-
+    onCancel(){
+        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/parameters']);
+        return false;
+    }
 }

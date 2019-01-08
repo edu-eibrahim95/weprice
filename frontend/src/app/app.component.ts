@@ -28,32 +28,41 @@ export class AppComponent implements OnInit{
                     this.noHeader = true;
                 }
                 else if(['/branches', '/cost_centers', '/accounts', '/products', '/employees', '/assets', '/taxes', '/social_charges', '/parameters', '/users'].includes(currentUrl)){
-                    this.files_open = 'show-sub';
+                    this.files_open = 'show-sub active';
                 }
             }
         });
         if (localStorage.getItem('currentUser')){
             this.user = JSON.parse(localStorage.getItem('currentUser'));
-        }
-        if (! localStorage.getItem('branch_id')){
-            this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
-                this.branches = res['branches'];
-            });
-            if(this.branches.length > 0){
-                let branch = this.branches[0];
-                this.branch_name = branch.name;
-                localStorage.setItem('branch_id', branch.id.toString());
-                localStorage.setItem('branch_name', branch.name);
-            }
-            else {
-                localStorage.setItem('branch_id', '0');
+
+            if (! localStorage.getItem('branch_id') || localStorage.getItem('branch_id') == '0' ){
+                this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
+                    this.branches = res['branches'];
+                    if(this.branches.length > 0){
+                        let branch = this.branches[0];
+                        this.branch_name = branch.name;
+                        console.log(this.branch_name);
+                        localStorage.setItem('branch_id', branch.id.toString());
+                        localStorage.setItem('branch_name', branch.name);
+                    }
+                    else {
+                        localStorage.setItem('branch_id', '0');
+                    }
+                });
             }
         }
         this.translate.addLangs(['en', 'pt']);
-        this.translate.setDefaultLang('en');
+        let lang = 'en';
+        if(localStorage.getItem('lang') && localStorage.getItem('lang') !== 'undefined'){
+            lang = localStorage.getItem('lang');
+        }
+        this.translate.setDefaultLang(lang);
     }
     logout() {
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('lang');
+        localStorage.removeItem('branch_id');
+        localStorage.removeItem('branch_name');
         location.reload();
     }
 }

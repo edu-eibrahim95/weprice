@@ -1,14 +1,14 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">Branches </h4>
-    <p class="mg-b-0">list of existing branches </p>
+    <h4 class="tx-gray-800 mg-b-5">{{ "brancho.bran" | translate }}</h4>
+    <p class="mg-b-0">{{ "brancho.list" | translate }} </p>
   </div><!-- d-flex -->
   <div class="br-pagebody">
     <div class="br-section-wrapper">
       <div class="text-right">
-        <a href="#" (click)="massDeleteBranch()" class="btn btn-danger mg-r-10" *ngIf="delete">Mass Delete</a>
-        <a routerLink="/branches/add" class="btn btn-success" *ngIf="add">Add New</a>
+        <a href="#" (click)="massDeleteBranch()" class="btn btn-danger mg-r-10" *ngIf="delete">{{ "brancho.mess" | translate }}</a>
+        <a routerLink="/branches/add" class="btn btn-success" *ngIf="add">{{ "brancho.new" | translate }}</a>
       </div>
       <hr>
       <ag-grid-angular
@@ -23,6 +23,8 @@
               [rowMultiSelectWithClick]="true"
               (gridReady)="onGridReady($event)"
               domLayout='autoHeight'
+              pagination="true"
+              paginationPageSize="10"
       >
       </ag-grid-angular>
     </div>

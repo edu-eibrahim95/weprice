@@ -1,16 +1,16 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
     <div class="pd-30">
-        <h4 class="tx-gray-800 mg-b-5"> Locals </h4>
-        <p class="mg-b-0">list of existing  locals </p>
+        <h4 class="tx-gray-800 mg-b-5"> {{ 'localo.local' | translate }} </h4>
+        <p class="mg-b-0">{{ 'localo.list' | translate }} </p>
     </div><!-- d-flex -->
     <div class="br-pagebody">
         <div class="br-section-wrapper">
             <div class="text-left">
-                <a routerLink="/assets" class="btn btn-primary"><i class="fa fa-long-arrow-left fa-lg"><span style="font-family: Roboto, 'Helvetica Neue', Arial, sans-serif">   Assets</span></i></a>
+                <a routerLink="/assets" class="btn btn-primary"><i class="fa fa-long-arrow-left fa-lg"><span style="font-family: Roboto, 'Helvetica Neue', Arial, sans-serif">   {{ 'localo.asset' | translate }}</span></i></a>
                 <div class="float-right">
-                    <a href="#" (click)="massDeleteLocals()" class="btn btn-danger mg-r-10" *ngIf="delete">Mass Delete</a>
-                    <a routerLink="/locals/add" class="btn btn-success" *ngIf="add">Add New</a>
+                    <a href="#" (click)="massDeleteLocals()" class="btn btn-danger mg-r-10" *ngIf="delete">{{ 'localo.mass' | translate }}</a>
+                    <a routerLink="/locals/add" class="btn btn-success" *ngIf="add">{{ 'localo.new' | translate }}</a>
                 </div>
             </div>
             <hr>
@@ -26,6 +26,8 @@
                     [rowMultiSelectWithClick]="true"
                     (gridReady)="onGridReady($event)"
                     domLayout='autoHeight'
+                    pagination="true"
+                    paginationPageSize="10"
             >
             </ag-grid-angular>
         </div>

@@ -4,6 +4,7 @@ import {Branch} from "../../../Models/branch";
 import {BranchService} from "../../../Services/branch.service";
 import * as $ from 'jquery';
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
+import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-branches-overview',
@@ -24,7 +25,7 @@ export class BranchesOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private branchesApi: BranchService) { }
+    constructor(private branchesApi: BranchService, private pipe: TranslateService ) { }
 
     ngOnInit() {
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
@@ -36,7 +37,7 @@ export class BranchesOverviewComponent implements OnInit {
             let w = $(document).innerWidth() - $('.br-sideleft').width() - 220;
             w = w/10;
             this.columnDefs = [
-                {headerName: 'Branch', field: 'name', width: w},
+                {headerName:  this.pipe.get('home.title')['value'], field: 'name', width: w},
                 {headerName: 'Area', field: 'area', width: w },
                 {headerName: 'Monthly AVG QT', field: 'months_avg_qt', width: w},
                 {headerName: 'Monthly Interest', field: 'interest_month_pct', width: w},

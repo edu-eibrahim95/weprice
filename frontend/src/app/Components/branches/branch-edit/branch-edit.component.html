@@ -1,41 +1,41 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">Branches </h4>
-    <p class="mg-b-0">Edit branch </p>
+    <h4 class="tx-gray-800 mg-b-5">{{ "branche.name" | translate }} </h4>
+    <p class="mg-b-0">{{ "branche.edit" | translate }} </p>
   </div><!-- d-flex -->
   <div class="br-pagebody">
     <div class="br-section-wrapper">
-      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Edit Branch</h6>
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">{{ "branche.edit" | translate }}</h6>
       <form *ngIf="branch" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Type:
+              {{ "branche.type" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
                       aria-hidden="true" (change)="changeType()" name="type" #type="ngModel" ngModel [ngModel]="branch.type">
-                <option value="0" selected="">Company</option>
-                <option value="1">Branch</option>
+                <option value="0" selected="">{{ "branche.com" | translate }}</option>
+                <option value="1">{{ "branche.bran" | translate }}</option>
               </select>
             </div><!-- col-8 -->
           </div><!-- row -->
           <div id="parent_branch" class="row no-gutters" *ngIf="branch.type == 1">
             <div class="col-5 col-sm-4 col-md-3">
-              Parent Company:
+              {{ "branche.parent" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
                       aria-hidden="true" name="parent_id" #parent_id="ngModel" ngModel [ngModel]="branch.parent_id">
-                <option value="0" selected="">Select Company</option>
+                <option value="0" selected="">{{ "branche.select" | translate }}</option>
                 <option *ngFor="let b of branches" value="{{b.id}}">{{b.name}}</option>
               </select>
             </div><!-- col-8 -->
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              NAME:
+              {{ "branche.nem" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter Branch Name"
@@ -44,7 +44,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Area:
+              {{ "branche.area" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number"
@@ -53,7 +53,7 @@
           </div>
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Monthly Interest:
+              {{ "branche.month" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number" [ngModel]="branch.interest_month_pct"
@@ -62,7 +62,7 @@
           </div>
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Avg Quantity Months:
+              {{ "branche.avg" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number" [ngModel]="branch.months_avg_qt"
@@ -71,7 +71,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Work hours per day:
+              {{ "branche.hour" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number" [ngModel]="branch.workhours_day_qt"
@@ -80,7 +80,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Work days per month:
+              {{ "branche.day" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number" [ngModel]="branch.workdays_month_qt"
@@ -89,7 +89,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Months Stock Quantity:
+              {{ "branche.stock" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number" [ngModel]="branch.months_stock_qt"
@@ -98,7 +98,7 @@
           </div>
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Raw Material Rate:
+              {{ "branche.raw" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number" [ngModel]="branch.raw_material_rate_pct"
@@ -107,7 +107,7 @@
           </div>
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Days Rec:
+              {{ "branche.rec" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number" [ngModel]="branch.days_rec_qt"
@@ -117,7 +117,9 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">Submit</button>
+          <button class="btn btn-info" type="submit">{{ "branche.sub" | translate }}</button>
+          <button class="text-white btn btn-secondary cancel-edit ml-3"
+                  (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
         </div>
       </form>
     </div>

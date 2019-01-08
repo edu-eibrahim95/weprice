@@ -1,17 +1,17 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
-  <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">Products </h4>
-    <p class="mg-b-0">Add new Product </p>
+  <div class="pd-30"> 
+    <h4 class="tx-gray-800 mg-b-5">Products{{ 'producta.prod' | translate }} </h4>
+    <p class="mg-b-0"> {{ 'producta.new' | translate }} </p>
   </div>
   <div class="br-pagebody">
     <div class="br-section-wrapper">
-      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add a New Product</h6>
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">{{ 'producta.add' | translate }}</h6>
       <form #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Name:
+              {{ 'producta.name' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter name"
@@ -20,7 +20,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Description:
+              {{ 'producta.des' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter description"
@@ -29,7 +29,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Product Classif:
+              {{ 'producta.class' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <select *ngIf="productClassifs" id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
@@ -40,35 +40,35 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Type:
+              {{ 'producta.type' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
                       aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="0">
-                <option value="0" selected="">Simple</option>
-                <option value="1">Compound</option>
+                <option value="0" selected="">{{ 'producta.simple' | translate }}</option>
+                <option value="1">{{ 'producta.comp' | translate }}</option>
               </select>
             </div><!-- col-8 -->
           </div><!-- row -->
 
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Product group:
+              {{ 'producta.group' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <select id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose product_group"
                       aria-hidden="true"  name="product_group" #product_group="ngModel" ngModel [ngModel]="0">
-                <option value="0" selected="">Raw Material</option>
-                <option value="1">Finished</option>
-                <option value="2">Semi Finished</option>
-                <option value="3">Rescale</option>
-                <option value="4">Packing</option>
+                <option value="0" selected="">{{ 'producta.raw' | translate }}</option>
+                <option value="1">{{ 'producta.finish' | translate }}</option>
+                <option value="2">{{ 'producta.semi' | translate }}</option>
+                <option value="3">{{ 'producta.res' | translate }}</option>
+                <option value="4">{{ 'producta.pack' | translate }}</option>
               </select>
             </div><!-- col-8 -->
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Internal Code:
+              {{ 'producta.internal' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter internal_code"
@@ -77,7 +77,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Unit:
+              {{ 'producta.unit' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="text" placeholder="Enter unit"
@@ -86,7 +86,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Currency Type:
+              {{ 'producta.currency' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number"
@@ -95,7 +95,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Cost Price:
+              {{ 'producta.cost' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number"
@@ -104,7 +104,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Sale Price:
+              {{ 'producta.sale' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number"
@@ -113,7 +113,7 @@
           </div><!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              Day Sterm Recpt:
+              {{ 'producta.day' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control" type="number"
@@ -123,7 +123,7 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">Submit</button>
+          <button class="btn btn-info" type="submit">{{ 'producta.sub' | translate }}</button>
         </div>
       </form>
     </div>

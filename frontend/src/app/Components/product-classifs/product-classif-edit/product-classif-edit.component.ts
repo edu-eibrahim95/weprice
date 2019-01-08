@@ -34,6 +34,9 @@ export class ProductClassifEditComponent implements OnInit {
             console.error
         );
     }
-
+    onCancel(){
+        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/product_classifs']);
+        return false;
+    }
 
 }
