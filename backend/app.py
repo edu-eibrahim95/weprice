@@ -16,9 +16,13 @@ db.init_app(app)
 jwt = JWTManager(app)
 
 
+@app.route('/assets/i18n/<file>')
+def assets(file):
+    return send_from_directory(template_dir+'/assets/i18n/', file)
+
+
 @app.route('/<path>')
 def hello_world(path):
-    # return render_template("index.html")
     return send_from_directory(template_dir, path)
 
 
