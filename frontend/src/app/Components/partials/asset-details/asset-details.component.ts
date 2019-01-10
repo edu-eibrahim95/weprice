@@ -11,7 +11,7 @@ import * as $ from 'jquery';
 })
 export class AssetDetailsComponent implements OnInit {
 
-
+    node = null;
     assetsSubs: Subscription;
     master_raw_id = null;
     asset_id = null;
@@ -53,9 +53,8 @@ export class AssetDetailsComponent implements OnInit {
     static lookupValue(mappings, key) {
         return mappings[key];
     }
-
     static lookupKey(mappings, name) {
-        for (var key in mappings) {
+        for (let key in mappings) {
             if (mappings.hasOwnProperty(key)) {
                 if (name === mappings[key]) {
                     return key;
@@ -64,21 +63,20 @@ export class AssetDetailsComponent implements OnInit {
         }
     }
 
-
     toggleDetails() {
         let toggle = $('.details-toggle-'+this.master_raw_id);
         let angle = toggle.find('i');
-        let node = this.gridApi.getRowNode(this.master_raw_id);
         let t = $('#tab-details-'+this.master_raw_id);
         if(toggle.hasClass('collapsed-toggle')) {
             if (this.rowData.length == 1){
+                this.node = this.gridApi.getRowNode(this.master_raw_id);
                 this.assetsSubs = this.assetsApi.getAssetCostCenters(this.asset_id).subscribe(res => {
                     ///////////////////////////////////////
                     this.cost_center_options = res['cost_center_options'];
                     let c = this;
                     this.columnDefs = [
                         {
-                            headerName: '', field: 'check', checkboxSelection: function (params) {
+                            headerName: '', field: 'check',width: 70,  checkboxSelection: function (params) {
                                 return (params.node.id != 0);
                             }
                         },
@@ -97,7 +95,7 @@ export class AssetDetailsComponent implements OnInit {
                                 return AssetDetailsComponent.lookupKey(c.cost_center_options, params.newValue);
                             }
                         },
-                        {headerName: 'Rating %', field: 'rating_pct', editable: true},
+                        {headerName: 'Rating %', field: 'rating_pct', width: 70, editable: true},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
                     ];
                     this.rowData = this.rowData.concat(res['assets_cost_centers']);
@@ -117,25 +115,21 @@ export class AssetDetailsComponent implements OnInit {
                     toggle.addClass('expanded-toggle');
                     angle.removeClass('fa-angle-down');
                     angle.addClass('fa-angle-up');
-                    let r = this.rowData.length;
                     t.removeClass('invisible');
-                    node.setRowHeight((r*25)+200);
-                    this.gridApi.onRowHeightChanged();
-
+                    this.resetHeight();
                 });
             }
-            toggle.removeClass('collapsed-toggle');
-            toggle.addClass('expanded-toggle');
-            angle.removeClass('fa-angle-down');
-            angle.addClass('fa-angle-up');
-            let r = this.rowData.length;
-            t.removeClass('invisible');
-            node.setRowHeight((r*25)+200);
-            this.gridApi.onRowHeightChanged();
-
+            else {
+                toggle.removeClass('collapsed-toggle');
+                toggle.addClass('expanded-toggle');
+                angle.removeClass('fa-angle-down');
+                angle.addClass('fa-angle-up');
+                t.removeClass('invisible');
+                this.resetHeight();
+            }
         }
         else {
-            node.setRowHeight(50);
+            this.node.setRowHeight(50);
             this.gridApi.onRowHeightChanged();
             toggle.removeClass('expanded-toggle');
             toggle.addClass('collapsed-toggle');
@@ -156,6 +150,7 @@ export class AssetDetailsComponent implements OnInit {
                         if (res == 1) {
                             this.rowData = this.rowData.filter(row => !( ids.includes(row.id)));
                             this.assetGridApi.setRowData(this.rowData);
+                            this.resetHeight();
                         }
                     },
                     console.error
@@ -171,6 +166,7 @@ export class AssetDetailsComponent implements OnInit {
                     if (res == 1 ) {
                         self.rowData = self.rowData.filter(row => row.id != id);
                         self.assetGridApi.setRowData(self.rowData);
+                        this.resetHeight();
                     }
                 },
                 console.error
@@ -196,6 +192,7 @@ export class AssetDetailsComponent implements OnInit {
                         };
                         self.rowData.push(parameters);
                         self.assetGridApi.setRowData(self.rowData);
+                        self.resetHeight();
                         return false;
                     }
                 },
@@ -204,7 +201,7 @@ export class AssetDetailsComponent implements OnInit {
         }
         else {
             self.assetsSubs = self.assetsApi.editAssetCostCenter(self.asset_id, parameters, id).subscribe(res => {
-                    if (res == 0 ){
+                    if (res == 1 ){
                         return false;
                     }
                 },
@@ -214,5 +211,9 @@ export class AssetDetailsComponent implements OnInit {
         return false;
     }
 
-
+    resetHeight(){
+        let r = this.rowData.length;
+        this.node.setRowHeight((r*25)+200);
+        this.gridApi.onRowHeightChanged();
+    }
 }

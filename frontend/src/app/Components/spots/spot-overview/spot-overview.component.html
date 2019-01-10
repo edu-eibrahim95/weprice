@@ -7,7 +7,7 @@
     <div class="br-pagebody">
         <div class="br-section-wrapper">
             <div class="text-left">
-                <a routerLink="/users" class="btn btn-primary"><i class="fa fa-long-arrow-left fa-lg"><span style="font-family: Roboto, 'Helvetica Neue', Arial, sans-serif">    {{ 'spoto.user' | translate }}</span></i></a>
+                <a routerLink="/users" class="btn btn-primary"><i class="fa fa-long-arrow-left fa-lg"><span style="font-family: Roboto, 'Helvetica Neue', Arial, sans-serif">{{ "globals.mass" | translate }}</span></i></a>
                 <div class="float-right">
                     <a href="#" (click)="massDeleteSpots()" class="btn btn-danger mg-r-10" *ngIf="delete">   {{ 'spoto.mass' | translate }}</a>
                     <a routerLink="/spots/add" class="btn btn-success" *ngIf="add">   {{ 'spoto.new' | translate }}</a>

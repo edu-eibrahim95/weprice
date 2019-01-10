@@ -1,7 +1,7 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30"> 
-    <h4 class="tx-gray-800 mg-b-5">Products{{ 'producta.prod' | translate }} </h4>
+    <h4 class="tx-gray-800 mg-b-5">{{ 'producta.prod' | translate }} </h4>
     <p class="mg-b-0"> {{ 'producta.new' | translate }} </p>
   </div>
   <div class="br-pagebody">
@@ -32,7 +32,7 @@
               {{ 'producta.class' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select *ngIf="productClassifs" id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select *ngIf="productClassifs" id="select2-c" class="form-control select2-hidden-accessible"
                       aria-hidden="true"  name="product_class_id" #product_class_id="ngModel" ngModel [ngModel]="(productClassifs.length > 0) ? productClassifs[0].id : 0">
                 <option *ngFor="let product_classif of productClassifs" [value]="product_classif.id" selected="">{{product_classif.description}}</option>
               </select>
@@ -43,7 +43,7 @@
               {{ 'producta.type' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select id="select2-b" class="form-control select2-hidden-accessible"
                       aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="0">
                 <option value="0" selected="">{{ 'producta.simple' | translate }}</option>
                 <option value="1">{{ 'producta.comp' | translate }}</option>
@@ -123,7 +123,7 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">{{ 'producta.sub' | translate }}</button>
+          <button class="btn btn-info" type="submit">{{ 'globals.sub' | translate }}</button>
         </div>
       </form>
     </div>

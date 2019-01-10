@@ -16,9 +16,9 @@ export class HomeComponent implements OnInit {
     constructor(private branchesApi: BranchService) { }
 
     ngOnInit() {
-        this.branch =  localStorage.getItem('branch_id');
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
             this.branches = res['branches'];
+            this.branch =  localStorage.getItem('branch_id');
         });
     }
 

@@ -6,7 +6,7 @@
   </div>
   <div class="br-pagebody">
     <div class="br-section-wrapper">
-      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">{{ "assets_add.anew" | translate }}</h6>
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">{{ "assets_add.new" | translate }}</h6>
       <form #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
@@ -14,7 +14,7 @@
               {{ "assets_add.type" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select *ngIf="assetTypes" id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select *ngIf="assetTypes" id="select2-a" class="form-control select2-hidden-accessible"
                       aria-hidden="true"  name="type_id" #type_id="ngModel" ngModel [ngModel]="(assetTypes.length > 0) ? assetTypes[0].id : 0">
                 <option *ngFor="let asset_type of assetTypes" [value]="asset_type.id" selected="">{{asset_type.description}}</option>
               </select>
@@ -25,7 +25,7 @@
               {{ "assets_add.local" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select *ngIf="locals" id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select *ngIf="locals" id="select2-b" class="form-control select2-hidden-accessible"
                       aria-hidden="true"  name="local_id" #local_id="ngModel" ngModel [ngModel]="(locals.length > 0) ? locals[0].id : 0">
                 <option *ngFor="let local of locals" [value]="local.id" selected="">{{local.description}}</option>
               </select>
@@ -106,7 +106,7 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">{{ "assets_add.sub" | translate }}</button>
+          <button class="btn btn-info" type="submit">{{ "globals.sub" | translate }}</button>
         </div>
       </form>
     </div>

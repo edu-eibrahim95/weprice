@@ -15,7 +15,7 @@
                             {{ "acc_edit.acc_type" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                            <select id="select2-b" class="form-control select2-hidden-accessible"
                                     aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="account.type">
                                 <option value="0" selected="">{{ "acc_edit.sin" | translate }}</option>
                                 <option value="1">{{ "acc_edit.analit" | translate }}</option>
@@ -28,7 +28,7 @@
                             {{ "acc_edit.nat" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <select id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                            <select id="select2-a" class="form-control select2-hidden-accessible"
                                     aria-hidden="true"  name="nat" #nat="ngModel" ngModel [ngModel]="account.nat">
                                 <option value="0" selected="">{{ "acc_edit.deb" | translate }}</option>
                                 <option value="1">{{ "acc_edit.cred" | translate }}</option>
@@ -41,7 +41,7 @@
                             {{ "acc_edit.expense" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <select id="select2-d" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                            <select id="select2-d" class="form-control select2-hidden-accessible"
                                     aria-hidden="true"  name="expense_type" #expense_type="ngModel" ngModel [ngModel]="account.expense_type">
                                 <option value="0" selected="">{{ "acc_edit.fix" | translate }}</option>
                                 <option value="1">{{ "acc_edit.var" | translate }}</option>
@@ -55,7 +55,7 @@
                             {{ "acc_edit.absorb" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <select id="select2-e" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                            <select id="select2-e" class="form-control select2-hidden-accessible"
                                     aria-hidden="true"  name="expense_abs_type" #expense_abs_type="ngModel" ngModel [ngModel]="account.expense_abs_type">
                                 <option value="0" selected="">{{ "acc_edit.no_absorb" | translate }}</option>
                                 <option value="1">{{ "acc_edit.rate" | translate }}</option>
@@ -182,7 +182,7 @@
                 </div>
                 <hr>
                 <div class="form-layout-footer mg-t-30 text-center">
-                    <button class="btn btn-info" type="submit">{{ "acc_edit.sub" | translate }}</button>
+                    <button class="btn btn-info" type="submit">{{ "globals.sub" | translate }}</button>
                     <button class="text-white btn btn-secondary cancel-edit ml-3"
                        (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
                 </div>

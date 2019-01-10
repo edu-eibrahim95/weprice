@@ -12,6 +12,7 @@ import * as $ from 'jquery';
 export class EmployeeDetailsComponent implements OnInit {
     employeesSubs: Subscription;
     master_raw_id = null;
+    node = null;
     employee_id = null;
     cost_center_options = {};
     columnDefs = [];
@@ -66,17 +67,17 @@ export class EmployeeDetailsComponent implements OnInit {
     toggleDetails() {
         let toggle = $('.details-toggle-'+this.master_raw_id);
         let angle = toggle.find('i');
-        let node = this.gridApi.getRowNode(this.master_raw_id);
         let t = $('#tab-details-'+this.master_raw_id);
         if(toggle.hasClass('collapsed-toggle')) {
             if (this.rowData.length == 1){
+                this.node = this.gridApi.getRowNode(this.master_raw_id);
                 this.employeesSubs = this.employeesApi.getEmployeeCostCenters(this.employee_id).subscribe(res => {
                     ///////////////////////////////////////
                     this.cost_center_options = res['cost_center_options'];
                     let c = this;
                     this.columnDefs = [
                         {
-                            headerName: '', field: 'check', checkboxSelection: function (params) {
+                            headerName: '', field: 'check',width: 70, checkboxSelection: function (params) {
                                 return (params.node.id != 0);
                             }
                         },
@@ -95,8 +96,8 @@ export class EmployeeDetailsComponent implements OnInit {
                                 return EmployeeDetailsComponent.lookupKey(c.cost_center_options, params.newValue);
                             }
                         },
-                        {headerName: 'Rating %', field: 'rating_pct', editable: true},
-                        {headerName: 'Direct Labor %', field: 'direct_labor_pct', editable: true},
+                        {headerName: 'Rating %', field: 'rating_pct',width: 70,  editable: true},
+                        {headerName: 'Direct Labor %', field: 'direct_labor_pct', width: 100, editable: true},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
                     ];
                     this.rowData = this.rowData.concat(res['cost_centers']);
@@ -111,23 +112,23 @@ export class EmployeeDetailsComponent implements OnInit {
                             self: this
                         };
                     }
-
-
-
+                    toggle.removeClass('collapsed-toggle');
+                    toggle.addClass('expanded-toggle');
+                    angle.removeClass('fa-angle-down');
+                    angle.addClass('fa-angle-up');
+                    t.removeClass('invisible');
+                    this.resetHeight();
                 });
             }
             toggle.removeClass('collapsed-toggle');
             toggle.addClass('expanded-toggle');
             angle.removeClass('fa-angle-down');
             angle.addClass('fa-angle-up');
-            let r = this.rowData.length;
             t.removeClass('invisible');
-            node.setRowHeight((r*25)+200);
-            this.gridApi.onRowHeightChanged();
-
+            this.resetHeight();
         }
         else {
-            node.setRowHeight(50);
+            this.node.setRowHeight(50);
             this.gridApi.onRowHeightChanged();
             toggle.removeClass('expanded-toggle');
             toggle.addClass('collapsed-toggle');
@@ -148,6 +149,7 @@ export class EmployeeDetailsComponent implements OnInit {
                         if (res == 1) {
                             this.rowData = this.rowData.filter(row => !( ids.includes(row.id)));
                             this.employeeGridApi.setRowData(this.rowData);
+                            this.resetHeight();
                         }
                     },
                     console.error
@@ -163,6 +165,7 @@ export class EmployeeDetailsComponent implements OnInit {
                     if (res == 1 ) {
                         self.rowData = self.rowData.filter(row => row.id != id);
                         self.employeeGridApi.setRowData(self.rowData);
+                        self.resetHeight();
                     }
                 },
                 console.error
@@ -188,6 +191,7 @@ export class EmployeeDetailsComponent implements OnInit {
                         };
                         self.rowData.push(parameters);
                         self.employeeGridApi.setRowData(self.rowData);
+                        self.resetHeight();
                         return false;
                     }
                 },
@@ -196,7 +200,7 @@ export class EmployeeDetailsComponent implements OnInit {
         }
         else {
             self.employeesSubs = self.employeesApi.editEmployeeCostCenter(self.employee_id, parameters, id).subscribe(res => {
-                    if (res == 0 ){
+                    if (res == 1 ){
                         return false;
                     }
                 },
@@ -206,5 +210,9 @@ export class EmployeeDetailsComponent implements OnInit {
         return false;
     }
 
-
+    resetHeight(){
+        let r = this.rowData.length;
+        this.node.setRowHeight((r*25)+200);
+        this.gridApi.onRowHeightChanged();
+    }
 }

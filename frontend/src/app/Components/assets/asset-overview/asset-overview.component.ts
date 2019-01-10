@@ -7,9 +7,9 @@ import * as $ from 'jquery';
 import {AssetDetailsComponent} from "../../partials/asset-details/asset-details.component";
 
 @Component({
-  selector: 'app-asset-overview',
-  templateUrl: './asset-overview.component.html',
-  styleUrls: ['./asset-overview.component.css']
+    selector: 'app-asset-overview',
+    templateUrl: './asset-overview.component.html',
+    styleUrls: ['./asset-overview.component.css']
 })
 export class AssetOverviewComponent implements OnInit {
 
@@ -72,7 +72,9 @@ export class AssetOverviewComponent implements OnInit {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
     }
-
+    getGridApi() {
+        return this.gridApi;
+    }
     deleteAsset(id, type, self) {
         let asset = {};
         if(confirm("Are You Sure Want To Delete ? ")){

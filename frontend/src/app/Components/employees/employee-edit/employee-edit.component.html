@@ -23,7 +23,7 @@
               {{ "employe.type" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select id="select2-b" class="form-control select2-hidden-accessible"
                       aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="employee.type">
                 <option value="0" selected=""> {{ "employe.stand" | translate }}</option>
                 <option value="1"> {{ "employe.dire" | translate }}</option>
@@ -70,7 +70,7 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit"> {{ "employe.sub" | translate }}</button>
+          <button class="btn btn-info" type="submit">{{ "globals.sub" | translate }}</button>
           <button class="text-white btn btn-secondary cancel-edit ml-3"
                   (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
         </div>

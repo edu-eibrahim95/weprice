@@ -10,7 +10,7 @@ import * as $ from 'jquery';
     styleUrls: ['./social-charge-details.component.css']
 })
 export class SocialChargeDetailsComponent implements OnInit {
-
+    node = null;
     social_chargesSubs: Subscription;
     master_raw_id = null;
     social_charge_id = null;
@@ -45,7 +45,6 @@ export class SocialChargeDetailsComponent implements OnInit {
         this.master_raw_id = params.value.row_id;
         this.social_charge_id = params.value.id;
     }
-
     static extractValues(mappings) {
         return Object.keys(mappings);
     }
@@ -67,17 +66,17 @@ export class SocialChargeDetailsComponent implements OnInit {
     toggleDetails() {
         let toggle = $('.details-toggle-'+this.master_raw_id);
         let angle = toggle.find('i');
-        let node = this.gridApi.getRowNode(this.master_raw_id);
         let t = $('#tab-details-'+this.master_raw_id);
         if(toggle.hasClass('collapsed-toggle')) {
             if (this.rowData.length == 1){
+                this.node = this.gridApi.getRowNode(this.master_raw_id);
                 this.social_chargesSubs = this.social_chargesApi.getSocialChargeAccounts(this.social_charge_id).subscribe(res => {
                     ///////////////////////////////////////
                     this.account_options = res['accounts_options'];
                     let c = this;
                     this.columnDefs = [
                         {
-                            headerName: '', field: 'check', checkboxSelection: function (params) {
+                            headerName: '', field: 'check',width: 70,  checkboxSelection: function (params) {
                                 return (params.node.id != 0);
                             }
                         },
@@ -109,22 +108,26 @@ export class SocialChargeDetailsComponent implements OnInit {
                             self: this
                         };
                     }
-
-                    this.resetHeight(node);
-
+                    toggle.removeClass('collapsed-toggle');
+                    toggle.addClass('expanded-toggle');
+                    angle.removeClass('fa-angle-down');
+                    angle.addClass('fa-angle-up');
+                    t.removeClass('invisible');
+                    this.resetHeight();
                 });
             }
-            toggle.removeClass('collapsed-toggle');
-            toggle.addClass('expanded-toggle');
-            angle.removeClass('fa-angle-down');
-            angle.addClass('fa-angle-up');
-            t.removeClass('invisible');
+            else {
+                toggle.removeClass('collapsed-toggle');
+                toggle.addClass('expanded-toggle');
+                angle.removeClass('fa-angle-down');
+                angle.addClass('fa-angle-up');
+                t.removeClass('invisible');
 
-            this.resetHeight(node);
-
+                this.resetHeight();
+            }
         }
         else {
-            node.setRowHeight(50);
+            this.node.setRowHeight(50);
             this.gridApi.onRowHeightChanged();
             toggle.removeClass('expanded-toggle');
             toggle.addClass('collapsed-toggle');
@@ -145,6 +148,7 @@ export class SocialChargeDetailsComponent implements OnInit {
                         if (res == 1) {
                             this.rowData = this.rowData.filter(row => !( ids.includes(row.id)));
                             this.social_chargeGridApi.setRowData(this.rowData);
+                            this.resetHeight();
                         }
                     },
                     console.error
@@ -160,6 +164,7 @@ export class SocialChargeDetailsComponent implements OnInit {
                     if (res == 1 ) {
                         self.rowData = self.rowData.filter(row => row.id != id);
                         self.social_chargeGridApi.setRowData(self.rowData);
+                        self.resetHeight();
                     }
                 },
                 console.error
@@ -185,7 +190,7 @@ export class SocialChargeDetailsComponent implements OnInit {
                         };
                         self.rowData.push(parameters);
                         self.social_chargeGridApi.setRowData(self.rowData);
-                        self.gridApi.onRowHeightChanged();
+                        self.resetHeight();
                         return false;
                     }
                 },
@@ -194,20 +199,18 @@ export class SocialChargeDetailsComponent implements OnInit {
         }
         else {
             self.social_chargesSubs = self.social_chargesApi.editSocialChargeAccount(self.social_charge_id, parameters, id).subscribe(res => {
-                    if (res == 0 ){
+                    if (res == 1 ){
                         return false;
                     }
                 },
                 console.error
             );
         }
-        let node = self.gridApi.getRowNode(self.master_raw_id);
-        self.resetHeight(node);
         return false;
     }
-    resetHeight(node){
+    resetHeight(){
         let r = this.rowData.length;
-        node.setRowHeight((r*25)+200);
+        this.node.setRowHeight((r*25)+200);
         this.gridApi.onRowHeightChanged();
     }
 

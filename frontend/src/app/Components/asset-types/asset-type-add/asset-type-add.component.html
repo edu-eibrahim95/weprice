@@ -14,7 +14,7 @@
               {{ "asset_add.acc" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select id="select2-c" class="form-control select2-hidden-accessible"
                       aria-hidden="true" name="account_id" #account_id="ngModel" ngModel [ngModel]="0">
                 <option value="0" selected="">{{ "asset_add.select" | translate }}</option>
                 <option *ngFor="let account of accounts" value="{{account.id}}">{{account.code}}</option>
@@ -60,7 +60,7 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">{{ "asset_add.sub" | translate }}</button>
+          <button class="btn btn-info" type="submit">{{ "globals.sub" | translate }}</button>
         </div>
       </form>
     </div>

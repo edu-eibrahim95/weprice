@@ -15,8 +15,8 @@
               {{ "costa.type" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
-                      aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="0">
+              <select id="select2-b" class="form-control select2-hidden-accessible"
+                      aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="0" (change)="changeType()" >
                 <option value="0" selected="">{{ "costa.build" | translate }}</option>
                 <option value="1">{{ "costa.supp" | translate }}</option>
                 <option value="2">{{ "costa.dire" | translate }}</option>
@@ -42,7 +42,7 @@
                      name="area" #area="ngModel" ngModel placeholder="Enter Area">
             </div>
           </div><!-- row -->
-          <div class="row no-gutters">
+          <div class="row no-gutters d-none direct">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "costa.hours" | translate }}
             </div><!-- col-4 -->
@@ -51,7 +51,7 @@
                      name="workhours_qt" #workhours_qt="ngModel" ngModel placeholder="Enter Work hours per day">
             </div><!-- col-8 -->
           </div><!-- row -->
-          <div class="row no-gutters">
+          <div class="row no-gutters d-none direct">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "costa.days" | translate }}
             </div><!-- col-4 -->
@@ -60,7 +60,7 @@
                      name="workdays_qt" #workdays_qt="ngModel" ngModel placeholder="Enter Work hours per day">
             </div><!-- col-8 -->
           </div><!-- row -->
-          <div class="row no-gutters">
+          <div class="row no-gutters d-none direct">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "costa.mach" | translate }}
             </div><!-- col-4 -->
@@ -81,7 +81,7 @@
         </div>
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">{{ "costa.sub" | translate }}</button>
+          <button class="btn btn-info" type="submit">{{ "globals.sub" | translate }}</button>
         </div>
       </form>
     </div>

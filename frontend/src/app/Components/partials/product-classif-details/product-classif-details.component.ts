@@ -10,7 +10,7 @@ import {ProductClassifService} from "../../../Services/product-classif.service";
     styleUrls: ['./product-classif-details.component.css']
 })
 export class ProductClassifDetailsComponent implements OnInit {
-
+    node = null;
     productClassifsSubs: Subscription;
     master_raw_id = null;
     product_id = null;
@@ -64,7 +64,7 @@ export class ProductClassifDetailsComponent implements OnInit {
     }
 
     static lookupKey(mappings, name) {
-        for (var key in mappings) {
+        for (let key in mappings) {
             if (mappings.hasOwnProperty(key)) {
                 if (name === mappings[key]) {
                     return key;
@@ -72,23 +72,21 @@ export class ProductClassifDetailsComponent implements OnInit {
             }
         }
     }
-
-
     toggleDetails() {
         let toggle = $('.details-toggle-'+this.master_raw_id);
         let angle = toggle.find('i');
-        let node = this.gridApi.getRowNode(this.master_raw_id);
         let t = $('#tab-details-'+this.master_raw_id);
         let bar = t.find('.mat-ink-bar');
         if(toggle.hasClass('collapsed-toggle')) {
             if (this.subsRowData.length == 1){
+                this.node = this.gridApi.getRowNode(this.master_raw_id);
                 this.productClassifsSubs = this.productClassifsApi.getProductSubs(this.product_id).subscribe(res => {
                     ///////////////////////////////////////
                     this.subs_options = res['product_classifs_data'];
                     let c = this;
                     this.subsColumnDefs = [
                         {
-                            headerName: '', field: 'check', checkboxSelection: function (params) {
+                            headerName: '', field: 'check', width: 70, checkboxSelection: function (params) {
                                 return (params.node.id != 0);
                             }
                         },
@@ -127,7 +125,7 @@ export class ProductClassifDetailsComponent implements OnInit {
                         let c = this;
                         this.taxesColumnDefs = [
                             {
-                                headerName: '', field: 'check', checkboxSelection: function (params) {
+                                headerName: '', field: 'check', width: 70, checkboxSelection: function (params) {
                                     return (params.node.id != 0);
                                 }
                             },
@@ -146,8 +144,8 @@ export class ProductClassifDetailsComponent implements OnInit {
                                     return ProductClassifDetailsComponent.lookupKey(c.taxes_options, params.newValue);
                                 }
                             },
-                            {headerName: 'On Purchase %', field: 'purchase_pct', editable: true},
-                            {headerName: 'On Sale %', field: 'sale_pct', editable: true},
+                            {headerName: 'On Purchase %', field: 'purchase_pct', width: 100, editable: true},
+                            {headerName: 'On Sale %', field: 'sale_pct', width: 100, editable: true},
                             {
                                 headerName: 'Actions',
                                 field: 'actions',
@@ -167,23 +165,29 @@ export class ProductClassifDetailsComponent implements OnInit {
                             };
                         }
                         ///////////////////////////////////////////////////////////////////////////////////////////////////
+                        toggle.removeClass('collapsed-toggle');
+                        toggle.addClass('expanded-toggle');
+                        angle.removeClass('fa-angle-down');
+                        angle.addClass('fa-angle-up');
+                        t.removeClass('invisible');
+                        bar.css('display', 'block');
+                        this.resetHeight();
                     });
 
                 });
             }
-            toggle.removeClass('collapsed-toggle');
-            toggle.addClass('expanded-toggle');
-            angle.removeClass('fa-angle-down');
-            angle.addClass('fa-angle-up');
-            let r = this.subsRowData.length;
-            t.removeClass('invisible');
-            bar.css('display', 'block');
-            node.setRowHeight((r*25)+300);
-            this.gridApi.onRowHeightChanged();
-
+            else {
+                toggle.removeClass('collapsed-toggle');
+                toggle.addClass('expanded-toggle');
+                angle.removeClass('fa-angle-down');
+                angle.addClass('fa-angle-up');
+                t.removeClass('invisible');
+                bar.css('display', 'block');
+                this.resetHeight();
+            }
         }
         else {
-            node.setRowHeight(50);
+            this.node.setRowHeight(50);
             this.gridApi.onRowHeightChanged();
             toggle.removeClass('expanded-toggle');
             toggle.addClass('collapsed-toggle');
@@ -194,57 +198,69 @@ export class ProductClassifDetailsComponent implements OnInit {
         }
     }
     massDeleteSubs(type) {
-        let rowData = null;
-        let grid = null;
         if(type == 'subs'){
-            rowData = this.subsRowData;
-            grid = this.subGridApi;
-
+            let grid = this.subGridApi;
+            let nodes = grid.getSelectedNodes();
+            if (nodes.length == 0)
+                alert("No Rows Selected");
+            else {
+                let ids = nodes.map(row => row.data.id);
+                let parameter = {ids: ids};
+                if (confirm("Are You Sure")) {
+                    this.productClassifsSubs = this.productClassifsApi.deleteProductClassifSubs(type, this.product_id,parameter, 'mass').subscribe(res => {
+                            if (res == 1) {
+                                this.subsRowData = this.subsRowData.filter(row => !( ids.includes(row.id)));
+                                grid.setRowData(this.subsRowData);
+                                this.resetHeight();
+                            }
+                        },
+                        console.error
+                    );
+                    return false;
+                }
+            }
         }
         else if (type == 'taxes'){
-            rowData = this.taxesRowData;
-            grid = this.taxGridApi;
-        }
-        let nodes = grid.getSelectedNodes();
-        if (nodes.length == 0)
-            alert("No Rows Selected");
-        else {
-            let ids = nodes.map(row => row.data.id);
-            let parameter = {ids: ids};
-            if (confirm("Are You Sure")) {
-
-                this.productClassifsSubs = this.productClassifsApi.deleteProductClassifSubs(type, this.product_id,parameter, 'mass').subscribe(res => {
-                        if (res == 1) {
-                            rowData = rowData.filter(row => !( ids.includes(row.id)));
-                            grid.setRowData(rowData);
-                        }
-                    },
-                    console.error
-                );
-                return false;
+            let grid = this.taxGridApi;
+            let nodes = grid.getSelectedNodes();
+            if (nodes.length == 0)
+                alert("No Rows Selected");
+            else {
+                let ids = nodes.map(row => row.data.id);
+                let parameter = {ids: ids};
+                if (confirm("Are You Sure")) {
+                    this.productClassifsSubs = this.productClassifsApi.deleteProductClassifSubs(type, this.product_id,parameter, 'mass').subscribe(res => {
+                            if (res == 1) {
+                                this.taxesRowData = this.taxesRowData.filter(row => !( ids.includes(row.id)));
+                                grid.setRowData(this.taxesRowData);
+                                this.resetHeight();
+                            }
+                        },
+                        console.error
+                    );
+                    return false;
+                }
             }
         }
         return false;
-
     }
     deleteProductClassifSubs(id, type, self) {
         if(confirm("Are You Sure")) {
-            let rowData = null;
-            let grid = null;
-            if(type == 'subs'){
-                rowData = self.subsRowData;
-                grid = self.subGridApi;
-
-            }
-            else if (type == 'taxes'){
-                rowData = self.taxesRowData;
-                grid = self.taxGridApi;
-            }
             self.productClassifsSubs = self.productClassifsApi.deleteProductClassifSubs(type, self.product_id, {},  id).subscribe(res => {
                     if (res == 1 ) {
-                        rowData = rowData.filter(row => row.id != id);
-                        grid.setRowData(rowData);
+                        if(type == 'subs'){
+                            let grid = self.subGridApi;
+                            self.subsRowData = self.subsRowData.filter(row => row.id != id);
+                            grid.setRowData(self.subsRowData);
+
+                        }
+                        else if (type == 'taxes'){
+                            let grid = self.taxGridApi;
+                            self.taxesRowData = self.taxesRowData.filter(row => row.id != id);
+                            grid.setRowData(self.taxesRowData);
+                        }
                     }
+                    self.resetHeight();
                 },
                 console.error
             );
@@ -253,21 +269,14 @@ export class ProductClassifDetailsComponent implements OnInit {
 
     }
     save(id, type, self) {
-        let rowData = null;
-        let grid = null;
         let parameters = {};
         if(type == 'subs'){
-            rowData = self.subsRowData;
-            grid = self.subGridApi;
-            let row = rowData.filter(row => row.id == id)[0];
+            let row = self.subsRowData.filter(row => row.id == id)[0];
             parameters = {'product_classification_id': row.name, 'name':row.name};
 
         }
         else if (type == 'taxes'){
-            rowData = self.taxesRowData;
-            grid = self.taxGridApi;
-            let row = rowData.filter(row => row.id == id)[0];
-            console.log(row);
+            let row = self.taxesRowData.filter(row => row.id == id)[0];
             parameters = {'tax_id': row.name, 'name':row.name, 'purchase_pct':row.purchase_pct, 'sale_pct':row.sale_pct};
 
         }
@@ -284,8 +293,18 @@ export class ProductClassifDetailsComponent implements OnInit {
                             type: type,
                             self: self
                         };
-                        rowData.push(parameters);
-                        grid.setRowData(rowData);
+                        if(type == 'subs'){
+                            let grid = self.subGridApi;
+                            self.subsRowData.push(parameters);
+                            grid.setRowData(self.subsRowData);
+
+                        }
+                        else if (type == 'taxes'){
+                            let grid = self.subGridApi;
+                            self.taxesRowData.push(parameters);
+                            grid.setRowData(self.taxesRowData);
+                        }
+                        self.resetHeight();
                         return false;
                     }
                 },
@@ -294,7 +313,7 @@ export class ProductClassifDetailsComponent implements OnInit {
         }
         else {
             self.productClassifsSubs = self.productClassifsApi.editProductClassifSubs(type, self.product_id, parameters, id).subscribe(res => {
-                    if (res == 0 ){
+                    if (res == 1 ){
                         return false;
                     }
                 },
@@ -304,6 +323,9 @@ export class ProductClassifDetailsComponent implements OnInit {
 
         return false;
     }
-
-
+    resetHeight(){
+        let r = Math.max(this.subsRowData.length, this.taxesRowData.length);
+        this.node.setRowHeight((r*25)+250);
+        this.gridApi.onRowHeightChanged();
+    }
 }

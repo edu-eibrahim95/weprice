@@ -14,7 +14,7 @@
               {{ "branche.type" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select id="select2-b" class="form-control select2-hidden-accessible"
                       aria-hidden="true" (change)="changeType()" name="type" #type="ngModel" ngModel [ngModel]="branch.type">
                 <option value="0" selected="">{{ "branche.com" | translate }}</option>
                 <option value="1">{{ "branche.bran" | translate }}</option>
@@ -26,7 +26,7 @@
               {{ "branche.parent" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-c" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select id="select2-c" class="form-control select2-hidden-accessible"
                       aria-hidden="true" name="parent_id" #parent_id="ngModel" ngModel [ngModel]="branch.parent_id">
                 <option value="0" selected="">{{ "branche.select" | translate }}</option>
                 <option *ngFor="let b of branches" value="{{b.id}}">{{b.name}}</option>
@@ -117,7 +117,7 @@
         </div><!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">{{ "branche.sub" | translate }}</button>
+          <button class="btn btn-info" type="submit">{{ "globals.sub" | translate }}</button>
           <button class="text-white btn btn-secondary cancel-edit ml-3"
                   (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
         </div>

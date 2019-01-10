@@ -2,12 +2,12 @@
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30">
     <h4 class="tx-gray-800 mg-b-5">{{ 'acc_add.accounts' | translate }}</h4>
-    <p class="mg-b-0">{{ "acc_add.acc_new" | translate }}</p>
+    <p class="mg-b-0">{{ "acc_add.new" | translate }}</p>
   </div><!-- d-flex -->
   <div class="br-pagebody">
     <div class="br-section-wrapper">
 
-      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">{{ "acc_add.add_new" | translate }}</h6>
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">{{ "acc_add.new" | translate }}</h6>
       <form #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
@@ -15,7 +15,7 @@
               {{ "acc_add.acc_type" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select id="select2-b" class="form-control select2-hidden-accessible"
                       aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="0">
                 <option value="0" selected="">{{ "acc_add.sin" | translate }}</option>
                 <option value="1">{{ "acc_add.analit" | translate }}</option>
@@ -28,7 +28,7 @@
               {{ "acc_add.nat" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select id="select2-a" class="form-control select2-hidden-accessible"
                       aria-hidden="true"  name="nat" #nat="ngModel" ngModel [ngModel]="0">
                 <option value="0" selected="">{{ "acc_add.debit" | translate }}</option>
                 <option value="1">{{ "acc_add.cred" | translate }}</option>
@@ -41,7 +41,7 @@
               {{ "acc_add.expense" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-d" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select id="select2-d" class="form-control select2-hidden-accessible"
                       aria-hidden="true"  name="expense_type" #expense_type="ngModel" ngModel [ngModel]="0">
                 <option value="0" selected="">{{ "acc_add.fix" | translate }}</option>
                 <option value="1">{{ "acc_add.var" | translate }}</option>
@@ -55,7 +55,7 @@
               {{ "acc_add.absorb" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-e" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+              <select id="select2-e" class="form-control select2-hidden-accessible"
                       aria-hidden="true"  name="expense_abs_type" #expense_abs_type="ngModel" ngModel [ngModel]="0">
                 <option value="0" selected="">{{ "acc_add.no_absorb" | translate }}</option>
                 <option value="1">{{ "acc_add.rate" | translate }}</option>
@@ -182,7 +182,7 @@
         </div>
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit">{{ "acc_add.sub" | translate }}</button>
+          <button class="btn btn-info" type="submit">{{ "globals.sub" | translate }}</button>
         </div>
       </form>
     </div>

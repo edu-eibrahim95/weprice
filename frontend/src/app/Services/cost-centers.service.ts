@@ -44,7 +44,7 @@ export class CostCentersService {
         return this.http.post(`${API_URL}/cost_centers/`+type+`/`+val+`/edit/`+cost_center_id, parameter, this.httpOptions).map(
             res => {
                 if (res['status'] == 1) {
-                    return res['id'];
+                    return 1;
                 }
             },
             err => {

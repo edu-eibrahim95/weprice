@@ -12,6 +12,7 @@ import {ActionsFormatterComponent} from "../action-cell-rendrer/action-cell-rend
 export class DetailsFormatterComponent implements  OnInit{
     master_raw_id = null;
     cost_center_id = null;
+    node = null;
     costCenterSubs: Subscription;
     ratioColumnDefs = [];
     ratioRowData = [{id: 0, name: "0", rating_pct: '0', check: 'Add new '}];
@@ -55,7 +56,6 @@ export class DetailsFormatterComponent implements  OnInit{
     static lookupValue(mappings, key) {
         return mappings[key];
     }
-
     static lookupKey(mappings, name) {
         for (var key in mappings) {
             if (mappings.hasOwnProperty(key)) {
@@ -83,18 +83,18 @@ export class DetailsFormatterComponent implements  OnInit{
     toggleDetails() {
         let toggle = $('.details-toggle-'+this.master_raw_id);
         let angle = toggle.find('i');
-        let node = this.gridApi.getRowNode(this.master_raw_id);
         let t = $('#tab-details-'+this.master_raw_id);
         let bar = t.find('.mat-ink-bar');
         if(toggle.hasClass('collapsed-toggle')){
             if (this.ratioRowData.length == 1 && this.taxesRowData.length == 1 && this.comsRowData.length == 1){
+                this.node = this.gridApi.getRowNode(this.master_raw_id);
                 this.costCenterSubs = this.costCenterApi.getCostCenterRatio(this.cost_center_id).subscribe(res => {
                     ///////////////////////////////////////
                     this.ratio_cost_center_options = res['cost_centers_options'];
                     this.taxes_cost_center_options = res['taxes_options'];
                     let c = this;
                     this.ratioColumnDefs = [
-                        {headerName: '', field: 'check', checkboxSelection: function (params) {return (params.node.id != 0) ;}},
+                        {headerName: '', field: 'check', width: 70, checkboxSelection: function (params) {return (params.node.id != 0) ;}},
                         {headerName: 'Cost Center Name', field: 'name', editable: true, cellEditor: 'agSelectCellEditor',
                             cellEditorParams: {
                                 values: DetailsFormatterComponent.extractValues(c.ratio_cost_center_options)
@@ -106,7 +106,7 @@ export class DetailsFormatterComponent implements  OnInit{
                                 return DetailsFormatterComponent.lookupKey(c.ratio_cost_center_options, params.newValue);
                             }
                         },
-                        {headerName: 'Rating %', field: 'rating_pct', editable: true},
+                        {headerName: 'Rating %', field: 'rating_pct', editable: true, width: 70},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent' },
                     ];
                     this.ratioRowData = this.ratioRowData.concat(res['ratio']);
@@ -123,7 +123,7 @@ export class DetailsFormatterComponent implements  OnInit{
                     }
                     //////////////////////////////////////
                     this.taxesColumnDefs = [
-                        {headerName: '', field: 'check', checkboxSelection: function (params) {return (params.node.id != 0) ;}},
+                        {headerName: '', field: 'check',width: 70, checkboxSelection: function (params) {return (params.node.id != 0) ;}},
                         {headerName: 'Tax', field: 'name', editable: true, cellEditor: 'agSelectCellEditor',
                             cellEditorParams: {
                                 values: DetailsFormatterComponent.extractValues(c.taxes_cost_center_options)
@@ -135,7 +135,7 @@ export class DetailsFormatterComponent implements  OnInit{
                                 return DetailsFormatterComponent.lookupKey(c.taxes_cost_center_options, params.newValue);
                             }
                         },
-                        {headerName: 'PCT', field: 'tax_pct', editable: true },
+                        {headerName: 'PCT', field: 'tax_pct', editable: true , width: 70},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent' },
                     ];
                     this.taxesRowData = this.taxesRowData.concat(res['taxes']);
@@ -152,7 +152,7 @@ export class DetailsFormatterComponent implements  OnInit{
                     }
                     //////////////////////////////////////
                     this.comsColumnDefs = [
-                        {headerName: '', field: 'check', checkboxSelection: function (params) {return (params.node.id != 0) ;}},
+                        {headerName: '', field: 'check',width: 70, checkboxSelection: function (params) {return (params.node.id != 0) ;}},
                         {headerName: 'Com', field: 'name' , editable: true, cellEditor: 'agSelectCellEditor',
                             cellEditorParams: {
                                 values: DetailsFormatterComponent.extractValues(c.ratio_cost_center_options)
@@ -164,7 +164,7 @@ export class DetailsFormatterComponent implements  OnInit{
                                 return DetailsFormatterComponent.lookupKey(c.ratio_cost_center_options, params.newValue);
                             }
                         },
-                        {headerName: 'PCT', field: 'day_rec_qt', editable: true },
+                        {headerName: 'PCT', field: 'day_rec_qt', editable: true, width: 70 },
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent' },
                     ];
                     this.comsRowData = this.comsRowData.concat(res['coms']);
@@ -185,10 +185,8 @@ export class DetailsFormatterComponent implements  OnInit{
                     angle.removeClass('fa-angle-down');
                     angle.addClass('fa-angle-up');
                     bar.css('display', 'block');
-                    let r = Math.max(this.ratioRowData.length, this.comsRowData.length, this.taxesRowData.length);
                     t.removeClass('invisible');
-                    node.setRowHeight((r*25)+270);
-                    this.gridApi.onRowHeightChanged();
+                    this.resetHeight();
                 });
             }
             else {
@@ -197,15 +195,12 @@ export class DetailsFormatterComponent implements  OnInit{
                 angle.removeClass('fa-angle-down');
                 angle.addClass('fa-angle-up');
                 bar.css('display', 'block');
-                let r = Math.max(this.ratioRowData.length, this.comsRowData.length, this.taxesRowData.length);
                 t.removeClass('invisible');
-                node.setRowHeight((r*25)+270);
-                this.gridApi.onRowHeightChanged();
+                this.resetHeight();
             }
-
         }
         else if (toggle.hasClass('expanded-toggle')){
-            node.setRowHeight(50);
+            this.node.setRowHeight(50);
             this.gridApi.onRowHeightChanged();
             toggle.removeClass('expanded-toggle');
             toggle.addClass('collapsed-toggle');
@@ -218,24 +213,24 @@ export class DetailsFormatterComponent implements  OnInit{
 
     deleteRatio(id, type, self) {
         if(confirm("Are You Sure")){
-            let grid = null;
-            let rowData = null;
-            if (type == 'ratio') {
-                grid = self.ratioGridApi;
-                rowData = self.ratioRowData;
-            }
-            else if (type == 'tax') {
-                grid = self.taxGridApi;
-                rowData = self.taxesRowData;
-            }
-            else if (type == 'com') {
-                grid = self.comGridApi;
-                rowData = self.comsRowData;
-            }
             self.costCenterSubs = self.costCenterApi.deleteCostCenterRatio(type, self.cost_center_id, id,{}).subscribe(res => {
                     if (res == 1 ) {
-                        rowData = rowData.filter(row => row.id != id);
-                        grid.setRowData(rowData);
+                        if (type == 'ratio') {
+                            let grid = self.ratioGridApi;
+                            self.ratioRowData = self.ratioRowData.filter(row => row.id != id);
+                            grid.setRowData(self.ratioRowData);
+                        }
+                        else if (type == 'tax') {
+                            let grid = self.taxGridApi;
+                            self.taxesRowData = self.taxesRowData.filter(row => row.id != id);
+                            grid.setRowData(self.taxesRowData);
+                        }
+                        else if (type == 'com') {
+                            let grid = self.comGridApi;
+                            self.comsRowData = self.comsRowData.filter(row => row.id != id);
+                            grid.setRowData(self.comsRowData);
+                        }
+                        self.resetHeight();
                     }
                 },
                 console.error
@@ -245,69 +240,96 @@ export class DetailsFormatterComponent implements  OnInit{
     }
 
     massDelete(type) {
-        let grid = null;
-        let rowData = null;
         if (type == 'ratio') {
-            grid = this.ratioGridApi;
-            rowData = this.ratioRowData;
-        }
-        else if (type == 'tax') {
-            grid = this.taxGridApi;
-            rowData = this.taxesRowData;
-        }
-        else if (type == 'com') {
-            grid = this.comGridApi;
-            rowData = this.comsRowData;
-        }
-        let nodes = grid.getSelectedNodes();
-
-        if (nodes.length == 0)
-            alert("No Rows Selected");
-        else {
-            let ids = nodes.map(row => row.data.id);
-            let parameter = {ids: ids};
-            if (confirm("Are You Sure")) {
-                this.costCenterSubs = this.costCenterApi.deleteCostCenterRatio(type, this.cost_center_id, 'mass', parameter).subscribe(res => {
-                        if (res == 1) {
-                            rowData = rowData.filter(row => ! (ids.includes(row.id)));
-                            grid.setRowData(rowData);
-                        }
-                    },
-                    console.error
-                );
-                return false;
+            let grid = this.ratioGridApi;
+            let nodes = grid.getSelectedNodes();
+            if (nodes.length == 0)
+                alert("No Rows Selected");
+            else {
+                let ids = nodes.map(row => row.data.id);
+                let parameter = {ids: ids};
+                if (confirm("Are You Sure")) {
+                    this.costCenterSubs = this.costCenterApi.deleteCostCenterRatio(type, this.cost_center_id, 'mass', parameter).subscribe(res => {
+                            if (res == 1) {
+                                this.ratioRowData = this.ratioRowData.filter(row => ! (ids.includes(row.id)));
+                                grid.setRowData(this.ratioRowData);
+                                this.resetHeight();
+                            }
+                        },
+                        console.error
+                    );
+                    return false;
+                }
             }
         }
+        else if (type == 'tax') {
+            let grid = this.taxGridApi;
+            let nodes = grid.getSelectedNodes();
+            if (nodes.length == 0)
+                alert("No Rows Selected");
+            else {
+                let ids = nodes.map(row => row.data.id);
+                let parameter = {ids: ids};
+                if (confirm("Are You Sure")) {
+                    this.costCenterSubs = this.costCenterApi.deleteCostCenterRatio(type, this.cost_center_id, 'mass', parameter).subscribe(res => {
+                            if (res == 1) {
+                                this.taxesRowData = this.taxesRowData.filter(row => ! (ids.includes(row.id)));
+                                grid.setRowData(this.taxesRowData);
+                                this.resetHeight();
+                            }
+                        },
+                        console.error
+                    );
+                    return false;
+                }
+            }
+        }
+        else if (type == 'com') {
+            let grid = this.comGridApi;
+            let nodes = grid.getSelectedNodes();
+            if (nodes.length == 0)
+                alert("No Rows Selected");
+            else {
+                let ids = nodes.map(row => row.data.id);
+                let parameter = {ids: ids};
+                if (confirm("Are You Sure")) {
+                    this.costCenterSubs = this.costCenterApi.deleteCostCenterRatio(type, this.cost_center_id, 'mass', parameter).subscribe(res => {
+                            if (res == 1) {
+                                this.comsRowData = this.comsRowData.filter(row => ! (ids.includes(row.id)));
+                                grid.setRowData(this.comsRowData);
+                                this.resetHeight();
+                            }
+                        },
+                        console.error
+                    );
+                    return false;
+                }
+            }
+        }
+
+
     }
 
     save(id, type, self) {
         let parameters = {};
-        let grid = null;
-        let rowData = null;
-        if (type == 'ratio'){
-            grid = self.ratioGridApi;
-            rowData = self.ratioRowData;
-            let row = rowData.filter(row => row.id == id)[0];
-            parameters = {'costcenter_part_id': row.name, 'rating_pct': row.rating_pct, 'name':row.name};
+        if (type == 'ratio') {
+            let row = self.ratioRowData.filter(row => row.id == id)[0];
+            parameters = {'costcenter_part_id': row.name, 'rating_pct': row.rating_pct, 'name': row.name};
         }
-        else if (type == 'tax'){
-            grid = self.taxGridApi;
-            rowData = self.taxesRowData;
-            let row = rowData.filter(row => row.id == id)[0];
-            parameters = {'tax_id': row.name, 'tax_pct': row.tax_pct, 'name':row.name};
+        else if (type == 'tax') {
+            let row = self.taxesRowData.filter(row => row.id == id)[0];
+            parameters = {'tax_id': row.name, 'tax_pct': row.tax_pct, 'name': row.name};
         }
-        else if (type == 'com'){
-            grid = self.comGridApi;
-            rowData = self.comsRowData;
-            let row = rowData.filter(row => row.id == id)[0];
-            parameters = {'costcenter_com_id': row.name, 'day_rec_qt': row.day_rec_qt, 'name':row.name};
+        else if (type == 'com') {
+            let row = self.comsRowData.filter(row => row.id == id)[0];
+            parameters = {'costcenter_com_id': row.name, 'day_rec_qt': row.day_rec_qt, 'name': row.name};
         }
         if(id == 0){
             self.costCenterSubs = self.costCenterApi.addCostCenterRatio(type, self.cost_center_id, parameters).subscribe(res => {
                     if (res > 0 ){
                         parameters['id'] = res;
                         parameters['actions'] = {
-                            api : this.costCenterApi,
+                            api : self.costCenterApi,
                             id:res,
                             delete: [true, self.deleteRatio],
                             edit: [false, ''],
@@ -315,8 +337,19 @@ export class DetailsFormatterComponent implements  OnInit{
                             type: 'ratio',
                             self: self
                         };
-                        rowData.push(parameters);
-                        grid.setRowData(rowData);
+                        if (type == 'ratio'){
+                            let grid = self.ratioGridApi;
+                            self.ratioRowData.push(parameters);
+                            grid.setRowData(self.ratioRowData);}
+                        else if (type == 'tax'){
+                            let grid = self.taxGridApi;
+                            self.taxesRowData.push(parameters);
+                            grid.setRowData(self.taxesRowData);}
+                        else if (type == 'com'){
+                            let grid = self.comGridApi;
+                            self.comsRowData.push(parameters);
+                            grid.setRowData(self.comsRowData);}
+
                         return false;
                     }
                 },
@@ -325,14 +358,20 @@ export class DetailsFormatterComponent implements  OnInit{
         }
         else {
             self.costCenterSubs = self.costCenterApi.editCostCenterRatio(type, self.cost_center_id, id, parameters).subscribe(res => {
-                    if (res == 0 ){
+                    if (res == 1 ){
                         return false;
                     }
                 },
                 console.error
             );
         }
+        self.resetHeight();
         return false;
+    }
+    resetHeight(){
+        let r = Math.max(this.ratioRowData.length, this.comsRowData.length, this.taxesRowData.length);
+        this.node.setRowHeight((r*25)+270);
+        this.gridApi.onRowHeightChanged();
     }
 
 }

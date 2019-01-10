@@ -10,7 +10,7 @@ import * as $ from 'jquery';
     styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-
+    node = null;
     productsSubs: Subscription;
     master_raw_id = null;
     product_id = null;
@@ -52,9 +52,8 @@ export class ProductDetailsComponent implements OnInit {
     static lookupValue(mappings, key) {
         return mappings[key];
     }
-
     static lookupKey(mappings, name) {
-        for (var key in mappings) {
+        for (let key in mappings) {
             if (mappings.hasOwnProperty(key)) {
                 if (name === mappings[key]) {
                     return key;
@@ -63,21 +62,20 @@ export class ProductDetailsComponent implements OnInit {
         }
     }
 
-
     toggleDetails() {
         let toggle = $('.details-toggle-'+this.master_raw_id);
         let angle = toggle.find('i');
-        let node = this.gridApi.getRowNode(this.master_raw_id);
         let t = $('#tab-details-'+this.master_raw_id);
         if(toggle.hasClass('collapsed-toggle')) {
             if (this.rowData.length == 1){
+                this.node = this.gridApi.getRowNode(this.master_raw_id);
                 this.productsSubs = this.productsApi.getProductTaxes(this.product_id).subscribe(res => {
                     ///////////////////////////////////////
                     this.taxes_options = res['taxes'];
                     let c = this;
                     this.columnDefs = [
                         {
-                            headerName: '', field: 'check', checkboxSelection: function (params) {
+                            headerName: '', field: 'check', width: 70, checkboxSelection: function (params) {
                                 return (params.node.id != 0);
                             }
                         },
@@ -96,8 +94,8 @@ export class ProductDetailsComponent implements OnInit {
                                 return ProductDetailsComponent.lookupKey(c.taxes_options, params.newValue);
                             }
                         },
-                        {headerName: 'On Purchase %', field: 'purchase_pct', editable: true},
-                        {headerName: 'On Sale %', field: 'sale_pct', editable: true},
+                        {headerName: 'On Purchase %', field: 'purchase_pct', editable: true, width: 100},
+                        {headerName: 'On Sale %', field: 'sale_pct', editable: true, width: 100},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
                     ];
                     this.rowData = this.rowData.concat(res['products']);
@@ -112,23 +110,27 @@ export class ProductDetailsComponent implements OnInit {
                             self: this
                         };
                     }
-
-
-
+                    toggle.removeClass('collapsed-toggle');
+                    toggle.addClass('expanded-toggle');
+                    angle.removeClass('fa-angle-down');
+                    angle.addClass('fa-angle-up');
+                    t.removeClass('invisible');
+                    this.gridApi.onRowHeightChanged();
+                    this.resetHeight();
                 });
             }
-            toggle.removeClass('collapsed-toggle');
-            toggle.addClass('expanded-toggle');
-            angle.removeClass('fa-angle-down');
-            angle.addClass('fa-angle-up');
-            let r = this.rowData.length;
-            t.removeClass('invisible');
-            node.setRowHeight((r*25)+200);
-            this.gridApi.onRowHeightChanged();
-
+            else {
+                toggle.removeClass('collapsed-toggle');
+                toggle.addClass('expanded-toggle');
+                angle.removeClass('fa-angle-down');
+                angle.addClass('fa-angle-up');
+                t.removeClass('invisible');
+                this.gridApi.onRowHeightChanged();
+                this.resetHeight();
+            }
         }
         else {
-            node.setRowHeight(50);
+            this.node.setRowHeight(50);
             this.gridApi.onRowHeightChanged();
             toggle.removeClass('expanded-toggle');
             toggle.addClass('collapsed-toggle');
@@ -149,6 +151,7 @@ export class ProductDetailsComponent implements OnInit {
                         if (res == 1) {
                             this.rowData = this.rowData.filter(row => !( ids.includes(row.id)));
                             this.productGridApi.setRowData(this.rowData);
+                            this.resetHeight();
                         }
                     },
                     console.error
@@ -164,6 +167,7 @@ export class ProductDetailsComponent implements OnInit {
                     if (res == 1 ) {
                         self.rowData = self.rowData.filter(row => row.id != id);
                         self.productGridApi.setRowData(self.rowData);
+                        self.resetHeight();
                     }
                 },
                 console.error
@@ -189,6 +193,7 @@ export class ProductDetailsComponent implements OnInit {
                         };
                         self.rowData.push(parameters);
                         self.productGridApi.setRowData(self.rowData);
+                        self.resetHeight();
                         return false;
                     }
                 },
@@ -206,5 +211,9 @@ export class ProductDetailsComponent implements OnInit {
         }
         return false;
     }
-
+    resetHeight(){
+        let r = this.rowData.length;
+        this.node.setRowHeight((r*25)+200);
+        this.gridApi.onRowHeightChanged();
+    }
 }

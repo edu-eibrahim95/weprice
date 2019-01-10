@@ -6,6 +6,7 @@ import {CostCentersService} from "../../../Services/cost-centers.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {CostCenter} from "../../../Models/cost_center";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-cost-center-edit',
@@ -41,5 +42,14 @@ export class CostCenterEditComponent implements OnInit {
     onCancel(){
         if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/cost_centers']);
         return false;
+    }
+        changeType() {
+        let s = $("select[name=type]").val();
+        if ( s == 2){
+            $('.direct').removeClass('d-none');
+        }
+        else {
+            $('.direct').addClass('d-none');
+        }
     }
 }

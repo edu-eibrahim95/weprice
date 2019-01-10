@@ -76,3 +76,6 @@
 /*/deep/ .ag-theme-material .ag-ltr .ag-body {*/
   /*margin-top : 100px*/
 /*}*/
+/deep/ .ag-theme-fresh .ag-header {
+  font-size: 12px;
+}

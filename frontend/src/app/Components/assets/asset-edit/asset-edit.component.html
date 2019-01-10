@@ -14,7 +14,7 @@
                             {{ "assets_edit.type" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <select *ngIf="assetTypes" id="select2-a" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                            <select *ngIf="assetTypes" id="select2-a" class="form-control select2-hidden-accessible"
                                     aria-hidden="true"  name="type_id" #type_id="ngModel" ngModel [ngModel]="asset.type_id">
                                 <option *ngFor="let asset_type of assetTypes" [value]="asset_type.id" selected="">{{asset_type.description}}</option>
                             </select>
@@ -25,7 +25,7 @@
                             {{ "assets_edit.local" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <select *ngIf="locals" id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
+                            <select *ngIf="locals" id="select2-b" class="form-control select2-hidden-accessible"
                                     aria-hidden="true"  name="local_id" #local_id="ngModel" ngModel [ngModel]="asset.local_id">
                                 <option *ngFor="let local of locals" [value]="local.id" selected="">{{local.description}}</option>
                             </select>
@@ -105,7 +105,7 @@
                 </div><!-- form-layout -->
                 <hr>
                 <div class="form-layout-footer mg-t-30 text-center">
-                    <button class="btn btn-info" type="submit">{{ "assets_edit.sub" | translate }}</button>
+                    <button class="btn btn-info" type="submit">{{ "globals.sub" | translate }}</button>
                     <button class="text-white btn btn-secondary cancel-edit ml-3"
                             (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
                 </div>

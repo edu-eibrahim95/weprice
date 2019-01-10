@@ -1,12 +1,12 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
   <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">{{ 'class.prod' | translate }} </h4>
-    <p class="mg-b-0">{{ 'class.' | translate }} </p>
+    <h4 class="tx-gray-800 mg-b-5">{{ 'classe.prod' | translate }} </h4>
+    <p class="mg-b-0">{{ 'classe.edit' | translate }} </p>
   </div>
   <div class="br-pagebody">
     <div class="br-section-wrapper">
-      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10"> {{ 'class.edit' | translate }}</h6>
+      <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10"> {{ 'classe.edit' | translate }}</h6>
       <form *ngIf="product_classif" #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
@@ -46,7 +46,7 @@
 
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit"> {{ 'class.sub' | translate }}</button>
+          <button class="btn btn-info" type="submit"> {{ 'globals.sub' | translate }}</button>
           <button class="text-white btn btn-secondary cancel-edit ml-3"
                   (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
         </div>

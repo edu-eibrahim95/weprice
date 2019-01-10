@@ -12,7 +12,7 @@ export class ActionsFormatterComponent implements  OnInit{
     edit_url : string;
     entity_id : number;
     type : string;
-    self: null;
+    self: object;
 
     delete(id, type, self) {} ;
     save(id, type, self) {} ;

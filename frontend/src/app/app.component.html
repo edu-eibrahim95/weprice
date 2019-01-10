@@ -3,73 +3,73 @@
 </div>
 <ng-template #component>
     <!-- ########## START: LEFT PANEL ########## -->
-    <div class="br-logo"><a href=""><span>[</span>Weprice<span>]</span></a></div>
+    <div class="br-logo"><a href=""><span>[</span>{{ "globals.project" | translate }}<span>]</span></a></div>
     <div class="br-sideleft overflow-y-auto">
-        <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
+        <label class="sidebar-label pd-x-15 mg-t-20">{{ "globals.nav" | translate }}</label>
         <div class="br-sideleft-menu">
             <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="br-menu-link">
                 <div class="br-menu-item">
                     <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-                    <span class="menu-item-label">Dashboard</span>
+                    <span class="menu-item-label">{{ "globals.dashboard" | translate }}</span>
                 </div><!-- menu-item -->
             </a><!-- br-menu-link -->
             <a href="#" [class]="'br-menu-link '+files_open">
                 <div class="br-menu-item">
                     <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-                    <span class="menu-item-label">Files</span>
+                    <span class="menu-item-label">{{ "globals.files" | translate }}</span>
                     <i class="menu-item-arrow fa fa-angle-down"></i>
                 </div><!-- menu-item -->
             </a><!-- br-menu-link -->
             <ul class="br-menu-sub nav flex-column">
-                <li class="nav-item"><a routerLink="/branches" routerLinkActive="active"  class="nav-link">Branches</a></li>
-                <li class="nav-item"><a routerLink="/cost_centers" routerLinkActive="active" class="nav-link">Cost Centers</a></li>
+                <li class="nav-item"><a routerLink="/branches" routerLinkActive="active"  class="nav-link">{{ "globals.branches" | translate }}</a></li>
+                <li class="nav-item"><a routerLink="/cost_centers" routerLinkActive="active" class="nav-link">{{ "globals.cost_centers" | translate }}</a></li>
                 <li class="nav-item"><a routerLink="/accounts" routerLinkActive="active" class="nav-link">Accounts</a></li>
                 <li class="nav-item">
                     <a href="#" class="br-menu-link">
                         <div class="br-menu-item nav-link">
-                            <span class="menu-item-label">Products</span>
+                            <span class="menu-item-label">{{ "globals.products" | translate }}</span>
                             <i class="menu-item-arrow fa fa-angle-down"></i>
                         </div><!-- menu-item -->
                     </a><!-- br-menu-link -->
                     <ul class="br-menu-sub br-menu-sub-sub nav flex-column">
-                        <li class="nav-item"><a routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">General</a></li>
-                        <li class="nav-item"><a routerLink="/products/1" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Finished</a></li>
-                        <li class="nav-item"><a routerLink="/products/2" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Semi-Finished</a></li>
+                        <li class="nav-item"><a routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">{{ "globals.general" | translate }}</a></li>
+                        <li class="nav-item"><a routerLink="/products/1" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">{{ "globals.finished_products" | translate }}</a></li>
+                        <li class="nav-item"><a routerLink="/products/2" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">{{ "globals.semi_finished_products" | translate }}</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a routerLink="/employees" routerLinkActive="active" class="nav-link">Employees</a></li>
-                <li class="nav-item"><a routerLink="/assets" routerLinkActive="active" class="nav-link">Assets</a></li>
-                <li class="nav-item"><a routerLink="/taxes" routerLinkActive="active" class="nav-link">Taxes</a></li>
-                <li class="nav-item"><a routerLink="/social_charges" routerLinkActive="active" class="nav-link">Social Charges</a></li>
-                <li class="nav-item"><a routerLink="/parameters" routerLinkActive="active" class="nav-link">Parameters</a></li>
-                <li class="nav-item"><a routerLink="/users" routerLinkActive="active" class="nav-link">Users</a></li>
+                <li class="nav-item"><a routerLink="/employees" routerLinkActive="active" class="nav-link">{{ "globals.employees" | translate }}</a></li>
+                <li class="nav-item"><a routerLink="/assets" routerLinkActive="active" class="nav-link">{{ "globals.assets" | translate }}</a></li>
+                <li class="nav-item"><a routerLink="/taxes" routerLinkActive="active" class="nav-link">{{ "globals.taxes" | translate }}</a></li>
+                <li class="nav-item"><a routerLink="/social_charges" routerLinkActive="active" class="nav-link">{{ "globals.social_charges" | translate }}</a></li>
+                <li class="nav-item"><a routerLink="/parameters" routerLinkActive="active" class="nav-link">{{ "globals.parameters" | translate }}</a></li>
+                <li class="nav-item"><a routerLink="/users" routerLinkActive="active" class="nav-link">{{ "globals.users" | translate }}</a></li>
             </ul>
             <a href="#" class="br-menu-link">
                 <div class="br-menu-item">
                     <i class="menu-item-icon ion-ios-redo-outline tx-24"></i>
-                    <span class="menu-item-label">Transactions</span>
+                    <span class="menu-item-label">{{ "globals.transactions" | translate }}</span>
                     <i class="menu-item-arrow fa fa-angle-down"></i>
                 </div><!-- menu-item -->
             </a><!-- br-menu-link -->
             <ul class="br-menu-sub nav flex-column">
-                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Entries</a></li>
+                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">{{ "globals.entries" | translate }}</a></li>
             </ul>
             <a href="#" class="br-menu-link">
                 <div class="br-menu-item">
                     <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-                    <span class="menu-item-label">Calculations</span>
+                    <span class="menu-item-label">{{ "globals.calcs" | translate }}</span>
                     <i class="menu-item-arrow fa fa-angle-down"></i>
                 </div><!-- menu-item -->
             </a><!-- br-menu-link -->
             <ul class="br-menu-sub nav flex-column">
-                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Cost Map</a></li>
-                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Finished Products</a></li>
-                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Semi-Finished Products</a></li>
+                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">{{ "globals.cost_map" | translate }}</a></li>
+                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">{{ "globals.finished_products" | translate }}</a></li>
+                <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">{{ "globals.semi_finished_products" | translate }}</a></li>
             </ul>
             <a href="#" class="br-menu-link">
                 <div class="br-menu-item">
                     <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-                    <span class="menu-item-label">Reports</span>
+                    <span class="menu-item-label">{{ "globals.reports" | translate }}</span>
                     <i class="menu-item-arrow fa fa-angle-down"></i>
                 </div><!-- menu-item -->
             </a><!-- br-menu-link -->
@@ -77,13 +77,13 @@
                 <li class="nav-item">
                     <a href="#" class="br-menu-link">
                         <div class="br-menu-item nav-link">
-                            <span class="menu-item-label">Demonstratives</span>
+                            <span class="menu-item-label">{{ "globals.demonstratives" | translate }}</span>
                             <i class="menu-item-arrow fa fa-angle-down"></i>
                         </div><!-- menu-item -->
                     </a><!-- br-menu-link -->
                     <ul class="br-menu-sub br-menu-sub-sub nav flex-column">
-                        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Expenses</a></li>
-                        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">Results</a></li>
+                        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">{{ "globals.expenses" | translate }}</a></li>
+                        <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">{{ "globals.results" | translate }}</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a routerLink="/cost_centers" class="nav-link">EBTIDA</a></li>

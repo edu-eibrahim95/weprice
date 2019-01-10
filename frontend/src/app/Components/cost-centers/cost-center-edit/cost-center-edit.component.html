@@ -15,8 +15,8 @@
               {{ "coste.type" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-b" class="form-control select2-hidden-accessible" data-placeholder="Choose country"
-                      aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="cost_center.type">
+              <select id="select2-b" class="form-control select2-hidden-accessible"
+                      aria-hidden="true"  name="type" #type="ngModel" ngModel [ngModel]="cost_center.type" (change)="changeType()">
                 <option value="0" selected="">{{ "coste.build" | translate }}</option>
                 <option value="1"> {{ "coste.supp" | translate }}</option>
                 <option value="1"> {{ "coste.dire" | translate }}</option>
@@ -42,7 +42,7 @@
                      name="area" #area="ngModel" ngModel placeholder="Enter Area" [ngModel]="cost_center.area">
             </div>
           </div><!-- row -->
-          <div class="row no-gutters">
+          <div class="row no-gutters d-none direct">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "coste.hours" | translate }}
             </div><!-- col-4 -->
@@ -51,7 +51,7 @@
                      name="workhours_qt" #workhours_qt="ngModel" ngModel placeholder="Enter Work hours per day" [ngModel]="cost_center.workhours_qt">
             </div><!-- col-8 -->
           </div><!-- row -->
-          <div class="row no-gutters">
+          <div class="row no-gutters d-none direct">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "coste.days" | translate }}
             </div><!-- col-4 -->
@@ -60,7 +60,7 @@
                      name="workdays_qt" #workdays_qt="ngModel" ngModel placeholder="Enter Work hours per day" [ngModel]="cost_center.workdays_qt">
             </div><!-- col-8 -->
           </div><!-- row -->
-          <div class="row no-gutters">
+          <div class="row no-gutters d-none direct">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "coste.mach" | translate }}
             </div><!-- col-4 -->
@@ -81,7 +81,7 @@
         </div>
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
-          <button class="btn btn-info" type="submit"> {{ "coste.sub" | translate }}</button>
+          <button class="btn btn-info" type="submit">{{ "globals.sub" | translate }}</button>
           <button class="text-white btn btn-secondary cancel-edit ml-3"
                   (click)="onCancel()">{{ "globals.cancel" | translate }}</button>
         </div>

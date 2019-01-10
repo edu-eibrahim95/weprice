@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {CostCentersService} from "../../../Services/cost-centers.service";
 import {BranchService} from "../../../Services/branch.service";
 import {Branch} from "../../../Models/branch";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-cost-center-add',
@@ -35,6 +36,15 @@ export class CostCenterAddComponent implements OnInit {
             },
             console.error
         );
+    }
+    changeType() {
+        let s = $("select[name=type]").val();
+        if ( s == 2){
+            $('.direct').removeClass('d-none');
+        }
+        else {
+            $('.direct').addClass('d-none');
+        }
     }
 
 }

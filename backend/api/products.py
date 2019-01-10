@@ -122,7 +122,7 @@ class GetProductTaxes(Resource):
         schema = ProductTaxesSchema(many=True)
         products_data = [] if len(products_taxes) == 0 else schema.dump(products_taxes).data
         taxes = Tax.query.filter_by(installation_id=get_user().installation_id).all()
-        taxes_data = {"0": "Choose Cost Center"}
+        taxes_data = {"0": "Choose Tax"}
         for tax in taxes:
             taxes_data["{}".format(tax.id)] = tax.name
         add = able('add', 'products')
