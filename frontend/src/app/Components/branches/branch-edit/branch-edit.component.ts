@@ -25,6 +25,14 @@ export class BranchEditComponent implements OnInit {
         this.branchesSubs = this.branchesApi.getBranch(this.route.params['value']['rule_id']).subscribe(res => {
             this.branch = res['branch'];
             this.branches = this.branches.filter(e => e.id != this.branch.id);
+
+            $(document).ready(function () {
+            let float_inputs = $(".float-input");
+            float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+            float_inputs.on('change',function() {
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+            });
+        });
         });
 
     }

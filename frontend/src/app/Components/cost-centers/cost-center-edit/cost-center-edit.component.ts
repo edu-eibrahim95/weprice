@@ -13,7 +13,7 @@ import * as $ from 'jquery';
     templateUrl: './cost-center-edit.component.html',
     styleUrls: ['./cost-center-edit.component.css']
 })
-export class CostCenterEditComponent implements OnInit {
+export class CostCenterEditComponent implements OnInit{
     costCentersSubs: Subscription;
     branchesSubs: Subscription;
     branches : Branch[];
@@ -26,7 +26,17 @@ export class CostCenterEditComponent implements OnInit {
         });
         this.costCentersSubs = this.costCentersApi.getCostCenter(this.route.params['value']['rule_id']).subscribe(res => {
             this.cost_center = res['cost_center'];
+
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+            });
+
         });
+
     }
     onSubmit(f: NgForm) {
         let parameter = JSON.stringify(f.value);
@@ -43,13 +53,19 @@ export class CostCenterEditComponent implements OnInit {
         if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/cost_centers']);
         return false;
     }
-        changeType() {
+    changeType() {
         let s = $("select[name=type]").val();
         if ( s == 2){
             $('.direct').removeClass('d-none');
         }
         else {
             $('.direct').addClass('d-none');
+        }
+        if (s == 3){
+            $('.comm').removeClass('d-none');
+        }
+        else {
+            $('.comm').addClass('d-none');
         }
     }
 }

@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {ProductClassif} from "../../../Models/product_classif";
 import {ProductClassifService} from "../../../Services/product-classif.service";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-product-edit',
@@ -23,6 +24,13 @@ export class ProductEditComponent implements OnInit {
     ngOnInit() {
         this.productSubs = this.productsApi.getProduct(this.route.params['value']['rule_id']).subscribe(res => {
             this.product = res['product'];
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+            });
         });
         this.productClassifSubs = this.productClassifApi.getProductClassifs().subscribe(res => {
             this.productClassifs = res['products_classifs'];

@@ -6,17 +6,16 @@ import {LocalService} from "../../../Services/local.service";
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-local-overview',
-  templateUrl: './local-overview.component.html',
-  styleUrls: ['./local-overview.component.css']
+    selector: 'app-local-overview',
+    templateUrl: './local-overview.component.html',
+    styleUrls: ['./local-overview.component.css']
 })
 export class LocalOverviewComponent implements OnInit {
 
-   localsSubs: Subscription;
+    localsSubs: Subscription;
     locals : Local[];
     columnDefs = [];
     rowData = [];
-    height = null;
     add = false;
     edit = false;
     delete = false;
@@ -26,6 +25,9 @@ export class LocalOverviewComponent implements OnInit {
     private gridApi;
     private gridColumnApi;
     constructor(private localsApi : LocalService) { }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
@@ -36,20 +38,17 @@ export class LocalOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.locals.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 220;
-            w = w/2;
             this.columnDefs = [
-                {headerName: 'Description', field: 'description', width: w },
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Description', field: 'description' },
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.locals.length; i++){
                 this.locals[i]['actions'] = {
-                  'api' : this.localsApi,
-                  'id':this.locals[i].id,
-                  'delete': [this.delete, this.deleteLocal],
-                  'edit': [this.edit, '/locals/edit/'] ,
-                'self':this
+                    'api' : this.localsApi,
+                    'id':this.locals[i].id,
+                    'delete': [this.delete, this.deleteLocal],
+                    'edit': [this.edit, '/locals/edit/'] ,
+                    'self':this
                 };
             }
             this.rowData = this.locals;

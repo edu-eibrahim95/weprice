@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {ProductClassifService} from "../../../Services/product-classif.service";
 import {ProductClassif} from "../../../Models/product_classif";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-product-add',
@@ -23,6 +24,13 @@ export class ProductAddComponent implements OnInit {
     ngOnInit() {
         this.productClassifSubs = this.productClassifApi.getProductClassifs().subscribe(res => {
             this.productClassifs = res['products_classifs'];
+        });
+        $(document).ready(function () {
+            let float_inputs = $(".float-input");
+            float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+            float_inputs.on('change',function() {
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+            });
         });
     }
 

@@ -41,6 +41,9 @@ export class DetailsFormatterComponent implements  OnInit{
         this.ratioGridApi = params.api;
         this.ratioGridColumnApi = params.columnApi;
     }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     onTaxGridReady(params) {
         this.taxGridApi = params.api;
         this.taxGridColumnApi = params.columnApi;

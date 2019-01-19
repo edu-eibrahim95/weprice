@@ -39,7 +39,9 @@ export class AssetDetailsComponent implements OnInit {
         this.assetGridApi = params.api;
         this.assetGridColumnApi = params.columnApi;
     }
-
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     agInit(params: any): void {
         this.gridApi = params.value.gridApi;
         this.gridColumnApi = params.value.gridColumnApi;

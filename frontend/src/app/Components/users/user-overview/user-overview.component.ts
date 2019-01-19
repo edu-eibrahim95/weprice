@@ -18,7 +18,6 @@ export class UserOverviewComponent implements OnInit {
     delete = false;
     columnDefs = [];
     rowData = [];
-    height = null;
     users : User[];
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
@@ -33,17 +32,14 @@ export class UserOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.users.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 220;
-            w = w/7;
             this.columnDefs = [
-                {headerName: 'Name', field: 'name', width: w},
-                {headerName: 'Full Name', field: 'full_name', width: w},
-                {headerName: 'Email ', field: 'email', width: w},
-                {headerName: 'Active ', field: 'active_flag', width: w},
-                {headerName: 'Initial Date', field: 'initial_date', width: w},
-                {headerName: 'Final Date ', field: 'final_date', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Name', field: 'name'},
+                {headerName: 'Full Name', field: 'full_name'},
+                {headerName: 'Email ', field: 'email'},
+                {headerName: 'Active ', field: 'active_flag'},
+                {headerName: 'Initial Date', field: 'initial_date'},
+                {headerName: 'Final Date ', field: 'final_date'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.users.length; i++){
                 this.users[i]['details'] = {'id': i,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
@@ -56,6 +52,9 @@ export class UserOverviewComponent implements OnInit {
             this.rowData = this.users;
         });
 
+    }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
     }
     onGridReady(params) {
         this.gridApi = params.api;

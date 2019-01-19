@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {Branch} from "../../../Models/branch";
 import {BranchService} from "../../../Services/branch.service";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-employee-edit',
@@ -25,6 +26,13 @@ export class EmployeeEditComponent implements OnInit {
         });
         this.employeeSubs = this.employeesApi.getEmployee(this.route.params['value']['rule_id']).subscribe(res => {
             this.employee = res['employee'];
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+            });
         });
     }
 

@@ -16,7 +16,6 @@ export class AssetTypeOverviewComponent implements OnInit {
     assetTypes : AssetType[];
     columnDefs = [];
     rowData = [];
-    height = null;
     add = false;
     edit = false;
     delete = false;
@@ -26,6 +25,9 @@ export class AssetTypeOverviewComponent implements OnInit {
     private gridApi;
     private gridColumnApi;
     constructor(private assetTypesApi : AssetTypeService) { }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
@@ -36,16 +38,13 @@ export class AssetTypeOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.assetTypes.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 220;
-            w = w/6;
             this.columnDefs = [
-                {headerName: 'Description', field: 'description', width: w},
-                {headerName: 'Years Lifetime', field: 'years_lifetime', width: w },
-                {headerName: 'Residual Lifetime', field: 'residual_lifetime', width: w},
-                {headerName: 'Interest Year Pct', field: 'interest_year_pct', width: w},
-                {headerName: 'Account', field: 'account_id', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Description', field: 'description'},
+                {headerName: 'Years Lifetime', field: 'years_lifetime' },
+                {headerName: 'Residual Lifetime', field: 'residual_lifetime'},
+                {headerName: 'Interest Year Pct', field: 'interest_year_pct'},
+                {headerName: 'Account', field: 'account_id'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.assetTypes.length; i++){
                 this.assetTypes[i]['actions'] = {

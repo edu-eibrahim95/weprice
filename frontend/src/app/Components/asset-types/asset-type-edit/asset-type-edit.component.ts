@@ -6,6 +6,7 @@ import {AccountService} from "../../../Services/account.service";
 import {AssetTypeService} from "../../../Services/asset-type.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-asset-type-edit',
@@ -26,6 +27,13 @@ export class AssetTypeEditComponent implements OnInit {
         });
         this.assetTypesSubs = this.assetTypesApi.getAssetType(this.route.params['value']['rule_id']).subscribe(res => {
             this.asset_type = res['asset_type'];
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+            });
         });
     }
 

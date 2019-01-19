@@ -38,7 +38,9 @@ export class ProductDetailsComponent implements OnInit {
         this.productGridApi = params.api;
         this.productGridColumnApi = params.columnApi;
     }
-
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     agInit(params: any): void {
         this.gridApi = params.value.gridApi;
         this.gridColumnApi = params.value.gridColumnApi;

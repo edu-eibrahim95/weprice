@@ -13,6 +13,8 @@
                 domLayout='autoHeight'
                 [frameworkComponents]="frameworkComponents"
                 rowSelection="multiple"
+                (firstDataRendered)="onFirstDataRendered($event)"
+                (gridSizeChanged)="onFirstDataRendered($event)"
                 (gridReady)="onGridReady($event)">
         </ag-grid-angular>
     </div>

@@ -16,7 +16,6 @@ export class SocialChargeOverviewComponent implements OnInit {
     social_charges : SocialCharge[];
     columnDefs = [];
     rowData = [];
-    height = null;
     add = false;
     edit = false;
     delete = false;
@@ -27,6 +26,11 @@ export class SocialChargeOverviewComponent implements OnInit {
     private gridApi;
     private gridColumnApi;
     constructor(private social_chargesApi : SocialChargeService) { }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+        let w = 7/9 * parseInt($('.ag-theme-material').width());
+        $('.details').width(w);
+    }
     onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
@@ -38,18 +42,15 @@ export class SocialChargeOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.social_charges.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 330;
-            w = w/6;
             this.columnDefs = [
                 {headerName: '', field: 'check', checkboxSelection:true, width:60},
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
-                {headerName: 'Description', field: 'description', width: w},
-                {headerName: 'Initial Date', field: 'initial_date', width: w },
-                {headerName: 'Final Date', field: 'final_date', width: w},
-                {headerName: 'Charge Pct', field: 'charge_pct', width: w},
-                {headerName: 'Account', field: 'account_id', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Description', field: 'description'},
+                {headerName: 'Initial Date', field: 'initial_date' },
+                {headerName: 'Final Date', field: 'final_date'},
+                {headerName: 'Charge Pct', field: 'charge_pct'},
+                {headerName: 'Account', field: 'account_id'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.social_charges.length; i++){
                 this.social_charges[i]['details'] = {

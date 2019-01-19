@@ -5,6 +5,7 @@ import {AccountService} from "../../../Services/account.service";
 import {SocialChargeService} from "../../../Services/social-charge.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-social-charge-add',
@@ -23,6 +24,13 @@ export class SocialChargeAddComponent implements OnInit {
     ngOnInit() {
         this.accountsSubs = this.accountsApi.getAccounts().subscribe(res => {
             this.accounts = res['accounts'];
+        });
+        $(document).ready(function () {
+            let float_inputs = $(".float-input");
+            float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+            float_inputs.on('change',function() {
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+            });
         });
     }
 

@@ -47,7 +47,7 @@
               {{ "branche.area" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number"
+              <input class="form-control float-input" type="number" step="0.01"
                      name="area" #area="ngModel" ngModel placeholder="Enter Area" [ngModel]="branch.area">
             </div>
           </div>
@@ -65,7 +65,7 @@
               {{ "branche.avg" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number" [ngModel]="branch.months_avg_qt"
+              <input class="form-control float-input" type="number" [ngModel]="branch.months_avg_qt" step="0.01"
                      name="months_avg_qt" #months_avg_qt="ngModel" ngModel placeholder="Enter Avg Quantity Months">
             </div><!-- col-8 -->
           </div><!-- row -->
@@ -74,7 +74,7 @@
               {{ "branche.hour" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number" [ngModel]="branch.workhours_day_qt"
+              <input class="form-control float-input" type="number" [ngModel]="branch.workhours_day_qt" step="0.01"
                      name="workhours_day_qt" #workhours_day_qt="ngModel" ngModel placeholder="Enter Work hours per day">
             </div><!-- col-8 -->
           </div><!-- row -->
@@ -83,7 +83,7 @@
               {{ "branche.day" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number" [ngModel]="branch.workdays_month_qt"
+              <input class="form-control float-input" type="number" [ngModel]="branch.workdays_month_qt" step="0.01"
                      name="workdays_month_qt" #workdays_month_qt="ngModel" ngModel placeholder="Enter Work hours per day">
             </div><!-- col-8 -->
           </div><!-- row -->
@@ -92,7 +92,7 @@
               {{ "branche.stock" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number" [ngModel]="branch.months_stock_qt"
+              <input class="form-control float-input" type="number" [ngModel]="branch.months_stock_qt" step="0.01"
                      name="months_stock_qt" #months_stock_qt="ngModel" ngModel placeholder="Enter Months Stock Quantity">
             </div>
           </div>
@@ -101,7 +101,7 @@
               {{ "branche.raw" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number" [ngModel]="branch.raw_material_rate_pct"
+              <input class="form-control float-input" type="number" [ngModel]="branch.raw_material_rate_pct" ste="0.01"
                      name="raw_material_rate_pct" #raw_material_rate_pct="ngModel" ngModel placeholder="Enter Raw Material Rate">
             </div>
           </div>
@@ -110,7 +110,7 @@
               {{ "branche.rec" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number" [ngModel]="branch.days_rec_qt"
+              <input class="form-control float-input" type="number" [ngModel]="branch.days_rec_qt" step="0.01"
                      name="days_rec_qt" #days_rec_qt="ngModel" ngModel placeholder="Enter Days Rec">
             </div>
           </div>

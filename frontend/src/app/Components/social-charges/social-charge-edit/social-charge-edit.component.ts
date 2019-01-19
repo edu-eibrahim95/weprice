@@ -6,11 +6,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {SocialChargeService} from "../../../Services/social-charge.service";
 import {SocialCharge} from "../../../Models/social_charge";
+import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-social-charge-edit',
-  templateUrl: './social-charge-edit.component.html',
-  styleUrls: ['./social-charge-edit.component.css']
+    selector: 'app-social-charge-edit',
+    templateUrl: './social-charge-edit.component.html',
+    styleUrls: ['./social-charge-edit.component.css']
 })
 export class SocialChargeEditComponent implements OnInit {
 
@@ -26,6 +27,13 @@ export class SocialChargeEditComponent implements OnInit {
         });
         this.socialChargesSubs = this.socialChargesApi.getSocialCharge(this.route.params['value']['rule_id']).subscribe(res => {
             this.social_charge = res['social_charge'];
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+            });
         });
     }
 

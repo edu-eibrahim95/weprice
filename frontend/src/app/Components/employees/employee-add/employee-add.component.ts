@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {Branch} from "../../../Models/branch";
 import {BranchService} from "../../../Services/branch.service";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-employee-add',
@@ -23,7 +24,13 @@ export class EmployeeAddComponent implements OnInit {
     ngOnInit() {
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
             this.branches = res['branches'];
-            console.log(this.branches);
+        });
+        $(document).ready(function () {
+            let float_inputs = $(".float-input");
+            float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+            float_inputs.on('change',function() {
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+            });
         });
     }
 

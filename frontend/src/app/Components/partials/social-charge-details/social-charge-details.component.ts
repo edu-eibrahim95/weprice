@@ -29,8 +29,7 @@ export class SocialChargeDetailsComponent implements OnInit {
 
     ngOnInit() {
         $(document).ready(function () {
-            let w = 8/9 * (parseInt($(document).innerWidth()) - parseInt($('.br-sideleft').width()) - 300);
-            $('.details').width(w)
+
         })
     }
 
@@ -38,7 +37,12 @@ export class SocialChargeDetailsComponent implements OnInit {
         this.social_chargeGridApi = params.api;
         this.social_chargeGridColumnApi = params.columnApi;
     }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
 
+        // let w = 8/9 * (parseInt($(document).innerWidth()) - parseInt($('.br-sideleft').width()) - 300);
+        // $('.details').width(w)
+    }
     agInit(params: any): void {
         this.gridApi = params.value.gridApi;
         this.gridColumnApi = params.value.gridColumnApi;

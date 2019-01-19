@@ -15,7 +15,6 @@ export class TaxOverviewComponent implements OnInit {
     taxes : Tax[];
     columnDefs = [];
     rowData = [];
-    height = null;
     add = false;
     edit = false;
     delete = false;
@@ -25,6 +24,9 @@ export class TaxOverviewComponent implements OnInit {
     private gridApi;
     private gridColumnApi;
     constructor(private taxesApi : TaxService) { }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
@@ -35,17 +37,14 @@ export class TaxOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.taxes.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 220;
-            w = w/7;
             this.columnDefs = [
-                {headerName: 'Name', field: 'name', width: w},
-                {headerName: 'Initial Date', field: 'initial_date', width: w },
-                {headerName: 'Final Date', field: 'final_date', width: w},
-                {headerName: 'Purchase Pct', field: 'purchase_pct', width: w},
-                {headerName: 'Sale Pct', field: 'sale_pct', width: w},
-                {headerName: 'Account', field: 'account_id', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Name', field: 'name'},
+                {headerName: 'Initial Date', field: 'initial_date' },
+                {headerName: 'Final Date', field: 'final_date'},
+                {headerName: 'Purchase Pct', field: 'purchase_pct'},
+                {headerName: 'Sale Pct', field: 'sale_pct'},
+                {headerName: 'Account', field: 'account_id'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.taxes.length; i++){
                 this.taxes[i]['actions'] = {

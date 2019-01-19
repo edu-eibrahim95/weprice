@@ -5,7 +5,7 @@
     <p class="mg-b-0">{{ "brancho.list" | translate }} </p>
   </div><!-- d-flex -->
   <div class="br-pagebody">
-    <div class="br-section-wrapper">
+    <div class="br-section-wrapper" style="width: 100%">
       <div class="text-right">
         <a href="#" (click)="massDeleteBranch()" class="btn btn-danger mg-r-10" *ngIf="delete">{{ "globals.mass" | translate }}</a>
         <a routerLink="/branches/add" class="btn btn-success" *ngIf="add">{{ "globals.new" | translate }}</a>
@@ -22,6 +22,8 @@
               rowSelection="multiple"
               [rowMultiSelectWithClick]="true"
               (gridReady)="onGridReady($event)"
+              (firstDataRendered)="onFirstDataRendered($event)"
+              (gridSizeChanged)="onFirstDataRendered($event)"
               domLayout='autoHeight'
               pagination="true"
               paginationPageSize="10"

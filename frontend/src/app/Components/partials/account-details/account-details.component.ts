@@ -38,7 +38,9 @@ export class AccountDetailsComponent implements OnInit {
         this.accountGridApi = params.api;
         this.accountGridColumnApi = params.columnApi;
     }
-
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     agInit(params: any): void {
         this.gridApi = params.value.gridApi;
         this.gridColumnApi = params.value.gridColumnApi;

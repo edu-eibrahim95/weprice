@@ -6,17 +6,16 @@ import {SpotService} from "../../../Services/spot.service";
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-spot-overview',
-  templateUrl: './spot-overview.component.html',
-  styleUrls: ['./spot-overview.component.css']
+    selector: 'app-spot-overview',
+    templateUrl: './spot-overview.component.html',
+    styleUrls: ['./spot-overview.component.css']
 })
 export class SpotOverviewComponent implements OnInit {
 
-  spotsSubs: Subscription;
+    spotsSubs: Subscription;
     spots : Spot[];
     columnDefs = [];
     rowData = [];
-    height = null;
     add = false;
     edit = false;
     delete = false;
@@ -26,6 +25,9 @@ export class SpotOverviewComponent implements OnInit {
     private gridApi;
     private gridColumnApi;
     constructor(private spotsApi : SpotService) { }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
@@ -36,22 +38,19 @@ export class SpotOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.spots.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 220;
-            w = w/4;
             this.columnDefs = [
-                {headerName: 'Name', field: 'name', width: w },
-                {headerName: 'Ip Address', field: 'ip_address', width: w },
-                {headerName: 'NIC Address', field: 'nic_address', width: w },
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Name', field: 'name' },
+                {headerName: 'Ip Address', field: 'ip_address' },
+                {headerName: 'NIC Address', field: 'nic_address' },
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.spots.length; i++){
                 this.spots[i]['actions'] = {
-                  'api' : this.spotsApi,
-                  'id':this.spots[i].id,
-                  'delete': [this.delete, this.deleteSpot],
-                  'edit': [this.edit, '/spots/edit/'] ,
-                'self':this
+                    'api' : this.spotsApi,
+                    'id':this.spots[i].id,
+                    'delete': [this.delete, this.deleteSpot],
+                    'edit': [this.edit, '/spots/edit/'] ,
+                    'self':this
                 };
             }
             this.rowData = this.spots;

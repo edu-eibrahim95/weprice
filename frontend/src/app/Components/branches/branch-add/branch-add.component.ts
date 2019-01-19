@@ -9,48 +9,53 @@ import {NgForm} from "@angular/forms";
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-branch-add',
-  templateUrl: './branch-add.component.html',
-  styleUrls: ['./branch-add.component.css']
+    selector: 'app-branch-add',
+    templateUrl: './branch-add.component.html',
+    styleUrls: ['./branch-add.component.css']
 })
 export class BranchAddComponent implements OnInit {
-  installationSubs: Subscription;
-  branchesSubs: Subscription;
-  installations : Installation[];
-  branches : Branch[];
-  constructor(private installationApi: InstallationService,private branchesApi: BranchService, private router: Router) { }
+    installationSubs: Subscription;
+    branchesSubs: Subscription;
+    installations : Installation[];
+    branches : Branch[];
+    constructor(private installationApi: InstallationService,private branchesApi: BranchService, private router: Router) { }
 
-  ngOnInit() {
-    this.installationSubs = this.installationApi.get().subscribe(res => {
-      this.installations = res['installations'];
-      console.log(this.installations);
-    });
-    this.branchesSubs = this.branchesApi.getParents().subscribe(res => {
-      this.branches = res['branches'];
-      console.log(this.branches);
-    });
-  }
+    ngOnInit() {
+        this.installationSubs = this.installationApi.get().subscribe(res => {
+            this.installations = res['installations'];
+        });
+        this.branchesSubs = this.branchesApi.getParents().subscribe(res => {
+            this.branches = res['branches'];
+        });
+        $(document).ready(function () {
+            let float_inputs = $(".float-input");
+            float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+            float_inputs.on('change',function() {
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+            });
+        });
+    }
 
-  onSubmit(f: NgForm) {
-    let parameter = JSON.stringify(f.value);
-    this.branchesSubs = this.branchesApi.addBranch(parameter).subscribe(res => {
-        if (res ==1 ){
-          this.router.navigate(['/branches']);
-          location.reload();
+    onSubmit(f: NgForm) {
+        let parameter = JSON.stringify(f.value);
+        this.branchesSubs = this.branchesApi.addBranch(parameter).subscribe(res => {
+                if (res ==1 ){
+                    this.router.navigate(['/branches']);
+                    location.reload();
+                }
+            },
+            console.error
+        );
+    }
+
+    changeType() {
+        let type = $("select[name=type]").val();
+        if (type == 0){
+            $("#parent_branch").addClass("d-none");
         }
-      },
-      console.error
-    );
-  }
-
-   changeType() {
-    let type = $("select[name=type]").val();
-    if (type == 0){
-      $("#parent_branch").addClass("d-none");
+        else {
+            $("#parent_branch").removeClass("d-none");
+        }
     }
-    else {
-      $("#parent_branch").removeClass("d-none");
-    }
-  }
 
 }

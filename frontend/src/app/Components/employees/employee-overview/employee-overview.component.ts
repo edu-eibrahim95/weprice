@@ -19,7 +19,6 @@ export class EmployeeOverviewComponent implements OnInit {
     delete = false;
     columnDefs = [];
     rowData = [];
-    height = null;
     employees : Employee[];
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
@@ -35,19 +34,16 @@ export class EmployeeOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.employees.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 330;
-            w = w/7;
             this.columnDefs = [
                 {headerName: '', field: 'check', checkboxSelection:true, width:60},
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
-                {headerName: 'Name', field: 'name', width: w},
-                {headerName: 'Type', field: 'type', width: w},
-                {headerName: 'Hire Date', field: 'hire_date', width: w},
-                {headerName: 'Dismiss Date', field: 'dismiss_date', width: w},
-                {headerName: 'Salary', field: 'salary', width: w},
-                {headerName: 'Extra Salary', field: 'extra_salary', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Name', field: 'name'},
+                {headerName: 'Type', field: 'type'},
+                {headerName: 'Hire Date', field: 'hire_date'},
+                {headerName: 'Dismiss Date', field: 'dismiss_date'},
+                {headerName: 'Salary', field: 'salary'},
+                {headerName: 'Extra Salary', field: 'extra_salary'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.employees.length; i++){
                 this.employees[i]['details'] = {
@@ -64,6 +60,11 @@ export class EmployeeOverviewComponent implements OnInit {
             this.rowData = this.employees;
         });
 
+    }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+        let w = 7/9 * parseInt($('.ag-theme-material').width());
+        $('.details').width(w);
     }
     onGridReady(params) {
         this.gridApi = params.api;

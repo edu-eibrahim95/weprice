@@ -36,7 +36,9 @@ export class ProductClassifDetailsComponent implements OnInit {
         this.taxGridApi = params.api;
         this.taxGridColumnApi = params.columnApi;
     }
-
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     ngOnInit() {
         $(document).ready(function () {
             let w = 8/9 * (parseInt($(document).innerWidth()) - parseInt($('.br-sideleft').width()) - 300);

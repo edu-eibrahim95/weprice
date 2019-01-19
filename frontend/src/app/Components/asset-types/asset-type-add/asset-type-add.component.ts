@@ -5,36 +5,44 @@ import {AccountService} from "../../../Services/account.service";
 import {AssetTypeService} from "../../../Services/asset-type.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-asset-type-add',
-  templateUrl: './asset-type-add.component.html',
-  styleUrls: ['./asset-type-add.component.css']
+    selector: 'app-asset-type-add',
+    templateUrl: './asset-type-add.component.html',
+    styleUrls: ['./asset-type-add.component.css']
 })
 export class AssetTypeAddComponent implements OnInit {
 
-     accountsSubs: Subscription;
+    accountsSubs: Subscription;
     accounts : Account[];
     assetTypesSubs: Subscription;
 
-  constructor( private accountsApi: AccountService, private assetTypesApi : AssetTypeService, private router: Router) { }
+    constructor( private accountsApi: AccountService, private assetTypesApi : AssetTypeService, private router: Router) { }
 
-  ngOnInit() {
-    this.accountsSubs = this.accountsApi.getAccounts().subscribe(res => {
-      this.accounts = res['accounts'];
-    });
-  }
+    ngOnInit() {
+        this.accountsSubs = this.accountsApi.getAccounts().subscribe(res => {
+            this.accounts = res['accounts'];
+        });
+        $(document).ready(function () {
+            let float_inputs = $(".float-input");
+            float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+            float_inputs.on('change',function() {
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+            });
+        });
+    }
 
     onSubmit(f: NgForm) {
-    let parameter = JSON.stringify(f.value);
-    this.assetTypesSubs = this.assetTypesApi.addAssetType(parameter).subscribe(res => {
-        if (res ==1 ){
-          this.router.navigate(['/asset_types']);
-          location.reload();
-        }
-      },
-      console.error
-    );
-  }
+        let parameter = JSON.stringify(f.value);
+        this.assetTypesSubs = this.assetTypesApi.addAssetType(parameter).subscribe(res => {
+                if (res ==1 ){
+                    this.router.navigate(['/asset_types']);
+                    location.reload();
+                }
+            },
+            console.error
+        );
+    }
 
 }

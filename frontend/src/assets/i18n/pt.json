@@ -1,13 +1,39 @@
 {
   "globals": {
+    "project": "WePrice",
+    "nav": "Navigation",
+    "dashboard": "Dashboard",
+    "files": "Files",
+    "branches": "Branches",
+    "cost_centers": "Cost Centers",
+    "accounts": "Accounts",
+    "products": "Products",
+    "finished_products": "Finished Products",
+    "semi_finished_products": "Semi-Finished Products",
+    "employees": "Employees",
+    "assets": "Assets",
+    "taxes": "Taxes",
+    "social_charges": "Social Charges",
+    "parameters": "Parameters",
+    "users": "Users",
+    "transactions": "Transaction",
+    "entries": "Entries",
+    "calcs": "Calculations",
+    "cost_map": "Cost Map",
+    "reports": "Reports",
+    "demonstratives": "Demonstratives",
+    "ebtida": "EBTIDA",
     "sub": "Submit",
     "new": "Add New",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "general": "General",
+    "expenses": "Expenses",
+    "results": "Results",
+    "mass": "Mass Delete"
   },
   "acc_add": {
     "accounts": "Accounts",
-    "acc_new": "Add new Account ",
-    "add_new": "Add a New Account",
+    "new": "Add a New Account",
     "acc_type": "Account Type:",
     "sin": "Sintetic",
     "analit": "Analitic",
@@ -38,8 +64,7 @@
     "ded": "Expense Ded Pct:",
     "recov": "Expense recov pct:",
     "flag": "Revenue Flag:",
-    "ear": "Earning Distrib Flag:",
-    "sub": "Submit"
+    "ear": "Earning Distrib Flag:"
   },
 
   "acc_edit": {
@@ -76,14 +101,11 @@
     "ded": "Expense Ded Pct:",
     "recov": "Expense recov pct:",
     "flag": "Revenue Flag:",
-    "ear": "Earning Distrib Flag:",
-    "sub": "Submit"
+    "ear": "Earning Distrib Flag:"
   },
   "overview": {
     "acount": "Accounts",
-    "list": "list of existing  accounts",
-    "del": "Mass Delete",
-    "new": "Add New"
+    "list": "list of existing  accounts"
   },
   "asset_add": {
     "type":"Asset Types",
@@ -94,8 +116,7 @@
     "descript":"Description:",
     "year":"Years Lifetime:",
     "life":"Residual Lifetime:",
-    "interest":"Interest Year Pct:",
-    "sub":"Submit"
+    "interest":"Interest Year Pct:"
   },
   "asset_edit": {
     "type":"Asset Types",
@@ -106,15 +127,12 @@
     "descript":"Description:",
     "year":"Years Lifetime:",
     "life":"Residual Lifetime:",
-    "interest":"Interest Year Pct:",
-    "sub":"Submit"
+    "interest":"Interest Year Pct:"
   },
   "asset_overview": {
     "type":"Asset Types",
     "list":"list of existing  asset types",
-    "asset":"Assets",
-    "mass":"Mass Delete",
-    "new":"Add New"
+    "asset":"Assets"
   },
   "assets_add": {
     "asset": "Assets",
@@ -129,9 +147,7 @@
     "date": " Acquisition Date:",
     "start": "Start Depr Date:",
     "expire": "Expiration Depr Date:",
-    "dep": "Depreciable Flag  :",
-    "sub": "Submit"
-
+    "dep": "Depreciable Flag  :"
   },
   "assets_edit": {
     "assets": "Assets",
@@ -145,14 +161,12 @@
     "date": "Acquisition Date:",
     "start": "Start Depr Date:",
     "expire": "Expiration Depr Date:",
-    "flag": "Depreciable Flag  :",
-    "sub": "Submit"
+    "flag": "Depreciable Flag  :"
   },
   "assets_overview": {
     "asset": "Assets",
     "list": "list of existing  Assets",
     "mass": "Mass Delete",
-    "add_new": "Add New",
     "manage": "Manage Asset Types",
     "local": "Manage Locals"
   },
@@ -188,9 +202,7 @@
     "day": "Work days per month:",
     "stock": "Months Stock Quantity:",
     "rate": "Raw Material Rate:",
-    "rec": "Days Rec:",
-    "sub": "Submit"
-
+    "rec": "Days Rec:"
   },
   "branche": {
     "name": "Branches",
@@ -208,14 +220,11 @@
     "day": "Work days per month:",
     "stock": "Months Stock Quantity:",
     "raw": "Raw Material Rate:",
-    "rec": "Days Rec:",
-    "sub": "Submit"
+    "rec": "Days Rec:"
   },
   "brancho": {
     "bran": "Branches",
-    "list": "list of existing branches",
-    "mess": "Mass Delete",
-    "new": "Add New"
+    "list": "list of existing branches"
   },
   "costa": {
     "cost": "Cost Centers",
@@ -231,8 +240,7 @@
     "hours": "Work hours per day:",
     "days": "Work days per month:",
     "mach": "Machines Quantity:",
-    "sales": "Sales Revenue:",
-    "sub": "Submit"
+    "sales": "Sales Revenue:"
   },
   "coste": {
     "cost": "Cost Centers",
@@ -247,14 +255,11 @@
     "hours": "Work hours per day:",
     "days": "Work days per month:",
     "mach": "Machines Quantity:",
-    "sales": "Sales Revenue:",
-    "sub": "Submit"
+    "sales": "Sales Revenue:"
   },
   "costo": {
     "cost": "Cost Centers",
-    "list": "list of existing cost centers",
-    "mass": "Mass Delete",
-    "new": "Add New"
+    "list": "list of existing cost centers"
   },
   "employa": {
     "employ":"Employees",
@@ -268,8 +273,7 @@
     "hire":"Hire Date:",
     "diss":"Dismiss Date:",
     "salary":"Salary:",
-    "extra":"Extra Salary:",
-    "sub":"Submit"
+    "extra":"Extra Salary:"
   },
   "employe": {
     "employ":"Employees",
@@ -282,21 +286,16 @@
     "hire":"Hire Date:",
     "diss":"Dismiss Date:",
     "salary":"Salary:",
-    "extra":"Extra Salary:",
-    "sub":"Submit"
-
-
+    "extra":"Extra Salary:"
   },
   "employo": {
     "employ":"Employees",
-    "list":"list of existing  Employees",
-    "mass":"Mass Delete",
-    "new":"Add New"
+    "list":"list of existing  Employees"
   },
   "home": {
-    "title": "Dashboard PT",
+    "title": "Dashboard",
     "SELECT": "Change language",
-    "we":"WePrice the most accurate",
+    "we": "Weprice is the most accurate place for cost management",
     "set":"Settings",
     "branch":"Select Branch",
     "subm":"Submit",
@@ -317,21 +316,18 @@
     "local":"Locals",
     "new":"Add new Local",
     "anew":"Add a New Local",
-    "descript":"Description:",
-    "sub":"Submit"
+    "descript":"Description:"
   },
   "locale": {
     "local":"Locals",
     "edit":"Add new Local",
-    "descript":"Description:",
-    "sub":"Submit"
+    "descript":"Description:"
   },
   "localo": {
     "local":"Locals",
     "list":"list of existing  locals",
-    "asset":"Assets",
-    "mass":"Mass Delete",
-    "new":"Add New"
+    "asset":"Assets"
+
   },
   "parama": {
     "param": "Parameters",
@@ -339,25 +335,19 @@
     "new": "Add a New Parameter",
     "attr": "Attribute:",
     "des": "Description:",
-    "def": "Default Value:",
-    "sub": "Submit"
+    "def": "Default Value:"
   },
   "parame": {
     "param": "Parameters",
     "edit": "Edit Parameter",
     "attr": "Attribute:",
     "des": "Description:",
-    "def": "Default Value:",
-    "sub": "Submit"
+    "def": "Default Value:"
   },
   "paramo": {
     "param": "Parameters",
-    "list":"list of existing  Parameters",
-    "mass":"Mass Delete",
-    "new":"Add New"
-  },
-  "partial": {
-    "mass":"Mass Delete"
+    "list":"list of existing  Parameters"
+
   },
   "classa": {
     "prod":"ProductClassifs",
@@ -370,8 +360,7 @@
     "res":"Rescale",
     "pack":"Packing",
     "des":"Description:",
-    "init":"Initial Flag  :",
-    "sub":"Submit"
+    "init":"Initial Flag  :"
   },
   "classe": {
     "prod":"ProductClassifs",
@@ -383,16 +372,13 @@
     "res":"Rescale",
     "pack":"Packing",
     "des":"Description:",
-    "init":"Initial Flag  :",
-    "sub":"Submit"
-
+    "init":"Initial Flag  :"
   },
   "classo": {
     "prod":" Product Classifs",
     "list":"list of existing  Product Classifs",
-    "prodo":"Products",
-    "mass":"Mass Delete",
-    "new":"Add New"
+    "prodo":"Products"
+
   },
   "producta": {
     "prod":" Products",
@@ -415,8 +401,7 @@
     "currency": "Currency Type:",
     "cost": "Cost Price:",
     "sale": "Sale Price:",
-    "day": "Day Sterm Recpt:",
-    "sub": "Submit"
+    "day": "Day Sterm Recpt:"
   },
   "producte": {
     "prod":" Products",
@@ -439,28 +424,22 @@
     "currency": "Currency Type:",
     "cost": "Cost Price:",
     "sale": "Sale Price:",
-    "day": "Day Sterm Recpt:",
-    "sub": "Submit"
-
+    "day": "Day Sterm Recpt:"
   },
   "producto": {
     "prod":" Products",
     "list":"list of existing  Products",
-    "mass":"Mass Delete",
-    "manage": "Manage Product Classifs",
-    "new":"Add New"
+    "manage": "Manage Product Classifs"
   },
   "sociala": {
-    "tax": "Taxes",
-    "new": "Add new tax",
-    "add": "Add a New Branch",
+    "soci": "Social Charges",
+    "new": "Add new Social Charge",
     "acc": " Account:",
     "select": "Select Account",
     "des": "Description:",
     "init": "Initial Date:",
     "final": "Final Date:",
-    "charge": "Charge Pct:",
-    "sub":"Submit"
+    "charge": "Charge Pct:"
   },
   "sociale": {
     "soci": "Social Charges",
@@ -470,14 +449,11 @@
     "des": "Description:",
     "init": "Initial Date:",
     "final": "Final Date:",
-    "charge": "Charge Pct:",
-    "sub":"Submit"
+    "charge": "Charge Pct:"
   },
   "socialo": {
     "social":"Social Charges",
-    "list":"list of existing  social charges",
-    "mass":"Mass Delete",
-    "new":"Add New"
+    "list":"list of existing  social charges"
   },
   "spota": {
     "spot":"Spots",
@@ -485,8 +461,7 @@
     "add": "Add a New Spot",
     "name": "Name:",
     "ip": "Ip Address:",
-    "nic": "Nic Address:",
-    "sub": "Submit"
+    "nic": "Nic Address:"
   },
   "spote": {
     "spot":"Spots",
@@ -494,30 +469,26 @@
     "add": "Add a New Spot",
     "name": "Name:",
     "ip": "Ip Address:",
-    "nic": "Nic Address:",
-    "sub": "Submit"
+    "nic": "Nic Address:"
   },
   "spoto": {
     "spot":"Spots",
     "list":"list of existing  spots",
-    "user":"Users",
-    "mass":"Mass Delete",
-    "new":"Add New"
+    "user":"Users"
   },
-  "taxo": {
+  "taxa": {
     "tax": "Taxes",
     "new": "Add new tax",
-    "add": "Add a New Branch",
+    "add": "Add a New Tax",
     "acc": "Account:",
     "select": "Select Account",
     "final": "Final Date:",
     "name": "NAME :",
     "init": "Initial Date:",
     "purch":"Purchase Pct:",
-    "sale":"Sale Pct:",
-    "sub": "Submit"
+    "sale":"Sale Pct:"
   },
-  "taxo": {
+  "taxe": {
     "tax": "Taxes",
     "edit": "Edit tax  ",
     "acc": "Account:",
@@ -526,15 +497,11 @@
     "name": "NAME :",
     "init": "Initial Date:",
     "purch":"Purchase Pct:",
-    "sale":"Sale Pct:",
-    "sub": "Submit"
-
+    "sale":"Sale Pct:"
   },
   "taxo": {
     "tax":"Taxes",
-    "list":"list of existing  taxes",
-    "mass":"Mass Delete",
-    "new":"Add New"
+    "list":"list of existing  taxes"
   },
   "usera": {
     "user":"Users",
@@ -546,8 +513,7 @@
     "email":"Email:",
     "act":" Active Flag:",
     "init":"Initial Date:",
-    "final":"Final Date:",
-    "sub":"Submit"
+    "final":"Final Date:"
   },
   "usere": {
     "user":"Users",
@@ -558,15 +524,11 @@
     "email":"Email:",
     "act":" Active Flag:",
     "init":"Initial Date:",
-    "final":"Final Date:",
-    "sub":"Submit"
-
+    "final":"Final Date:"
   },
   "usero": {
     "user":"Users",
     "list":"list of existing  Users",
-    "mass":"Mass Delete",
-    "new":"Add New",
     "manage":"Manage Spots"
   }
 }

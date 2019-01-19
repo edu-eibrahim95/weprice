@@ -6,9 +6,9 @@ import {ParameterService} from "../../../Services/parameter.service";
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-parameter-overview',
-  templateUrl: './parameter-overview.component.html',
-  styleUrls: ['./parameter-overview.component.css']
+    selector: 'app-parameter-overview',
+    templateUrl: './parameter-overview.component.html',
+    styleUrls: ['./parameter-overview.component.css']
 })
 export class ParameterOverviewComponent implements OnInit {
 
@@ -18,7 +18,6 @@ export class ParameterOverviewComponent implements OnInit {
     delete = false;
     columnDefs = [];
     rowData = [];
-    height = null;
     parameters : Parameter[];
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
@@ -33,14 +32,11 @@ export class ParameterOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.parameters.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 220;
-            w = w/4;
             this.columnDefs = [
-                {headerName: 'Attribute', field: 'attribute', width: w},
-                {headerName: 'Description', field: 'description', width: w },
-                {headerName: 'Default Value', field: 'default_value', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Attribute', field: 'attribute'},
+                {headerName: 'Description', field: 'description' },
+                {headerName: 'Default Value', field: 'default_value'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.parameters.length; i++){
                 this.parameters[i]['details'] = {'id': i,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
@@ -53,6 +49,9 @@ export class ParameterOverviewComponent implements OnInit {
             this.rowData = this.parameters;
         });
 
+    }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
     }
     onGridReady(params) {
         this.gridApi = params.api;
@@ -92,6 +91,6 @@ export class ParameterOverviewComponent implements OnInit {
         }
         return false;
     }
-    
+
 
 }

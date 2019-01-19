@@ -6,6 +6,7 @@ import {AccountService} from "../../../Services/account.service";
 import {TaxService} from "../../../Services/tax.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-tax-edit',
@@ -25,6 +26,13 @@ export class TaxEditComponent implements OnInit {
         });
         this.taxesSubs = this.taxesApi.getTax(this.route.params['value']['rule_id']).subscribe(res => {
             this.tax = res['tax'];
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+            });
         });
     }
 

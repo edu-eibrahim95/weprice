@@ -1,35 +1,37 @@
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel" xmlns="">
-  <div class="pd-30">
-    <h4 class="tx-gray-800 mg-b-5">{{ 'classa.prod' | translate }}</h4>
-    <p class="mg-b-0">{{ 'classo.list' | translate }} </p>
-  </div><!-- d-flex -->
-  <div class="br-pagebody">
-    <div class="br-section-wrapper">
-      <div class="text-left">
-        <a routerLink="/products" class="btn btn-primary"><i class="fa fa-long-arrow-left fa-lg"><span style="font-family: Roboto, 'Helvetica Neue', Arial, sans-serif">   {{ 'classo.prodo' | translate }}</span></i></a>
-        <div class="float-right">
-          <a href="#" (click)="massDeleteProductClassif()" class="btn btn-danger mg-r-10" *ngIf="delete">{{ "globals.mass" | translate }}</a>
-          <a routerLink="/product_classifs/add" class="btn btn-success" *ngIf="add">{{ 'globals.new' | translate }}</a>
+    <div class="pd-30">
+        <h4 class="tx-gray-800 mg-b-5">{{ 'classa.prod' | translate }}</h4>
+        <p class="mg-b-0">{{ 'classo.list' | translate }} </p>
+    </div><!-- d-flex -->
+    <div class="br-pagebody">
+        <div class="br-section-wrapper">
+            <div class="text-left">
+                <a routerLink="/products" class="btn btn-primary"><i class="fa fa-long-arrow-left fa-lg"><span style="font-family: Roboto, 'Helvetica Neue', Arial, sans-serif">   {{ 'classo.prodo' | translate }}</span></i></a>
+                <div class="float-right">
+                    <a href="#" (click)="massDeleteProductClassif()" class="btn btn-danger mg-r-10" *ngIf="delete">{{ "globals.mass" | translate }}</a>
+                    <a routerLink="/product_classifs/add" class="btn btn-success" *ngIf="add">{{ 'globals.new' | translate }}</a>
+                </div>
+            </div>
+            <hr>
+            <ag-grid-angular
+                    style="width: 100%;"
+                    class="ag-theme-material"
+                    [rowData]="rowData"
+                    [columnDefs]="columnDefs"
+                    [enableSorting]="true"
+                    [enableFilter]="true"
+                    [frameworkComponents]="frameworkComponents"
+                    rowSelection="multiple"
+                    [rowMultiSelectWithClick]="true"
+                    (gridReady)="onGridReady($event)"
+                    (firstDataRendered)="onFirstDataRendered($event)"
+                    (gridSizeChanged)="onFirstDataRendered($event)"
+                    domLayout='autoHeight'
+                    pagination="true"
+                    paginationPageSize="10"
+            >
+            </ag-grid-angular>
         </div>
-      </div>
-      <hr>
-      <ag-grid-angular
-              style="width: 100%;"
-              class="ag-theme-material"
-              [rowData]="rowData"
-              [columnDefs]="columnDefs"
-              [enableSorting]="true"
-              [enableFilter]="true"
-              [frameworkComponents]="frameworkComponents"
-              rowSelection="multiple"
-              [rowMultiSelectWithClick]="true"
-              (gridReady)="onGridReady($event)"
-              domLayout='autoHeight'
-              pagination="true"
-              paginationPageSize="10"
-      >
-      </ag-grid-angular>
     </div>
-  </div>
 </div>

@@ -21,7 +21,6 @@ export class ProductOverviewComponent implements OnInit{
     delete = false;
     columnDefs = [];
     rowData = [];
-    height = null;
     products : Product[];
     type: null;
     frameworkComponents = {
@@ -39,22 +38,19 @@ export class ProductOverviewComponent implements OnInit{
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.products.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 330;
-            w = w/10;
             this.columnDefs = [
                 {headerName: '', field: 'check', checkboxSelection:true, width:60},
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
-                {headerName: 'Name', field: 'name', width: w},
-                {headerName: 'Description', field: 'description', width: w },
-                {headerName: 'Type', field: 'type', width: w},
-                {headerName: 'Product Group', field: 'product_group', width: w},
-                {headerName: 'Internal Code', field: 'internal_code', width: w},
-                {headerName: 'Unit', field: 'unit', width: w},
-                {headerName: 'Currency Type', field: 'currency_type', width: w},
-                {headerName: 'Cost Price', field: 'cost_price', width: w},
-                {headerName: 'Sale Price', field: 'sale_price', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Name', field: 'name'},
+                {headerName: 'Description', field: 'description' },
+                {headerName: 'Type', field: 'type'},
+                {headerName: 'Product Group', field: 'product_group'},
+                {headerName: 'Internal Code', field: 'internal_code'},
+                {headerName: 'Unit', field: 'unit'},
+                {headerName: 'Currency Type', field: 'currency_type'},
+                {headerName: 'Cost Price', field: 'cost_price'},
+                {headerName: 'Sale Price', field: 'sale_price'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.products.length; i++){
                 this.products[i]['details'] = {
@@ -79,6 +75,11 @@ export class ProductOverviewComponent implements OnInit{
             }
         });
         this.init()
+    }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+        let w = 7/9 * parseInt($('.ag-theme-material').width());
+        $('.details').width(w);
     }
     onGridReady(params) {
         this.gridApi = params.api;

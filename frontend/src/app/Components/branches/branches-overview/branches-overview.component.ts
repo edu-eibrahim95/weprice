@@ -16,7 +16,6 @@ export class BranchesOverviewComponent implements OnInit {
     branches : Branch[];
     columnDefs = [];
     rowData = [];
-    height = null;
     add = false;
     edit = false;
     delete = false;
@@ -27,26 +26,31 @@ export class BranchesOverviewComponent implements OnInit {
     private gridColumnApi;
     constructor(private branchesApi: BranchService, private pipe: TranslateService ) { }
 
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
+    onGridReady(params) {
+        this.gridApi = params.api;
+        this.gridColumnApi = params.columnApi;
+    }
+
     ngOnInit() {
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
             this.branches = res['branches'];
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.branches.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 220;
-            w = w/10;
             this.columnDefs = [
-                {headerName:  this.pipe.get('home.title')['value'], field: 'name', width: w},
-                {headerName: 'Area', field: 'area', width: w },
-                {headerName: 'Monthly AVG QT', field: 'months_avg_qt', width: w},
-                {headerName: 'Monthly Interest', field: 'interest_month_pct', width: w},
-                {headerName: 'Work Hours / Day', field: 'workhours_day_qt', width: w},
-                {headerName: 'Work Days / Month', field: 'workdays_month_qt', width: w},
-                {headerName: 'Monthly Stock QT', field: 'months_stock_qt', width: w},
-                {headerName: 'Raw Material Rate', field: 'raw_material_rate_pct', width: w},
-                {headerName: 'Days Rec', field: 'days_rec_qt', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName:  this.pipe.get('home.title')['value'], field: 'name'},
+                {headerName: 'Area', field: 'area' },
+                {headerName: 'Monthly AVG QT', field: 'months_avg_qt'},
+                {headerName: 'Monthly Interest', field: 'interest_month_pct'},
+                {headerName: 'Work Hours / Day', field: 'workhours_day_qt'},
+                {headerName: 'Work Days / Month', field: 'workdays_month_qt'},
+                {headerName: 'Monthly Stock QT', field: 'months_stock_qt'},
+                {headerName: 'Raw Material Rate', field: 'raw_material_rate_pct'},
+                {headerName: 'Days Rec', field: 'days_rec_qt'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.branches.length; i++){
                 this.branches[i]['actions'] = {
@@ -72,10 +76,7 @@ export class BranchesOverviewComponent implements OnInit {
         }
         return false;
     }
-    onGridReady(params) {
-        this.gridApi = params.api;
-        this.gridColumnApi = params.columnApi;
-    }
+
     massDeleteBranch() {
         let nodes = this.gridApi.getSelectedNodes();
         if (nodes.length == 0)

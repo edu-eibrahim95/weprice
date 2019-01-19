@@ -38,7 +38,9 @@ export class EmployeeDetailsComponent implements OnInit {
         this.employeeGridApi = params.api;
         this.employeeGridColumnApi = params.columnApi;
     }
-
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+    }
     agInit(params: any): void {
         this.gridApi = params.value.gridApi;
         this.gridColumnApi = params.value.gridColumnApi;

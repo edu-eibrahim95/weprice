@@ -22,7 +22,13 @@ export class CostCenterAddComponent implements OnInit {
     ngOnInit() {
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
             this.branches = res['branches'];
-            console.log(this.branches);
+        });
+        $(document).ready(function () {
+            let float_inputs = $(".float-input");
+            float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+            float_inputs.on('change',function() {
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+            });
         });
     }
 
@@ -44,6 +50,12 @@ export class CostCenterAddComponent implements OnInit {
         }
         else {
             $('.direct').addClass('d-none');
+        }
+        if (s == 3){
+            $('.comm').removeClass('d-none');
+        }
+        else {
+            $('.comm').addClass('d-none');
         }
     }
 

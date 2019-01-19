@@ -7,9 +7,9 @@ import * as $ from 'jquery';
 import {ProductClassifDetailsComponent} from "../../partials/product-classif-details/product-classif-details.component";
 
 @Component({
-  selector: 'app-product-classif-overview',
-  templateUrl: './product-classif-overview.component.html',
-  styleUrls: ['./product-classif-overview.component.css']
+    selector: 'app-product-classif-overview',
+    templateUrl: './product-classif-overview.component.html',
+    styleUrls: ['./product-classif-overview.component.css']
 })
 export class ProductClassifOverviewComponent implements OnInit {
 
@@ -20,7 +20,6 @@ export class ProductClassifOverviewComponent implements OnInit {
     delete = false;
     columnDefs = [];
     rowData = [];
-    height = null;
     productClassifs : ProductClassif[];
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
@@ -36,16 +35,13 @@ export class ProductClassifOverviewComponent implements OnInit {
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            this.height = this.productClassifs.length * 48 + 60;
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 330;
-            w = w/4;
             this.columnDefs = [
                 {headerName: '', field: 'check', checkboxSelection:true, width:60},
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
-                {headerName: 'Product Group', field: 'product_group', width: w},
-                {headerName: 'Description', field: 'description', width: w },
-                {headerName: 'Initial Flag', field: 'initial_flag', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Product Group', field: 'product_group'},
+                {headerName: 'Description', field: 'description' },
+                {headerName: 'Initial Flag', field: 'initial_flag'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.productClassifs.length; i++){
                 this.productClassifs[i]['details'] = {
@@ -64,6 +60,11 @@ export class ProductClassifOverviewComponent implements OnInit {
             this.rowData = this.productClassifs;
         });
 
+    }
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+        let w = 7/9 * parseInt($('.ag-theme-material').width());
+        $('.details').width(w);
     }
     onGridReady(params) {
         this.gridApi = params.api;

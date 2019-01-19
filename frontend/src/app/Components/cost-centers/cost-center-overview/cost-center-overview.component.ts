@@ -28,26 +28,32 @@ export class CostCenterOverviewComponent implements OnInit {
         detailsFormatterComponent: DetailsFormatterComponent
     };
     constructor(private costCenterApi: CostCentersService) { }
-
+    onFirstDataRendered(params) {
+        params.api.sizeColumnsToFit();
+        let w = 7/9 * parseInt($('.ag-theme-material').width());
+        $('.details').width(w);
+    }
+    onGridReady(params) {
+        this.gridApi = params.api;
+        this.gridColumnApi = params.columnApi;
+    }
     ngOnInit() {
         this.costCenterSubs = this.costCenterApi.getCostCenters().subscribe(res => {
             this.cost_centers = res['cost_centers'];
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
-            let w = $(document).innerWidth() - $('.br-sideleft').width() - 330;
-            w = w/8;
             this.columnDefs = [
                 {headerName: '', field: 'check', checkboxSelection:true, width:60},
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
-                {headerName: 'Cost Center', field: 'name', width: w},
-                {headerName: 'Area', field: 'area', width: w },
-                {headerName: 'Work Hours / Day', field: 'workhours_qt', width: w},
-                {headerName: 'Work Days / Month', field: 'workdays_qt', width: w},
-                {headerName: 'Machines QT', field: 'machines_qt', width: w},
-                {headerName: 'Sales Revenue', field: 'sales_revenue', width: w},
-                {headerName: 'Type', field: 'type', width: w},
-                {headerName: 'Actions', field: 'actions', width: w, cellRenderer: 'actionsFormatterComponent'},
+                {headerName: 'Cost Center', field: 'name'},
+                {headerName: 'Area', field: 'area' },
+                {headerName: 'Work Hours / Day', field: 'workhours_qt'},
+                {headerName: 'Work Days / Month', field: 'workdays_qt'},
+                {headerName: 'Machines QT', field: 'machines_qt'},
+                {headerName: 'Sales Revenue', field: 'sales_revenue'},
+                {headerName: 'Type', field: 'type'},
+                {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.cost_centers.length; i++){
                 this.cost_centers[i]['details'] = {'row_id': i, 'id': this.cost_centers[i].id,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
@@ -60,10 +66,6 @@ export class CostCenterOverviewComponent implements OnInit {
             this.rowData = this.cost_centers;
         });
 
-    }
-    onGridReady(params) {
-        this.gridApi = params.api;
-        this.gridColumnApi = params.columnApi;
     }
 
     deleteCostCenter(id, type, self) {

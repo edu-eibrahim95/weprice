@@ -21,6 +21,8 @@
               [frameworkComponents]="frameworkComponents"
               rowSelection="multiple"
               (gridReady)="onGridReady($event)"
+              (firstDataRendered)="onFirstDataRendered($event)"
+              (gridSizeChanged)="onFirstDataRendered($event)"
               domLayout='autoHeight'
               pagination="true"
               paginationPageSize="10"
