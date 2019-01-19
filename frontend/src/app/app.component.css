@@ -79,3 +79,6 @@
 /deep/ .ag-theme-fresh .ag-header {
   font-size: 12px;
 }
+/deep/ .has-error {
+  background: lightcoral !important;
+}

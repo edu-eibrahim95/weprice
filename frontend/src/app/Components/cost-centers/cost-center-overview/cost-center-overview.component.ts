@@ -5,7 +5,6 @@ import {CostCentersService} from "../../../Services/cost-centers.service";
 import {Subscription} from "rxjs";
 import * as $ from 'jquery';
 import {DetailsFormatterComponent} from "../../partials/cost-center-details/cost-center-details.component";
-
 @Component({
     selector: 'app-cost-center-over-view',
     templateUrl: './cost-center-overview.component.html',

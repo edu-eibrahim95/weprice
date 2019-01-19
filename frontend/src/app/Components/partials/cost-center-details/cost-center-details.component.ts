@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as $ from 'jquery';
 import {Subscription} from "rxjs";
 import {CostCentersService} from "../../../Services/cost-centers.service";
 import {ActionsFormatterComponent} from "../action-cell-rendrer/action-cell-renderer.component";
-
+import swal from 'sweetalert2';
 @Component({
     selector: 'cost-center-details',
     templateUrl: './cost-center-details.component.html'
 })
 
 export class DetailsFormatterComponent implements  OnInit{
+
     master_raw_id = null;
     cost_center_id = null;
     node = null;
@@ -30,6 +31,7 @@ export class DetailsFormatterComponent implements  OnInit{
     private ratioGridColumnApi;
     private taxGridColumnApi;
     private comGridColumnApi;
+    private rowClassRules;
 
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
@@ -70,10 +72,20 @@ export class DetailsFormatterComponent implements  OnInit{
     }
 
     ngOnInit() {
+        // console.log(this.deleteSwal);
+        // swal("Simple Message");
         $(document).ready(function () {
             let w = 8/9 * (parseInt($(document).innerWidth()) - parseInt($('.br-sideleft').width()) - 300);
             $('mat-tab-group').width(w)
         })
+
+        this.rowClassRules = {
+            "has-error": function(params) {
+                var error = params.data.error;
+                return error == 1;
+            },
+            // "sick-days-breach": "data.sickDays > 8"
+        };
     }
 
     agInit(params: any): void {
@@ -317,6 +329,24 @@ export class DetailsFormatterComponent implements  OnInit{
         let parameters = {};
         if (type == 'ratio') {
             let row = self.ratioRowData.filter(row => row.id == id)[0];
+            let ratings = self.ratioRowData.map(row => row.rating_pct);
+            let sum = 0;
+            if (id == 0)
+                sum = ratings.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
+            else {
+                ratings.shift();
+                sum = ratings.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
+            }
+            if (sum > 100){
+                swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Cannot save, Ratings sum cannot exceed 100%!',
+                });
+                row.error = 1;
+                self.ratioGridApi.setRowData(self.ratioRowData);
+                return false;
+            }
             parameters = {'costcenter_part_id': row.name, 'rating_pct': row.rating_pct, 'name': row.name};
         }
         else if (type == 'tax') {

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
@@ -179,6 +180,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HttpClientModule,
     AgGridModule.withComponents([]),
     BrowserAnimationsModule,
+      SweetAlert2Module.forRoot(),
     MatTabsModule,
        TranslateModule.forRoot({
       loader: {

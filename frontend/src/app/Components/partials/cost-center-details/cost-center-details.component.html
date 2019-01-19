@@ -1,5 +1,6 @@
 <div style="overflow: visible">
     <button [class]="'btn btn-link collapsed-toggle details-toggle-'+master_raw_id" (click)="toggleDetails()"><i class="fa fa-angle-down"></i></button>
+
     <mat-tab-group [id]="'tab-details-'+master_raw_id" class="invisible details" [selectedIndex]="0" dynamicHeight>
         <mat-tab label="Cost Center Ratio">
             <div>
@@ -15,6 +16,7 @@
                         domLayout='autoHeight'
                         [frameworkComponents]="frameworkComponents"
                         rowSelection="multiple"
+                        [rowClassRules]="rowClassRules"
                         (firstDataRendered)="onFirstDataRendered($event)"
                         (gridSizeChanged)="onFirstDataRendered($event)"
                         (gridReady)="onRatioGridReady($event)">
@@ -35,6 +37,7 @@
                         [columnDefs]="taxesColumnDefs"
                         domLayout='autoHeight'
                         rowSelection="multiple"
+                        [rowClassRules]="rowClassRules"
                         (firstDataRendered)="onFirstDataRendered($event)"
                         (gridSizeChanged)="onFirstDataRendered($event)"
                         (gridReady)="onTaxGridReady($event)">
@@ -54,6 +57,7 @@
                         [columnDefs]="comsColumnDefs"
                         [frameworkComponents]="frameworkComponents"
                         domLayout='autoHeight'
+                        [rowClassRules]="rowClassRules"
                         (firstDataRendered)="onFirstDataRendered($event)"
                         (gridSizeChanged)="onFirstDataRendered($event)"
                         (gridReady)="onComGridReady($event)"
