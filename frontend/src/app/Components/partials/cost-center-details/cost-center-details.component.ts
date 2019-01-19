@@ -31,7 +31,7 @@ export class DetailsFormatterComponent implements  OnInit{
     private ratioGridColumnApi;
     private taxGridColumnApi;
     private comGridColumnApi;
-    private rowClassRules;
+    public rowClassRules;
 
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
