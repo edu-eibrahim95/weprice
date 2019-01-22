@@ -96,8 +96,24 @@ export class ProductDetailsComponent implements OnInit {
                                 return ProductDetailsComponent.lookupKey(c.taxes_options, params.newValue);
                             }
                         },
-                        {headerName: 'On Purchase %', field: 'purchase_pct', editable: true, width: 100},
-                        {headerName: 'On Sale %', field: 'sale_pct', editable: true, width: 100},
+                        {headerName: 'On Purchase %', field: 'purchase_pct', editable: true, width: 100, valueSetter: function(params) {
+                                // Value is legit - set it and signal the value has been changed/set
+                                if (params.newValue > 0) {
+                                    params.data[params.colDef.field] = params.newValue;
+                                    return true;
+                                }
+                                // Illegal value - signal no change
+                                return false;
+                            }},
+                        {headerName: 'On Sale %', field: 'sale_pct', editable: true, width: 100, valueSetter: function(params) {
+                                // Value is legit - set it and signal the value has been changed/set
+                                if (params.newValue > 0) {
+                                    params.data[params.colDef.field] = params.newValue;
+                                    return true;
+                                }
+                                // Illegal value - signal no change
+                                return false;
+                            }},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
                     ];
                     this.rowData = this.rowData.concat(res['products']);

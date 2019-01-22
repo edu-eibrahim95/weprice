@@ -5,6 +5,7 @@ import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/acti
 import {ProductClassifService} from "../../../Services/product-classif.service";
 import * as $ from 'jquery';
 import {ProductClassifDetailsComponent} from "../../partials/product-classif-details/product-classif-details.component";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-product-classif-overview',
@@ -27,7 +28,7 @@ export class ProductClassifOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private productClassifApi: ProductClassifService) { }
+    constructor(private productClassifApi: ProductClassifService,private  translate: TranslateService) { }
 
     ngOnInit() {
         this.productClassifSubs = this.productClassifApi.getProductClassifs().subscribe(res => {
@@ -38,7 +39,24 @@ export class ProductClassifOverviewComponent implements OnInit {
             this.columnDefs = [
                 {headerName: '', field: 'check', checkboxSelection:true, width:60},
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
-                {headerName: 'Product Group', field: 'product_group'},
+                {headerName: 'Product Group', field: 'product_group', cellRendererParams: {c: this}, cellRenderer: function(params) {
+                        let c = params.c;
+                        if (params.value == 0){
+                            return c.translate.instant("classa.raw")
+                        }
+                        else if (params.value == 1){
+                            return c.translate.instant("classa.finish")
+                        }
+                        else if (params.value == 2){
+                            return c.translate.instant("classa.semi")
+                        }
+                        else if (params.value == 3){
+                            return c.translate.instant("classa.res")
+                        }
+                        else if (params.value == 4){
+                            return c.translate.instant("classa.pack")
+                        }
+                    }},
                 {headerName: 'Description', field: 'description' },
                 {headerName: 'Initial Flag', field: 'initial_flag'},
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},

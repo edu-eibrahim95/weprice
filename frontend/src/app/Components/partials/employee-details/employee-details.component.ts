@@ -98,8 +98,24 @@ export class EmployeeDetailsComponent implements OnInit {
                                 return EmployeeDetailsComponent.lookupKey(c.cost_center_options, params.newValue);
                             }
                         },
-                        {headerName: 'Rating %', field: 'rating_pct',width: 70,  editable: true},
-                        {headerName: 'Direct Labor %', field: 'direct_labor_pct', width: 100, editable: true},
+                        {headerName: 'Rating %', field: 'rating_pct',width: 70,  editable: true, valueSetter: function(params) {
+                                // Value is legit - set it and signal the value has been changed/set
+                                if (params.newValue > 0) {
+                                    params.data[params.colDef.field] = params.newValue;
+                                    return true;
+                                }
+                                // Illegal value - signal no change
+                                return false;
+                            }},
+                        {headerName: 'Direct Labor %', field: 'direct_labor_pct', width: 100, editable: true, valueSetter: function(params) {
+                                // Value is legit - set it and signal the value has been changed/set
+                                if (params.newValue > 0) {
+                                    params.data[params.colDef.field] = params.newValue;
+                                    return true;
+                                }
+                                // Illegal value - signal no change
+                                return false;
+                            }},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
                     ];
                     this.rowData = this.rowData.concat(res['cost_centers']);

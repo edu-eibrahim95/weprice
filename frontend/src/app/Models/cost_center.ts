@@ -3,6 +3,8 @@ export class CostCenter {
   name: string;
   type: string;
   parent_id : number;
+  day_rec_qt : number;
+  abs_order : number;
   area : number;
   workhours_qt : number;
   workdays_qt : number;

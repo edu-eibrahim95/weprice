@@ -5,6 +5,7 @@ import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/acti
 import {AccountService} from "../../../Services/account.service";
 import * as $ from 'jquery';
 import {AccountDetailsComponent} from "../../partials/account-details/account-details.component";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-account-overview',
@@ -27,7 +28,7 @@ export class AccountOverviewComponent implements OnInit {
         detailsFormatterComponent: AccountDetailsComponent
     };
 
-    constructor(private accountsApi: AccountService) { }
+    constructor(private accountsApi: AccountService,  private translate: TranslateService) { }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
         let w = 7/9 * parseInt($('.ag-theme-material').width());
@@ -49,7 +50,15 @@ export class AccountOverviewComponent implements OnInit {
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
                 {headerName: 'Code', field: 'code'},
                 {headerName: 'Description', field: 'description' },
-                {headerName: 'Type', field: 'type'},
+                {headerName: 'Type', field: 'type', cellRendererParams: {c: this}, cellRenderer: function(params) {
+                        let c = params.c;
+                        if (params.value == 0){
+                            return c.translate.instant("acc_add.sin")
+                        }
+                        else if (params.value == 1){
+                            return c.translate.instant("acc_add.analit")
+                        }
+                    }},
                 {headerName: 'Nat', field: 'nat'},
                 {headerName: 'Exp Type', field: 'expense_type'},
                 {headerName: 'Abs Type', field: 'expense_abs_type'},

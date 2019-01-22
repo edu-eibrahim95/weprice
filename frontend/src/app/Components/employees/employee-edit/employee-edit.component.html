@@ -54,7 +54,7 @@
               {{ "employe.salary" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number" [ngModel]="employee.salary"
+              <input class="form-control float-input" min="0"  step="0.01" type="number" [ngModel]="employee.salary"
                      name="salary" #salary="ngModel" ngModel placeholder="Enter salary">
             </div>
           </div><!-- row -->
@@ -63,7 +63,7 @@
               {{ "employe.extra" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number" [ngModel]="employee.extra_salary"
+              <input class="form-control float-input" min="0"  step="0.01" type="number" [ngModel]="employee.extra_salary"
                      name="extra_salary" #extra_salary="ngModel" ngModel placeholder="Enter extra_salary">
             </div>
           </div><!-- row -->

@@ -105,7 +105,7 @@
                             {{ "acc_edit.bgd_entry" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <input class="form-control float-input" step="0.01"  type="number" [ngModel]="account.bdgentry_value"
+                            <input class="form-control float-input" min="0"  step="0.01"  type="number" [ngModel]="account.bdgentry_value"
                                    name="bdgentry_value" #bdgentry_value="ngModel" ngModel placeholder="Enter Area">
                         </div>
                     </div><!-- row -->
@@ -115,7 +115,7 @@
                            {{ "acc_edit.limit" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <input class="form-control float-input" step="0.01" type="number" [ngModel]="account.expense_limit_pct"
+                            <input class="form-control float-input" min="0"  step="0.01" type="number" [ngModel]="account.expense_limit_pct"
                                    name="expense_limit_pct" #expense_limit_pct="ngModel" ngModel placeholder="Enter Expense Limit">
                         </div><!-- col-8 -->
                     </div><!-- row -->
@@ -125,7 +125,7 @@
                             {{ "acc_edit.expense_var" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <input class="form-control float-input" step="0.01" type="number" [ngModel]="account.expense_var_pct"
+                            <input class="form-control float-input" min="0"  step="0.01" type="number" [ngModel]="account.expense_var_pct"
                                    name="expense_var_pct" #expense_var_pct="ngModel" ngModel placeholder="EnterExpense Var">
                         </div><!-- col-8 -->
                     </div><!-- row -->
@@ -145,7 +145,7 @@
                             {{ "acc_edit.ded" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <input class="form-control float-input" step="0.01" type="number" [ngModel]="account.expense_ded_pct"
+                            <input class="form-control float-input" min="0"  step="0.01" type="number" [ngModel]="account.expense_ded_pct"
                                    name="expense_ded_pct" #expense_ded_pct="ngModel" ngModel placeholder="Enter Expense Ded Pct">
                         </div>
                     </div><!-- row -->
@@ -155,7 +155,7 @@
                             {{ "acc_edit.recov" | translate }}
                         </div><!-- col-4 -->
                         <div class="col-7 col-sm-8 col-md-9">
-                            <input class="form-control float-input" step="0.01" type="number" [ngModel]="account.expense_recov_pct"
+                            <input class="form-control float-input" min="0"  step="0.01" type="number" [ngModel]="account.expense_recov_pct"
                                    name="expense_recov_pct" #expense_recov_pct="ngModel" ngModel placeholder="Enter Expense recov pct">
                         </div>
                     </div><!-- row -->

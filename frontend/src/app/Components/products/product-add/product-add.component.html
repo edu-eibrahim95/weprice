@@ -98,7 +98,7 @@
               {{ 'producta.cost' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number"
+              <input class="form-control float-input" min="0"  step="0.01" type="number"
                      name="cost_price" #cost_price="ngModel" ngModel placeholder="Enter cost_price">
             </div>
           </div><!-- row -->
@@ -107,7 +107,7 @@
               {{ 'producta.sale' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number"
+              <input class="form-control float-input" min="0"  step="0.01" type="number"
                      name="sale_price" #sale_price="ngModel" ngModel placeholder="Enter sale_price">
             </div>
           </div><!-- row -->
@@ -116,7 +116,7 @@
               {{ 'producta.day' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number"
+              <input class="form-control float-input" min="0"  step="0.01" type="number"
                      name="daysterm_recpt" #daysterm_recpt="ngModel" ngModel placeholder="Enter daysterm_recpt">
             </div>
           </div><!-- row -->

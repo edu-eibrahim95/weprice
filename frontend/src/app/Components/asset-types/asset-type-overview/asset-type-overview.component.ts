@@ -43,7 +43,7 @@ export class AssetTypeOverviewComponent implements OnInit {
                 {headerName: 'Years Lifetime', field: 'years_lifetime' },
                 {headerName: 'Residual Lifetime', field: 'residual_lifetime'},
                 {headerName: 'Interest Year Pct', field: 'interest_year_pct'},
-                {headerName: 'Account', field: 'account_id'},
+                {headerName: 'Account', field: 'account_name'},
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.assetTypes.length; i++){

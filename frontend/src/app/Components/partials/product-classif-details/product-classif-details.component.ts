@@ -146,8 +146,24 @@ export class ProductClassifDetailsComponent implements OnInit {
                                     return ProductClassifDetailsComponent.lookupKey(c.taxes_options, params.newValue);
                                 }
                             },
-                            {headerName: 'On Purchase %', field: 'purchase_pct', width: 100, editable: true},
-                            {headerName: 'On Sale %', field: 'sale_pct', width: 100, editable: true},
+                            {headerName: 'On Purchase %', field: 'purchase_pct', width: 100, editable: true, valueSetter: function(params) {
+                                // Value is legit - set it and signal the value has been changed/set
+                                if (params.newValue > 0) {
+                                    params.data[params.colDef.field] = params.newValue;
+                                    return true;
+                                }
+                                // Illegal value - signal no change
+                                return false;
+                            }},
+                            {headerName: 'On Sale %', field: 'sale_pct', width: 100, editable: true, valueSetter: function(params) {
+                                // Value is legit - set it and signal the value has been changed/set
+                                if (params.newValue > 0) {
+                                    params.data[params.colDef.field] = params.newValue;
+                                    return true;
+                                }
+                                // Illegal value - signal no change
+                                return false;
+                            }},
                             {
                                 headerName: 'Actions',
                                 field: 'actions',

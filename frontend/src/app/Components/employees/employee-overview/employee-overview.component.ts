@@ -5,6 +5,7 @@ import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/acti
 import {EmployeeService} from "../../../Services/employee.service";
 import * as $ from 'jquery';
 import {EmployeeDetailsComponent} from "../../partials/employee-details/employee-details.component";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-employee-overview',
@@ -26,7 +27,7 @@ export class EmployeeOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private employeeApi: EmployeeService) { }
+    constructor(private employeeApi: EmployeeService, private translate: TranslateService) { }
 
     ngOnInit() {
         this.employeeSubs = this.employeeApi.getEmployees().subscribe(res => {
@@ -38,7 +39,18 @@ export class EmployeeOverviewComponent implements OnInit {
                 {headerName: '', field: 'check', checkboxSelection:true, width:60},
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
                 {headerName: 'Name', field: 'name'},
-                {headerName: 'Type', field: 'type'},
+                {headerName: 'Type', field: 'type', cellRendererParams: {c: this}, cellRenderer: function(params) {
+                        let c = params.c;
+                        if (params.value == 0){
+                            return c.translate.instant("employa.stand")
+                        }
+                        else if (params.value == 1){
+                            return c.translate.instant("employa.dire")
+                        }
+                        else if (params.value == 2){
+                            return c.translate.instant("employa.train")
+                        }
+                    }},
                 {headerName: 'Hire Date', field: 'hire_date'},
                 {headerName: 'Dismiss Date', field: 'dismiss_date'},
                 {headerName: 'Salary', field: 'salary'},

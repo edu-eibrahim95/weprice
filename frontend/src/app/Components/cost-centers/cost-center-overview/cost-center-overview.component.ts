@@ -5,6 +5,7 @@ import {CostCentersService} from "../../../Services/cost-centers.service";
 import {Subscription} from "rxjs";
 import * as $ from 'jquery';
 import {DetailsFormatterComponent} from "../../partials/cost-center-details/cost-center-details.component";
+import {TranslateService} from "@ngx-translate/core";
 @Component({
     selector: 'app-cost-center-over-view',
     templateUrl: './cost-center-overview.component.html',
@@ -26,7 +27,7 @@ export class CostCenterOverviewComponent implements OnInit {
         actionsFormatterComponent: ActionsFormatterComponent,
         detailsFormatterComponent: DetailsFormatterComponent
     };
-    constructor(private costCenterApi: CostCentersService) { }
+    constructor(private costCenterApi: CostCentersService, private translate: TranslateService) { }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
         let w = 7/9 * parseInt($('.ag-theme-material').width());
@@ -51,11 +52,25 @@ export class CostCenterOverviewComponent implements OnInit {
                 {headerName: 'Work Days / Month', field: 'workdays_qt'},
                 {headerName: 'Machines QT', field: 'machines_qt'},
                 {headerName: 'Sales Revenue', field: 'sales_revenue'},
-                {headerName: 'Type', field: 'type'},
+                {headerName: 'Type', field: 'type', cellRendererParams: {c: this}, cellRenderer: function(params) {
+                        let c = params.c;
+                        if (params.value == 0){
+                            return c.translate.instant("costa.build")
+                        }
+                        else if (params.value == 1){
+                            return c.translate.instant("costa.supp")
+                        }
+                        else if (params.value == 2){
+                            return c.translate.instant("costa.dire")
+                        }
+                        else if (params.value == 3){
+                            return c.translate.instant("costa.comm")
+                        }
+                    } },
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.cost_centers.length; i++){
-                this.cost_centers[i]['details'] = {'row_id': i, 'id': this.cost_centers[i].id,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
+                this.cost_centers[i]['details'] = {'type':this.cost_centers[i].type, 'row_id': i, 'id': this.cost_centers[i].id,'gridApi' : this.gridApi, 'gridColumnApi': this.gridColumnApi};
                 this.cost_centers[i]['actions'] = {
                     'self' : this,
                     'id':this.cost_centers[i].id,

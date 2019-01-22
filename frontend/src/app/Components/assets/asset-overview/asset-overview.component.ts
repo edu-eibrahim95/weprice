@@ -45,7 +45,6 @@ export class AssetOverviewComponent implements OnInit {
                 {headerName: 'Acquisition Date', field: 'acquisition_date'},
                 {headerName: 'Start Depr Date', field: 'start_depr_date'},
                 {headerName: 'Expiration Depr Date', field: 'expiration_depr_date'},
-                {headerName: 'Branch', field: 'branch_id'},
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.assets.length; i++){

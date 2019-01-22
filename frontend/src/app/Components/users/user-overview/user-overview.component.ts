@@ -4,6 +4,7 @@ import {User} from "../../../Models/user";
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {UserService} from "../../../Services/user.service";
 import * as $ from 'jquery';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-user-overview',
@@ -24,7 +25,7 @@ export class UserOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private userApi: UserService) { }
+    constructor(private userApi: UserService, private translate: TranslateService) { }
 
     ngOnInit() {
         this.userSubs = this.userApi.getUsers().subscribe(res => {
@@ -36,7 +37,15 @@ export class UserOverviewComponent implements OnInit {
                 {headerName: 'Name', field: 'name'},
                 {headerName: 'Full Name', field: 'full_name'},
                 {headerName: 'Email ', field: 'email'},
-                {headerName: 'Active ', field: 'active_flag'},
+                {headerName: 'Active ', field: 'active_flag', cellRendererParams: {c: this}, cellRenderer: function(params) {
+                        let c = params.c;
+                        if (params.value == 0){
+                            return c.translate.instant("usero.not_active")
+                        }
+                        else if (params.value == 1){
+                            return c.translate.instant("usero.active")
+                        }
+                    }},
                 {headerName: 'Initial Date', field: 'initial_date'},
                 {headerName: 'Final Date ', field: 'final_date'},
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},

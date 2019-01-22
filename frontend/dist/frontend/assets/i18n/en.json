@@ -259,6 +259,8 @@
   },
   "costo": {
     "cost": "Cost Centers",
+    "day_rec_qt" : "Day Rec QT",
+    "abs_order" : "Absolute Order",
     "list": "list of existing cost centers"
   },
   "employa": {
@@ -529,6 +531,8 @@
   "usero": {
     "user":"Users",
     "list":"list of existing  Users",
-    "manage":"Manage Spots"
+    "manage":"Manage Spots",
+    "active": "Active",
+    "not_active": "Not Active"
   }
 }

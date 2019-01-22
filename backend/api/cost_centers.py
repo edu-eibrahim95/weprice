@@ -75,8 +75,9 @@ class GetCostCenterRatio(Resource):
         if not cost_center:
             return {'status': 0}
         ratio = CostCenterRatio.query.filter_by(costcenter_id=cost_center_id) \
-            .join(CostCenter, CostCenter.id == CostCenterRatio.costcenter_id) \
-            .join(Branch, Branch.id == CostCenter.branch_id).filter(Branch.id == data['branch_id']).all()
+            .join(CostCenter, CostCenter.id == CostCenterRatio.costcenter_part_id) \
+            .join(Branch, Branch.id == CostCenter.branch_id).filter(Branch.id == data['branch_id']) \
+            .order_by(CostCenter.type.asc()).order_by(CostCenter.abs_order.asc()).all()
         for i in ratio:
             i.name = i.costcenter_part_id
         schema = CostCenterRatioSchema(many=True)
@@ -98,11 +99,11 @@ class GetCostCenterRatio(Resource):
         add = able('add', 'cost_centers')
         edit = able('edit', 'cost_centers')
         delete = able('delete', 'cost_centers')
-        cost_centers = CostCenter.query.filter(CostCenter.id != cost_center_id).join(Branch, Branch.id == CostCenter.branch_id) \
+        cost_centers = CostCenter.query.filter(CostCenter.id != cost_center_id).filter(CostCenter.type != 0).join(Branch, Branch.id == CostCenter.branch_id) \
             .filter(Branch.installation_id == get_user().installation_id).filter(Branch.id == data['branch_id']).all()
-        cost_center_options = {"0": "Choose Cost Center"}
+        cost_center_options = {"'0'": "Choose Cost Center"}
         for cost_center in cost_centers:
-            cost_center_options["{}".format(cost_center.id)] = cost_center.name
+            cost_center_options["'{}'".format(cost_center.id)] = cost_center.name
         taxes_options = Tax.query.filter_by(installation_id=get_user().installation_id).all()
         tax_options = {"0": "Choose Tax"}
         for tax in taxes_options:
@@ -130,6 +131,8 @@ class AddCostCenter(Resource):
         self.parser.add_argument('workdays_qt', help='This field cannot be blank', required=True)
         self.parser.add_argument('machines_qt', help='This field cannot be blank', required=True)
         self.parser.add_argument('sales_revenue', help='This field cannot be blank', required=True)
+        self.parser.add_argument('day_rec_qt', help='This field cannot be blank', required=True)
+        self.parser.add_argument('abs_order', help='This field cannot be blank', required=True)
         self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
 
     @jwt_required
@@ -144,6 +147,8 @@ class AddCostCenter(Resource):
             workdays_qt=data['workdays_qt'],
             machines_qt=data['machines_qt'],
             sales_revenue=data['sales_revenue'],
+            day_rec_qt=data['day_rec_qt'],
+            abs_order=data['abs_order'],
             branch_id=data['branch_id'],
         )
         try:
@@ -329,6 +334,8 @@ class EditCostCenter(Resource):
         self.parser.add_argument('workdays_qt', help='This field cannot be blank', required=True)
         self.parser.add_argument('machines_qt', help='This field cannot be blank', required=True)
         self.parser.add_argument('sales_revenue', help='This field cannot be blank', required=True)
+        self.parser.add_argument('day_rec_qt', help='This field cannot be blank', required=True)
+        self.parser.add_argument('abs_order', help='This field cannot be blank', required=True)
         self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
 
     @jwt_required
@@ -339,7 +346,7 @@ class EditCostCenter(Resource):
             .filter(Branch.installation_id == get_user().installation_id).first()
         if not cost_center:
             return {'status': 0}
-        for i in  ['name', 'type', 'area', 'workhours_qt', 'workdays_qt', 'machines_qt', 'sales_revenue', 'branch_id']:
+        for i in ['day_rec_qt', 'abs_order', 'name', 'type', 'area', 'workhours_qt', 'workdays_qt', 'machines_qt', 'sales_revenue', 'branch_id']:
             setattr(cost_center, '%s' % i, data[i])
         try:
             save_to_db(cost_center)

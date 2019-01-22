@@ -10,7 +10,8 @@ import swal from 'sweetalert2';
 })
 
 export class DetailsFormatterComponent implements  OnInit{
-
+    has_details = true;
+    is_comm = true;
     master_raw_id = null;
     cost_center_id = null;
     node = null;
@@ -59,7 +60,11 @@ export class DetailsFormatterComponent implements  OnInit{
         return Object.keys(mappings);
     }
     static lookupValue(mappings, key) {
-        return mappings[key];
+        let r =  mappings[key];
+        if(! r){
+            r = mappings["'"+key+"'"];
+        }
+        return r;
     }
     static lookupKey(mappings, name) {
         for (var key in mappings) {
@@ -93,6 +98,13 @@ export class DetailsFormatterComponent implements  OnInit{
         this.gridColumnApi = params.value.gridColumnApi;
         this.master_raw_id = params.value.row_id;
         this.cost_center_id = params.value.id;
+        let type = params.value.type;
+        if(type != 1) {
+            this.has_details = false;
+        }
+        if(type != 3){
+            this.is_comm = false;
+        }
     }
 
     toggleDetails() {
@@ -105,12 +117,12 @@ export class DetailsFormatterComponent implements  OnInit{
                 this.node = this.gridApi.getRowNode(this.master_raw_id);
                 this.costCenterSubs = this.costCenterApi.getCostCenterRatio(this.cost_center_id).subscribe(res => {
                     ///////////////////////////////////////
+                    let c = this;
                     this.ratio_cost_center_options = res['cost_centers_options'];
                     this.taxes_cost_center_options = res['taxes_options'];
-                    let c = this;
                     this.ratioColumnDefs = [
                         {headerName: '', field: 'check', width: 70, checkboxSelection: function (params) {return (params.node.id != 0) ;}},
-                        {headerName: 'Cost Center Name', field: 'name', editable: true, cellEditor: 'agSelectCellEditor',
+                        {headerName: 'Cost Center Name', field: 'name', editable: true, suppressSorting : true,cellEditor: 'agSelectCellEditor',
                             cellEditorParams: {
                                 values: DetailsFormatterComponent.extractValues(c.ratio_cost_center_options)
                             },
@@ -121,7 +133,15 @@ export class DetailsFormatterComponent implements  OnInit{
                                 return DetailsFormatterComponent.lookupKey(c.ratio_cost_center_options, params.newValue);
                             }
                         },
-                        {headerName: 'Rating %', field: 'rating_pct', editable: true, width: 70},
+                        {headerName: 'Rating %', field: 'rating_pct', editable: true, width: 70, valueSetter: function(params) {
+                                // Value is legit - set it and signal the value has been changed/set
+                                if (params.newValue > 0) {
+                                    params.data[params.colDef.field] = params.newValue;
+                                    return true;
+                                }
+                                // Illegal value - signal no change
+                                return false;
+                            }},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent' },
                     ];
                     this.ratioRowData = this.ratioRowData.concat(res['ratio']);
@@ -150,7 +170,15 @@ export class DetailsFormatterComponent implements  OnInit{
                                 return DetailsFormatterComponent.lookupKey(c.taxes_cost_center_options, params.newValue);
                             }
                         },
-                        {headerName: 'PCT', field: 'tax_pct', editable: true , width: 70},
+                        {headerName: 'PCT', field: 'tax_pct', editable: true , width: 70, valueSetter: function(params) {
+                                // Value is legit - set it and signal the value has been changed/set
+                                if (params.newValue > 0) {
+                                    params.data[params.colDef.field] = params.newValue;
+                                    return true;
+                                }
+                                // Illegal value - signal no change
+                                return false;
+                            }},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent' },
                     ];
                     this.taxesRowData = this.taxesRowData.concat(res['taxes']);
@@ -179,7 +207,15 @@ export class DetailsFormatterComponent implements  OnInit{
                                 return DetailsFormatterComponent.lookupKey(c.ratio_cost_center_options, params.newValue);
                             }
                         },
-                        {headerName: 'PCT', field: 'day_rec_qt', editable: true, width: 70 },
+                        {headerName: 'PCT', field: 'day_rec_qt', editable: true, width: 70, valueSetter: function(params) {
+                                // Value is legit - set it and signal the value has been changed/set
+                                if (params.newValue > 0) {
+                                    params.data[params.colDef.field] = params.newValue;
+                                    return true;
+                                }
+                                // Illegal value - signal no change
+                                return false;
+                            } },
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent' },
                     ];
                     this.comsRowData = this.comsRowData.concat(res['coms']);

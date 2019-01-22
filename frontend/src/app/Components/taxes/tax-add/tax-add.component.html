@@ -53,7 +53,7 @@
               {{ 'taxa.purch' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number"
+              <input class="form-control float-input" min="0"  step="0.01" type="number"
                      name="purchase_pct" #purchase_pct="ngModel" ngModel placeholder="Enter Avg Quantity Months">
             </div><!-- col-8 -->
           </div><!-- row -->
@@ -62,7 +62,7 @@
               {{ 'taxa.sale' | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number"
+              <input class="form-control float-input" min="0"  step="0.01" type="number"
                      name="sale_pct" #sale_pct="ngModel" ngModel placeholder="Enter Work hours per day">
             </div><!-- col-8 -->
           </div><!-- row -->

@@ -49,7 +49,7 @@ export class SocialChargeOverviewComponent implements OnInit {
                 {headerName: 'Initial Date', field: 'initial_date' },
                 {headerName: 'Final Date', field: 'final_date'},
                 {headerName: 'Charge Pct', field: 'charge_pct'},
-                {headerName: 'Account', field: 'account_id'},
+                {headerName: 'Account', field: 'account_name'},
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.social_charges.length; i++){

@@ -43,7 +43,7 @@ export class TaxOverviewComponent implements OnInit {
                 {headerName: 'Final Date', field: 'final_date'},
                 {headerName: 'Purchase Pct', field: 'purchase_pct'},
                 {headerName: 'Sale Pct', field: 'sale_pct'},
-                {headerName: 'Account', field: 'account_id'},
+                {headerName: 'Account', field: 'account_name'},
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.taxes.length; i++){

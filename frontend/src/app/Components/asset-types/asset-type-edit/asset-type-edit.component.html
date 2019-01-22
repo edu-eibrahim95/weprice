@@ -35,7 +35,7 @@
               {{ "asset_edit.year" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number" [ngModel]="asset_type.years_lifetime"
+              <input class="form-control float-input" min="0"  step="0.01" type="number" [ngModel]="asset_type.years_lifetime"
                      name="years_lifetime" #years_lifetime="ngModel" ngModel placeholder="Enter years_lifetime">
             </div><!-- col-8 -->
           </div><!-- row -->
@@ -44,7 +44,7 @@
               {{ "asset_edit.life" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number"  [ngModel]="asset_type.residual_lifetime"
+              <input class="form-control float-input" min="0"  step="0.01" type="number"  [ngModel]="asset_type.residual_lifetime"
                      name="residual_lifetime" #residual_lifetime="ngModel" ngModel placeholder="Enter Residual Lifetime">
             </div><!-- col-8 -->
           </div><!-- row -->
@@ -53,7 +53,7 @@
               {{ "asset_edit.interest" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" step="0.01" type="number" [ngModel]="asset_type.interest_year_pct"
+              <input class="form-control float-input" min="0"  step="0.01" type="number" [ngModel]="asset_type.interest_year_pct"
                      name="interest_year_pct" #interest_year_pct="ngModel" ngModel placeholder="Enter Interest Year Pct">
             </div><!-- col-8 -->
           </div><!-- row -->

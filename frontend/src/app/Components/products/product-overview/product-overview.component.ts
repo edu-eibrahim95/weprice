@@ -6,6 +6,7 @@ import {ProductService} from "../../../Services/product.service";
 import * as $ from 'jquery';
 import {ProductDetailsComponent} from "../../partials/product-details/product-details.component";
 import {ActivatedRoute, Event, NavigationEnd, Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -29,7 +30,7 @@ export class ProductOverviewComponent implements OnInit{
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private productApi: ProductService, private route: ActivatedRoute, private router: Router,) { }
+    constructor(private productApi: ProductService, private route: ActivatedRoute, private router: Router,private translate: TranslateService) { }
     init() {
         if (this.route.params['value']['type'])
             this.type = this.route.params['value']['type'];
@@ -43,8 +44,33 @@ export class ProductOverviewComponent implements OnInit{
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
                 {headerName: 'Name', field: 'name'},
                 {headerName: 'Description', field: 'description' },
-                {headerName: 'Type', field: 'type'},
-                {headerName: 'Product Group', field: 'product_group'},
+                {headerName: 'Type', field: 'type', cellRendererParams: {c: this}, cellRenderer: function(params) {
+                        let c = params.c;
+                        if (params.value == 0){
+                            return c.translate.instant("producta.simple")
+                        }
+                        else if (params.value == 1){
+                            return c.translate.instant("producta.comp")
+                        }
+                    }},
+                {headerName: 'Product Group', field: 'product_group', cellRendererParams: {c: this}, cellRenderer: function(params) {
+                        let c = params.c;
+                        if (params.value == 0){
+                            return c.translate.instant("classa.raw")
+                        }
+                        else if (params.value == 1){
+                            return c.translate.instant("classa.finish")
+                        }
+                        else if (params.value == 2){
+                            return c.translate.instant("classa.semi")
+                        }
+                        else if (params.value == 3){
+                            return c.translate.instant("classa.res")
+                        }
+                        else if (params.value == 4){
+                            return c.translate.instant("classa.pack")
+                        }
+                    }},
                 {headerName: 'Internal Code', field: 'internal_code'},
                 {headerName: 'Unit', field: 'unit'},
                 {headerName: 'Currency Type', field: 'currency_type'},
