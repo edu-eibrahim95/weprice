@@ -99,7 +99,7 @@ export class DetailsFormatterComponent implements  OnInit{
         this.master_raw_id = params.value.row_id;
         this.cost_center_id = params.value.id;
         let type = params.value.type;
-        if(type != 1) {
+        if(type != 1 && type != 3)  {
             this.has_details = false;
         }
         if(type != 3){

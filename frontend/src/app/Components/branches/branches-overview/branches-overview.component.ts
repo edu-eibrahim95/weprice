@@ -24,7 +24,7 @@ export class BranchesOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private branchesApi: BranchService, private pipe: TranslateService ) { }
+    constructor(private branchesApi: BranchService, private translate: TranslateService ) { }
 
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
@@ -41,7 +41,7 @@ export class BranchesOverviewComponent implements OnInit {
             this.edit = res['edit'];
             this.delete = res['delete'];
             this.columnDefs = [
-                {headerName:  this.pipe.get('home.title')['value'], field: 'name'},
+                {headerName:  this.translate.instant('brancha.bran'), field: 'name'},
                 {headerName: 'Area', field: 'area' },
                 {headerName: 'Monthly AVG QT', field: 'months_avg_qt'},
                 {headerName: 'Monthly Interest', field: 'interest_month_pct'},

@@ -41,7 +41,6 @@ export class AppComponent implements OnInit{
                     if(this.branches.length > 0){
                         let branch = this.branches[0];
                         this.branch_name = branch.name;
-                        console.log(this.branch_name);
                         localStorage.setItem('branch_id', branch.id.toString());
                         localStorage.setItem('branch_name', branch.name);
                     }

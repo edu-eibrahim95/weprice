@@ -22,14 +22,12 @@ export class AuthService {
     };
     return this.http.post(`${API_URL}/register`, parameter, httpOptions).map(
       res => {
-        console.log(res);
         if (res['message'] == 1) {
           localStorage.setItem('currentUser', res['user']);
           return 1;
         }
       },
       err => {
-        console.log("Error occurred");
         return 0;
       })}
   login(parameter):  Observable<number>{
@@ -43,12 +41,10 @@ export class AuthService {
         if (res['message'] == 1) {
           localStorage.setItem('currentUser', JSON.stringify(res['user']));
           localStorage.setItem('lang', res['lang']);
-          console.log(localStorage.getItem('lang'), res['lang']);
           return 1;
         }
       },
       err => {
-        console.log("Error occurred");
         return 0;
       });
   }
