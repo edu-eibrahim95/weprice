@@ -146,7 +146,7 @@ export class DetailsFormatterComponent implements  OnInit{
                     ];
                     for (let i=0; i<Object.keys(this.ratio_cost_center_options).length; i++){
                         let id = parseInt(Object.keys(this.ratio_cost_center_options)[i].replace(/'/g, ''));
-                        let exists = res['ratio'].map(i => i.costcenter_part_id);
+                        let exists = res['ratio'].map(i => parseInt(i.name));
                         // console.log(id, Object.keys(this.ratio_cost_center_options)[i]);
                         if( id != 0 && ! exists.includes(id)){
                             // console.log("adding id "+ id);
