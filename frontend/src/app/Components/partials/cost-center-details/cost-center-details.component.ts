@@ -17,7 +17,7 @@ export class DetailsFormatterComponent implements  OnInit{
     node = null;
     costCenterSubs: Subscription;
     ratioColumnDefs = [];
-    ratioRowData = [{id: 0, name: "0", rating_pct: '0', check: 'Add new '}];
+    ratioRowData = [];
     taxesColumnDefs = [];
     taxesRowData = [{id: 0, name: "0", tax_pct: '0', check: 'Add new '}];
     comsColumnDefs = [];
@@ -113,7 +113,7 @@ export class DetailsFormatterComponent implements  OnInit{
         let t = $('#tab-details-'+this.master_raw_id);
         let bar = t.find('.mat-ink-bar');
         if(toggle.hasClass('collapsed-toggle')){
-            if (this.ratioRowData.length == 1 && this.taxesRowData.length == 1 && this.comsRowData.length == 1){
+            if (this.ratioRowData.length == 0 && this.taxesRowData.length == 1 && this.comsRowData.length == 1){
                 this.node = this.gridApi.getRowNode(this.master_raw_id);
                 this.costCenterSubs = this.costCenterApi.getCostCenterRatio(this.cost_center_id).subscribe(res => {
                     ///////////////////////////////////////
@@ -121,7 +121,7 @@ export class DetailsFormatterComponent implements  OnInit{
                     this.ratio_cost_center_options = res['cost_centers_options'];
                     this.taxes_cost_center_options = res['taxes_options'];
                     this.ratioColumnDefs = [
-                        {headerName: '', field: 'check', width: 70, checkboxSelection: function (params) {return (params.node.id != 0) ;}},
+                        // {headerName: '', field: 'check', width: 70, checkboxSelection: function (params) {return (params.node.data.check != 'Add New') ;}},
                         {headerName: 'Cost Center Name', field: 'name', editable: true, suppressSorting : true,cellEditor: 'agSelectCellEditor',
                             cellEditorParams: {
                                 values: DetailsFormatterComponent.extractValues(c.ratio_cost_center_options)
@@ -144,12 +144,21 @@ export class DetailsFormatterComponent implements  OnInit{
                             }},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent' },
                     ];
+                    for (let i=0; i<Object.keys(this.ratio_cost_center_options).length; i++){
+                        let id = parseInt(Object.keys(this.ratio_cost_center_options)[i].replace(/'/g, ''));
+                        let exists = res['ratio'].map(i => i.costcenter_part_id);
+                        // console.log(id, Object.keys(this.ratio_cost_center_options)[i]);
+                        if( id != 0 && ! exists.includes(id)){
+                            // console.log("adding id "+ id);
+                            this.ratioRowData.push({id : 0, name: id, rating_pct: '0', check: "Add New"});
+                        }
+                    }
                     this.ratioRowData = this.ratioRowData.concat(res['ratio']);
                     for (let i=0; i<this.ratioRowData.length; i++){
                         this.ratioRowData[i]['actions'] = {
                             api : this.costCenterApi,
                             id:this.ratioRowData[i].id,
-                            delete: [(i != 0), this.deleteRatio],
+                            delete: [false, this.deleteRatio],
                             edit: [false, ''],
                             save: [true, this.save],
                             type: 'ratio',
@@ -407,9 +416,10 @@ export class DetailsFormatterComponent implements  OnInit{
                             self: self
                         };
                         if (type == 'ratio'){
-                            let grid = self.ratioGridApi;
-                            self.ratioRowData.push(parameters);
-                            grid.setRowData(self.ratioRowData);}
+                            // let grid = self.ratioGridApi;
+                            // self.ratioRowData.push(parameters);
+                            // grid.setRowData(self.ratioRowData);
+                        }
                         else if (type == 'tax'){
                             let grid = self.taxGridApi;
                             self.taxesRowData.push(parameters);
