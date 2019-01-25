@@ -98,7 +98,7 @@ export class ProductDetailsComponent implements OnInit {
                         },
                         {headerName: 'On Purchase %', field: 'purchase_pct', editable: true, width: 100, valueSetter: function(params) {
                                 // Value is legit - set it and signal the value has been changed/set
-                                if (params.newValue > 0) {
+                                if (params.newValue >= 0) {
                                     params.data[params.colDef.field] = params.newValue;
                                     return true;
                                 }
@@ -107,7 +107,7 @@ export class ProductDetailsComponent implements OnInit {
                             }},
                         {headerName: 'On Sale %', field: 'sale_pct', editable: true, width: 100, valueSetter: function(params) {
                                 // Value is legit - set it and signal the value has been changed/set
-                                if (params.newValue > 0) {
+                                if (params.newValue >= 0) {
                                     params.data[params.colDef.field] = params.newValue;
                                     return true;
                                 }

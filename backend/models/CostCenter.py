@@ -1,6 +1,7 @@
 from db import db
-from sqlalchemy import text
+from sqlalchemy import text, ForeignKey
 from marshmallow import Schema, fields
+from sqlalchemy.orm import relationship
 
 
 class CostCenter(db.Model):
@@ -40,17 +41,33 @@ class CostCenterRatio(db.Model):
     __tablename__ = 'costcenter_costcenter'
     id = db.Column(db.Integer, primary_key=True)
     costcenter_id = db.Column(db.Integer)
-    costcenter_part_id = db.Column(db.Integer)
+    costcenter_part_id = db.Column(db.Integer, ForeignKey("cost_centers.id"))
     rating_pct = db.Column(db.Float)
     created_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
     updated_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
+
+    cost_center = relationship("CostCenter", foreign_keys=[costcenter_part_id])
+
+    @property
+    def type(self):
+        if self.cost_center is not None:
+            return self.cost_center.type
+        return None
+
+    @property
+    def abs_order(self):
+        if self.cost_center is not None:
+            return self.cost_center.abs_order
+        return None
 
 
 class CostCenterRatioSchema(Schema):
     id = fields.Number()
     costcenter_part_id = fields.Number()
     name = fields.Str()
+    type = fields.Str()
     rating_pct = fields.Number()
+    abs_order = fields.Number()
     created_at = fields.DateTime()
     updated_at = fields.DateTime()
 

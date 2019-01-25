@@ -101,9 +101,9 @@ class GetCostCenterRatio(Resource):
         delete = able('delete', 'cost_centers')
         cost_centers = CostCenter.query.filter(CostCenter.id != cost_center_id).filter(CostCenter.type != 0).join(Branch, Branch.id == CostCenter.branch_id) \
             .filter(Branch.installation_id == get_user().installation_id).filter(Branch.id == data['branch_id']).all()
-        cost_center_options = {"'0'": "Choose Cost Center"}
+        cost_center_options = {}
         for cost_center in cost_centers:
-            cost_center_options["'{}'".format(cost_center.id)] = cost_center.name
+            cost_center_options["{}".format(cost_center.id)] = [cost_center.name, cost_center.type, cost_center.abs_order]
         taxes_options = Tax.query.filter_by(installation_id=get_user().installation_id).all()
         tax_options = {"0": "Choose Tax"}
         for tax in taxes_options:

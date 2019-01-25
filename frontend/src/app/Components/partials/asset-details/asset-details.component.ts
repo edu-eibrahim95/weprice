@@ -99,7 +99,7 @@ export class AssetDetailsComponent implements OnInit {
                         },
                         {headerName: 'Rating %', field: 'rating_pct', width: 70, editable: true, valueSetter: function(params) {
                                 // Value is legit - set it and signal the value has been changed/set
-                                if (params.newValue > 0) {
+                                if (params.newValue >= 0) {
                                     params.data[params.colDef.field] = params.newValue;
                                     return true;
                                 }

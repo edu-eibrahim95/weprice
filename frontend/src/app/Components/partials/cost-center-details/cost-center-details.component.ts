@@ -64,6 +64,8 @@ export class DetailsFormatterComponent implements  OnInit{
         if(! r){
             r = mappings["'"+key+"'"];
         }
+        if(r.constructor === Array)
+            r = r[0];
         return r;
     }
     static lookupKey(mappings, name) {
@@ -135,7 +137,7 @@ export class DetailsFormatterComponent implements  OnInit{
                         },
                         {headerName: 'Rating %', field: 'rating_pct', editable: true, width: 70, valueSetter: function(params) {
                                 // Value is legit - set it and signal the value has been changed/set
-                                if (params.newValue > 0) {
+                                if (params.newValue >= 0) {
                                     params.data[params.colDef.field] = params.newValue;
                                     return true;
                                 }
@@ -146,18 +148,18 @@ export class DetailsFormatterComponent implements  OnInit{
                     ];
                     for (let i=0; i<Object.keys(this.ratio_cost_center_options).length; i++){
                         let id = parseInt(Object.keys(this.ratio_cost_center_options)[i].replace(/'/g, ''));
-                        let exists = res['ratio'].map(i => parseInt(i.name));
-                        // console.log(id, Object.keys(this.ratio_cost_center_options)[i]);
+                        let exists = res['ratio'].map(j => parseInt(j.name));
                         if( id != 0 && ! exists.includes(id)){
-                            // console.log("adding id "+ id);
-                            this.ratioRowData.push({id : 0, name: id, rating_pct: '0', check: "Add New"});
+                            this.ratioRowData.push({id : 0, name: id, rating_pct: '0', type: this.ratio_cost_center_options[id][1], abs_order: this.ratio_cost_center_options[id][2],check: "Add New"});
                         }
                     }
                     this.ratioRowData = this.ratioRowData.concat(res['ratio']);
+                    this.ratioRowData.sort((a, b) => a.type - b.type);
+                    this.ratioRowData.sort((a, b) => (a.type == b.type) ? a.abs_order-b.abs_order: a.type - b.type);
                     for (let i=0; i<this.ratioRowData.length; i++){
                         this.ratioRowData[i]['actions'] = {
                             api : this.costCenterApi,
-                            id:this.ratioRowData[i].id,
+                            id:this.ratioRowData[i].name,
                             delete: [false, this.deleteRatio],
                             edit: [false, ''],
                             save: [true, this.save],
@@ -181,7 +183,7 @@ export class DetailsFormatterComponent implements  OnInit{
                         },
                         {headerName: 'PCT', field: 'tax_pct', editable: true , width: 70, valueSetter: function(params) {
                                 // Value is legit - set it and signal the value has been changed/set
-                                if (params.newValue > 0) {
+                                if (params.newValue >= 0) {
                                     params.data[params.colDef.field] = params.newValue;
                                     return true;
                                 }
@@ -218,7 +220,7 @@ export class DetailsFormatterComponent implements  OnInit{
                         },
                         {headerName: 'PCT', field: 'day_rec_qt', editable: true, width: 70, valueSetter: function(params) {
                                 // Value is legit - set it and signal the value has been changed/set
-                                if (params.newValue > 0) {
+                                if (params.newValue >= 0) {
                                     params.data[params.colDef.field] = params.newValue;
                                     return true;
                                 }
@@ -372,16 +374,13 @@ export class DetailsFormatterComponent implements  OnInit{
 
     save(id, type, self) {
         let parameters = {};
+        let name = 0;
         if (type == 'ratio') {
-            let row = self.ratioRowData.filter(row => row.id == id)[0];
+            let row = self.ratioRowData.filter(row => row.name == id)[0];
+            id = row.id;
+            name = row.name;
             let ratings = self.ratioRowData.map(row => row.rating_pct);
-            let sum = 0;
-            if (id == 0)
-                sum = ratings.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
-            else {
-                ratings.shift();
-                sum = ratings.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
-            }
+            let sum = ratings.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
             if (sum > 100){
                 swal({
                     type: 'error',
@@ -391,6 +390,10 @@ export class DetailsFormatterComponent implements  OnInit{
                 row.error = 1;
                 self.ratioGridApi.setRowData(self.ratioRowData);
                 return false;
+            }
+            else {
+                row.error=0;
+                self.ratioGridApi.setRowData(self.ratioRowData);
             }
             parameters = {'costcenter_part_id': row.name, 'rating_pct': row.rating_pct, 'name': row.name};
         }
@@ -416,6 +419,8 @@ export class DetailsFormatterComponent implements  OnInit{
                             self: self
                         };
                         if (type == 'ratio'){
+                            let row = self.ratioRowData.filter(row => row.name == name)[0];
+                            row.id = res;
                             // let grid = self.ratioGridApi;
                             // self.ratioRowData.push(parameters);
                             // grid.setRowData(self.ratioRowData);
