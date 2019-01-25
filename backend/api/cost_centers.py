@@ -19,6 +19,7 @@ class GetCostCenters(Resource):
         data = self.parser.parse_args()
         cost_centers = CostCenter.query.join(Branch, Branch.id == CostCenter.branch_id) \
             .filter(Branch.installation_id == get_user().installation_id) \
+            .order_by(CostCenter.type.asc()).order_by(CostCenter.abs_order.asc())\
             .filter(Branch.id == data['branch_id']).all()
         schema = CostCenterSchema(many=True)
         cost_centers_data = [] if len(cost_centers) == 0 else schema.dump(cost_centers).data

@@ -60,6 +60,7 @@ export class DetailsFormatterComponent implements  OnInit{
         return Object.keys(mappings);
     }
     static lookupValue(mappings, key) {
+        console.log(mappings, key);
         let r =  mappings[key];
         if(! r){
             r = mappings["'"+key+"'"];
