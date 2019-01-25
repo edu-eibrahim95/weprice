@@ -47,11 +47,6 @@ export class CostCenterOverviewComponent implements OnInit {
                 {headerName: '', field: 'check', checkboxSelection:true, width:60},
                 {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
                 {headerName: 'Cost Center', field: 'name'},
-                {headerName: 'Area', field: 'area' },
-                {headerName: 'Work Hours / Day', field: 'workhours_qt'},
-                {headerName: 'Work Days / Month', field: 'workdays_qt'},
-                {headerName: 'Machines QT', field: 'machines_qt'},
-                {headerName: 'Sales Revenue', field: 'sales_revenue'},
                 {headerName: 'Type', field: 'type', cellRendererParams: {c: this}, cellRenderer: function(params) {
                         let c = params.c;
                         if (params.value == 0){
@@ -67,6 +62,15 @@ export class CostCenterOverviewComponent implements OnInit {
                             return c.translate.instant("costa.comm")
                         }
                     } },
+                {headerName: 'Area', field: 'area' },
+                {headerName: 'Work Hours / Day', field: 'workhours_qt', cellRenderer: function(params) {
+                        if (params.data.type != 2) return '-'; else return params.value}},
+                {headerName: 'Work Days / Month', field: 'workdays_qt', cellRenderer: function(params) {
+                        if (params.data.type != 2) return '-'; else return params.value}},
+                {headerName: 'Machines QT', field: 'machines_qt', cellRenderer: function(params) {
+                        if (params.data.type != 2) return '-'; else return params.value}},
+                {headerName: 'Sales Revenue', field: 'sales_revenue', cellRenderer: function(params) {
+                        if (params.data.type != 3) return '-'; else return params.value}},
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.cost_centers.length; i++){
