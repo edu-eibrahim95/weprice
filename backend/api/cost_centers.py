@@ -99,7 +99,7 @@ class GetCostCenterRatio(Resource):
         add = able('add', 'cost_centers')
         edit = able('edit', 'cost_centers')
         delete = able('delete', 'cost_centers')
-        cost_centers = CostCenter.query.filter(CostCenter.id != cost_center_id).filter(CostCenter.type != 0).join(Branch, Branch.id == CostCenter.branch_id) \
+        cost_centers = CostCenter.query.filter(CostCenter.id != cost_center_id).filter(CostCenter.abs_order > cost_center.abs_order).filter(CostCenter.type != 0).join(Branch, Branch.id == CostCenter.branch_id) \
             .filter(Branch.installation_id == get_user().installation_id).filter(Branch.id == data['branch_id']).all()
         cost_center_options = {}
         for cost_center in cost_centers:
