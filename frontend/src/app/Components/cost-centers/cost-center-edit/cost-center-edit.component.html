@@ -42,7 +42,7 @@
                      name="area" #area="ngModel" ngModel placeholder="Enter Area" [ngModel]="cost_center.area">
             </div>
           </div><!-- row -->
-          <div class="row no-gutters d-none direct">
+          <div class="row no-gutters {{ cost_center.type == 2 ? '' : 'd-none'}} direct">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "coste.hours" | translate }}
             </div><!-- col-4 -->
@@ -51,7 +51,7 @@
                      name="workhours_qt" #workhours_qt="ngModel" ngModel placeholder="Enter Work hours per day" [ngModel]="cost_center.workhours_qt">
             </div><!-- col-8 -->
           </div><!-- row -->
-          <div class="row no-gutters d-none direct">
+          <div class="row no-gutters {{ cost_center.type == 2 ? '' : 'd-none'}} direct">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "coste.days" | translate }}
             </div><!-- col-4 -->
@@ -60,7 +60,7 @@
                      name="workdays_qt" #workdays_qt="ngModel" ngModel placeholder="Enter Work hours per day" [ngModel]="cost_center.workdays_qt">
             </div><!-- col-8 -->
           </div><!-- row -->
-          <div class="row no-gutters d-none direct">
+          <div class="row no-gutters {{ cost_center.type == 2 ? '' : 'd-none'}} direct">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "coste.mach" | translate }}
             </div><!-- col-4 -->
@@ -69,7 +69,7 @@
                      name="machines_qt" #machines_qt="ngModel" ngModel placeholder="Enter Machines Quantity:" [ngModel]="cost_center.machines_qt">
             </div>
           </div><!-- row -->
-          <div class="row no-gutters d-none comm">
+          <div class="row no-gutters {{ cost_center.type == 3 ? '' : 'd-none'}} comm">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "coste.sales" | translate }}
             </div><!-- col-4 -->
@@ -78,7 +78,7 @@
                      name="sales_revenue" #sales_revenue="ngModel" ngModel placeholder="Enter Sales Revenue:" [ngModel]="cost_center.sales_revenue">
             </div>
           </div><!-- row -->
-                    <div class="row no-gutters d-none comm">
+                    <div class="row no-gutters {{ cost_center.type == 3 ? '' : 'd-none'}} comm">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "costo.day_rec_qt" | translate }}
             </div><!-- col-4 -->
