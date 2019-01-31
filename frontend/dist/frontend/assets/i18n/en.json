@@ -6,6 +6,7 @@
     "files": "Files",
     "branches": "Branches",
     "cost_centers": "Cost Centers",
+    "cost_center": "Cost Center",
     "accounts": "Accounts",
     "products": "Products",
     "finished_products": "Finished Products",
@@ -534,5 +535,19 @@
     "manage":"Manage Spots",
     "active": "Active",
     "not_active": "Not Active"
+  },
+  "entry_accounts": {
+    "title" : "Entry Accounts",
+    "single" : "Entry Account",
+    "new" : "Add Entry Accounts",
+    "single_new" : "Add new Entry Account",
+    "select_cost_center" : "Select Cost Center",
+    "expense" : "Expense",
+    "reference_date" : "reference_date",
+    "revenue" : "Revenue",
+    "entry_date" : "Entry Date",
+    "due_date" : "Due Date",
+    "historic" : "Historic",
+    "entry_value" : "Entry Value"
   }
 }

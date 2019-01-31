@@ -14,6 +14,7 @@ from api.product_classifs import register_productclassifs_routes
 from api.asset_types import register_asset_types_routes
 from api.locals import register_locals_routes
 from api.spots import register_spots_routes
+from api.entry_accounts import register_entry_accounts_routes
 
 
 class BluePrint:
@@ -39,3 +40,4 @@ def register_api_routes():
     register_asset_types_routes()
     register_locals_routes()
     register_spots_routes()
+    register_entry_accounts_routes()

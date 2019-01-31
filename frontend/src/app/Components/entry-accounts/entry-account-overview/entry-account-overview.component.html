@@ -1,0 +1,103 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="br-mainpanel" xmlns="">
+  <div class="pd-30">
+    <h4 class="tx-gray-800 mg-b-5"> {{ 'taxo.tax' | translate }} </h4>
+    <p class="mg-b-0">{{ 'taxo.list' | translate }} </p>
+  </div><!-- d-flex -->
+  <div class="br-pagebody">
+    <div class="br-section-wrapper">
+      <div class="text-right">
+        <a href="#" (click)="massDeleteEntryAccounts()" class="btn btn-danger mg-r-10" *ngIf="delete">{{ "globals.mass" | translate }}</a>
+        <a routerLink="/entry_accounts/add" class="btn btn-success" *ngIf="add"> {{ 'globals.new' | translate }}</a>
+      </div>
+      <hr>
+      <form #f="ngForm" role="form" (ngSubmit)="onSubmit(f);">
+        <div class="form-layout form-layout-1">
+          <div class="row mg-b-10">
+            <div class="col-lg-3">
+              <label class="form-control-label">Entry Account Type:</label>
+              <div class="form-group">
+                <label class="rdiobox">
+                  <input name="type" #type="ngModel" ngModel type="radio" value="-1">
+                  <span>All</span>
+                </label>
+                <label class="rdiobox">
+                  <input name="type" #type="ngModel" ngModel type="radio" value="0">
+                  <span>Expenses</span>
+                </label>
+                <label class="rdiobox">
+                  <input name="type" #type="ngModel" ngModel type="radio" value="1">
+                  <span>Revenues</span>
+                </label>
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label for="select2-c" class="form-control-label">Account:</label>
+                <div class="row">
+                  <select id="select2-c" class="form-control select2-hidden-accessible"
+                          aria-hidden="true" name="account_id" #account_id="ngModel" ngModel [ngModel]="0">
+                    <option value="0" selected="">{{ 'taxa.select' | translate }}</option>
+                    <option *ngFor="let account of accounts" value="{{account.id}}">{{account.code}}</option>
+                  </select>
+                </div>
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <label class="form-control-label">Historic:</label>
+                <div class="row">
+                  <input class="form-control" type="text" placeholder="Enter Historic"
+                         name="historic" #historic="ngModel" ngModel>
+                </div>
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-lg-6">
+              <div class="form-group mg-b-10-force">
+                <label class="form-control-label">Ref Period: </label>
+                <div class="row">
+                  <input class="form-control col-lg-5" type="date" name="reference_date_start" #reference_date_start="ngModel" ngModel>
+                  <label class="col-lg-1 text-center" style="line-height: 40px">to:</label>
+                  <input class="form-control col-lg-4" type="date" name="reference_date_end" #reference_date_end="ngModel" ngModel>
+                </div>
+              </div>
+            </div><!-- col-8 -->
+            <div class="col-lg-6">
+              <div class="form-group mg-b-10-force">
+                <label class="form-control-label">Due Period: </label>
+                <div class="row">
+                  <input class="form-control col-lg-5" type="date" name="due_date_start" #due_date_start="ngModel" ngModel>
+                  <label class="col-lg-1 text-center" style="line-height: 40px">to:</label>
+                  <input class="form-control col-lg-4" type="date" name="due_date_end" #due_date_end="ngModel" ngModel>
+                </div>
+              </div>
+            </div><!-- col-8 -->
+            <div class="col-lg-12 text-center">
+              <hr>
+              <input type="submit" class="btn btn-primary col-lg-2" value="Filter">
+            </div>
+          </div><!-- row -->
+        </div>
+      </form>
+      <ag-grid-angular
+              style="width: 100%;"
+              class="ag-theme-material"
+              [rowData]="rowData"
+              [columnDefs]="columnDefs"
+              [enableSorting]="true"
+              [enableFilter]="true"
+              [frameworkComponents]="frameworkComponents"
+              rowSelection="multiple"
+              [rowMultiSelectWithClick]="true"
+              (gridReady)="onGridReady($event)"
+              (firstDataRendered)="onFirstDataRendered($event)"
+              (gridSizeChanged)="onFirstDataRendered($event)"
+              domLayout='autoHeight'
+              pagination="true"
+              paginationPageSize="10"
+      >
+      </ag-grid-angular>
+    </div>
+  </div>
+</div>

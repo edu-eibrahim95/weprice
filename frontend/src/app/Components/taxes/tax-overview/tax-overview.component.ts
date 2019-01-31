@@ -3,7 +3,6 @@ import {Subscription} from "rxjs";
 import {Tax} from "../../../Models/tax";
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {TaxService} from "../../../Services/tax.service";
-import * as $ from 'jquery';
 
 @Component({
     selector: 'app-tax-overview',

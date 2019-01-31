@@ -63,6 +63,11 @@ import {SpotsComponent} from "../Components/spots/spots.component";
 import {SpotOverviewComponent} from "../Components/spots/spot-overview/spot-overview.component";
 import {SpotAddComponent} from "../Components/spots/spot-add/spot-add.component";
 import {SpotEditComponent} from "../Components/spots/spot-edit/spot-edit.component";
+import {EntryAccount} from "../Models/entry_account";
+import {EntryAccountOverviewComponent} from "../Components/entry-accounts/entry-account-overview/entry-account-overview.component";
+import {EntryAccountAddComponent} from "../Components/entry-accounts/entry-account-add/entry-account-add.component";
+import {EntryAccountEditComponent} from "../Components/entry-accounts/entry-account-edit/entry-account-edit.component";
+import {EntryAccountsComponent} from "../Components/entry-accounts/entry-accounts.component";
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -179,6 +184,14 @@ const appRoutes: Routes = [
             { path: '', component: SpotOverviewComponent },
             { path: 'add', component: SpotAddComponent },
             { path: 'edit/:rule_id', component: SpotEditComponent }
+        ],
+        canActivate: [AuthGuard]
+    },
+    { path: 'entry_accounts', component: EntryAccountsComponent,
+        children: [
+            { path: '', component: EntryAccountOverviewComponent },
+            { path: 'add', component: EntryAccountAddComponent },
+            { path: 'edit/:rule_id', component: EntryAccountEditComponent }
         ],
         canActivate: [AuthGuard]
     },

@@ -86,6 +86,10 @@ import { SpotAddComponent } from './Components/spots/spot-add/spot-add.component
 import { SpotEditComponent } from './Components/spots/spot-edit/spot-edit.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { EntryAccountsComponent } from './Components/entry-accounts/entry-accounts.component';
+import { EntryAccountOverviewComponent } from './Components/entry-accounts/entry-account-overview/entry-account-overview.component';
+import { EntryAccountAddComponent } from './Components/entry-accounts/entry-account-add/entry-account-add.component';
+import { EntryAccountEditComponent } from './Components/entry-accounts/entry-account-edit/entry-account-edit.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -160,7 +164,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SpotsComponent,
     SpotOverviewComponent,
     SpotAddComponent,
-    SpotEditComponent
+    SpotEditComponent,
+    EntryAccountsComponent,
+    EntryAccountOverviewComponent,
+    EntryAccountAddComponent,
+    EntryAccountEditComponent
   ],
   entryComponents: [
     ActionsFormatterComponent,

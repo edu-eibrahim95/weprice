@@ -9364,7 +9364,8 @@ textarea.parsley-error:active {
 /***** FORM LAYOUT 1 *****/
 .form-layout-1 {
   border: 1px solid #ced4da;
-  padding: 30px;
+  padding: 15px 30px;
+  background: #eee;
 }
 .form-layout-1 .form-group {
   margin-bottom: 30px;

@@ -17,3 +17,4 @@ from models.Asset import Asset, AssetSchema, AssetCostCenterSchema, AssetCostCen
 from models.FixedAssetType import AssetTypeSchema, AssetType
 from models.Local import LocalSchema, Local
 from models.Spot import SpotSchema, Spot
+from models.EntryAccount import EntryAccountSchema, EntryAccount
