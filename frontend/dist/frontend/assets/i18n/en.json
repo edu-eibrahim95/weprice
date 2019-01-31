@@ -538,6 +538,7 @@
   },
   "entry_accounts": {
     "title" : "Entry Accounts",
+    "list" : "List of existing Entry Accounts",
     "single" : "Entry Account",
     "new" : "Add Entry Accounts",
     "single_new" : "Add new Entry Account",
