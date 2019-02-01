@@ -14,7 +14,7 @@ import * as $ from 'jquery';
     styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-
+    formChanged = false;
     productClassifSubs: Subscription;
     productClassifs : ProductClassif[];
     productSubs: Subscription;
@@ -24,11 +24,18 @@ export class ProductEditComponent implements OnInit {
     ngOnInit() {
         this.productSubs = this.productsApi.getProduct(this.route.params['value']['rule_id']).subscribe(res => {
             this.product = res['product'];
+            let c = this;
             $(document).ready(function () {
                 let float_inputs = $(".float-input");
                 float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
                 float_inputs.on('change',function() {
                     $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
                 });
             });
         });
@@ -49,7 +56,12 @@ export class ProductEditComponent implements OnInit {
         );
     }
     onCancel(){
-        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/products']);
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/products']);
+        }
+        else {
+            this.router.navigate(['/products']);
+        }
         return false;
     }
 

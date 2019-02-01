@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Branch} from "../../../Models/branch";
 import {Subscription} from "rxjs/Rx";
-import {Installation} from "../../../Models/installation";
 import {Router, ActivatedRoute} from "@angular/router";
 import {BranchService} from "../../../Services/branch.service";
 import {NgForm} from "@angular/forms";
@@ -16,6 +15,7 @@ export class BranchEditComponent implements OnInit {
     branchesSubs: Subscription;
     branches : Branch[];
     branch : Branch;
+    formChanged = false;
     constructor(private branchesApi: BranchService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
@@ -25,14 +25,20 @@ export class BranchEditComponent implements OnInit {
         this.branchesSubs = this.branchesApi.getBranch(this.route.params['value']['rule_id']).subscribe(res => {
             this.branch = res['branch'];
             this.branches = this.branches.filter(e => e.id != this.branch.id);
-
+            let c = this;
             $(document).ready(function () {
-            let float_inputs = $(".float-input");
-            float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
-            float_inputs.on('change',function() {
-                $(this).val(parseFloat($(this).val()).toFixed(2));
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
+                });
             });
-        });
         });
 
     }
@@ -53,9 +59,14 @@ export class BranchEditComponent implements OnInit {
         let type = $("select[name=type]").val();
         this.branch.type = type;
     }
-  onCancel(){
-      if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/branches']);
-      return false;
+    onCancel(){
+        if(this.formChanged){
+            if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/branches']);
+        }
+        else{
+            this.router.navigate(['/branches']);
+        }
+        return false;
     }
 
 }

@@ -39,8 +39,8 @@
     "sin": "Sintetic",
     "analit": "Analitic",
     "nat": "Account Nat:",
-    "debit": "Debit",
-    "cred": "Credit",
+    "debit": "Expense",
+    "cred": "Revenue",
     "expense": "Expense Type:",
     "fix": "Fixed",
     "var": "Variable",
@@ -71,13 +71,12 @@
   "acc_edit": {
     "acc": "Accounts",
     "edit": "Edit Account",
-    "edit": "Edit Account",
     "acc_type": "Account Type:",
     "sin": "Sintetic",
     "analit": "Analitic",
     "nat": "Account Nat:",
-    "deb": "Debit",
-    "cred": "Credit",
+    "deb": "Expense",
+    "cred": "Revenue",
     "expense": "Expense Type:",
     "fix": "Fixed",
     "var": "Variable",
@@ -544,11 +543,12 @@
     "single_new" : "Add new Entry Account",
     "select_cost_center" : "Select Cost Center",
     "expense" : "Expense",
-    "reference_date" : "reference_date",
+    "reference_date" : "Reference Date",
     "revenue" : "Revenue",
     "entry_date" : "Entry Date",
     "due_date" : "Due Date",
     "historic" : "Historic",
-    "entry_value" : "Entry Value"
+    "entry_value" : "Entry Value",
+    "payment_date" : "Payment Date"
   }
 }

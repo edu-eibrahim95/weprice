@@ -18,6 +18,7 @@ export class TaxEditComponent implements OnInit {
     accountsSubs: Subscription;
     accounts : Account[];
     tax : Tax;
+    formChanged = false;
     constructor(private accountsApi: AccountService, private taxesApi : TaxService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
@@ -26,11 +27,18 @@ export class TaxEditComponent implements OnInit {
         });
         this.taxesSubs = this.taxesApi.getTax(this.route.params['value']['rule_id']).subscribe(res => {
             this.tax = res['tax'];
+            let c = this;
             $(document).ready(function () {
                 let float_inputs = $(".float-input");
                 float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
                 float_inputs.on('change',function() {
                     $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
                 });
             });
         });
@@ -48,7 +56,12 @@ export class TaxEditComponent implements OnInit {
         );
     }
     onCancel(){
-        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/taxes']);
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/taxes']);
+        }
+        else {
+            this.router.navigate(['/taxes']);
+        }
         return false;
     }
 }

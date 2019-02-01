@@ -4,6 +4,7 @@ import {User} from "../../../Models/user";
 import {UserService} from "../../../Services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-user-edit',
@@ -11,7 +12,7 @@ import {NgForm} from "@angular/forms";
     styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
-
+    formChanged = false;
     userSubs: Subscription;
     user : User;
     constructor(private usersApi: UserService, private router: Router, private route: ActivatedRoute) { }
@@ -19,6 +20,20 @@ export class UserEditComponent implements OnInit {
     ngOnInit() {
         this.userSubs = this.usersApi.getUser(this.route.params['value']['rule_id']).subscribe(res => {
             this.user = res['user'];
+            let c = this;
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
+                });
+            });
         });
     }
 
@@ -35,7 +50,12 @@ export class UserEditComponent implements OnInit {
         );
     }
     onCancel(){
-        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/users']);
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/users']);
+        }
+        else {
+            this.router.navigate(['/users']);
+        }
         return false;
     }
 }

@@ -9,13 +9,13 @@ import {NgForm} from "@angular/forms";
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-asset-type-edit',
-  templateUrl: './asset-type-edit.component.html',
-  styleUrls: ['./asset-type-edit.component.css']
+    selector: 'app-asset-type-edit',
+    templateUrl: './asset-type-edit.component.html',
+    styleUrls: ['./asset-type-edit.component.css']
 })
 export class AssetTypeEditComponent implements OnInit {
-
-  assetTypesSubs: Subscription;
+    formChanged = false;
+    assetTypesSubs: Subscription;
     accountsSubs: Subscription;
     accounts : Account[];
     asset_type : AssetType;
@@ -27,11 +27,18 @@ export class AssetTypeEditComponent implements OnInit {
         });
         this.assetTypesSubs = this.assetTypesApi.getAssetType(this.route.params['value']['rule_id']).subscribe(res => {
             this.asset_type = res['asset_type'];
+            let c = this;
             $(document).ready(function () {
                 let float_inputs = $(".float-input");
                 float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
                 float_inputs.on('change',function() {
                     $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
                 });
             });
         });
@@ -48,9 +55,14 @@ export class AssetTypeEditComponent implements OnInit {
             console.error
         );
     }
-  onCancel(){
-      if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/asset_types']);
-      return false;
+    onCancel(){
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/asset_types']);
+        }
+        else {
+            this.router.navigate(['/asset_types']);
+        }
+        return false;
     }
 
 }

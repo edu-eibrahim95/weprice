@@ -18,6 +18,7 @@ export class CostCenterEditComponent implements OnInit{
     branchesSubs: Subscription;
     branches : Branch[];
     cost_center: CostCenter;
+    formChanged = false;
     constructor(private branchesApi: BranchService,private costCentersApi: CostCentersService,private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
@@ -26,12 +27,18 @@ export class CostCenterEditComponent implements OnInit{
         });
         this.costCentersSubs = this.costCentersApi.getCostCenter(this.route.params['value']['rule_id']).subscribe(res => {
             this.cost_center = res['cost_center'];
-
+            let c = this;
             $(document).ready(function () {
                 let float_inputs = $(".float-input");
                 float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
                 float_inputs.on('change',function() {
                     $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
                 });
             });
 
@@ -50,7 +57,12 @@ export class CostCenterEditComponent implements OnInit{
         );
     }
     onCancel(){
-        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/cost_centers']);
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/cost_centers']);
+        }
+        else {
+            this.router.navigate(['/cost_centers']);
+        }
         return false;
     }
     changeType() {

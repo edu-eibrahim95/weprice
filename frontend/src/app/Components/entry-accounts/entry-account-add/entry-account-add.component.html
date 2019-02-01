@@ -11,87 +11,105 @@
         <div class="form-layout form-layout-6">
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
-              {{ 'taxa.acc' | translate }}
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-c" class="form-control select2-hidden-accessible"
-                      aria-hidden="true" name="account_id" #account_id="ngModel" ngModel [ngModel]="0">
-                <option value="0" selected="">{{ 'taxa.select' | translate }}</option>
-                <option *ngFor="let account of accounts" value="{{account.id}}">{{account.code}}</option>
-              </select>
-            </div><!-- col-8 -->
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              {{ 'globals.cost_center' | translate }}
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-g" class="form-control select2-hidden-accessible"
-                      aria-hidden="true" name="cost_center_id" #cost_center_id="ngModel" ngModel [ngModel]="0">
-                <option value="0" selected="">{{ 'entry_accounts.select_cost_center' | translate }}</option>
-                <option *ngFor="let cost_center of cost_centers" value="{{cost_center.id}}">{{cost_center.name}}</option>
-              </select>
-            </div><!-- col-8 -->
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
               {{ "brancha.type" | translate }}
-            </div><!-- col-4 -->
+            </div>
+            <!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <select id="select2-b" class="form-control select2-hidden-accessible"
-                      aria-hidden="true" name="type" #type="ngModel" ngModel [ngModel]="0">
+              <select id="select2-b" class="form-control select2-hidden-accessible" aria-hidden="true" name="type" #type="ngModel" ngModel
+                [ngModel]="0" (change)="filterAccounts()">
                 <option value="0" selected="">{{ "entry_accounts.expense" | translate }}</option>
                 <option value="1">{{ "entry_accounts.revenue" | translate }}</option>
               </select>
-            </div><!-- col-8 -->
-          </div><!-- row -->
+            </div>
+            <!-- col-8 -->
+          </div>
+          <!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              {{ 'taxa.acc' | translate }}
+            </div>
+            <!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-c" class="form-control select2-hidden-accessible" aria-hidden="true" name="account_id" #account_id="ngModel"
+                ngModel [ngModel]="0" (change)="changeCostCenter(f)">
+                <option value="0" selected="">{{ 'taxa.select' | translate }}</option>
+                <option *ngFor="let account of accounts" value="{{account.id}}" data-value="{{account.type}}">{{account.code}} | {{account.description}}</option>
+              </select>
+            </div>
+            <!-- col-8 -->
+          </div>
+          <!-- row -->
+          <div class="row no-gutters only-expense-abs-type">
+            <div class="col-5 col-sm-4 col-md-3">
+              {{ 'globals.cost_center' | translate }}
+            </div>
+            <!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <select id="select2-g" class="form-control select2-hidden-accessible" aria-hidden="true" name="cost_center_id" #cost_center_id="ngModel"
+                ngModel [ngModel]="0">
+                <option value="0" selected="">{{ 'entry_accounts.select_cost_center' | translate }}</option>
+                <option *ngFor="let cost_center of cost_centers" value="{{cost_center.id}}">{{cost_center.name}} | {{cost_center.description}}</option>
+              </select>
+            </div>
+            <!-- col-8 -->
+          </div>
+          <!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
               {{ 'entry_accounts.reference_date' | translate }}
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="date"
-                     name="reference_date" #reference_date="ngModel" ngModel placeholder="Enter Reference Date">
             </div>
-          </div><!-- row -->
-          <div class="row no-gutters">
-            <div class="col-5 col-sm-4 col-md-3">
-              {{ 'entry_accounts.entry_date' | translate }}
-            </div><!-- col-4 -->
+            <!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="date"
-                     name="entry_date" #entry_date="ngModel" ngModel placeholder="Enter Entry Date:">
+              <input class="form-control" type="date" name="reference_date" #reference_date="ngModel" ngModel placeholder="Enter Reference Date">
             </div>
-          </div><!-- row -->
+          </div>
+          <!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
               {{ 'entry_accounts.due_date' | translate }}
-            </div><!-- col-4 -->
-            <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="date"
-                     name="due_date" #due_date="ngModel" ngModel placeholder="Enter Due Date:">
             </div>
-          </div><!-- row -->
+            <!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="date" name="due_date" #due_date="ngModel" ngModel placeholder="Enter Due Date:">
+            </div>
+          </div>
+          <!-- row -->
+          <div class="row no-gutters">
+            <div class="col-5 col-sm-4 col-md-3">
+              {{ 'entry_accounts.payment_date' | translate }}
+            </div>
+            <!-- col-4 -->
+            <div class="col-7 col-sm-8 col-md-9">
+              <input class="form-control" type="date" name="payment_date" #payment_date="ngModel" ngModel placeholder="Enter Entry Date:">
+            </div>
+          </div>
+          <!-- row -->
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
               {{ "entry_accounts.historic" | translate }}
-            </div><!-- col-4 -->
+            </div>
+            <!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="text" placeholder="Enter Historic"
-                     name="historic" #historic="ngModel" ngModel>
-            </div><!-- col-8 -->
-          </div><!-- row -->
+              <input class="form-control" type="text" placeholder="Enter Historic" name="historic" #historic="ngModel" ngModel>
+            </div>
+            <!-- col-8 -->
+          </div>
+          <!-- row -->
 
           <div class="row no-gutters">
             <div class="col-5 col-sm-4 col-md-3">
               {{ 'entry_accounts.entry_value' | translate }}
-            </div><!-- col-4 -->
+            </div>
+            <!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control float-input" min="0"  step="0.01" type="number"
-                     name="entry_value" #entry_value="ngModel" ngModel placeholder="Enter Entry Value">
-            </div><!-- col-8 -->
-          </div><!-- row -->
-        </div><!-- form-layout -->
+              <input class="form-control float-input" min="0" step="0.01" type="number" name="entry_value" #entry_value="ngModel" ngModel
+                placeholder="Enter Entry Value">
+            </div>
+            <!-- col-8 -->
+          </div>
+          <!-- row -->
+        </div>
+        <!-- form-layout -->
         <hr>
         <div class="form-layout-footer mg-t-30 text-center">
           <button class="btn btn-info" type="submit"> {{ 'globals.sub' | translate }}</button>

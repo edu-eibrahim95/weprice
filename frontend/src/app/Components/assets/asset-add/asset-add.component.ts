@@ -10,6 +10,7 @@ import {AssetType} from "../../../Models/asset_type";
 import {Local} from "../../../Models/local";
 import {AssetTypeService} from "../../../Services/asset-type.service";
 import {LocalService} from "../../../Services/local.service";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-asset-add',
@@ -38,6 +39,13 @@ export class AssetAddComponent implements OnInit {
         this.localsSubs = this.localsApi.getLocals().subscribe(res => {
             this.locals = res['locals'];
         });
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+            });
     }
 
     onSubmit(f: NgForm) {

@@ -80,7 +80,7 @@ class AddEntryAccount(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('type', help='This field cannot be blank', required=True)
         self.parser.add_argument('reference_date', help='This field cannot be blank', required=True)
-        self.parser.add_argument('entry_date', help='This field cannot be blank', required=True)
+        self.parser.add_argument('payment_date', help='This field cannot be blank', required=True)
         self.parser.add_argument('due_date', help='This field cannot be blank', required=True)
         self.parser.add_argument('historic', help='This field cannot be blank', required=True)
         self.parser.add_argument('entry_value', help='This field cannot be blank', required=True)
@@ -95,7 +95,7 @@ class AddEntryAccount(Resource):
         entry_account = EntryAccount(
             type=data['type'],
             reference_date=data['reference_date'],
-            entry_date=data['entry_date'],
+            payment_date=data['payment_date'],
             due_date=data['due_date'],
             historic=data['historic'],
             entry_value=data['entry_value'],
@@ -138,7 +138,7 @@ class EditEntryAccount(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('type', help='This field cannot be blank', required=True)
         self.parser.add_argument('reference_date', help='This field cannot be blank', required=True)
-        self.parser.add_argument('entry_date', help='This field cannot be blank', required=True)
+        self.parser.add_argument('payment_date', help='This field cannot be blank', required=True)
         self.parser.add_argument('due_date', help='This field cannot be blank', required=True)
         self.parser.add_argument('historic', help='This field cannot be blank', required=True)
         self.parser.add_argument('entry_value', help='This field cannot be blank', required=True)
@@ -154,7 +154,7 @@ class EditEntryAccount(Resource):
             .filter(Branch.installation_id == get_user().installation_id).first()
         if not entry_account:
             return {'status': 0}
-        columns = ['type', 'reference_date', 'entry_date', 'due_date', 'historic', 'entry_value',
+        columns = ['type', 'reference_date', 'payment_date', 'due_date', 'historic', 'entry_value',
                    'account_id', 'cost_center_id']
         for i in columns:
             setattr(entry_account, '%s' % i, data[i])

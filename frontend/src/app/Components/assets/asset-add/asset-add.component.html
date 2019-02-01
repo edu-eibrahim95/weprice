@@ -54,7 +54,7 @@
               {{ "assets_add.invent" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number"
+              <input class="form-control float-input" type="number" min="0"  step="0.01"
                      name="inventory_qt" #inventory_qt="ngModel" ngModel placeholder="Enter salary">
             </div>
           </div><!-- row -->
@@ -63,7 +63,7 @@
               {{ "assets_add.unit" | translate }}
             </div><!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
-              <input class="form-control" type="number"
+              <input class="form-control float-input" type="number" min="0"  step="0.01"
                      name="cost_price_unit" #cost_price_unit="ngModel" ngModel placeholder="Enter cost_price_unit">
             </div>
           </div><!-- row -->

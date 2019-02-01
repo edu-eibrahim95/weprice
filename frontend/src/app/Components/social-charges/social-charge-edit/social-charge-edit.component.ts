@@ -14,7 +14,7 @@ import * as $ from 'jquery';
     styleUrls: ['./social-charge-edit.component.css']
 })
 export class SocialChargeEditComponent implements OnInit {
-
+    formChanged = false;
     socialChargesSubs: Subscription;
     accountsSubs: Subscription;
     accounts : Account[];
@@ -27,11 +27,18 @@ export class SocialChargeEditComponent implements OnInit {
         });
         this.socialChargesSubs = this.socialChargesApi.getSocialCharge(this.route.params['value']['rule_id']).subscribe(res => {
             this.social_charge = res['social_charge'];
+            let c = this;
             $(document).ready(function () {
                 let float_inputs = $(".float-input");
                 float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
                 float_inputs.on('change',function() {
                     $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
                 });
             });
         });
@@ -49,7 +56,12 @@ export class SocialChargeEditComponent implements OnInit {
         );
     }
     onCancel(){
-        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/social_charges']);
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/social_charges']);
+        }
+        else {
+            this.router.navigate(['/social_charges']);
+        }
         return false;
     }
 }

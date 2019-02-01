@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {ParameterService} from "../../../Services/parameter.service";
 import {Parameter} from "../../../Models/parameter";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-parameter-edit',
@@ -11,7 +12,7 @@ import {Parameter} from "../../../Models/parameter";
     styleUrls: ['./parameter-edit.component.css']
 })
 export class ParameterEditComponent implements OnInit {
-
+    formChanged = false;
     parameterSubs: Subscription;
     parameter : Parameter;
     constructor(private parametersApi: ParameterService, private router: Router, private route: ActivatedRoute) { }
@@ -19,6 +20,20 @@ export class ParameterEditComponent implements OnInit {
     ngOnInit() {
         this.parameterSubs = this.parametersApi.getParameter(this.route.params['value']['rule_id']).subscribe(res => {
             this.parameter = res['parameter'];
+            let c = this;
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
+                });
+            });
         });
     }
 
@@ -34,7 +49,12 @@ export class ParameterEditComponent implements OnInit {
         );
     }
     onCancel(){
-        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/parameters']);
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/parameters']);
+        }
+        else {
+            this.router.navigate(['/parameters']);
+        }
         return false;
     }
 }

@@ -14,6 +14,7 @@ import * as $ from 'jquery';
 export class AccountEditComponent implements OnInit {
     account: Account;
     accountsSubs: Subscription;
+    formChanged = false;
 
     constructor(private accountsApi: AccountService, private route: ActivatedRoute, private router: Router) {
     }
@@ -21,11 +22,18 @@ export class AccountEditComponent implements OnInit {
     ngOnInit() {
         this.accountsSubs = this.accountsApi.getAccount(this.route.params['value']['rule_id']).subscribe(res => {
             this.account = res['account'];
+            let c = this;
             $(document).ready(function () {
                 let float_inputs = $(".float-input");
                 float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
                 float_inputs.on('change',function() {
                     $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
                 });
             });
         });
@@ -45,7 +53,12 @@ export class AccountEditComponent implements OnInit {
         );
     }
     onCancel(){
-        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/accounts']);
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/accounts']);
+        }
+        else {
+            this.router.navigate(['/accounts']);
+        }
         return false;
     }
 }

@@ -66,7 +66,6 @@
     "flag": "Faturamento?:",
     "ear": "DistribuiÃ§Ã£o de Lucros?:"
   },
-
   "acc_edit": {
     "acc": "Contas",
     "edit": "AlteraÃ§Ã£o",
@@ -107,31 +106,31 @@
     "list": "Lista"
   },
   "asset_add": {
-    "type":"Tipo de Ativo",
-    "new_type":"Novo",
-    "anew_type":"Novo",
-    "acc":"Conta':",
-    "select":"Selecione",
-    "descript":"DescriÃ§Ã£o:",
-    "year":"Anos Vida Ãštil:",
-    "life":"Anos Vida Residual",
-    "interest":"%Juros ao Ano:"
+    "type": "Tipo de Ativo",
+    "new_type": "Novo",
+    "anew_type": "Novo",
+    "acc": "Conta':",
+    "select": "Selecione",
+    "descript": "DescriÃ§Ã£o:",
+    "year": "Anos Vida Ãštil:",
+    "life": "Anos Vida Residual",
+    "interest": "%Juros ao Ano:"
   },
   "asset_edit": {
-    "type":"Tipo de Ativo",
-    "new_type":"Novo",
-    "anew_type":"Novo",
-    "acc":"Conta':",
-    "select":"Selecione",
-    "descript":"DescriÃ§Ã£o:",
-    "year":"Anos Vida Ãštil:",
-    "life":"Anos Vida Residual",
-    "interest":"%Juros ao Ano:"
+    "type": "Tipo de Ativo",
+    "new_type": "Novo",
+    "anew_type": "Novo",
+    "acc": "Conta':",
+    "select": "Selecione",
+    "descript": "DescriÃ§Ã£o:",
+    "year": "Anos Vida Ãštil:",
+    "life": "Anos Vida Residual",
+    "interest": "%Juros ao Ano:"
   },
   "asset_overview": {
-    "type":"Tipos de Ativo",
-    "list":"Lista",
-    "asset":"Tipos"
+    "type": "Tipos de Ativo",
+    "list": "Lista",
+    "asset": "Tipos"
   },
   "assets_add": {
     "asset": "Ativos",
@@ -177,14 +176,14 @@
     "mem": "Not yet a member?",
     "up": "Sign Up"
   },
-  "signup":{
+  "signup": {
     "name": "Weprice",
     "plat": "Sign Up and make use of our platform",
     "privacy": "By clicking the Sign Up button below, you agreed to our privacy policy and terms of use of our website",
     "mem": "Already a Member?",
     "log": "Login"
   },
-  "brancha":{
+  "brancha": {
     "name": "Filiais",
     "new": "Nova",
     "anew": "Nova",
@@ -258,77 +257,76 @@
   },
   "costo": {
     "cost": "Centros de Custo",
-    "day_rec_qt" : "Day Rec QT",
-    "abs_order" : "Absolute Order",
+    "day_rec_qt": "Day Rec QT",
+    "abs_order": "Absolute Order",
     "list": "Lista"
   },
   "employa": {
-    "employ":"FuncionÃ¡rios",
-    "new":"InclusÃ£o",
-    "anew":"Novo",
-    "name":" Nome:",
-    "type":"Tipo:",
-    "stand":"Normal",
-    "dire":"Diretoria",
-    "train":"EstagiÃ¡rio",
-    "hire":"Data AdmissÃ£o:",
-    "diss":"Data DemissÃ£o:",
-    "salary":"SalÃ¡rio:",
-    "extra":"Adicionais:"
+    "employ": "FuncionÃ¡rios",
+    "new": "InclusÃ£o",
+    "anew": "Novo",
+    "name": " Nome:",
+    "type": "Tipo:",
+    "stand": "Normal",
+    "dire": "Diretoria",
+    "train": "EstagiÃ¡rio",
+    "hire": "Data AdmissÃ£o:",
+    "diss": "Data DemissÃ£o:",
+    "salary": "SalÃ¡rio:",
+    "extra": "Adicionais:"
   },
   "employe": {
-    "employ":"FuncionÃ¡rios",
-    "edit":"AlteraÃ§Ã£o",
-    "name":" Nome:",
-    "type":"Tipo:",
-    "stand":"Normal",
-    "dire":"Diretoria",
-    "train":"EstagiÃ¡rio",
-    "hire":"Data AdmissÃ£o:",
-    "diss":"Data DemissÃ£o:",
-    "salary":"SalÃ¡rio:",
-    "extra":"Adicionais:"
+    "employ": "FuncionÃ¡rios",
+    "edit": "AlteraÃ§Ã£o",
+    "name": " Nome:",
+    "type": "Tipo:",
+    "stand": "Normal",
+    "dire": "Diretoria",
+    "train": "EstagiÃ¡rio",
+    "hire": "Data AdmissÃ£o:",
+    "diss": "Data DemissÃ£o:",
+    "salary": "SalÃ¡rio:",
+    "extra": "Adicionais:"
   },
   "employo": {
-    "employ":"FuncionÃ¡rios",
-    "list":"Lista"
+    "employ": "FuncionÃ¡rios",
+    "list": "Lista"
   },
   "home": {
     "title": "Dashboard",
     "SELECT": "Change language",
     "we": "Weprice is the most accurate place for cost management",
-    "set":"Settings",
-    "branch":"Select Branch",
-    "subm":"Submit",
-    "visit":"Today's Visits",
-    "num":"1,975,224",
-    "anum":"24% higher yesterday",
-    "sales":"Today Sales",
-    "dollar":"$329,291",
-    "before":"$390,212 before tax",
-    "visits":"% Unique Visits",
-    "avg":"23% average duration",
-    "bounce":"Bounce Rate",
-    "time":"65.45% on average time",
-    "footer":"Copyright Â© 2019. WePrice. All Rights Reserved.",
-    "made":"Attentively and carefully made by "
+    "set": "Settings",
+    "branch": "Select Branch",
+    "subm": "Submit",
+    "visit": "Today's Visits",
+    "num": "1,975,224",
+    "anum": "24% higher yesterday",
+    "sales": "Today Sales",
+    "dollar": "$329,291",
+    "before": "$390,212 before tax",
+    "visits": "% Unique Visits",
+    "avg": "23% average duration",
+    "bounce": "Bounce Rate",
+    "time": "65.45% on average time",
+    "footer": "Copyright Â© 2019. WePrice. All Rights Reserved.",
+    "made": "Attentively and carefully made by "
   },
   "locala": {
-    "local":"Locais",
-    "new":"InclusÃ£o",
-    "anew":"Novo",
-    "descript":"DescriÃ§Ã£o:"
+    "local": "Locais",
+    "new": "InclusÃ£o",
+    "anew": "Novo",
+    "descript": "DescriÃ§Ã£o:"
   },
   "locale": {
-    "local":"Locais",
-    "edit":"AlteraÃ§Ã£o",
-    "descript":"DescriÃ§Ã£o:"
+    "local": "Locais",
+    "edit": "AlteraÃ§Ã£o",
+    "descript": "DescriÃ§Ã£o:"
   },
   "localo": {
-    "local":"Locais",
-    "list":"Lista",
-    "asset":"Ativos"
-
+    "local": "Locais",
+    "list": "Lista",
+    "asset": "Ativos"
   },
   "parama": {
     "param": "ParÃ¢metros",
@@ -349,44 +347,42 @@
   },
   "paramo": {
     "param": "ParÃ¢metros",
-    "list":"Lista"
-
+    "list": "Lista"
   },
   "classa": {
-    "prod":"ClassificaÃ§Ãµes",
-    "new":"InclusÃ£o",
-    "add":"Nova",
-    "group":" Grupo:",
-    "raw":"MatÃ©ria-Prima",
-    "finish":"Acabado",
-    "semi":"Semi-Acabado",
-    "res":"Revenda",
-    "pack":"Embalagem",
-    "des":"DescriÃ§Ã£o:",
-    "init":"Initial Flag  :"
+    "prod": "ClassificaÃ§Ãµes",
+    "new": "InclusÃ£o",
+    "add": "Nova",
+    "group": " Grupo:",
+    "raw": "MatÃ©ria-Prima",
+    "finish": "Acabado",
+    "semi": "Semi-Acabado",
+    "res": "Revenda",
+    "pack": "Embalagem",
+    "des": "DescriÃ§Ã£o:",
+    "init": "Initial Flag  :"
   },
   "classe": {
-    "prod":"ClassificaÃ§Ãµes",
-    "edit":"AlteraÃ§Ã£o",
-    "group":" Grupo:",
-    "raw":"MatÃ©ria-Prima",
-    "finish":"Acabado",
-    "semi":"Semi-Acabado",
-    "res":"Revenda",
-    "pack":"Embalagem",
-    "des":"DescriÃ§Ã£o:",
-    "init":"Initial Flag  :"
+    "prod": "ClassificaÃ§Ãµes",
+    "edit": "AlteraÃ§Ã£o",
+    "group": " Grupo:",
+    "raw": "MatÃ©ria-Prima",
+    "finish": "Acabado",
+    "semi": "Semi-Acabado",
+    "res": "Revenda",
+    "pack": "Embalagem",
+    "des": "DescriÃ§Ã£o:",
+    "init": "Initial Flag  :"
   },
   "classo": {
-    "prod":" ClassificaÃ§Ãµes",
-    "list":"Lista",
-    "prodo":"Produtos"
-
+    "prod": " ClassificaÃ§Ãµes",
+    "list": "Lista",
+    "prodo": "Produtos"
   },
   "producta": {
-    "prod":" Productos",
-    "new":"InclusÃ£o",
-    "add":"Novo",
+    "prod": " Productos",
+    "new": "InclusÃ£o",
+    "add": "Novo",
     "name": "Nome:",
     "des": "DescriÃ§Ã£o:",
     "class": "ClassificaÃ§Ã£o:",
@@ -394,11 +390,11 @@
     "simple": "Simples",
     "comp": "Composto'",
     "group": "Grupo:",
-    "raw":"MatÃ©ria-Prima'",
-    "finish":"Acabado",
-    "semi":"Semi-Acabado",
-    "res":"Revenda",
-    "pack":"Embalagem",
+    "raw": "MatÃ©ria-Prima'",
+    "finish": "Acabado",
+    "semi": "Semi-Acabado",
+    "res": "Revenda",
+    "pack": "Embalagem",
     "internal": "CÃ³digo Interno:",
     "unit": "Unid:",
     "currency": "Moeda",
@@ -407,9 +403,9 @@
     "day": "Day Sterm Recpt:"
   },
   "producte": {
-    "prod":" Produtos",
-    "edit":"AlteraÃ§Ã£o",
-    "edita":"Alterar",
+    "prod": " Produtos",
+    "edit": "AlteraÃ§Ã£o",
+    "edita": "Alterar",
     "name": "Nome:",
     "des": "DescriÃ§Ã£o:",
     "class": "ClassificaÃ§Ã£o:",
@@ -417,11 +413,11 @@
     "simple": "Simples",
     "comp": "Composto'",
     "group": "Grupo:",
-    "raw":"MatÃ©ria-Prima'",
-    "finish":"Acabado",
-    "semi":"Semi-Acabado",
-    "res":"Revenda",
-    "pack":"Embalagem",
+    "raw": "MatÃ©ria-Prima'",
+    "finish": "Acabado",
+    "semi": "Semi-Acabado",
+    "res": "Revenda",
+    "pack": "Embalagem",
     "internal": "CÃ³digo Interno:",
     "unit": "Unid:",
     "currency": "Moeda",
@@ -430,8 +426,8 @@
     "day": "Day Sterm Recpt:"
   },
   "producto": {
-    "prod":" Produtos",
-    "list":"Lista",
+    "prod": " Produtos",
+    "list": "Lista",
     "manage": "ClassificaÃ§Ãµes"
   },
   "sociala": {
@@ -455,11 +451,11 @@
     "charge": "%AlÃ­q:"
   },
   "socialo": {
-    "social":"Encargos Sociais",
-    "list":"Lista"
+    "social": "Encargos Sociais",
+    "list": "Lista"
   },
   "spota": {
-    "spot":"Spots",
+    "spot": "Spots",
     "new": "Add new Spot",
     "add": "Add a New Spot",
     "name": "Name:",
@@ -467,7 +463,7 @@
     "nic": "Nic Address:"
   },
   "spote": {
-    "spot":"Spots",
+    "spot": "Spots",
     "new": "InclusÃ£o",
     "add": "Novo",
     "name": "Nome:",
@@ -475,9 +471,9 @@
     "nic": "NIC:"
   },
   "spoto": {
-    "spot":"Spots",
-    "list":"Lista",
-    "user":"UsuÃ¡rios"
+    "spot": "Spots",
+    "list": "Lista",
+    "user": "UsuÃ¡rios"
   },
   "taxa": {
     "tax": "Impostos",
@@ -488,8 +484,8 @@
     "final": "Data Final:",
     "name": "NOME :",
     "init": "Data Inicial:",
-    "purch":"%AlÃ­q.Entrada:",
-    "sale":"%AlÃ­q.SaÃ­da:"
+    "purch": "%AlÃ­q.Entrada:",
+    "sale": "%AlÃ­q.SaÃ­da:"
   },
   "taxe": {
     "tax": "Impostos",
@@ -499,56 +495,57 @@
     "final": "Data Final:",
     "name": "NOME :",
     "init": "Data Inicial:",
-    "purch":"%AlÃ­q.Entrada:",
-    "sale":"%AlÃ­q.SaÃ­da:"
+    "purch": "%AlÃ­q.Entrada:",
+    "sale": "%AlÃ­q.SaÃ­da:"
   },
   "taxo": {
-    "tax":"Impostos",
-    "list":"Lista"
+    "tax": "Impostos",
+    "list": "Lista"
   },
   "usera": {
-    "user":"UsuÃ¡rios",
-    "new":"InclusÃ£o",
-    "add":"Novo",
-    "name":"Nome:",
-    "pass":"Senha:",
-    "full":"Nome Completo:",
-    "email":"Email:",
-    "act":" Ativo?:",
-    "init":"Data Inicial:",
-    "final":"Data Final:"
+    "user": "UsuÃ¡rios",
+    "new": "InclusÃ£o",
+    "add": "Novo",
+    "name": "Nome:",
+    "pass": "Senha:",
+    "full": "Nome Completo:",
+    "email": "Email:",
+    "act": " Ativo?:",
+    "init": "Data Inicial:",
+    "final": "Data Final:"
   },
   "usere": {
-    "user":"UsuÃ¡rios",
-    "edit":"AlteraÃ§Ã£o",
-    "name":"Nome:",
-    "pass":"Senha:",
-    "full":"Nome Completo:",
-    "email":"Email:",
-    "act":" Ativo?:",
-    "init":"Data Inicial:",
-    "final":"Data Final:"
+    "user": "UsuÃ¡rios",
+    "edit": "AlteraÃ§Ã£o",
+    "name": "Nome:",
+    "pass": "Senha:",
+    "full": "Nome Completo:",
+    "email": "Email:",
+    "act": " Ativo?:",
+    "init": "Data Inicial:",
+    "final": "Data Final:"
   },
   "usero": {
-    "user":"UsuÃ¡rios",
-    "list":"Lista",
-    "manage":"Spots",
+    "user": "UsuÃ¡rios",
+    "list": "Lista",
+    "manage": "Spots",
     "active": "Active",
     "not_active": "Not Active"
   },
   "entry_accounts": {
-    "title" : "Entry Accounts",
-    "list" : "List of existing Entry Accounts",
-    "single" : "Entry Account",
-    "new" : "Add Entry Accounts",
-    "single_new" : "Add new Entry Account",
-    "select_cost_center" : "Select Cost Center",
-    "expense" : "Expense",
-    "reference_date" : "reference_date",
-    "revenue" : "Revenue",
-    "entry_date" : "Entry Date",
-    "due_date" : "Due Date",
-    "historic" : "Historic",
-    "entry_value" : "Entry Value"
+    "title": "Entry Accounts",
+    "list": "List of existing Entry Accounts",
+    "single": "Entry Account",
+    "new": "Add Entry Accounts",
+    "single_new": "Add new Entry Account",
+    "select_cost_center": "Select Cost Center",
+    "expense": "Expense",
+    "reference_date": "reference_date",
+    "revenue": "Revenue",
+    "entry_date": "Entry Date",
+    "due_date": "Due Date",
+    "historic": "Historic",
+    "entry_value": "Entry Value",
+    "payment_date": "Payment Date"
   }
 }

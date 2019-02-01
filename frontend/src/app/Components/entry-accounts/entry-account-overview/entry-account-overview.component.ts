@@ -58,12 +58,21 @@ export class EntryAccountOverviewComponent implements OnInit {
                         }
                     } },
                 {headerName: 'Reference Date', field: 'reference_date' },
-                {headerName: 'Entry Date', field: 'entry_date'},
                 {headerName: 'Due Date', field: 'due_date'},
+                {headerName: 'Payment Date', field: 'payment_date'},                
                 {headerName: 'Historic', field: 'historic'},
                 {headerName: 'Entry Value', field: 'entry_value'},
                 {headerName: 'Account', field: 'account_name'},
-                {headerName: 'Cost Center', field: 'cost_center_name'},
+                {headerName: 'Cost Center', field: 'cost_center_name',cellRendererParams: {c: this}, cellRenderer: function(params) {
+                        let c = params.c;
+                        console.log(params);
+                        if (params.value == null){
+                            return "-";
+                        }
+                        else{
+                            return params.value;
+                        }
+                    }},
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.entryAccounts.length; i++){

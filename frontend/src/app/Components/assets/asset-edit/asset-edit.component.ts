@@ -10,6 +10,7 @@ import {AssetType} from "../../../Models/asset_type";
 import {Local} from "../../../Models/local";
 import {AssetTypeService} from "../../../Services/asset-type.service";
 import {LocalService} from "../../../Services/local.service";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-asset-edit',
@@ -17,7 +18,7 @@ import {LocalService} from "../../../Services/local.service";
     styleUrls: ['./asset-edit.component.css']
 })
 export class AssetEditComponent implements OnInit {
-
+    formChanged = false;
     branchesSubs: Subscription;
     branches : Branch[];
     assetSubs: Subscription;
@@ -34,6 +35,20 @@ export class AssetEditComponent implements OnInit {
         });
         this.assetSubs = this.assetsApi.getAsset(this.route.params['value']['rule_id']).subscribe(res => {
             this.asset = res['asset'];
+            let c = this;
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
+                });
+            });
         });
         this.assetTypesSubs = this.assetTypesApi.getAssetTypes().subscribe(res => {
             this.assetTypes = res['asset_types'];
@@ -56,7 +71,12 @@ export class AssetEditComponent implements OnInit {
         );
     }
     onCancel(){
-        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/assets']);
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/assets']);
+        }
+        else {
+            this.router.navigate(['/assets']);
+        }
         return false;
     }
 

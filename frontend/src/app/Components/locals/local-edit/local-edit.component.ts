@@ -4,21 +4,37 @@ import {Local} from "../../../Models/local";
 import {LocalService} from "../../../Services/local.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-local-edit',
-  templateUrl: './local-edit.component.html',
-  styleUrls: ['./local-edit.component.css']
+    selector: 'app-local-edit',
+    templateUrl: './local-edit.component.html',
+    styleUrls: ['./local-edit.component.css']
 })
 export class LocalEditComponent implements OnInit {
 
-   localsSubs: Subscription;
+    localsSubs: Subscription;
     local : Local;
+    formChanged = false;
     constructor(private localsApi: LocalService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.localsSubs = this.localsApi.getLocal(this.route.params['value']['rule_id']).subscribe(res => {
             this.local = res['local'];
+            let c = this;
+            $(document).ready(function () {
+                let float_inputs = $(".float-input");
+                float_inputs.each(function () { $(this).val(parseFloat($(this).val()).toFixed(2)); });
+                float_inputs.on('change',function() {
+                    $(this).val(parseFloat($(this).val()).toFixed(2));
+                });
+                $("input").on('change', function() {
+                    c.formChanged = true;
+                });
+                $("select").on('change', function() {
+                    c.formChanged = true;
+                });
+            });
         });
     }
 
@@ -34,7 +50,12 @@ export class LocalEditComponent implements OnInit {
         );
     }
     onCancel(){
-        if (confirm('Your changes will be lost, Are You Sure ?') ) this.router.navigate(['/locals']);
+        if(this.formChanged) {
+            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/locals']);
+        }
+        else {
+            this.router.navigate(['/locals']);
+        }
         return false;
     }
 }
