@@ -30,7 +30,9 @@
     "general": "General",
     "expenses": "Expenses",
     "results": "Results",
-    "mass": "Mass Delete"
+    "mass": "Mass Delete",
+    "are_you_sure": "Are You Sure ?",
+    "changes_will_be_lost": "Your changes will be lost, Are You Sure ?"
   },
   "acc_add": {
     "accounts": "Accounts",
@@ -171,7 +173,6 @@
     "local": "Manage Locals"
   },
   "signin": {
-    "bla": "Bracket Responsive Bootstrap 4 Admin Template",
     "name": "Weprice",
     "pass": "Forgot password?",
     "sign": "Sign In",
@@ -322,7 +323,7 @@
   },
   "locale": {
     "local":"Locals",
-    "edit":"Add new Local",
+    "edit":"Edit Local",
     "descript":"Description:"
   },
   "localo": {
@@ -467,8 +468,7 @@
   },
   "spote": {
     "spot":"Spots",
-    "new": "Add new Spot",
-    "add": "Add a New Spot",
+    "edit": "Edit Spot",
     "name": "Name:",
     "ip": "Ip Address:",
     "nic": "Nic Address:"
@@ -540,7 +540,9 @@
     "list" : "List of existing Entry Accounts",
     "single" : "Entry Account",
     "new" : "Add Entry Accounts",
+    "edit" : "Edit Entry Accounts",
     "single_new" : "Add new Entry Account",
+    "single_edit" : "Edit Entry Account",
     "select_cost_center" : "Select Cost Center",
     "expense" : "Expense",
     "reference_date" : "Reference Date",

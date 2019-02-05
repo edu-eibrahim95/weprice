@@ -30,7 +30,9 @@
     "general": "Geral",
     "expenses": "Despesas",
     "results": "Receitas",
-    "mass": "Excluir Sel"
+    "mass": "Excluir Sel",
+    "are_you_sure" : "Are You Sure ?",
+    "changes_will_be_lost" : "Your changes will be lost, Are You Sure ?"
   },
   "acc_add": {
     "accounts": "Contas",
@@ -128,7 +130,9 @@
     "descript":"Descrição:",
     "year":"Anos Vida Útil:",
     "life":"Anos Vida Residual",
-    "interest":"%Juros ao Ano:"
+    "interest":"%Juros ao Ano:",
+    "edit" : "Edit Asset Type",
+    "edit_asset" : "Edit Asset Type",
   },
   "asset_overview": {
     "type":"Tipos de Ativo",
@@ -162,7 +166,9 @@
     "date": "Data de Aquisição:",
     "start": "Data Início Depr:",
     "expire": "Data Término Depr:",
-    "dep": "Depreciável?:"
+    "dep": "Depreciável?:",
+    "flag" : "Depreciable Flag  :"
+
   },
   "assets_overview": {
     "asset": "Ativos",
@@ -221,7 +227,9 @@
     "day": "Dias por Mês:",
     "stock": "Meses em Estoque:",
     "rate": "%Part.Matéria-Prima:",
-    "rec": "Dias Prazo Recebimento:"
+    "rec": "Dias Prazo Recebimento:",
+    "nem" : "NAME:",
+    "raw" : "Raw Material Rate:"
   },
   "brancho": {
     "bran": "Filiais",
@@ -260,7 +268,9 @@
   },
   "costo": {
     "cost": "Centros de Custo",
-    "list": "Lista"
+    "list": "Lista",
+    "day_rec_qt" : "Day Rec QT",
+    "abs_order" : "Absolute Order"
   },
   "employa": {
     "employ":"Funcionários",
@@ -475,7 +485,8 @@
     "add": "Novo",
     "name": "Nome:",
     "ip": "IP:",
-    "nic": "NIC:"
+    "nic": "NIC:",
+    "edit" : "Edit Spot"
   },
   "spoto": {
     "spot":"Spots",
@@ -535,6 +546,26 @@
   "usero": {
     "user":"Usuários",
     "list":"Lista",
-    "manage":"Spots"
+    "manage":"Spots",
+    "active" : "Active",
+    "not_active" : "Not Active"
+  },
+  "entry_accounts": {
+    "title" : "Entry Accounts",
+    "list" : "List of existing Entry Accounts",
+    "single" : "Entry Account",
+    "new" : "Add Entry Accounts",
+    "edit" : "Edit Entry Accounts",
+    "single_new" : "Add new Entry Account",
+    "single_edit" : "Edit Entry Account",
+    "select_cost_center" : "Select Cost Center",
+    "expense" : "Expense",
+    "reference_date" : "Reference Date",
+    "revenue" : "Revenue",
+    "entry_date" : "Entry Date",
+    "due_date" : "Due Date",
+    "historic" : "Historic",
+    "entry_value" : "Entry Value",
+    "payment_date" : "Payment Date"
   }
 }

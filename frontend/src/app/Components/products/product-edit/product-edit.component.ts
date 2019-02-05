@@ -8,6 +8,8 @@ import {ProductClassif} from "../../../Models/product_classif";
 import {ProductClassifService} from "../../../Services/product-classif.service";
 import * as $ from 'jquery';
 import swal from "sweetalert2";
+import {Title} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-product-edit',
@@ -20,7 +22,7 @@ export class ProductEditComponent implements OnInit {
     productClassifs : ProductClassif[];
     productSubs: Subscription;
     product : Product;
-    constructor(private productsApi: ProductService, private router: Router, private route: ActivatedRoute, private productClassifApi: ProductClassifService) { }
+    constructor(private productsApi: ProductService, private router: Router, private route: ActivatedRoute, private productClassifApi: ProductClassifService, private titleService: Title, private translate: TranslateService) { }
 
     ngOnInit() {
         this.productSubs = this.productsApi.getProduct(this.route.params['value']['rule_id']).subscribe(res => {
