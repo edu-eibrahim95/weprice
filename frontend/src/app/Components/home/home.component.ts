@@ -19,14 +19,15 @@ export class HomeComponent implements OnInit {
     constructor(private branchesApi: BranchService, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
+        let c = this;
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
             this.branches = res['branches'];
             this.branch =  localStorage.getItem('branch_id');
+            $(document).ready(function () {
+                c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("globals.dashboard") );
+            });
         });
-        let c = this;
-        $(document).ready(function () {
-            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("globals.dashboard") );
-        });
+
     }
 
     changeBranch() {

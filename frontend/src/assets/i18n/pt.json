@@ -132,7 +132,7 @@
     "life":"Anos Vida Residual",
     "interest":"%Juros ao Ano:",
     "edit" : "Edit Asset Type",
-    "edit_asset" : "Edit Asset Type",
+    "edit_asset" : "Edit Asset Type"
   },
   "asset_overview": {
     "type":"Tipos de Ativo",

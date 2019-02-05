@@ -16,13 +16,13 @@ export class SignInComponent implements OnInit {
   loginSubs: Subscription;
   returnUrl: string;
 
-  constructor(private authApi: AuthService, private router: Router, private route: ActivatedRoute, private translate: TranslateService,private titleService: Title) { }
+  constructor(private authApi: AuthService, private router: Router, private route: ActivatedRoute, private titleService: Title) { }
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     let c = this;
     $(document).ready(function() {
-      c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("signin.sign") );
+      c.titleService.setTitle(  "WePrice - Login");
     });
   }
   onSubmit(f: NgForm) {
