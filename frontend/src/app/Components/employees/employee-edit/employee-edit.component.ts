@@ -7,6 +7,9 @@ import {NgForm} from "@angular/forms";
 import {Branch} from "../../../Models/branch";
 import {BranchService} from "../../../Services/branch.service";
 import * as $ from 'jquery';
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import swal from "sweetalert2";
 
 @Component({
     selector: 'app-employee-edit',
@@ -19,7 +22,7 @@ export class EmployeeEditComponent implements OnInit {
     employeeSubs: Subscription;
     employee : Employee;
     formChanged = false;
-    constructor(private branchesApi: BranchService, private employeesApi: EmployeeService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private branchesApi: BranchService, private employeesApi: EmployeeService, private router: Router, private route: ActivatedRoute, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
@@ -40,6 +43,7 @@ export class EmployeeEditComponent implements OnInit {
                 $("select").on('change', function() {
                     c.formChanged = true;
                 });
+                c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("employe.edit") );
             });
         });
     }
@@ -57,7 +61,9 @@ export class EmployeeEditComponent implements OnInit {
     }
     onCancel(){
         if(this.formChanged) {
-            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/employees']);
+            let c = this;
+            swal({type: 'warning', title: this.translate.instant("globals.are_you_sure") , text: this.translate.instant("globals.changes_will_be_lost") , showCancelButton: true})
+                .then(function(result){if (! result.dismiss){c.router.navigate(['/employees']);}});
         }
         else {
             this.router.navigate(['/employees']);

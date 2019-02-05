@@ -53,7 +53,7 @@ class GetEmployeeCostCenters(Resource):
         schema = EmployeeCostCenterSchema(many=True)
         employees_data = [] if len(employees) == 0 else schema.dump(employees).data
         cost_centers = CostCenter.query.join(Branch, Branch.id == CostCenter.branch_id) \
-            .filter(Branch.installation_id == get_user().installation_id).all()
+            .filter(Branch.installation_id == get_user().installation_id).filter(Branch.id == data['branch_id']).all()
         cost_center_options = {"0": "Choose Cost Center"}
         for cost_center in cost_centers:
             cost_center_options["{}".format(cost_center.id)] = cost_center.name

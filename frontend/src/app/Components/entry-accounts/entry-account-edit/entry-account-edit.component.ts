@@ -9,6 +9,9 @@ import { EntryAccountService } from "../../../Services/entry-account.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import * as $ from 'jquery';
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import swal from "sweetalert2";
 
 @Component({
     selector: 'app-entry-account-edit',
@@ -25,7 +28,7 @@ export class EntryAccountEditComponent implements OnInit {
     entryAccountsSubs: Subscription;
     formChanged = false;
 
-    constructor(private costCenterApi: CostCentersService, private accountsApi: AccountService, private entryAccountsApi: EntryAccountService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private costCenterApi: CostCentersService, private accountsApi: AccountService, private entryAccountsApi: EntryAccountService, private router: Router, private route: ActivatedRoute, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.accountsSubs = this.accountsApi.getAccounts().subscribe(res => {
@@ -52,6 +55,7 @@ export class EntryAccountEditComponent implements OnInit {
                 $("select").on('change', function () {
                     c.formChanged = true;
                 })
+                c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("entry_accounts.edit") );
             });
         });
     }
@@ -59,17 +63,19 @@ export class EntryAccountEditComponent implements OnInit {
     onSubmit(f: NgForm) {
         let parameter = JSON.stringify(f.value);
         this.entryAccountsSubs = this.entryAccountsApi.editEntryAccount(this.entry_account.id, parameter).subscribe(res => {
-            if (res == 1) {
-                this.router.navigate(['/entry_accounts']);
-                location.reload();
-            }
-        },
+                if (res == 1) {
+                    this.router.navigate(['/entry_accounts']);
+                    location.reload();
+                }
+            },
             console.error
         );
     }
     onCancel() {
         if (this.formChanged) {
-            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/entry_accounts']);
+            let c = this;
+            swal({type: 'warning', title: this.translate.instant("globals.are_you_sure") , text: this.translate.instant("globals.changes_will_be_lost") , showCancelButton: true})
+                .then(function(result){if (! result.dismiss){c.router.navigate(['/entry_accounts']);}});
         }
         else {
             this.router.navigate(['/entry_accounts']);
@@ -93,7 +99,7 @@ export class EntryAccountEditComponent implements OnInit {
                     values.cost_center_id = 0;
                     console.log(values);
                     f.setValue(values);
-                    }
+                }
             }
             else {
                 $(".only-expense-abs-type").hide();

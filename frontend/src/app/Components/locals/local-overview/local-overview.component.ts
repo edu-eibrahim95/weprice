@@ -4,6 +4,9 @@ import {Local} from "../../../Models/local";
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {LocalService} from "../../../Services/local.service";
 import * as $ from 'jquery';
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-local-overview',
@@ -24,7 +27,7 @@ export class LocalOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private localsApi : LocalService) { }
+    constructor(private localsApi : LocalService, private translate: TranslateService,private titleService: Title) { }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
     }
@@ -52,6 +55,10 @@ export class LocalOverviewComponent implements OnInit {
                 };
             }
             this.rowData = this.locals;
+        });
+        let c = this;
+        $(document).ready(function() {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("localo.local") );
         });
     }
 

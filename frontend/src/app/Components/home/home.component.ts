@@ -3,6 +3,9 @@ import {Subscription} from "rxjs";
 import {Branch} from "../../Models/branch";
 import {BranchService} from "../../Services/branch.service";
 import * as $ from 'jquery';
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-home',
@@ -13,12 +16,16 @@ export class HomeComponent implements OnInit {
     branchesSubs: Subscription;
     branches : Branch[];
     branch :string;
-    constructor(private branchesApi: BranchService) { }
+    constructor(private branchesApi: BranchService, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
             this.branches = res['branches'];
             this.branch =  localStorage.getItem('branch_id');
+        });
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("globals.dashboard") );
         });
     }
 

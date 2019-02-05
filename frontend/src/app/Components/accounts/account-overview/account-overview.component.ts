@@ -6,6 +6,7 @@ import {AccountService} from "../../../Services/account.service";
 import * as $ from 'jquery';
 import {AccountDetailsComponent} from "../../partials/account-details/account-details.component";
 import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-account-overview',
@@ -28,7 +29,7 @@ export class AccountOverviewComponent implements OnInit {
         detailsFormatterComponent: AccountDetailsComponent
     };
 
-    constructor(private accountsApi: AccountService,  private translate: TranslateService) { }
+    constructor(private accountsApi: AccountService,  private translate: TranslateService,private titleService: Title) { }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
         let w = 7/9 * parseInt($('.ag-theme-material').width());
@@ -42,6 +43,8 @@ export class AccountOverviewComponent implements OnInit {
     ngOnInit() {
         this.accountsSubs = this.accountsApi.getAccounts().subscribe(res => {
             this.accounts = res['accounts'];
+            this.accounts = this.accounts.sort((a, b) => a.nat - b.nat);
+            this.accounts = this.accounts.sort((a, b) => {if (a.nat == b.nat)  return ('' + a.code).localeCompare(b.code);});
             this.add = res['add'];
             this.edit = res['edit'];
             this.delete = res['delete'];
@@ -129,9 +132,11 @@ export class AccountOverviewComponent implements OnInit {
                     'edit': [this.edit, '/accounts/edit/']
                 };
             }
-            this.accounts = this.accounts.sort((a, b) => a.nat - b.nat)
-            this.accounts = this.accounts.sort((a, b) => {if (a.nat == b.nat)  return ('' + a.code).localeCompare(b.code);});
             this.rowData = this.accounts;
+        });
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("acc_edit.acc") );
         });
     }
 

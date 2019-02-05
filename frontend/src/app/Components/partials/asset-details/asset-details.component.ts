@@ -17,7 +17,7 @@ export class AssetDetailsComponent implements OnInit {
     asset_id = null;
     cost_center_options = {};
     columnDefs = [];
-    rowData = [{id: 0, rating_pct: '0', check: 'Add new ', name: 0}];
+    rowData = [];
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
     };
@@ -70,18 +70,18 @@ export class AssetDetailsComponent implements OnInit {
         let angle = toggle.find('i');
         let t = $('#tab-details-'+this.master_raw_id);
         if(toggle.hasClass('collapsed-toggle')) {
-            if (this.rowData.length == 1){
+            if (this.rowData.length == 0){
                 this.node = this.gridApi.getRowNode(this.master_raw_id);
                 this.assetsSubs = this.assetsApi.getAssetCostCenters(this.asset_id).subscribe(res => {
                     ///////////////////////////////////////
                     this.cost_center_options = res['cost_center_options'];
                     let c = this;
                     this.columnDefs = [
-                        {
-                            headerName: '', field: 'check',width: 70,  checkboxSelection: function (params) {
-                                return (params.node.id != 0);
-                            }
-                        },
+                        // {
+                        //     headerName: '', field: 'check',width: 70,  checkboxSelection: function (params) {
+                        //         return (params.node.id != 0);
+                        //     }
+                        // },
                         {
                             headerName: 'Cost Center Name',
                             field: 'name',
@@ -108,12 +108,20 @@ export class AssetDetailsComponent implements OnInit {
                             }},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
                     ];
+                    let exists = res['assets_cost_centers'].map(j => parseInt(j.name));
+                    for (let i=0; i<Object.keys(this.cost_center_options).length; i++){
+                        let id = parseInt(Object.keys(this.cost_center_options)[i].replace(/'/g, ''));
+                        if( id != 0 && ! exists.includes(id)){
+                            this.rowData.push({id : 0, name: id, rating_pct: '0'});
+                        }
+                    }
+                    // {id: 0, rating_pct: '0', check: 'Add new ', name: 0}
                     this.rowData = this.rowData.concat(res['assets_cost_centers']);
                     for (let i = 0; i < this.rowData.length; i++) {
                         this.rowData[i]['actions'] = {
                             api: this.assetsApi,
-                            id: this.rowData[i].id,
-                            delete: [(i != 0), this.deleteCostCenter],
+                            id: this.rowData[i].name,
+                            delete: [false, this.deleteCostCenter],
                             edit: [false, ''],
                             save: [true, this.save],
                             type: 'asset_cost_center',
@@ -185,7 +193,10 @@ export class AssetDetailsComponent implements OnInit {
         }
     }
     save(id, type, self) {
-        let row = self.rowData.filter(row => row.id == id)[0];
+        let name = 0;
+        let row = self.rowData.filter(row => row.name == id)[0];
+        id = row.id;
+        name = row.name;
         let parameters = {'costcenter_id': row.name, 'rating_pct': row.rating_pct, 'name':row.name};
         if(id == 0){
             self.assetsSubs = self.assetsApi.addAssetCostCenter(self.asset_id, parameters).subscribe(res => {
@@ -200,9 +211,8 @@ export class AssetDetailsComponent implements OnInit {
                             type: 'ratio',
                             self: self
                         };
-                        self.rowData.push(parameters);
-                        self.assetGridApi.setRowData(self.rowData);
-                        self.resetHeight();
+                        let row = self.rowData.filter(row => row.name == name)[0];
+                        row.id = res;
                         return false;
                     }
                 },

@@ -6,6 +6,8 @@ import {Subscription} from "rxjs";
 import * as $ from 'jquery';
 import {DetailsFormatterComponent} from "../../partials/cost-center-details/cost-center-details.component";
 import {TranslateService} from "@ngx-translate/core";
+import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 @Component({
     selector: 'app-cost-center-over-view',
     templateUrl: './cost-center-overview.component.html',
@@ -27,7 +29,7 @@ export class CostCenterOverviewComponent implements OnInit {
         actionsFormatterComponent: ActionsFormatterComponent,
         detailsFormatterComponent: DetailsFormatterComponent
     };
-    constructor(private costCenterApi: CostCentersService, private translate: TranslateService) { }
+    constructor(private costCenterApi: CostCentersService, private translate: TranslateService,private titleService: Title) { }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
         let w = 7/9 * parseInt($('.ag-theme-material').width());
@@ -83,7 +85,10 @@ export class CostCenterOverviewComponent implements OnInit {
             }
             this.rowData = this.cost_centers;
         });
-
+        let c = this;
+        $(document).ready(function() {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("costa.cost") );
+        });
     }
 
     deleteCostCenter(id, type, self) {

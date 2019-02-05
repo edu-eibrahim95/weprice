@@ -4,6 +4,9 @@ import {AssetType} from "../../../Models/asset_type";
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {AssetTypeService} from "../../../Services/asset-type.service";
 import * as $ from 'jquery';
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-asset-type-overview',
@@ -24,7 +27,7 @@ export class AssetTypeOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private assetTypesApi : AssetTypeService) { }
+    constructor(private assetTypesApi : AssetTypeService, private translate: TranslateService,private titleService: Title) { }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
     }
@@ -55,6 +58,10 @@ export class AssetTypeOverviewComponent implements OnInit {
                 };
             }
             this.rowData = this.assetTypes;
+        });
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("asset_add.type") );
         });
     }
 

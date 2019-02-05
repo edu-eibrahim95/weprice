@@ -7,6 +7,9 @@ import {AssetTypeService} from "../../../Services/asset-type.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import * as $ from 'jquery';
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import swal from "sweetalert2";
 
 @Component({
     selector: 'app-asset-type-edit',
@@ -19,7 +22,7 @@ export class AssetTypeEditComponent implements OnInit {
     accountsSubs: Subscription;
     accounts : Account[];
     asset_type : AssetType;
-    constructor(private accountsApi: AccountService, private assetTypesApi : AssetTypeService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private accountsApi: AccountService, private assetTypesApi : AssetTypeService, private router: Router, private route: ActivatedRoute, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.accountsSubs = this.accountsApi.getAccounts().subscribe(res => {
@@ -40,6 +43,7 @@ export class AssetTypeEditComponent implements OnInit {
                 $("select").on('change', function() {
                     c.formChanged = true;
                 });
+                c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("asset_edit.edit") );
             });
         });
     }
@@ -57,7 +61,9 @@ export class AssetTypeEditComponent implements OnInit {
     }
     onCancel(){
         if(this.formChanged) {
-            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/asset_types']);
+            let c = this;
+            swal({type: 'warning', title: this.translate.instant("globals.are_you_sure") , text: this.translate.instant("globals.changes_will_be_lost") , showCancelButton: true})
+                .then(function(result){if (! result.dismiss){c.router.navigate(['/asset_types']);}});
         }
         else {
             this.router.navigate(['/asset_types']);

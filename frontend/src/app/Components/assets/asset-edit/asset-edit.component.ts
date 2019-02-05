@@ -11,6 +11,9 @@ import {Local} from "../../../Models/local";
 import {AssetTypeService} from "../../../Services/asset-type.service";
 import {LocalService} from "../../../Services/local.service";
 import * as $ from 'jquery';
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import swal from "sweetalert2";
 
 @Component({
     selector: 'app-asset-edit',
@@ -27,7 +30,7 @@ export class AssetEditComponent implements OnInit {
     assetTypes : AssetType[];
     localsSubs: Subscription;
     locals : Local[];
-    constructor(private branchesApi: BranchService, private assetsApi: AssetService, private router: Router, private route: ActivatedRoute, private assetTypesApi : AssetTypeService, private localsApi : LocalService) { }
+    constructor(private branchesApi: BranchService, private assetsApi: AssetService, private router: Router, private route: ActivatedRoute, private assetTypesApi : AssetTypeService, private localsApi : LocalService, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
@@ -48,6 +51,7 @@ export class AssetEditComponent implements OnInit {
                 $("select").on('change', function() {
                     c.formChanged = true;
                 });
+                c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("assets_edit.edit") );
             });
         });
         this.assetTypesSubs = this.assetTypesApi.getAssetTypes().subscribe(res => {
@@ -72,7 +76,9 @@ export class AssetEditComponent implements OnInit {
     }
     onCancel(){
         if(this.formChanged) {
-            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/assets']);
+            let c = this;
+            swal({type: 'warning', title: this.translate.instant("globals.are_you_sure") , text: this.translate.instant("globals.changes_will_be_lost") , showCancelButton: true})
+                .then(function(result){if (! result.dismiss){c.router.navigate(['/assets']);}});
         }
         else {
             this.router.navigate(['/assets']);

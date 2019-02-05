@@ -7,6 +7,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {CostCenter} from "../../../Models/cost_center";
 import * as $ from 'jquery';
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import swal from "sweetalert2";
 
 @Component({
     selector: 'app-cost-center-edit',
@@ -19,7 +22,7 @@ export class CostCenterEditComponent implements OnInit{
     branches : Branch[];
     cost_center: CostCenter;
     formChanged = false;
-    constructor(private branchesApi: BranchService,private costCentersApi: CostCentersService,private router: Router, private route: ActivatedRoute) { }
+    constructor(private branchesApi: BranchService,private costCentersApi: CostCentersService,private router: Router, private route: ActivatedRoute, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
@@ -41,7 +44,7 @@ export class CostCenterEditComponent implements OnInit{
                     c.formChanged = true;
                 });
             });
-
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("coste.edit") );
         });
 
     }
@@ -58,7 +61,9 @@ export class CostCenterEditComponent implements OnInit{
     }
     onCancel(){
         if(this.formChanged) {
-            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/cost_centers']);
+            let c = this;
+            swal({type: 'warning', title: this.translate.instant("globals.are_you_sure") , text: this.translate.instant("globals.changes_will_be_lost") , showCancelButton: true})
+                .then(function(result){if (! result.dismiss){c.router.navigate(['/cost_centers']);}});
         }
         else {
             this.router.navigate(['/cost_centers']);

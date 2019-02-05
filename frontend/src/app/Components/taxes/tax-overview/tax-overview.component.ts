@@ -3,6 +3,10 @@ import {Subscription} from "rxjs";
 import {Tax} from "../../../Models/tax";
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {TaxService} from "../../../Services/tax.service";
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-tax-overview',
@@ -22,7 +26,7 @@ export class TaxOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private taxesApi : TaxService) { }
+    constructor(private taxesApi : TaxService, private translate: TranslateService,private titleService: Title) { }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
     }
@@ -55,6 +59,10 @@ export class TaxOverviewComponent implements OnInit {
             }
             this.rowData = this.taxes;
         });
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("taxo.tax") );
+        })
     }
 
     massDeleteTaxes() {

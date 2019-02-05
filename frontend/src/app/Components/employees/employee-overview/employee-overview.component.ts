@@ -6,6 +6,8 @@ import {EmployeeService} from "../../../Services/employee.service";
 import * as $ from 'jquery';
 import {EmployeeDetailsComponent} from "../../partials/employee-details/employee-details.component";
 import {TranslateService} from "@ngx-translate/core";
+import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-employee-overview',
@@ -27,7 +29,7 @@ export class EmployeeOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private employeeApi: EmployeeService, private translate: TranslateService) { }
+    constructor(private employeeApi: EmployeeService, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.employeeSubs = this.employeeApi.getEmployees().subscribe(res => {
@@ -71,7 +73,10 @@ export class EmployeeOverviewComponent implements OnInit {
             }
             this.rowData = this.employees;
         });
-
+        let c = this;
+        $(document).ready(function() {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("employa.employ") );
+        });
     }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();

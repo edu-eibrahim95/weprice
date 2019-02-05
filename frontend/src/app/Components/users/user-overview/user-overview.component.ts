@@ -5,6 +5,8 @@ import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/acti
 import {UserService} from "../../../Services/user.service";
 import * as $ from 'jquery';
 import {TranslateService} from "@ngx-translate/core";
+import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-user-overview',
@@ -25,7 +27,7 @@ export class UserOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private userApi: UserService, private translate: TranslateService) { }
+    constructor(private userApi: UserService,private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.userSubs = this.userApi.getUsers().subscribe(res => {
@@ -60,7 +62,10 @@ export class UserOverviewComponent implements OnInit {
             }
             this.rowData = this.users;
         });
-
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("usero.user") );
+        })
     }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();

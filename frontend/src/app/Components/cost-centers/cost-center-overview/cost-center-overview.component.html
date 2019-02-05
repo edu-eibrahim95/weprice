@@ -20,6 +20,8 @@
               [enableFilter]="true"
               [frameworkComponents]="frameworkComponents"
               rowSelection="multiple"
+              [rowMultiSelectWithClick]="false"
+              [suppressRowClickSelection]="true"
               (gridReady)="onGridReady($event)"
               (firstDataRendered)="onFirstDataRendered($event)"
               (gridSizeChanged)="onFirstDataRendered($event)"

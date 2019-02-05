@@ -5,6 +5,7 @@ import {BranchService} from "../../../Services/branch.service";
 import * as $ from 'jquery';
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {TranslatePipe, TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-branches-overview',
@@ -24,7 +25,7 @@ export class BranchesOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private branchesApi: BranchService, private translate: TranslateService ) { }
+    constructor(private branchesApi: BranchService, private translate: TranslateService,private titleService: Title ) { }
 
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
@@ -61,6 +62,10 @@ export class BranchesOverviewComponent implements OnInit {
                 };
             }
             this.rowData = this.branches;
+        });
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("branche.name") );
         });
     }
     deleteBranch(id, type, self) {

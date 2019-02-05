@@ -7,6 +7,7 @@ export class EntryAccount {
     branch_id: number;
     reference_date: string;
     entry_date: string;
+    payment_date: string;
     due_date: string;
     historic: string;
     created_at: string;

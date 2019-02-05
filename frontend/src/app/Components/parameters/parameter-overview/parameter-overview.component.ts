@@ -4,6 +4,9 @@ import {Parameter} from "../../../Models/parameter";
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {ParameterService} from "../../../Services/parameter.service";
 import * as $ from 'jquery';
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-parameter-overview',
@@ -24,7 +27,7 @@ export class ParameterOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private parameterApi: ParameterService) { }
+    constructor(private parameterApi: ParameterService, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.parameterSubs = this.parameterApi.getParameters().subscribe(res => {
@@ -48,7 +51,10 @@ export class ParameterOverviewComponent implements OnInit {
             }
             this.rowData = this.parameters;
         });
-
+        let c = this;
+        $(document).ready(function (){
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("paramo.param") );
+        });
     }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();

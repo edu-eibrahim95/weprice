@@ -5,6 +5,9 @@ import {LocalService} from "../../../Services/local.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import * as $ from 'jquery';
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import swal from "sweetalert2";
 
 @Component({
     selector: 'app-local-edit',
@@ -16,7 +19,7 @@ export class LocalEditComponent implements OnInit {
     localsSubs: Subscription;
     local : Local;
     formChanged = false;
-    constructor(private localsApi: LocalService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private localsApi: LocalService, private router: Router, private route: ActivatedRoute, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.localsSubs = this.localsApi.getLocal(this.route.params['value']['rule_id']).subscribe(res => {
@@ -34,6 +37,7 @@ export class LocalEditComponent implements OnInit {
                 $("select").on('change', function() {
                     c.formChanged = true;
                 });
+                c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("locale.edit") );
             });
         });
     }
@@ -51,7 +55,9 @@ export class LocalEditComponent implements OnInit {
     }
     onCancel(){
         if(this.formChanged) {
-            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/locals']);
+            let c = this;
+            swal({type: 'warning', title: this.translate.instant("globals.are_you_sure") , text: this.translate.instant("globals.changes_will_be_lost") , showCancelButton: true})
+                .then(function(result){if (! result.dismiss){c.router.navigate(['/locals']);}});
         }
         else {
             this.router.navigate(['/locals']);

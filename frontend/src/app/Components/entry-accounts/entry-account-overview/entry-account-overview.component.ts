@@ -8,6 +8,8 @@ import {Account} from "../../../Models/account";
 import {AccountService} from "../../../Services/account.service";
 import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
+import * as $ from 'jquery';
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-entry-account-overview',
@@ -29,7 +31,7 @@ export class EntryAccountOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private entryAccountsApi : EntryAccountService, private translate: TranslateService, private accountsApi: AccountService, private router: Router) { }
+    constructor(private entryAccountsApi : EntryAccountService, private translate: TranslateService, private accountsApi: AccountService, private router: Router, private titleService: Title) { }
 
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
@@ -59,7 +61,7 @@ export class EntryAccountOverviewComponent implements OnInit {
                     } },
                 {headerName: 'Reference Date', field: 'reference_date' },
                 {headerName: 'Due Date', field: 'due_date'},
-                {headerName: 'Payment Date', field: 'payment_date'},                
+                {headerName: 'Payment Date', field: 'payment_date'},
                 {headerName: 'Historic', field: 'historic'},
                 {headerName: 'Entry Value', field: 'entry_value'},
                 {headerName: 'Account', field: 'account_name'},
@@ -84,6 +86,10 @@ export class EntryAccountOverviewComponent implements OnInit {
                 };
             }
             this.rowData = this.entryAccounts;
+        });
+        let c = this;
+        $(document).ready(function() {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("entry_accounts.title") );
         });
     }
 

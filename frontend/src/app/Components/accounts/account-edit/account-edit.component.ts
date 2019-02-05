@@ -5,6 +5,9 @@ import {AccountService} from "../../../Services/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import * as $ from 'jquery';
+import {Title} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
+import swal from "sweetalert2";
 
 @Component({
     selector: 'app-account-edit',
@@ -16,7 +19,7 @@ export class AccountEditComponent implements OnInit {
     accountsSubs: Subscription;
     formChanged = false;
 
-    constructor(private accountsApi: AccountService, private route: ActivatedRoute, private router: Router) {
+    constructor(private accountsApi: AccountService, private route: ActivatedRoute, private router: Router,private titleService: Title, private translate: TranslateService) {
     }
 
     ngOnInit() {
@@ -35,6 +38,7 @@ export class AccountEditComponent implements OnInit {
                 $("select").on('change', function() {
                     c.formChanged = true;
                 });
+                c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("acc_edit.edit") );
             });
         });
     }
@@ -54,7 +58,9 @@ export class AccountEditComponent implements OnInit {
     }
     onCancel(){
         if(this.formChanged) {
-            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/accounts']);
+            let c = this;
+            swal({type: 'warning', title: this.translate.instant("globals.are_you_sure") , text: this.translate.instant("globals.changes_will_be_lost") , showCancelButton: true})
+                .then(function(result){if (! result.dismiss){c.router.navigate(['/accounts']);}});
         }
         else {
             this.router.navigate(['/accounts']);

@@ -3,6 +3,9 @@ import {NgForm} from '@angular/forms';
 import {AuthService} from "../../../Services/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Rx";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,21 +16,25 @@ export class SignInComponent implements OnInit {
   loginSubs: Subscription;
   returnUrl: string;
 
-  constructor(private authApi: AuthService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private authApi: AuthService, private router: Router, private route: ActivatedRoute, private translate: TranslateService,private titleService: Title) { }
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    let c = this;
+    $(document).ready(function() {
+      c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("signin.sign") );
+    });
   }
   onSubmit(f: NgForm) {
     let parameter = JSON.stringify(f.value);
     this.loginSubs = this.authApi.login(parameter).subscribe(res => {
-        if (res ==1 ){
-          this.router.navigate([this.returnUrl]);
-          location.reload();
-        }
+          if (res ==1 ){
+            this.router.navigate([this.returnUrl]);
+            location.reload();
+          }
 
-      },
-      console.error
+        },
+        console.error
     );
   }
 }

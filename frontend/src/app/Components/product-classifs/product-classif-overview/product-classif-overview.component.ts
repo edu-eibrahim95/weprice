@@ -6,6 +6,8 @@ import {ProductClassifService} from "../../../Services/product-classif.service";
 import * as $ from 'jquery';
 import {ProductClassifDetailsComponent} from "../../partials/product-classif-details/product-classif-details.component";
 import {TranslateService} from "@ngx-translate/core";
+import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-product-classif-overview',
@@ -28,7 +30,7 @@ export class ProductClassifOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private productClassifApi: ProductClassifService,private  translate: TranslateService) { }
+    constructor(private productClassifApi: ProductClassifService, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.productClassifSubs = this.productClassifApi.getProductClassifs().subscribe(res => {
@@ -76,6 +78,10 @@ export class ProductClassifOverviewComponent implements OnInit {
                     'edit': [this.edit, '/product_classifs/edit/'] };
             }
             this.rowData = this.productClassifs;
+        });
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("classo.prod") );
         });
 
     }

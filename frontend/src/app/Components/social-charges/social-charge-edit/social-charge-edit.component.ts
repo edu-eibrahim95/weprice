@@ -7,6 +7,9 @@ import {NgForm} from "@angular/forms";
 import {SocialChargeService} from "../../../Services/social-charge.service";
 import {SocialCharge} from "../../../Models/social_charge";
 import * as $ from 'jquery';
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import swal from "sweetalert2";
 
 @Component({
     selector: 'app-social-charge-edit',
@@ -19,7 +22,7 @@ export class SocialChargeEditComponent implements OnInit {
     accountsSubs: Subscription;
     accounts : Account[];
     social_charge : SocialCharge;
-    constructor(private accountsApi: AccountService, private socialChargesApi : SocialChargeService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private accountsApi: AccountService, private socialChargesApi : SocialChargeService, private router: Router, private route: ActivatedRoute, private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.accountsSubs = this.accountsApi.getAccounts().subscribe(res => {
@@ -40,6 +43,7 @@ export class SocialChargeEditComponent implements OnInit {
                 $("select").on('change', function() {
                     c.formChanged = true;
                 });
+                c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("sociale.edit") );
             });
         });
     }
@@ -57,7 +61,9 @@ export class SocialChargeEditComponent implements OnInit {
     }
     onCancel(){
         if(this.formChanged) {
-            if (confirm('Your changes will be lost, Are You Sure ?')) this.router.navigate(['/social_charges']);
+            let c = this;
+            swal({type: 'warning', title: this.translate.instant("globals.are_you_sure") , text: this.translate.instant("globals.changes_will_be_lost") , showCancelButton: true})
+                .then(function(result){if (! result.dismiss){c.router.navigate(['/social_charges']);}});
         }
         else {
             this.router.navigate(['/social_charges']);

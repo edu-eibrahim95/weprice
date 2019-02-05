@@ -4,7 +4,10 @@ import {SocialCharge} from "../../../Models/social_charge";
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {SocialChargeService} from "../../../Services/social-charge.service";
 import * as $ from 'jquery';
-import {SocialChargeDetailsComponent} from "../../partials/social-charge-details/social-charge-details.component";
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+// import {SocialChargeDetailsComponent} from "../../partials/social-charge-details/social-charge-details.component";
 
 @Component({
     selector: 'app-social-charge-overview',
@@ -21,11 +24,11 @@ export class SocialChargeOverviewComponent implements OnInit {
     delete = false;
     frameworkComponents = {
         actionsFormatterComponent: ActionsFormatterComponent,
-        detailsFormatterComponent: SocialChargeDetailsComponent
+        // detailsFormatterComponent: SocialChargeDetailsComponent
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private social_chargesApi : SocialChargeService) { }
+    constructor(private social_chargesApi : SocialChargeService, private translate: TranslateService,private titleService: Title) { }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
         let w = 7/9 * parseInt($('.ag-theme-material').width());
@@ -43,8 +46,8 @@ export class SocialChargeOverviewComponent implements OnInit {
             this.edit = res['edit'];
             this.delete = res['delete'];
             this.columnDefs = [
-                {headerName: '', field: 'check', checkboxSelection:true, width:60},
-                {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
+                // {headerName: '', field: 'check', checkboxSelection:true, width:60},
+                // {headerName: '', field: 'details', width: 50, cellRenderer: 'detailsFormatterComponent', style: 'overflow: visible'},
                 {headerName: 'Description', field: 'description'},
                 {headerName: 'Initial Date', field: 'initial_date' },
                 {headerName: 'Final Date', field: 'final_date'},
@@ -53,12 +56,12 @@ export class SocialChargeOverviewComponent implements OnInit {
                 {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent'},
             ];
             for (let i=0; i<this.social_charges.length; i++){
-                this.social_charges[i]['details'] = {
-                    'row_id': i,
-                    'id': this.social_charges[i].id,
-                    'gridApi' : this.gridApi,
-                    'gridColumnApi': this.gridColumnApi
-                };
+                // this.social_charges[i]['details'] = {
+                //     'row_id': i,
+                //     'id': this.social_charges[i].id,
+                //     'gridApi' : this.gridApi,
+                //     'gridColumnApi': this.gridColumnApi
+                // };
                 this.social_charges[i]['actions'] = {
                     'self' : this,
                     'id':this.social_charges[i].id,
@@ -67,6 +70,10 @@ export class SocialChargeOverviewComponent implements OnInit {
                 };
             }
             this.rowData = this.social_charges;
+        });
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("socialo.social") );
         });
     }
 

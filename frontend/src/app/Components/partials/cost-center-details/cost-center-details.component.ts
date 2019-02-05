@@ -79,8 +79,6 @@ export class DetailsFormatterComponent implements  OnInit{
     }
 
     ngOnInit() {
-        // console.log(this.deleteSwal);
-        // swal("Simple Message");
         $(document).ready(function () {
             let w = 8/9 * (parseInt($(document).innerWidth()) - parseInt($('.br-sideleft').width()) - 300);
             $('mat-tab-group').width(w)
@@ -91,7 +89,6 @@ export class DetailsFormatterComponent implements  OnInit{
                 var error = params.data.error;
                 return error == 1;
             },
-            // "sick-days-breach": "data.sickDays > 8"
         };
     }
 
@@ -146,9 +143,9 @@ export class DetailsFormatterComponent implements  OnInit{
                             }},
                         {headerName: 'Actions', field: 'actions', cellRenderer: 'actionsFormatterComponent' },
                     ];
+                    let exists = res['ratio'].map(j => parseInt(j.name));
                     for (let i=0; i<Object.keys(this.ratio_cost_center_options).length; i++){
                         let id = parseInt(Object.keys(this.ratio_cost_center_options)[i].replace(/'/g, ''));
-                        let exists = res['ratio'].map(j => parseInt(j.name));
                         if( id != 0 && ! exists.includes(id)){
                             this.ratioRowData.push({id : 0, name: id, rating_pct: '0', type: this.ratio_cost_center_options[id][1], abs_order: this.ratio_cost_center_options[id][2],check: "Add New"});
                         }
@@ -421,9 +418,6 @@ export class DetailsFormatterComponent implements  OnInit{
                         if (type == 'ratio'){
                             let row = self.ratioRowData.filter(row => row.name == name)[0];
                             row.id = res;
-                            // let grid = self.ratioGridApi;
-                            // self.ratioRowData.push(parameters);
-                            // grid.setRowData(self.ratioRowData);
                         }
                         else if (type == 'tax'){
                             let grid = self.taxGridApi;

@@ -5,6 +5,8 @@ import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/acti
 import {AssetService} from "../../../Services/asset.service";
 import * as $ from 'jquery';
 import {AssetDetailsComponent} from "../../partials/asset-details/asset-details.component";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-asset-overview',
@@ -27,7 +29,7 @@ export class AssetOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private assetApi: AssetService) { }
+    constructor(private assetApi: AssetService,  private translate: TranslateService,private titleService: Title) { }
 
     ngOnInit() {
         this.assetSubs = this.assetApi.getAssets().subscribe(res => {
@@ -61,7 +63,10 @@ export class AssetOverviewComponent implements OnInit {
             }
             this.rowData = this.assets;
         });
-
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("assets_edit.assets") );
+        });
     }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();

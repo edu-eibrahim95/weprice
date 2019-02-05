@@ -4,6 +4,9 @@ import {Spot} from "../../../Models/spot";
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {SpotService} from "../../../Services/spot.service";
 import * as $ from 'jquery';
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-spot-overview',
@@ -24,7 +27,7 @@ export class SpotOverviewComponent implements OnInit {
     };
     private gridApi;
     private gridColumnApi;
-    constructor(private spotsApi : SpotService) { }
+    constructor(private spotsApi : SpotService, private translate: TranslateService,private titleService: Title) { }
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
     }
@@ -54,6 +57,10 @@ export class SpotOverviewComponent implements OnInit {
                 };
             }
             this.rowData = this.spots;
+        });
+        let c = this;
+        $(document).ready(function () {
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("spoto.spot") );
         });
     }
 

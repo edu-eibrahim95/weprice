@@ -34,19 +34,25 @@ class GetAssets(Resource):
 
 
 class GetAssetCostCenters(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
+
     @jwt_required
     @can(action='view', thing='assets')
     def get(self, asset_id):
+        data = self.parser.parse_args()
         assets_cost_centers = AssetCostCenter.query.filter_by(asset_id=asset_id).\
             join(Asset, Asset.id == AssetCostCenter.asset_id).\
             join(Branch, Branch.id == Asset.branch_id).\
-            filter(Branch.installation_id == get_user().installation_id).all()
+            filter(Branch.installation_id == get_user().installation_id). \
+            filter(Branch.id == data['branch_id']).all()
         for i in assets_cost_centers:
             i.name = i.costcenter_id
         schema = AssetCostCenterSchema(many=True)
         assets_data = [] if len(assets_cost_centers) == 0 else schema.dump(assets_cost_centers).data
         cost_centers = CostCenter.query.join(Branch, Branch.id == CostCenter.branch_id) \
-            .filter(Branch.installation_id == get_user().installation_id).all()
+            .filter(Branch.installation_id == get_user().installation_id).filter(Branch.id == data['branch_id']).all()
         cost_center_options = {"0": "Choose Cost Center"}
         for cost_center in cost_centers:
             cost_center_options["{}".format(cost_center.id)] = cost_center.name
