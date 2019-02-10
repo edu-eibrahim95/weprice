@@ -68,7 +68,7 @@ export class EntryAccountAddComponent implements OnInit {
     }
     filterAccounts() {
         let type = $("select[name=type]").val();
-        this.accounts = this.all_accounts.filter(row => row.type == type);
+        this.accounts = this.all_accounts.filter(row => row.nat == type);
     }
     changeCostCenter(f:NgForm) {
         let account_id = $("select[name=account_id]").val();
