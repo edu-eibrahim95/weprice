@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import raiseload
 
 db = SQLAlchemy()
-
 
 def save_to_db(e):
     db.session.add(e)

@@ -1,16 +1,16 @@
 from flask import Flask, request, render_template, send_from_directory
-from db import db
+from backend.db import db
 from flask_cors import CORS
-from api import register_api_routes
+from backend.api import register_api_routes
 import os
-from main_api import main_api
+from backend.main_api import main_api
 from flask_jwt_extended import JWTManager
 
 
 template_dir = os.path.dirname(os.path.realpath(__file__)) + '/../frontend/dist/frontend/'
 app = Flask(__name__, template_folder=template_dir)
 application = app
-app.config.from_object('config')
+app.config.from_object('backend.config')
 CORS(app)
 db.init_app(app)
 jwt = JWTManager(app)

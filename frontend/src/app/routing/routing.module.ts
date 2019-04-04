@@ -68,6 +68,11 @@ import {EntryAccountOverviewComponent} from "../Components/entry-accounts/entry-
 import {EntryAccountAddComponent} from "../Components/entry-accounts/entry-account-add/entry-account-add.component";
 import {EntryAccountEditComponent} from "../Components/entry-accounts/entry-account-edit/entry-account-edit.component";
 import {EntryAccountsComponent} from "../Components/entry-accounts/entry-accounts.component";
+import {CostMapsComponent} from "../Components/cost-maps/cost-maps.component";
+import {CostMapOverviewComponent} from "../Components/cost-maps/cost-map-overview/cost-map-overview.component";
+import {CostMapAddComponent} from "../Components/cost-maps/cost-map-add/cost-map-add.component";
+import {CostMapEditComponent} from "../Components/cost-maps/cost-map-edit/cost-map-edit.component";
+import {CostMapViewComponent} from "../Components/cost-maps/cost-map-view/cost-map-view.component";
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -192,6 +197,15 @@ const appRoutes: Routes = [
             { path: '', component: EntryAccountOverviewComponent },
             { path: 'add', component: EntryAccountAddComponent },
             { path: 'edit/:rule_id', component: EntryAccountEditComponent }
+        ],
+        canActivate: [AuthGuard]
+    },
+    { path: 'cost_maps', component: CostMapsComponent,
+        children: [
+            { path: '', component: CostMapOverviewComponent },
+            { path: 'add', component: CostMapAddComponent },
+            { path: 'edit/:rule_id', component: CostMapEditComponent },
+            { path: 'view/:rule_id', component: CostMapViewComponent }
         ],
         canActivate: [AuthGuard]
     },

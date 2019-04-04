@@ -1,4 +1,4 @@
-from db import db
+from backend.db import db
 from sqlalchemy import text, ForeignKey
 from marshmallow import Schema, fields
 from sqlalchemy.orm import relationship

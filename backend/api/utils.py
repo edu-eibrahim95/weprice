@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import request, redirect, abort
-from models import User, Permission
+from backend.models import User, Permission
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_current_user)
 
 
@@ -51,3 +51,20 @@ def able(action=None, thing=None):
     if p[n] == 0:
         return False
     return True
+
+
+class Struct:
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
+
+
+def iterate(data, Schema):
+    schema = Schema(many=True)
+    schema_data = [] if len(data) == 0 else schema.dump(data).data
+    return [Struct(**item) for item in schema_data]
+
+def oneObject(data, Schema):
+    schema = Schema()
+    schema_data = {} if data is None else schema.dump(data).data
+    return Struct(**schema_data)
+

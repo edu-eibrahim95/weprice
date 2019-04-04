@@ -21,7 +21,7 @@
             <!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <select id="select2-b" class="form-control select2-hidden-accessible" aria-hidden="true" name="type" #type="ngModel" ngModel
-                      [ngModel]="entry_account.type">
+                      [ngModel]="entry_account.type" (change)="filterAccounts()">
                 <option value="0" selected="">{{ "entry_accounts.expense" | translate }}</option>
                 <option value="1">{{ "entry_accounts.revenue" | translate }}</option>
               </select>
@@ -38,7 +38,7 @@
               <select id="select2-c" class="form-control select2-hidden-accessible" aria-hidden="true" name="account_id" #account_id="ngModel"
                       ngModel [ngModel]="entry_account.account_id" (change)="changeCostCenter(f)">
                 <option value="0" selected="">{{ 'taxa.select' | translate }}</option>
-                <option *ngFor="let account of accounts" value="{{account.id}}">{{account.code}}</option>
+                <option *ngFor="let account of accounts" value="{{account.id}}" data-value="{{account.type}}">{{account.code}} | {{account.description}}</option>
               </select>
             </div>
             <!-- col-8 -->
@@ -110,7 +110,7 @@
             <!-- col-4 -->
             <div class="col-7 col-sm-8 col-md-9">
               <input class="form-control float-input" min="0" step="0.01" type="number" [ngModel]="entry_account.entry_value" name="entry_value"
-                     #entry_value="ngModel" ngModel placeholder="Enter Entry Value">
+                     #entry_value="ngModel" ngModel placeholder="Enter Entry Value" (change)="maskFloat(f, 'entry_value')">
             </div>
             <!-- col-8 -->
           </div>

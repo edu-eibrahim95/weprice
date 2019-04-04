@@ -1,9 +1,9 @@
 import datetime
 
 from flask_restful import Resource, reqparse
-from main_api import main_api
-from models import User, UserSchema, Installation
-from db import save_to_db
+from backend.main_api import main_api
+from backend.models import User, UserSchema, Installation
+from backend.db import save_to_db
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
 

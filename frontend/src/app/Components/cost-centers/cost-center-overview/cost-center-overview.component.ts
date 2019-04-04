@@ -6,7 +6,6 @@ import {Subscription} from "rxjs";
 import * as $ from 'jquery';
 import {DetailsFormatterComponent} from "../../partials/cost-center-details/cost-center-details.component";
 import {TranslateService} from "@ngx-translate/core";
-import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 @Component({
     selector: 'app-cost-center-over-view',

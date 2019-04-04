@@ -1,9 +1,9 @@
 from flask_restful import Resource, reqparse
-from main_api import main_api
-from models import EntryAccount, EntryAccountSchema, User, Branch, CostCenter
-from db import save_to_db, delete_from_db
+from backend.main_api import main_api
+from backend.models import EntryAccount, EntryAccountSchema, User, Branch, CostCenter
+from backend.db import save_to_db, delete_from_db
 from flask_jwt_extended import jwt_required
-from api.utils import can, able, get_user
+from backend.api.utils import can, able, get_user
 # from sqlalchemy import _like
 
 
@@ -103,6 +103,7 @@ class AddEntryAccount(Resource):
             cost_center_id=data['cost_center_id'],
             branch_id=data['branch_id'],
         )
+        save_to_db(entry_account)
         try:
             save_to_db(entry_account)
             return {'status': 1}

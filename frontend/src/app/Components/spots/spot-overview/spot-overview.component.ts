@@ -4,7 +4,6 @@ import {Spot} from "../../../Models/spot";
 import {ActionsFormatterComponent} from "../../partials/action-cell-rendrer/action-cell-renderer.component";
 import {SpotService} from "../../../Services/spot.service";
 import * as $ from 'jquery';
-import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {Title} from "@angular/platform-browser";
 

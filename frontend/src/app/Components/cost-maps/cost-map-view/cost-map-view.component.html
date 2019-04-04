@@ -1,0 +1,35 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="br-mainpanel" xmlns="">
+    <div class="pd-30">
+        <h4 class="tx-gray-800 mg-b-5"> {{ 'cost_mapo.cost_map' | translate }} </h4>
+        <p class="mg-b-0"> {{ 'cost_mapo.list' | translate }} </p>
+    </div><!-- d-flex -->
+    <div class="br-pagebody">
+        <div class="br-section-wrapper">
+            <mat-tab-group class="full-width" [selectedIndex]="0" dynamicHeight>
+                <mat-tab label="Demonstrative">
+                    <ag-grid-angular
+                            style="width: 100%;"
+                            class="ag-theme-material"
+                            [rowData]="rowData"
+                            [columnDefs]="columnDefs"
+                            [enableSorting]="true"
+                            [enableFilter]="true"
+                            [frameworkComponents]="frameworkComponents"
+                            rowSelection="multiple"
+                            [rowMultiSelectWithClick]="true"
+                            (gridReady)="onGridReady($event)"
+                            (firstDataRendered)="onFirstDataRendered($event)"
+                            (gridSizeChanged)="onFirstDataRendered($event)"
+                            domLayout='autoHeight'
+                            pagination="true"
+                            paginationPageSize="10"
+                    >
+                    </ag-grid-angular>
+                </mat-tab>
+                <mat-tab label="Parameters"></mat-tab>
+                <mat-tab label="Operational cost"></mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

@@ -1,9 +1,9 @@
 from flask_restful import Resource, reqparse
-from main_api import main_api
-from models import Employee, EmployeeSchema, User, Branch, EmployeeCostCenterSchema, EmployeeCostCenter, CostCenter
-from db import save_to_db, delete_from_db
+from backend.main_api import main_api
+from backend.models import Employee, EmployeeSchema, User, Branch, EmployeeCostCenterSchema, EmployeeCostCenter, CostCenter
+from backend.db import save_to_db, delete_from_db
 from flask_jwt_extended import jwt_required
-from api.utils import can, able, get_user
+from backend.api.utils import can, able, get_user
 
 
 class GetEmployees(Resource):

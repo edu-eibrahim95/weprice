@@ -1,0 +1,34 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="br-mainpanel" xmlns="">
+    <div class="pd-30">
+        <h4 class="tx-gray-800 mg-b-5"> {{ 'cost_mapo.cost_map' | translate }} </h4>
+        <p class="mg-b-0"> {{ 'cost_mapo.list' | translate }} </p>
+    </div><!-- d-flex -->
+    <div class="br-pagebody">
+        <div class="br-section-wrapper">
+            <div class="text-right">
+                    <a href="#" (click)="massDeleteCostMaps()" class="btn btn-danger mg-r-10" *ngIf="delete">   {{ 'globals.mass' | translate }}</a>
+                    <a routerLink="/cost_maps/add" class="btn btn-success" *ngIf="add">   {{ 'globals.new' | translate }}</a>
+            </div>
+            <hr>
+            <ag-grid-angular
+                    style="width: 100%;"
+                    class="ag-theme-material"
+                    [rowData]="rowData"
+                    [columnDefs]="columnDefs"
+                    [enableSorting]="true"
+                    [enableFilter]="true"
+                    [frameworkComponents]="frameworkComponents"
+                    rowSelection="multiple"
+                    [rowMultiSelectWithClick]="true"
+                    (gridReady)="onGridReady($event)"
+                    (firstDataRendered)="onFirstDataRendered($event)"
+                    (gridSizeChanged)="onFirstDataRendered($event)"
+                    domLayout='autoHeight'
+                    pagination="true"
+                    paginationPageSize="10"
+            >
+            </ag-grid-angular>
+        </div>
+    </div>
+</div>

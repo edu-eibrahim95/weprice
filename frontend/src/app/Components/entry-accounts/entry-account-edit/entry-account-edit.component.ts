@@ -34,9 +34,11 @@ export class EntryAccountEditComponent implements OnInit {
         this.accountsSubs = this.accountsApi.getAccounts().subscribe(res => {
             this.accounts = res['accounts'];
             this.all_accounts = res['accounts'];
+            this.filterAccounts();
         });
         this.costCenterSubs = this.costCenterApi.getCostCenters().subscribe(res => {
             this.cost_centers = res['cost_centers'];
+            this.changeCostCenter(null);
         });
         this.entryAccountsSubs = this.entryAccountsApi.getEntryAccount(this.route.params['value']['rule_id']).subscribe(res => {
             this.entry_account = res['entry_account'];
@@ -44,11 +46,6 @@ export class EntryAccountEditComponent implements OnInit {
             $(document).ready(function () {
                 c.filterAccounts();
                 c.changeCostCenter(null);
-                let float_inputs = $(".float-input");
-                float_inputs.each(function () { $(this).val(Math.abs(parseFloat($(this).val())).toFixed(2)); });
-                float_inputs.on('change', function () {
-                    $(this).val(Math.abs(parseFloat($(this).val())).toFixed(2));
-                });
                 $("input").on('change', function () {
                     c.formChanged = true;
                 });
@@ -86,6 +83,10 @@ export class EntryAccountEditComponent implements OnInit {
         let type = $("select[name=type]").val();
         this.accounts = this.all_accounts.filter(row => row.nat == type);
     }
+    maskFloat(f:NgForm, field){
+        f.value[field] = Math.abs(parseFloat(f.value[field])).toFixed(2);
+        f.setValue(f.value);
+    }
     changeCostCenter(f:NgForm) {
         let account_id = $("select[name=account_id]").val();
         let account = this.all_accounts.find(row => row.id == account_id);
@@ -97,7 +98,6 @@ export class EntryAccountEditComponent implements OnInit {
                 if(f){
                     let values = f.value;
                     values.cost_center_id = 0;
-                    console.log(values);
                     f.setValue(values);
                 }
             }

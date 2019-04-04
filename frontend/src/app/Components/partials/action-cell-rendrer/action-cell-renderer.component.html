@@ -8,4 +8,13 @@
     <a *ngIf="can_save" (click)="save(entity_id, type, self)"  href="#" class="btn btn-success mr-1">
         <i class="fa fa-save"></i>
     </a>
+    <a *ngIf="can_view" href="#" [routerLink]="view_url+entity_id" class='btn btn-warning mr-1' title="View Item">
+        <i class='fa fa-desktop text-white'></i>
+    </a>
+    <a *ngIf="can_in_use" href="#" (click)="in_use(entity_id, type, self)" class='btn btn-success mr-1' title="Make Item In Use">
+        <i class='fa fa-check text-white'></i>
+    </a>
+    <a *ngIf="can_recalc" href="#" (click)="recalc(entity_id, type, self)" class='btn btn-primary mr-1' title="Recalculate Item">
+        <i class='fa fa-calculator text-white'></i>
+    </a>
 </div>

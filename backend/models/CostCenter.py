@@ -1,4 +1,4 @@
-from db import db
+from backend.db import db
 from sqlalchemy import text, ForeignKey
 from marshmallow import Schema, fields
 from sqlalchemy.orm import relationship
@@ -63,6 +63,7 @@ class CostCenterRatio(db.Model):
 
 class CostCenterRatioSchema(Schema):
     id = fields.Number()
+    costcenter_id = fields.Number()
     costcenter_part_id = fields.Number()
     name = fields.Str()
     type = fields.Str()

@@ -1,4 +1,4 @@
-from db import db
+from backend.db import db
 from sqlalchemy import text
 from marshmallow import Schema, fields
 
@@ -25,7 +25,6 @@ class Account(db.Model):
     installation_id = db.Column(db.Integer, default=0)
     created_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
     updated_at = db.Column(db.TIMESTAMP, nullable=True, server_default=text('CURRENT_TIMESTAMP'))
-
 
 
 class AccountSchema(Schema):

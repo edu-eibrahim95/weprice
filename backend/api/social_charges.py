@@ -1,9 +1,9 @@
 from flask_restful import Resource, reqparse
-from main_api import main_api
-from models import SocialCharge, SocialChargeSchema, User, SocialChargeAccountSchema, SocialChargeAccount, Account, Branch
-from db import save_to_db, delete_from_db
+from backend.main_api import main_api
+from backend.models import SocialCharge, SocialChargeSchema, User, SocialChargeAccountSchema, SocialChargeAccount, Account, Branch
+from backend.db import save_to_db, delete_from_db
 from flask_jwt_extended import jwt_required
-from api.utils import can, able, get_user
+from backend.api.utils import can, able, get_user
 
 
 class GetSocialCharges(Resource):

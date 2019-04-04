@@ -1,11 +1,11 @@
 from flask_restful import Resource, reqparse
-from main_api import main_api
-from models import Product, ProductSchema, User, ProductTaxesSchema, ProductTaxes, Tax, TaxSchema
-from models import ProductClassif, ProductClassifSchema, ProductClassifParent, \
+from backend.main_api import main_api
+from backend.models import Product, ProductSchema, User, ProductTaxesSchema, ProductTaxes, Tax, TaxSchema
+from backend.models import ProductClassif, ProductClassifSchema, ProductClassifParent, \
     ProductClassifParentSchema, ProductClassifTaxes, ProductClassifTaxesSchema
-from db import save_to_db, delete_from_db
+from backend.db import save_to_db, delete_from_db
 from flask_jwt_extended import jwt_required
-from api.utils import can, able, get_user
+from backend.api.utils import can, able, get_user
 
 
 class GetProductClassifs(Resource):

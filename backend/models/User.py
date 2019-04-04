@@ -1,4 +1,4 @@
-from db import db
+from backend.db import db
 from sqlalchemy import text
 from passlib.hash import pbkdf2_sha256 as sha256
 from marshmallow import Schema, fields

@@ -1,4 +1,4 @@
-from db import db
+from backend.db import db
 from sqlalchemy import text, ForeignKey
 from marshmallow import Schema, fields
 from sqlalchemy.orm import relationship
@@ -8,10 +8,10 @@ class EntryAccount(db.Model):
     __tablename__ = 'entry_accounts'
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.Integer, default=0)
-    reference_date = db.Column(db.Date, default=0)
-    entry_date = db.Column(db.Date, default=0)
-    payment_date = db.Column(db.Date, default=0)
-    due_date = db.Column(db.Date, default=0)
+    reference_date = db.Column(db.Date, default=text('NOW()'))
+    entry_date = db.Column(db.Date, default=text('NOW()'))
+    payment_date = db.Column(db.Date, default=text('NOW()'))
+    due_date = db.Column(db.Date, default=text('NOW()'))
     historic = db.Column(db.String(255), nullable=True)
     entry_value = db.Column(db.Float, default=0)
     account_id = db.Column(db.Integer, ForeignKey("accounts.id"))
