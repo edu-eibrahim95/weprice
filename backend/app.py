@@ -1,8 +1,9 @@
+import os, sys
+sys.path.append(os.path.abspath('../'))
 from flask import Flask, request, render_template, send_from_directory
 from backend.db import db
 from flask_cors import CORS
 from backend.api import register_api_routes
-import os
 from backend.main_api import main_api
 from flask_jwt_extended import JWTManager
 
