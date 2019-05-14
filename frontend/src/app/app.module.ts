@@ -95,6 +95,7 @@ import { CostMapOverviewComponent } from './Components/cost-maps/cost-map-overvi
 import { CostMapAddComponent } from './Components/cost-maps/cost-map-add/cost-map-add.component';
 import { CostMapEditComponent } from './Components/cost-maps/cost-map-edit/cost-map-edit.component';
 import { CostMapViewComponent } from './Components/cost-maps/cost-map-view/cost-map-view.component';
+import { CookieService } from "angular2-cookie/services/cookies.service";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -216,7 +217,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BranchService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
+    CookieService,
   ],
   bootstrap: [AppComponent]
 })

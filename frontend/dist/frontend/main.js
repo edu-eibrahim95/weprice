@@ -4371,6 +4371,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angular2-cookie/core */ "./node_modules/angular2-cookie/core.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(angular2_cookie_core__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4385,18 +4387,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(branchesApi, translate, titleService) {
+    function HomeComponent(branchesApi, translate, titleService, _cookieService) {
         this.branchesApi = branchesApi;
         this.translate = translate;
         this.titleService = titleService;
+        this._cookieService = _cookieService;
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         var c = this;
         this.branchesSubs = this.branchesApi.getBranches().subscribe(function (res) {
             _this.branches = res['branches'];
-            _this.branch = localStorage.getItem('branch_id');
+            _this.branch = _this._cookieService.get('branch_id');
             jquery__WEBPACK_IMPORTED_MODULE_2__(document).ready(function () {
                 c.titleService.setTitle(c.translate.instant("globals.project") + ' - ' + c.translate.instant("globals.dashboard"));
             });
@@ -4407,12 +4411,12 @@ var HomeComponent = /** @class */ (function () {
         var branch = this.branches.filter(function (branch) { return branch.id == branch_id; });
         if (branch.length > 0) {
             var branch_name = branch[0].name;
-            localStorage.setItem('branch_id', branch_id);
-            localStorage.setItem('branch_name', branch_name);
+            this._cookieService.put('branch_id', branch_id);
+            this._cookieService.put('branch_name', branch_name);
             location.reload();
         }
         else {
-            localStorage.setItem('branch_id', '0');
+            this._cookieService.put('branch_id', '0');
         }
         return false;
     };
@@ -4422,7 +4426,7 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/Components/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/Components/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [_Services_branch_service__WEBPACK_IMPORTED_MODULE_1__["BranchService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["Title"]])
+        __metadata("design:paramtypes", [_Services_branch_service__WEBPACK_IMPORTED_MODULE_1__["BranchService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["Title"], angular2_cookie_core__WEBPACK_IMPORTED_MODULE_5__["CookieService"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -10845,10 +10849,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _env__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../env */ "./src/app/env.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs_Observable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/Observable */ "./node_modules/rxjs-compat/_esm5/Observable.js");
-/* harmony import */ var rxjs_add_operator_catch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/add/operator/catch */ "./node_modules/rxjs-compat/_esm5/add/operator/catch.js");
-/* harmony import */ var rxjs_compat_add_operator_map__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs-compat/add/operator/map */ "./node_modules/rxjs-compat/add/operator/map.js");
-/* harmony import */ var rxjs_compat_add_operator_map__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(rxjs_compat_add_operator_map__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var rxjs_add_operator_catch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/add/operator/catch */ "./node_modules/rxjs-compat/_esm5/add/operator/catch.js");
+/* harmony import */ var rxjs_compat_add_operator_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs-compat/add/operator/map */ "./node_modules/rxjs-compat/add/operator/map.js");
+/* harmony import */ var rxjs_compat_add_operator_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs_compat_add_operator_map__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angular2-cookie/core */ "./node_modules/angular2-cookie/core.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(angular2_cookie_core__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10864,14 +10870,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AuthService = /** @class */ (function () {
-    function AuthService(http) {
+    function AuthService(http, _cookieService) {
         this.http = http;
+        this._cookieService = _cookieService;
     }
     AuthService._handleError = function (err) {
-        return rxjs_Observable__WEBPACK_IMPORTED_MODULE_3__["Observable"].throw(err.message || 'Error: Unable to complete request.');
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["throwError"])(err.message || 'Error: Unable to complete request.');
     };
     AuthService.prototype.register = function (parameter) {
+        var _this = this;
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -10879,7 +10888,8 @@ var AuthService = /** @class */ (function () {
         };
         return this.http.post(_env__WEBPACK_IMPORTED_MODULE_1__["API_URL"] + "/register", parameter, httpOptions).map(function (res) {
             if (res['message'] == 1) {
-                localStorage.setItem('currentUser', res['user']);
+                _this._cookieService.put("currentUser", JSON.stringify(res['user']));
+                _this._cookieService.put("lang", res['lang']);
                 return 1;
             }
         }, function (err) {
@@ -10887,6 +10897,7 @@ var AuthService = /** @class */ (function () {
         });
     };
     AuthService.prototype.login = function (parameter) {
+        var _this = this;
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -10894,8 +10905,8 @@ var AuthService = /** @class */ (function () {
         };
         return this.http.post(_env__WEBPACK_IMPORTED_MODULE_1__["API_URL"] + "/login", parameter, httpOptions).map(function (res) {
             if (res['message'] == 1) {
-                localStorage.setItem('currentUser', JSON.stringify(res['user']));
-                localStorage.setItem('lang', res['lang']);
+                _this._cookieService.put("currentUser", JSON.stringify(res['user']));
+                _this._cookieService.put("lang", res['lang']);
                 return 1;
             }
         }, function (err) {
@@ -10904,16 +10915,16 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.logout = function () {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('lang');
-        localStorage.removeItem('branch_id');
-        localStorage.removeItem('branch_name');
+        this._cookieService.remove("currentUser");
+        this._cookieService.remove("lang");
+        this._cookieService.remove("branch_id");
+        this._cookieService.remove("branch_name");
     };
     AuthService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], angular2_cookie_core__WEBPACK_IMPORTED_MODULE_5__["CookieService"]])
     ], AuthService);
     return AuthService;
 }());
@@ -12337,6 +12348,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angular2-cookie/core */ "./node_modules/angular2-cookie/core.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angular2_cookie_core__WEBPACK_IMPORTED_MODULE_2__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12348,22 +12361,26 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var AuthGuard = /** @class */ (function () {
-    function AuthGuard(router) {
+    function AuthGuard(router, _cookieService) {
         this.router = router;
+        this._cookieService = _cookieService;
     }
     AuthGuard.prototype.canActivate = function (route, state) {
-        if (localStorage.getItem('currentUser')) {
+        if (typeof this._cookieService.get('currentUser') !== 'undefined') {
             // logged in so return true
             return true;
         }
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-        return false;
+        else {
+            // not logged in so redirect to login page with the return url
+            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+            return false;
+        }
     };
     AuthGuard = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], angular2_cookie_core__WEBPACK_IMPORTED_MODULE_2__["CookieService"]])
     ], AuthGuard);
     return AuthGuard;
 }());
@@ -12384,6 +12401,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthenticatedGuard", function() { return AuthenticatedGuard; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angular2-cookie/core */ "./node_modules/angular2-cookie/core.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angular2_cookie_core__WEBPACK_IMPORTED_MODULE_2__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12395,23 +12414,24 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var AuthenticatedGuard = /** @class */ (function () {
-    function AuthenticatedGuard(router) {
+    function AuthenticatedGuard(router, _cookieService) {
         this.router = router;
+        this._cookieService = _cookieService;
     }
     AuthenticatedGuard.prototype.canActivate = function (route, state) {
-        if (!localStorage.getItem('currentUser')) {
-            // logged in so return true
+        if (typeof this._cookieService.get('currentUser') === 'undefined') {
+            // this is the login page so continue
             return true;
         }
-        // not logged in so redirect to login page with the return url
+        // logged in so redirect to home page
         this.router.navigate(['/']);
-        location.reload();
         return false;
     };
     AuthenticatedGuard = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], angular2_cookie_core__WEBPACK_IMPORTED_MODULE_2__["CookieService"]])
     ], AuthenticatedGuard);
     return AuthenticatedGuard;
 }());
@@ -12485,6 +12505,8 @@ var ErrorInterceptor = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JwtInterceptor", function() { return JwtInterceptor; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! angular2-cookie/core */ "./node_modules/angular2-cookie/core.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(angular2_cookie_core__WEBPACK_IMPORTED_MODULE_1__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12492,13 +12514,19 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
+
 var JwtInterceptor = /** @class */ (function () {
     function JwtInterceptor() {
     }
     JwtInterceptor.prototype.intercept = function (request, next) {
         // add authorization header with jwt token if available
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        var branch_id = localStorage.getItem('branch_id');
+        var _cookieService = new angular2_cookie_core__WEBPACK_IMPORTED_MODULE_1__["CookieService"];
+        var currentUser = null;
+        var branch_id = null;
+        if (typeof _cookieService.get('currentUser') !== 'undefined') {
+            currentUser = JSON.parse(_cookieService.get("currentUser"));
+            branch_id = _cookieService.get("branch_id");
+        }
         if (currentUser && currentUser.token) {
             request = request.clone({
                 setHeaders: {
@@ -12557,6 +12585,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _Services_branch_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Services/branch.service */ "./src/app/Services/branch.service.ts");
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! angular2-cookie/core */ "./node_modules/angular2-cookie/core.js");
+/* harmony import */ var angular2_cookie_core__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(angular2_cookie_core__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12570,14 +12600,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(router, branchesApi, translate) {
+    function AppComponent(router, branchesApi, translate, _cookieService) {
         this.router = router;
         this.branchesApi = branchesApi;
         this.translate = translate;
+        this._cookieService = _cookieService;
         this.title = 'frontend';
         this.files_open = '';
-        this.branch_name = localStorage.getItem('branch_name');
+        this.branch_name = null;
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -12592,35 +12624,35 @@ var AppComponent = /** @class */ (function () {
                 }
             }
         });
-        if (localStorage.getItem('currentUser')) {
-            this.user = JSON.parse(localStorage.getItem('currentUser'));
-            if (!localStorage.getItem('branch_id') || localStorage.getItem('branch_id') == '0') {
+        if (typeof this._cookieService.get('currentUser') !== 'undefined') {
+            this.user = JSON.parse(this._cookieService.get('currentUser'));
+            if (typeof this._cookieService.get('branch_id') === 'undefined' || this._cookieService.get('branch_id') == '0') {
                 this.branchesSubs = this.branchesApi.getBranches().subscribe(function (res) {
                     _this.branches = res['branches'];
                     if (_this.branches.length > 0) {
                         var branch = _this.branches[0];
                         _this.branch_name = branch.name;
-                        localStorage.setItem('branch_id', branch.id.toString());
-                        localStorage.setItem('branch_name', branch.name);
+                        _this._cookieService.put('branch_id', branch.id.toString());
+                        _this._cookieService.put('branch_name', branch.name);
                     }
                     else {
-                        localStorage.setItem('branch_id', '0');
+                        _this._cookieService.put('branch_id', '0');
                     }
                 });
             }
         }
         this.translate.addLangs(['en', 'pt']);
         var lang = 'en';
-        if (localStorage.getItem('lang') && localStorage.getItem('lang') !== 'undefined') {
-            lang = localStorage.getItem('lang');
+        if (typeof this._cookieService.get('lang') !== 'undefined') {
+            lang = this._cookieService.get('lang');
         }
         this.translate.setDefaultLang(lang);
     };
     AppComponent.prototype.logout = function () {
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('lang');
-        localStorage.removeItem('branch_id');
-        localStorage.removeItem('branch_name');
+        this._cookieService.remove("currentUser");
+        this._cookieService.remove("lang");
+        this._cookieService.remove("branch_id");
+        this._cookieService.remove("branch_name");
         location.reload();
     };
     AppComponent = __decorate([
@@ -12629,7 +12661,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _Services_branch_service__WEBPACK_IMPORTED_MODULE_2__["BranchService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _Services_branch_service__WEBPACK_IMPORTED_MODULE_2__["BranchService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"], angular2_cookie_core__WEBPACK_IMPORTED_MODULE_4__["CookieService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -12745,12 +12777,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_cost_maps_cost_map_add_cost_map_add_component__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./Components/cost-maps/cost-map-add/cost-map-add.component */ "./src/app/Components/cost-maps/cost-map-add/cost-map-add.component.ts");
 /* harmony import */ var _Components_cost_maps_cost_map_edit_cost_map_edit_component__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./Components/cost-maps/cost-map-edit/cost-map-edit.component */ "./src/app/Components/cost-maps/cost-map-edit/cost-map-edit.component.ts");
 /* harmony import */ var _Components_cost_maps_cost_map_view_cost_map_view_component__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./Components/cost-maps/cost-map-view/cost-map-view.component */ "./src/app/Components/cost-maps/cost-map-view/cost-map-view.component.ts");
+/* harmony import */ var angular2_cookie_services_cookies_service__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! angular2-cookie/services/cookies.service */ "./node_modules/angular2-cookie/services/cookies.service.js");
+/* harmony import */ var angular2_cookie_services_cookies_service__WEBPACK_IMPORTED_MODULE_95___default = /*#__PURE__*/__webpack_require__.n(angular2_cookie_services_cookies_service__WEBPACK_IMPORTED_MODULE_95__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -12970,6 +13005,7 @@ var AppModule = /** @class */ (function () {
                 _Services_branch_service__WEBPACK_IMPORTED_MODULE_20__["BranchService"],
                 { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HTTP_INTERCEPTORS"], useClass: _helpers_jwt_interceptor__WEBPACK_IMPORTED_MODULE_18__["JwtInterceptor"], multi: true },
                 { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HTTP_INTERCEPTORS"], useClass: _helpers_error_interceptor__WEBPACK_IMPORTED_MODULE_19__["ErrorInterceptor"], multi: true },
+                angular2_cookie_services_cookies_service__WEBPACK_IMPORTED_MODULE_95__["CookieService"],
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         })

@@ -5,6 +5,8 @@ import {Subscription} from "rxjs";
 import {Branch} from "./Models/branch";
 import {BranchService} from "./Services/branch.service";
 import {TranslateService} from "@ngx-translate/core";
+import { CookieService } from "angular2-cookie/core";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-root',
@@ -18,8 +20,8 @@ export class AppComponent implements OnInit{
     files_open = '';
     branchesSubs: Subscription;
     branches : Branch[];
-    branch_name = localStorage.getItem('branch_name');
-    constructor(private router: Router, private branchesApi: BranchService, public translate: TranslateService) { }
+    branch_name = null;
+    constructor(private router: Router, private branchesApi: BranchService, public translate: TranslateService, private _cookieService: CookieService) { }
     ngOnInit() {
         this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationEnd ) {
@@ -32,36 +34,36 @@ export class AppComponent implements OnInit{
                 }
             }
         });
-        if (localStorage.getItem('currentUser')){
-            this.user = JSON.parse(localStorage.getItem('currentUser'));
+        if (typeof this._cookieService.get('currentUser') !== 'undefined'){
+            this.user = JSON.parse(this._cookieService.get('currentUser'));
 
-            if (! localStorage.getItem('branch_id') || localStorage.getItem('branch_id') == '0' ){
+            if (typeof this._cookieService.get('branch_id') === 'undefined' || this._cookieService.get('branch_id') == '0' ){
                 this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
                     this.branches = res['branches'];
                     if(this.branches.length > 0){
                         let branch = this.branches[0];
                         this.branch_name = branch.name;
-                        localStorage.setItem('branch_id', branch.id.toString());
-                        localStorage.setItem('branch_name', branch.name);
+                        this._cookieService.put('branch_id', branch.id.toString());
+                        this._cookieService.put('branch_name', branch.name);
                     }
                     else {
-                        localStorage.setItem('branch_id', '0');
+                        this._cookieService.put('branch_id', '0');
                     }
                 });
             }
         }
         this.translate.addLangs(['en', 'pt']);
         let lang = 'en';
-        if(localStorage.getItem('lang') && localStorage.getItem('lang') !== 'undefined'){
-            lang = localStorage.getItem('lang');
+        if(typeof this._cookieService.get('lang') !== 'undefined'){
+            lang = this._cookieService.get('lang');
         }
         this.translate.setDefaultLang(lang);
     }
     logout() {
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('lang');
-        localStorage.removeItem('branch_id');
-        localStorage.removeItem('branch_name');
+        this._cookieService.remove("currentUser");
+        this._cookieService.remove("lang");
+        this._cookieService.remove("branch_id");
+        this._cookieService.remove("branch_name");
         location.reload();
     }
 }

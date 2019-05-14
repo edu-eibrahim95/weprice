@@ -47,7 +47,7 @@ export class AccountService {
                 return 0;
             })
     }
-        editAccountCostCenter(account_id, parameter, account_cost_center_id) : Observable<number>{
+    editAccountCostCenter(account_id, parameter, account_cost_center_id) : Observable<number>{
         return this.http.post(`${API_URL}/accounts/cost_centers/`+account_id+`/edit/`+account_cost_center_id, parameter, this.httpOptions).map(
             res => {
                 if (res['status'] == 1) {

@@ -6,6 +6,7 @@ import * as $ from 'jquery';
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {Title} from "@angular/platform-browser";
+import { CookieService } from "angular2-cookie/core";
 
 @Component({
     selector: 'app-home',
@@ -16,13 +17,13 @@ export class HomeComponent implements OnInit {
     branchesSubs: Subscription;
     branches : Branch[];
     branch :string;
-    constructor(private branchesApi: BranchService, private translate: TranslateService,private titleService: Title) { }
+    constructor(private branchesApi: BranchService, private translate: TranslateService,private titleService: Title, private _cookieService: CookieService) { }
 
     ngOnInit() {
         let c = this;
         this.branchesSubs = this.branchesApi.getBranches().subscribe(res => {
             this.branches = res['branches'];
-            this.branch =  localStorage.getItem('branch_id');
+            this.branch =  this._cookieService.get('branch_id');
             $(document).ready(function () {
                 c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("globals.dashboard") );
             });
@@ -35,12 +36,12 @@ export class HomeComponent implements OnInit {
         let branch = this.branches.filter(branch => branch.id==branch_id);
         if (branch.length > 0 ){
             let branch_name = branch[0].name;
-            localStorage.setItem('branch_id', branch_id);
-            localStorage.setItem('branch_name', branch_name);
+            this._cookieService.put('branch_id', branch_id);
+            this._cookieService.put('branch_name', branch_name);
             location.reload();
         }
         else {
-            localStorage.setItem('branch_id', '0');
+            this._cookieService.put('branch_id', '0');
         }
         return false;
     }
