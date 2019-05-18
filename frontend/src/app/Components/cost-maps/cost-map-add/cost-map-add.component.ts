@@ -36,7 +36,7 @@ export class CostMapAddComponent implements OnInit {
             $("select").on('change', function() {
                 c.formChanged = true;
             });
-            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("spota.new") );
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("cost_maps.new") );
         });
     }
 
@@ -47,7 +47,7 @@ export class CostMapAddComponent implements OnInit {
         this.costMapsSubs = this.costMapsApi.addCostMap(parameter).subscribe(res => {
                 if (res == 1 ){
                     this.router.navigate(['/cost_maps']);
-                    location.reload();
+                    // location.reload();
                 }
                 else {
                     // @ts-ignore

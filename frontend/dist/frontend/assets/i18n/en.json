@@ -552,5 +552,13 @@
     "historic" : "Historic",
     "entry_value" : "Entry Value",
     "payment_date" : "Payment Date"
+  },
+  "cost_maps": {
+    "title": "Cost Maps",
+    "new": "Add new Cost map",
+    "view": "Viewing Cost Map",
+    "list": "List of existing Cost Maps",
+    "initial_date": "Initial Date",
+    "final_date": "Final Date"
   }
 }

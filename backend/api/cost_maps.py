@@ -11,7 +11,7 @@ from flask_jwt_extended import jwt_required
 from backend.api.utils import can, able, get_user, Struct, iterate, oneObject
 
 from backend.models.SocialCharge import SocialCharge, SocialChargeSchema
-
+import sqlalchemy
 
 def checkApportionment(branch_id):
     errors = []
@@ -132,10 +132,11 @@ def calculateCostMap(cost_map_id, branch_id, year, month):
                 .filter(Branch.installation_id == get_user().installation_id).filter(Branch.id == branch_id) \
                 .join(AccountCostCenter, AccountCostCenter.costcenter_id == CostCenter.id) \
                 .filter(AccountCostCenter.account_id == account.id).all()
-            cost_centers_num = len(cost_centers)
             for cost_center in iterate(cost_centers, CostCenterSchema):
                 cost_center_employees = Employee.query.join(Branch, Branch.id == Employee.branch_id) \
                     .filter(Branch.installation_id == get_user().installation_id).filter(Branch.id == branch_id) \
+                    .filter(sqlalchemy.func.extract('month', Employee.hire_date) <= month)\
+                    .filter(sqlalchemy.func.extract('month', Employee.dismiss_date) >= month)\
                     .join(EmployeeCostCenter, EmployeeCostCenter.employee_id == Employee.id) \
                     .filter(EmployeeCostCenter.costcenter_id == cost_center.id).all()
                 employee_num = len(cost_center_employees)
@@ -155,7 +156,10 @@ def calculateCostMap(cost_map_id, branch_id, year, month):
                                                                       Employee.id == EmployeeCostCenter.employee_id) \
                     .join(Branch, Branch.id == Employee.branch_id) \
                     .filter(employee.id == Employee.id) \
-                    .filter(Branch.installation_id == get_user().installation_id).filter(Branch.id == branch_id).all()
+                    .filter(Branch.installation_id == get_user().installation_id) \
+                    .filter(sqlalchemy.func.extract('month', Employee.hire_date) <= month) \
+                    .filter(sqlalchemy.func.extract('month', Employee.dismiss_date) >= month) \
+                    .filter(Branch.id == branch_id).all()
 
                 for employee_cost_center in iterate(employee_cost_centers, EmployeeCostCenterSchema):
                     cost_center = CostCenter.query.filter_by(id=employee_cost_center.costcenter_id).first()
@@ -184,10 +188,11 @@ def calculateCostMap(cost_map_id, branch_id, year, month):
                     AccountCostCenter.account_id == account.id) \
                     .order_by(CostCenter.type.asc()).order_by(CostCenter.abs_order.asc()) \
                     .filter(Branch.id == branch_id).all()
-                cost_centers_num = len(cost_centers)
                 for cost_center in iterate(cost_centers, CostCenterSchema):
                     cost_center_employees = Employee.query.join(Branch, Branch.id == Employee.branch_id) \
                         .filter(Branch.installation_id == get_user().installation_id).filter(Branch.id == branch_id) \
+                        .filter(sqlalchemy.func.extract('month', Employee.hire_date) <= month) \
+                        .filter(sqlalchemy.func.extract('month', Employee.dismiss_date) >= month) \
                         .join(EmployeeCostCenter.employee_id == Employee.id) \
                         .filter(EmployeeCostCenter.costcenter_id == cost_center.id).all()
                     cost_value = 0
@@ -426,19 +431,19 @@ class DeleteCostMap(Resource):
     def __init__(self):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('branch_id', help='This field cannot be blank', required=True)
-        self.parser.add_argument('ids', help='This field cannot be blank', required=True)
 
     @jwt_required
     @can('delete', 'cost_maps')
     def post(self, cost_map_id):
-        data = self.parser.parse_args()
         if cost_map_id == 'mass':
             parser = reqparse.RequestParser()
             parser.add_argument('ids', help='This field cannot be blank', required=True, type=int, action='append')
+            data = parser.parse_args()
             cost_maps = CostMap.query.filter(CostMap.id.in_(data['ids'])).join(Branch, Branch.id == CostMap.branch_id) \
                 .filter(CostMap.branch_id == data['branch_id']).all()
 
         else:
+            data = self.parser.parse_args()
             cost_maps = CostMap.query.filter(CostMap.id == cost_map_id).join(Branch, Branch.id == CostMap.branch_id) \
                 .filter(CostMap.branch_id == data['branch_id']).first()
             if not cost_maps:

@@ -163,7 +163,8 @@
     "date": "Acquisition Date:",
     "start": "Start Depr Date:",
     "expire": "Expiration Depr Date:",
-    "flag": "Depreciable Flag  :"
+    "flag": "Depreciable Flag  :",
+    "dep": "Depreciable :"
   },
   "assets_overview": {
     "asset": "Assets",
@@ -173,6 +174,7 @@
     "local": "Manage Locals"
   },
   "signin": {
+    "bla": "WePrice is the most accurate measure for cost management",
     "name": "Weprice",
     "pass": "Forgot password?",
     "sign": "Sign In",
@@ -220,6 +222,7 @@
     "hour": "Work hours per day:",
     "day": "Work days per month:",
     "stock": "Months Stock Quantity:",
+    "rate": "Raw Material Rate:",
     "raw": "Raw Material Rate:",
     "rec": "Days Rec:"
   },
@@ -330,12 +333,12 @@
     "local":"Locals",
     "list":"list of existing  locals",
     "asset":"Assets"
-    
   },
   "parama": {
     "param": "Parameters",
     "add": "Add new Parameter",
     "new": "Add a New Parameter",
+    "val": "Value:",
     "attr": "Attribute:",
     "des": "Description:",
     "def": "Default Value:"
@@ -343,14 +346,14 @@
   "parame": {
     "param": "Parameters",
     "edit": "Edit Parameter",
-    "attr": "Attribute:",
+        "val": "Value:",
+"attr": "Attribute:",
     "des": "Description:",
     "def": "Default Value:"
   },
   "paramo": {
     "param": "Parameters",
     "list":"list of existing  Parameters"
-
   },
   "classa": {
     "prod":"ProductClassifs",
@@ -381,7 +384,6 @@
     "prod":" Product Classifs",
     "list":"list of existing  Product Classifs",
     "prodo":"Products"
-
   },
   "producta": {
     "prod":" Products",
@@ -552,5 +554,13 @@
     "historic" : "Historic",
     "entry_value" : "Entry Value",
     "payment_date" : "Payment Date"
+  },
+  "cost_maps": {
+    "title": "Cost Maps",
+    "new": "Add new Cost map",
+    "view": "Viewing Cost Map",
+    "list": "List of existing Cost Maps",
+    "initial_date": "Initial Date",
+    "final_date": "Final Date"
   }
 }

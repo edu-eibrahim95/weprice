@@ -70,7 +70,6 @@
     "ear": "Distribuição de Lucros?:"
   },
 
-
   "acc_edit": {
     "acc": "Contas",
     "edit": "Alteração",
@@ -123,8 +122,6 @@
   },
   "asset_edit": {
     "type":"Tipo de Ativo",
-    "new_type":"Novo",
-    "anew_type":"Novo",
     "acc":"Conta':",
     "select":"Selecione",
     "descript":"Descrição:",
@@ -168,7 +165,6 @@
     "expire": "Data Término Depr:",
     "dep": "Depreciável?:",
     "flag" : "Depreciable Flag  :"
-
   },
   "assets_overview": {
     "asset": "Ativos",
@@ -178,7 +174,7 @@
     "local": "Locais"
   },
   "signin": {
-    "bla": "Bracket Responsive Bootstrap 4 Admin Template",
+    "bla": "WePrice is the most accurate measure for cost management",
     "name": "Weprice",
     "pass": "Forgot password?",
     "sign": "Sign In",
@@ -219,7 +215,6 @@
     "bran": "Filial",
     "parent": "Empresa:",
     "select": "Selecione Empresa",
-    "neme": "NOME:",
     "area": "Área:",
     "month": "%Juros ao Mês:",
     "avg": "Meses para Média:",
@@ -338,8 +333,6 @@
     "local":"Locais",
     "list":"Lista",
     "asset":"Ativos"
-
-
   },
   "parama": {
     "param": "Parâmetros",
@@ -361,8 +354,6 @@
   "paramo": {
     "param": "Parâmetros",
     "list":"Lista"
-
-
   },
   "classa": {
     "prod":"Classificações",
@@ -393,8 +384,6 @@
     "prod":" Classificações",
     "list":"Lista",
     "prodo":"Produtos"
-
-
   },
   "producta": {
     "prod":" Productos",
@@ -481,8 +470,6 @@
   },
   "spote": {
     "spot":"Spots",
-    "new": "Inclusão",
-    "add": "Novo",
     "name": "Nome:",
     "ip": "IP:",
     "nic": "NIC:",
@@ -567,5 +554,13 @@
     "historic" : "Historic",
     "entry_value" : "Entry Value",
     "payment_date" : "Payment Date"
+  },
+  "cost_maps": {
+    "title": "Cost Maps",
+    "new": "Add new Cost map",
+    "view": "Viewing Cost Map",
+    "list": "List of existing Cost Maps",
+    "initial_date": "Initial Date",
+    "final_date": "Final Date"
   }
 }

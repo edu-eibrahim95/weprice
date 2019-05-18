@@ -69,7 +69,7 @@ export class CostMapOverviewComponent implements OnInit {
         });
         let c = this;
         $(document).ready(function () {
-            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("costMapo.costMap") );
+            c.titleService.setTitle(  c.translate.instant("globals.project") + ' - ' + c.translate.instant("cost_maps.title") );
         });
     }
 
