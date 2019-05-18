@@ -1,5 +1,5 @@
 import os, sys
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.realpath(os.path.dirname(os.path.realpath(__file__))+'/..'))
 from flask import Flask, request, render_template, send_from_directory, render_template_string
 from backend.db import db
 from flask_cors import CORS
